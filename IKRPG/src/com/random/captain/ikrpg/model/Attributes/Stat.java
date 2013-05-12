@@ -1,6 +1,6 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-public enum Stats
+public enum Stat
 {
 	//"Normal stats"
 	PHYSIQUE("Physique", "PHY"),
@@ -16,16 +16,28 @@ public enum Stats
 	INITIATIVE("Initiative","INIT"),
 	ARMOR("Armor","ARM"),
 	WILLPOWER("Willpower","WIL"),
+	COMMAND("Command","CMD"),
+	CONTROL("Control","CTRL"),
 	//"Other" stats
 	ATTACK("Attack modifier","ATK"),
 	DAMAGE("Damage modifier","DMG");
 	
-	private Stats(String pLongName, String pShortName)
+	private Stat(String pLongName, String pShortName)
 	{
 		this.longName = pLongName;
-		this.shortname = pShortName;
+		this.shortName = pShortName;
 	};
 	
 	String longName;
-	String shortname;
+	String shortName;
+	
+	public String longName()
+	{
+		return longName;
+	}
+	
+	public String shortName()
+	{
+		return shortName;
+	}
 }

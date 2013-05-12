@@ -19,10 +19,12 @@ public class StatsBundle
 	private int initBase, initActive;
 	private int armBase, armActive;
 	private int wilBase, wilActive;
+	private int cmdBase, cmdActive;
+	private int ctrlBase, ctrlActive;
 	private int atkActive;
 	private int dmgActive;
 	
-	private Map<String, Modifier<Stats>> modifiers;
+	private Map<String, Modifier<Stat>> modifiers;
 	
 	public StatsBundle(int pPhy, int pSpd, int pStr, int pAgi, int pPoi, int pPrw, int pInt, int pArc, int pPer)
 	{
@@ -40,8 +42,10 @@ public class StatsBundle
 		initBase = spdBase + prwBase + perBase;
 		armBase = phyBase;
 		wilBase = phyBase + intBase;
+		cmdBase = intBase;
+		ctrlBase = 2*arcBase;
 		
-		modifiers = new HashMap<String, Modifier<Stats>>();
+		modifiers = new HashMap<String, Modifier<Stat>>();
 		
 		rederiveStats();
 	}
@@ -59,6 +63,8 @@ public class StatsBundle
 	public int getInitiative(){return initActive;}
 	public int getArmor(){return armActive;}
 	public int getWillpower(){return wilActive;}
+	public int getCommand(){return cmdActive;}
+	public int getControl(){return ctrlActive;}
 	public int getAttack(){return atkActive;}
 	public int getDamage(){return dmgActive;}
 	
@@ -75,8 +81,10 @@ public class StatsBundle
 	public int getBaseInitiative(){return initBase;}
 	public int getBaseArmor(){return armBase;}
 	public int getBaseWillpower(){return wilBase;}
+	public int getBaseCommand(){return cmdBase;}
+	public int getBaseControl(){return ctrlBase;}
 	
-	public boolean addModifier(Modifier<Stats> modifier, String key)
+	public boolean addModifier(Modifier<Stat> modifier, String key)
 	{
 		if(modifiers.containsKey(key))
 		{
@@ -111,13 +119,15 @@ public class StatsBundle
 		initActive = initBase;
 		armActive = armBase;
 		wilActive = wilBase;
+		cmdActive = cmdBase;
+		ctrlActive = ctrlBase;
 		atkActive = dmgActive = 0;
 		
 		//apply modifiers
-		Collection<Modifier<Stats>> m = modifiers.values();
-		for(Modifier<Stats> modifier : m)
+		Collection<Modifier<Stat>> m = modifiers.values();
+		for(Modifier<Stat> modifier : m)
 		{
-			Stats stat = modifier.getTrait();
+			Stat stat = modifier.getTrait();
 			switch(stat)
 			{
 				case PHYSIQUE: phyActive = modifier.modifiedValue(phyActive); break;
