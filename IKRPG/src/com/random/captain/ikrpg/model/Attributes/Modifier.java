@@ -3,16 +3,16 @@ package com.random.captain.ikrpg.model.Attributes;
 public class Modifier<S extends Enum<S>>
 {
 	private int value;
-	private S stat;
+	private S trait;
 	
-	private Modifier (S pStat)
+	private Modifier (S pTrait)
 	{
-		this(pStat, 0);
+		this(pTrait, 0);
 	}
 	
-	private Modifier(S pStat, int pValue)
+	private Modifier(S pTrait, int pValue)
 	{
-		stat = pStat;
+		trait = pTrait;
 		value = pValue;
 	}
 	
@@ -20,14 +20,14 @@ public class Modifier<S extends Enum<S>>
 	//Thanks, S.O.!
 	//
 	//All access is through these static methods for simplicity.
-	public static <S2 extends Enum<S2>> Modifier<S2> onStat(S2 pStat, int pValue)
+	public static <S2 extends Enum<S2>> Modifier<S2> onTrait(S2 pTrait, int pValue)
 	{
-		return new Modifier<S2>(pStat, pValue);
+		return new Modifier<S2>(pTrait, pValue);
 	}
 	
-	public static <S2 extends Enum<S2>> Modifier<S2> onStat(S2 pStat)
+	public static <S2 extends Enum<S2>> Modifier<S2> onTrait(S2 pTrait)
 	{
-		return new Modifier<S2>(pStat);
+		return new Modifier<S2>(pTrait);
 	}
 	
 	public int getValue()
@@ -35,8 +35,14 @@ public class Modifier<S extends Enum<S>>
 		return value;
 	}
 	
-	public S getStat()
+	public S getTrait()
 	{
-		return stat;
+		return trait;
+	}
+	
+	//future improvement will allow for setting here, rather than incrementing
+	public int modifiedValue(int base)
+	{
+		return base += value;
 	}
 }
