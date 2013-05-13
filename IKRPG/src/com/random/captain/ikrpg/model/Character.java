@@ -9,4 +9,12 @@ public class Character
 	private List<Career> careers;
 	private SkillsBundle skillsBundle;
 	private StatsBundle statsBundle;
+	
+	public Character(Race pRace, List<Career> pCareers, SkillsBundle pSkills, StatsBundle pStats)
+	{
+		race = pRace;
+		careers = pCareers;
+		skillsBundle = pSkills;
+		statsBundle = pStats;
+	}
 }
