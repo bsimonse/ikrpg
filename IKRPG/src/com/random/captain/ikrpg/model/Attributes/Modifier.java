@@ -43,6 +43,6 @@ public class Modifier<S extends Enum<S>>
 	//future improvement will allow for setting here, rather than incrementing
 	public int modifiedValue(int base)
 	{
-		return base += value;
+		return base + value;
 	}
 }
