@@ -1,7 +1,9 @@
 package com.random.captain.ikrpg.model.Attributes;
 
 import android.util.Pair;
-import com.random.captain.ikrpg.model.Attributes.Skill;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public enum Race
 {
@@ -29,15 +31,35 @@ public enum Race
 							Pair<Stat, Integer>[] pEpicStats)
 	{
 		name = pName;
-		startStats = pStartStats;
-		heroStats = pHeroStats;
-		vetStats = pVetStats;
-		epicStats = pEpicStats;
+		startStats = Arrays.asList(pStartStats);
+		heroStats = Arrays.asList(pHeroStats);
+		vetStats = Arrays.asList(pVetStats);
+		epicStats = Arrays.asList(pEpicStats);
 	}
 	
 	private String name;
-	private Pair<Stat, Integer>[] startStats;
-	private Pair<Stat, Integer>[] heroStats;
-	private Pair<Stat, Integer>[] vetStats;
-	private Pair<Stat, Integer>[] epicStats;
+	private Collection<Pair<Stat, Integer>> startStats;
+	private Collection<Pair<Stat, Integer>> heroStats;
+	private Collection<Pair<Stat, Integer>> vetStats;
+	private Collection<Pair<Stat, Integer>> epicStats;
+	
+	public Collection<Pair<Stat, Integer>> startStats()
+	{
+		return Collections.unmodifiableCollection(startStats);
+	}
+	
+	public Collection<Pair<Stat, Integer>> heroStats()
+	{
+		return Collections.unmodifiableCollection(heroStats);
+	}
+	
+	public Collection<Pair<Stat, Integer>> vetStats()
+	{
+		return Collections.unmodifiableCollection(vetStats);
+	}
+	
+	public Collection<Pair<Stat, Integer>> epicStats()
+	{
+		return Collections.unmodifiableCollection(epicStats);
+	}
 }

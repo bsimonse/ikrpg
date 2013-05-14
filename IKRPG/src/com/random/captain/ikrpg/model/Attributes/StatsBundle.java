@@ -1,5 +1,6 @@
 package com.random.captain.ikrpg.model.Attributes;
 
+import android.util.Pair;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,21 +12,16 @@ public class StatsBundle
 	
 	private Map<String, Modifier<Stat>> modifiers;
 	
-	public StatsBundle(int pPhy, int pSpd, int pStr, int pAgi, int pPoi, int pPrw, int pInt, int pArc, int pPer)
+	public StatsBundle(Collection<Pair<Stat, Integer>> stats)
 	{
 		activeStats = new HashMap<Stat, Integer>();
 		baseStats = new HashMap<Stat, Integer>();
 		
-		baseStats.put(Stat.PHYSIQUE, pPhy);
-		baseStats.put(Stat.SPEED, pSpd);
-		baseStats.put(Stat.STRENGTH, pStr);
-		baseStats.put(Stat.AGILITY, pAgi);
-		baseStats.put(Stat.POISE, pPoi);
-		baseStats.put(Stat.PROWESS, pPrw);
-		baseStats.put(Stat.INTELLECT, pInt);
-		baseStats.put(Stat.ARCANE, pArc);
-		baseStats.put(Stat.PERCEPTION, pPer);
-
+		for(Pair<Stat, Integer> stat : stats)
+		{
+			baseStats.put(stat.first, stat.second);
+		}
+		
 		modifiers = new HashMap<String, Modifier<Stat>>();
 		
 		rederiveBaseStats();
@@ -72,6 +68,8 @@ public class StatsBundle
 	
 	private void rederiveBaseStats()
 	{
+		//Cheating because null = 0;
+		//Shouldn't have to count on it, though... will probably do check later
 		int pPhy = baseStats.get(Stat.PHYSIQUE);
 		int pSpd = baseStats.get(Stat.SPEED);
 		int pAgi = baseStats.get(Stat.AGILITY);
