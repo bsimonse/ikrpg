@@ -6,5 +6,6 @@ import java.util.Set;
 
 public interface PostCreateHook
 {
-	public void doPostCreateHook(Race pRace, Set<Career> pCareers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext);
+	public void doPostCreateHook(Race pRace, Archetype archetype, Set<Career> pCareers, Set<Ability> pAbilities,
+									SkillsBundle pSkills, StatsBundle pStats, Context appContext);
 }	

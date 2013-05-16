@@ -1,9 +1,8 @@
 package com.random.captain.ikrpg.model.Attributes;
 
+import java.util.*;
+
 import android.util.Pair;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SkillsBundle
 {
@@ -56,6 +55,23 @@ public class SkillsBundle
 		{
 			baseSkills.put((Skill)skillPair.first, (Integer)skillPair.second);
 		}
+	}
+	
+	public Collection<Pair<Skill, Integer>> getTrainedSkills()
+	{
+		Collection<Pair<Skill, Integer>> skills = new ArrayList<Pair<Skill, Integer>>(20);
+		
+		for(Skill skill : Skill.values())
+		{
+			int skillLevel = baseSkills.get(skill);
+			if(skillLevel > 0)
+			{
+				Pair<Skill, Integer> aPair = new Pair<Skill, Integer>(skill, skillLevel);
+				skills.add(aPair);
+			}
+		}
+		
+		return skills;
 	}
 	
 	public boolean addModifier(Modifier<Skill> modifier, String key)
