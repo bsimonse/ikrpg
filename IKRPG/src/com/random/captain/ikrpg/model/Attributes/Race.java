@@ -49,6 +49,8 @@ public enum Race
 	private Collection<Pair<Stat, Integer>> epicStats;
 	private PostCreateHook postCreateHook;
 	
+	@Override
+	public String toString(){return displayName();}
 	public String displayName(){return name;}
 	public Collection<Pair<Stat, Integer>> startStats(){return Collections.unmodifiableCollection(startStats);}
 	public Collection<Pair<Stat, Integer>> heroStats(){return Collections.unmodifiableCollection(heroStats);}
