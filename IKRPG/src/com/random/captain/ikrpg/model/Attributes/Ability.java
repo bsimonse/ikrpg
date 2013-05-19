@@ -1,10 +1,11 @@
 package com.random.captain.ikrpg.model.Attributes;
 
 import android.content.Context;
+import android.os.Parcelable;
 import com.random.captain.ikrpg.model.Creators.PrereqCheck;
 import java.util.Set;
 
-public enum Ability implements PrereqCheck
+public enum Ability implements PrereqCheck, Parcelable
 {
 	JACK_MARSHALL("'Jack Marshall", "Kickin'",null),
 	ACE_COMMANDER("Ace Commander", "Whee", new PrereqCheck(){

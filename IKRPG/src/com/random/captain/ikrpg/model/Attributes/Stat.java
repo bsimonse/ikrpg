@@ -1,6 +1,6 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-public enum Stat
+public enum Stat 
 {
 	//"Normal stats"
 	PHYSIQUE("Physique", "PHY"),
@@ -39,5 +39,11 @@ public enum Stat
 	public String shortName()
 	{
 		return shortName;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return longName+"("+shortName+")";
 	}
 }

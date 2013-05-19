@@ -1,5 +1,7 @@
 package com.random.captain.ikrpg.activities;
 
+import com.random.captain.ikrpg.model.Attributes.*;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +11,7 @@ import com.random.captain.ikrpg.R;
 
 public class MainActivity extends FragmentActivity
 {
+	public static final String NEW_CHARACTER = "thisIsANewCharacter";
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
     
     @Override
@@ -16,6 +19,31 @@ public class MainActivity extends FragmentActivity
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
+		
+		try
+		{
+			/*
+			Modifier<Stat> test = Modifier.onTrait(Stat.PERCEPTION,1);
+			*/
+			
+			StatsBundle test = new StatsBundle(Race.HUMAN.startStats());
+			test.addModifier(Modifier.onTrait(Stat.PERCEPTION, 10),"Kick-ass");
+			
+			Intent myIntent = new Intent();
+			Log.i("IKRPG","*Gulp*");
+			myIntent.putExtra("test", test);
+			Log.i("IKRPG","Oh God oh God oh God");
+			
+			//Modifier<Stat> didItWork = myIntent.getExtras().getParcelable("test");
+			StatsBundle didItWork = myIntent.getExtras().getParcelable("test");
+			
+			Log.i("IKRPG","Or did it?\n"+didItWork.toString());
+			
+		}
+		catch(Exception e)
+		{
+			Log.i("IKRPG", "Yeah, good try though. "+e.getMessage());
+		}
     }
 
 	public void createNewCharacterTapped(View tappee)

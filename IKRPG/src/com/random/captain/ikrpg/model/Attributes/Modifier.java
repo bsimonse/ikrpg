@@ -1,9 +1,16 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-public class Modifier<S extends Enum<S>>
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+import com.random.captain.ikrpg.model.Attributes.Modifier;
+import java.io.Serializable;
+
+public class Modifier<S extends Enum<S>> implements Parcelable
 {
 	private int value;
 	private S trait;
+	private Class<S> genericClass;
 	
 	private Modifier (S pTrait)
 	{
@@ -14,6 +21,7 @@ public class Modifier<S extends Enum<S>>
 	{
 		trait = pTrait;
 		value = pValue;
+		genericClass = (Class<S>)trait.getClass();
 	}
 	
 	//Java is weird.
@@ -21,28 +29,59 @@ public class Modifier<S extends Enum<S>>
 	//
 	//All access is through these static methods for simplicity.
 	public static <S2 extends Enum<S2>> Modifier<S2> onTrait(S2 pTrait, int pValue)
-	{
-		return new Modifier<S2>(pTrait, pValue);
-	}
+	{return new Modifier<S2>(pTrait, pValue);}
 	
 	public static <S2 extends Enum<S2>> Modifier<S2> onTrait(S2 pTrait)
-	{
-		return new Modifier<S2>(pTrait);
-	}
+	{return new Modifier<S2>(pTrait);}
 	
-	public int getValue()
-	{
-		return value;
-	}
-	
-	public S getTrait()
-	{
-		return trait;
-	}
+	public int getValue(){return value;}
+	public S getTrait(){return trait;}
 	
 	//future improvement will allow for setting here, rather than incrementing
-	public int modifiedValue(int base)
+	public int modifiedValue(int base){return base + value;}
+	
+	@Override
+	public String toString()
 	{
-		return base + value;
+		return trait.toString()+": "+value;
+	}
+	
+	/* Parcelling */
+	public void writeToParcel(Parcel toParcel, int flags)
+	{
+		toParcel.writeSerializable(genericClass);
+		toParcel.writeInt(value);
+		toParcel.writeSerializable(trait);
+	}
+
+	public static final Parcelable.Creator<Modifier> CREATOR = new Parcelable.Creator<Modifier>()
+	{
+		@Override
+		public Modifier createFromParcel(Parcel in)
+		{
+			try
+			{
+				Class<Enum> which = (Class<Enum>)in.readSerializable();
+				int value = in.readInt();
+				Serializable trait = in.readSerializable();
+				return Modifier.onTrait(which.cast(trait), value);
+			}
+			catch(Exception e)
+			{
+				Log.e("IKRPG","Bad news, dude, Modifier didn't Parcel correctly!");
+				return Modifier.onTrait(null, 0);
+			}
+		}
+
+		@Override
+		public Modifier[] newArray(int size)
+		{
+			return new Modifier[size];
+		}
+	};
+
+	public int describeContents()
+	{
+		return 0;
 	}
 }

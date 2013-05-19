@@ -1,6 +1,8 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-public enum Spell
+import android.os.Parcelable;
+
+public enum Spell implements Parcelable
 {
 	ARCANE_BOLT("Arcane Bolt", "You shoot magic", 2, 12, 0, 11, false, true),
 	ARCANE_STRIKE("Arcane Strike", "You shoot magic", 1, 8, 0, 8, false, true),

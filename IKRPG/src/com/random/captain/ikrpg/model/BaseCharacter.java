@@ -1,11 +1,13 @@
 package com.random.captain.ikrpg.model;
 import com.random.captain.ikrpg.model.Attributes.*;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import java.util.Collection;
 import java.util.Set;
 
-public class BaseCharacter
+public class BaseCharacter implements Parcelable
 {
 	/*Fluff*/
 	private String name;
@@ -19,6 +21,7 @@ public class BaseCharacter
 	private SkillsBundle skillsBundle;
 	private StatsBundle statsBundle;
 	
+	/* Constructor */
 	public BaseCharacter(String pName, Race pRace, Archetype pArchetype, Set<Career> pCareers, Set<Ability> pAbilities,
 							Set<Spell> pSpells, SkillsBundle pSkills, StatsBundle pStats)
 	{
@@ -41,22 +44,46 @@ public class BaseCharacter
 	public SkillsBundle skillsBundle(){return skillsBundle;}
 	public StatsBundle statsBundle(){return statsBundle;}
 	
+	public int describeContents()
+	{
+		return 0; //?
+	}
+	
+	/* Parcelling */
+	public void writeToParcel(Parcel toParcel, int flags)
+	{
+		toParcel.writeString(name);
+		toParcel.writeSerializable(race);
+		toParcel.writeSerializable(archetype);
+		toParcel.writeTypedArray(careers.toArray(new Career[careers.size()]),0);
+		toParcel.writeTypedArray(abilities.toArray(new Ability[abilities.size()]),0);
+		toParcel.writeTypedArray(spells.toArray(new Spell[spells.size()]),0);
+		toParcel.writeParcelable(skillsBundle,0);
+		toParcel.writeParcelable(statsBundle,0);
+	}
+	
+	public static final Parcelable.Creator<BaseCharacter> CREATOR = new Parcelable.Creator<BaseCharacter>()
+	{
+		@Override
+		public BaseCharacter createFromParcel(Parcel in)
+		{
+			BaseCharacter me = new BaseCharacter(null, null, null, null, null, null, null, null);
+			return me;
+		}
+
+		@Override
+		public BaseCharacter[] newArray(int size)
+		{
+			return new BaseCharacter[size];
+		}
+	};
+	
 	public String toString()
 	{
 		StringBuilder myString = new StringBuilder(100);
 		myString.append(name).append("\n");
 		myString.append(archetype.displayName()).append(" ").append(race.displayName());
 		myString.append("\n");
-		
-		myString.append("Stats:\nPHY: ").append(statsBundle.getStat(Stat.PHYSIQUE)).append("\n");
-		myString.append("SPD: ").append(statsBundle.getStat(Stat.SPEED)).append("\n");
-		myString.append("STR: ").append(statsBundle.getStat(Stat.STRENGTH)).append("\n");
-		myString.append("AGI: ").append(statsBundle.getStat(Stat.AGILITY)).append("\n");
-		myString.append("PRW: ").append(statsBundle.getStat(Stat.PROWESS)).append("\n");
-		myString.append("POI: ").append(statsBundle.getStat(Stat.POISE)).append("\n");
-		myString.append("INT: ").append(statsBundle.getStat(Stat.INTELLECT)).append("\n");
-		myString.append("ARC: ").append(statsBundle.getStat(Stat.ARCANE)).append("\n");
-		myString.append("PER: ").append(statsBundle.getStat(Stat.PERCEPTION)).append("\n");
 		
 		myString.append("\nCareers: \n");
 		for(Career career: careers)

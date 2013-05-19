@@ -83,6 +83,12 @@ public enum Archetype implements PrereqCheck
 		prereq = pPrereq;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return displayName();
+	}
+	
 	private String name;
 	private PostCreateHook postCreateHook;
 	private PrereqCheck prereq;

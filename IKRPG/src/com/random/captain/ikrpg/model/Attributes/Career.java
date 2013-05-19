@@ -3,12 +3,13 @@ package com.random.captain.ikrpg.model.Attributes;
 import java.util.*;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.util.Pair;
 import com.random.captain.ikrpg.model.Attributes.Race;
 import com.random.captain.ikrpg.model.Creators.PostCreateHook;
 import com.random.captain.ikrpg.model.Creators.PrereqCheck;
 
-public enum Career implements PrereqCheck
+public enum Career implements PrereqCheck, Parcelable
 {
 	//This might be better as JSON... eh.
 	//But Laaaaaaaambda
@@ -71,6 +72,12 @@ public enum Career implements PrereqCheck
 		careerSpells = pSpells != null ? Arrays.asList(pSpells) : new ArrayList<Spell>(10);
 		prereqCheck = pPrereqCheck;
 		postCreateHook = pPostCreateHook;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return displayName();
 	}
 	
 	private String name;

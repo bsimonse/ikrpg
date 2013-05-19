@@ -1,11 +1,13 @@
 package com.random.captain.ikrpg.model.Attributes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatsBundle
+public class StatsBundle implements Parcelable
 {
 	private Map<Stat, Integer> activeStats;
 	private Map<Stat, Integer> baseStats;
@@ -24,6 +26,14 @@ public class StatsBundle
 		
 		modifiers = new HashMap<String, Modifier<Stat>>();
 		
+		rederiveBaseStats();
+	}
+	
+	public StatsBundle(Map<Stat, Integer> pBaseStats)
+	{
+		baseStats = pBaseStats;
+		activeStats = new HashMap<Stat, Integer>();
+		modifiers = new HashMap<String, Modifier<Stat>>();
 		rederiveBaseStats();
 	}
 	
@@ -105,5 +115,90 @@ public class StatsBundle
 			value = modifier.modifiedValue(value);
 			activeStats.put(stat, value);
 		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder myString = new StringBuilder(100);
+		myString.append("Stats:\nPHY: ").append(activeStats.get(Stat.PHYSIQUE)).append("\n");
+		myString.append("SPD: ").append(activeStats.get(Stat.SPEED)).append("\n");
+		myString.append("STR: ").append(activeStats.get(Stat.STRENGTH)).append("\n");
+		myString.append("AGI: ").append(activeStats.get(Stat.AGILITY)).append("\n");
+		myString.append("PRW: ").append(activeStats.get(Stat.PROWESS)).append("\n");
+		myString.append("POI: ").append(activeStats.get(Stat.POISE)).append("\n");
+		myString.append("INT: ").append(activeStats.get(Stat.INTELLECT)).append("\n");
+		myString.append("ARC: ").append(activeStats.get(Stat.ARCANE)).append("\n");
+		myString.append("PER: ").append(activeStats.get(Stat.PERCEPTION)).append("\n");
+		return myString.toString();
+	}
+	
+	/* Parcelling */
+	public void writeToParcel(Parcel toParcel, int flags)
+	{
+		toParcel.writeInt(baseStats.size());
+		for(Stat stat : baseStats.keySet())
+		{
+			toParcel.writeSerializable(stat);
+			toParcel.writeInt(activeStats.get(stat));
+		}
+		
+		toParcel.writeInt(modifiers.size());
+		for(String modName : modifiers.keySet())
+		{
+			toParcel.writeString(modName);
+			toParcel.writeParcelable(modifiers.get(modName), 0);
+		}
+	}
+
+	public static final Parcelable.Creator<StatsBundle> CREATOR = new Parcelable.Creator<StatsBundle>()
+	{
+		@Override
+		public StatsBundle createFromParcel(Parcel in)
+		{
+			int baseSize = in.readInt();
+			Map<Stat, Integer> baseStats = new HashMap<Stat, Integer>(baseSize);
+			Stat stat;
+			int value;
+			for(int i=0; i<baseSize; i++)
+			{
+				stat = (Stat)in.readSerializable();
+				value = in.readInt();
+				baseStats.put(stat, value);
+			}
+			
+			baseSize = in.readInt();
+			Map<String, Modifier<Stat>> modifiers = new HashMap<String, Modifier<Stat>>(baseSize);
+			String key;
+			Modifier<Stat> mod;
+			for(int i=0; i<baseSize; i++)
+			{
+				key = in.readString();
+				mod = (Modifier<Stat>)(in.readParcelable(Modifier.class.getClassLoader()));
+				modifiers.put(key, mod);
+			}
+			
+			StatsBundle me = new StatsBundle(baseStats, modifiers);
+			return me;
+		}
+
+		@Override
+		public StatsBundle[] newArray(int size)
+		{
+			return new StatsBundle[size];
+		}
+	};
+	
+	private StatsBundle(Map<Stat, Integer> pBaseStats, Map<String, Modifier<Stat>> pModifiers)
+	{
+		baseStats = pBaseStats;
+		activeStats = new HashMap<Stat, Integer>();
+		modifiers = pModifiers;
+		rederiveBaseStats();
+	}
+	
+	public int describeContents()
+	{
+		return 0;
 	}
 }

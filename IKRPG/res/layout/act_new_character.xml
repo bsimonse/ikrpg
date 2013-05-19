@@ -1,12 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/mainFragmentContainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
     
-	<fragment android:name="com.random.captain.ikrpg.fragments.newcharacter.ChooseRaceFragment"
-		android:id="@+id/mainFragment"
-		android:layout_height="match_parent"
-		android:layout_width="match_parent"
-		/>
-	
 </LinearLayout>

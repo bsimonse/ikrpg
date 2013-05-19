@@ -2,9 +2,12 @@ package com.random.captain.ikrpg.model.Attributes;
 
 import java.util.*;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
+import com.random.captain.ikrpg.model.Attributes.StatsBundle;
 
-public class SkillsBundle
+public class SkillsBundle implements Parcelable
 {
 	private StatsBundle stats;
 	private Map<Skill, Integer> activeSkills;
@@ -108,5 +111,32 @@ public class SkillsBundle
 			value = modifier.modifiedValue(value);
 			activeSkills.put(skill, value);
 		}
+	}
+	
+	/* Parcelling */
+	public void writeToParcel(Parcel toParcel, int flags)
+	{
+		//TODO: do
+	}
+
+	public static final Parcelable.Creator<SkillsBundle> CREATOR = new Parcelable.Creator<SkillsBundle>()
+	{
+		@Override
+		public SkillsBundle createFromParcel(Parcel in)
+		{
+			SkillsBundle me = new SkillsBundle(null);
+			return me;
+		}
+
+		@Override
+		public SkillsBundle[] newArray(int size)
+		{
+			return new SkillsBundle[size];
+		}
+	};
+
+	public int describeContents()
+	{
+		return 0;
 	}
 }
