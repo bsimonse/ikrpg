@@ -140,7 +140,7 @@ public class StatsBundle implements Parcelable
 		for(Stat stat : baseStats.keySet())
 		{
 			toParcel.writeSerializable(stat);
-			toParcel.writeInt(activeStats.get(stat));
+			toParcel.writeInt(baseStats.get(stat));
 		}
 		
 		toParcel.writeInt(modifiers.size());

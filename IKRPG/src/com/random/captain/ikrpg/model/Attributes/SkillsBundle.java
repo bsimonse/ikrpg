@@ -113,10 +113,44 @@ public class SkillsBundle implements Parcelable
 		}
 	}
 	
+	@Override
+	public String toString()
+	{
+		StringBuilder myString = new StringBuilder(100);
+		myString.append("\nSkills: \n");
+		for(Pair<Skill, Integer> skillPair : getTrainedSkills())
+		{
+			Skill skill = skillPair.first;
+			myString.append(skill.name()).append(": ").append(skillPair.second).append("\n");
+		}
+		
+		return myString.toString();
+	}
+	
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)
 	{
 		//TODO: do
+		/*private StatsBundle stats;
+		private Map<Skill, Integer> baseSkills;
+
+		private Map<String, Modifier<Skill>> modifiers;*/
+		
+		toParcel.writeParcelable(stats,0);
+		
+		toParcel.writeInt(baseSkills.size());
+		for(Skill stat : baseSkills.keySet())
+		{
+			toParcel.writeSerializable(stat);
+			toParcel.writeInt(baseSkills.get(stat));
+		}
+
+		toParcel.writeInt(modifiers.size());
+		for(String modName : modifiers.keySet())
+		{
+			toParcel.writeString(modName);
+			toParcel.writeParcelable(modifiers.get(modName), 0);
+		}
 	}
 
 	public static final Parcelable.Creator<SkillsBundle> CREATOR = new Parcelable.Creator<SkillsBundle>()
@@ -124,7 +158,31 @@ public class SkillsBundle implements Parcelable
 		@Override
 		public SkillsBundle createFromParcel(Parcel in)
 		{
-			SkillsBundle me = new SkillsBundle(null);
+			StatsBundle pStats = (StatsBundle)in.readParcelable(StatsBundle.class.getClassLoader());
+			
+			int baseSize = in.readInt();
+			Map<Skill, Integer> baseSkills = new HashMap<Skill, Integer>(baseSize);
+			Skill skill;
+			int value;
+			for(int i=0; i<baseSize; i++)
+			{
+				skill = (Skill)in.readSerializable();
+				value = in.readInt();
+				baseSkills.put(skill, value);
+			}
+
+			baseSize = in.readInt();
+			Map<String, Modifier<Skill>> modifiers = new HashMap<String, Modifier<Skill>>(baseSize);
+			String key;
+			Modifier<Skill> mod;
+			for(int i=0; i<baseSize; i++)
+			{
+				key = in.readString();
+				mod = (Modifier<Skill>)(in.readParcelable(Modifier.class.getClassLoader()));
+				modifiers.put(key, mod);
+			}
+
+			SkillsBundle me = new SkillsBundle(pStats, baseSkills, modifiers);
 			return me;
 		}
 
@@ -135,6 +193,16 @@ public class SkillsBundle implements Parcelable
 		}
 	};
 
+	private SkillsBundle(StatsBundle pStats, Map<Skill, Integer> pBaseSkills, Map<String, Modifier<Skill>> pModifiers)
+	{
+		stats = pStats;
+		activeSkills = new HashMap<Skill, Integer>();
+		baseSkills = pBaseSkills;
+		modifiers = pModifiers;
+
+		rederiveSkills();
+	}
+	
 	public int describeContents()
 	{
 		return 0;

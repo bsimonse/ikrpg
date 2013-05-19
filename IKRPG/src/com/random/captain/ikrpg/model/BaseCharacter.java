@@ -1,11 +1,10 @@
 package com.random.captain.ikrpg.model;
 import com.random.captain.ikrpg.model.Attributes.*;
+import java.util.*;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
-import java.util.Collection;
-import java.util.Set;
 
 public class BaseCharacter implements Parcelable
 {
@@ -67,7 +66,13 @@ public class BaseCharacter implements Parcelable
 		@Override
 		public BaseCharacter createFromParcel(Parcel in)
 		{
-			BaseCharacter me = new BaseCharacter(null, null, null, null, null, null, null, null);
+			String pName = in.readString();
+			Race pRace = (Race)in.readSerializable();
+			Archetype pArchetype = (Archetype)in.readSerializable();
+			//List<Career> = Arrays.asList(in.readTypedArray(new Career[10], Career.CREATOR));
+			
+			
+			BaseCharacter me = new BaseCharacter(pName, pRace, pArchetype, null, null, null, null, null);
 			return me;
 		}
 
@@ -85,19 +90,15 @@ public class BaseCharacter implements Parcelable
 		myString.append(archetype.displayName()).append(" ").append(race.displayName());
 		myString.append("\n");
 		
+		myString.append(statsBundle.toString());
+		
 		myString.append("\nCareers: \n");
 		for(Career career: careers)
 		{
 			myString.append(career.displayName()).append("\n");
 		}
 		
-		myString.append("\nSkills: \n");
-		Collection<Pair<Skill, Integer>> mySkills = skillsBundle.getTrainedSkills();
-		for(Pair<Skill, Integer> skillPair : mySkills)
-		{
-			Skill skill = skillPair.first;
-			myString.append(skill.name()).append(": ").append(skillPair.second).append("\n");
-		}
+		myString.append(skillsBundle.toString());
 		
 		myString.append("\nAbilities: \n");
 		for(Ability ability: abilities)
