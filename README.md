@@ -1,4 +1,4 @@
 ikrpg
 =====
 
-General Helper app for IKRPG
+General Helper app for the Iron Kingdoms RPG
