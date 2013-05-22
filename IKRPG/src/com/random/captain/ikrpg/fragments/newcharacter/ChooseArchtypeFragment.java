@@ -3,6 +3,7 @@ package com.random.captain.ikrpg.fragments.newcharacter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.activities.NewCharacterActivity;
 import com.random.captain.ikrpg.model.Attributes.Archetype;
+import com.random.captain.ikrpg.model.BaseCharacter;
+import com.random.captain.ikrpg.model.Creators.PrereqCheckResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +38,12 @@ public class ChooseArchtypeFragment extends Fragment
 		final List<Archetype> validArchetypes = new ArrayList<Archetype>(5);
 		for(Archetype at : Archetype.values())
 		{
-			if(at.meetsPrereq(hostActivity.race, null, null, null, null, null, getActivity()))
-			{
-				validArchetypes.add(at);
-			}
+			PrereqCheckResult result = at.meetsPrereq(new BaseCharacter(hostActivity.name, hostActivity.race, null, null, null, null, null, null));
+			
+			//TODO: list additional questions with stars
+			
+			if(result.additionalQuestion != null || result.isAllowed)
+			{validArchetypes.add(at);}
 		}
 		
 		archetypeList = (ListView)rootView.findViewById(R.id.raceList);
@@ -55,6 +60,8 @@ public class ChooseArchtypeFragment extends Fragment
 
 	private void archetypeSelected(Archetype archetype)
 	{
+		//TODO: ask additional question!
+		Log.i("IKRPG","Archetype chosen! "+archetype.toString());
 		hostActivity.archetype = archetype;
 		hostActivity.nextFrag(NewCharacterActivity.FragState.ARCHETYPE);
 	}

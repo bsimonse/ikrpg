@@ -1,11 +1,8 @@
 package com.random.captain.ikrpg.model.Creators;
-import com.random.captain.ikrpg.model.Attributes.*;
-
-import android.content.Context;
-import java.util.Set;
+import android.support.v4.app.Fragment;
+import com.random.captain.ikrpg.model.BaseCharacter;
 
 public interface PostCreateHook
 {
-	public void doPostCreateHook(Race pRace, Archetype archetype, Set<Career> pCareers, Set<Ability> pAbilities,
-									SkillsBundle pSkills, StatsBundle pStats, Context appContext);
+	public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int which);
 }	

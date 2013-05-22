@@ -15,6 +15,8 @@ import android.widget.ListView;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.activities.NewCharacterActivity;
 import com.random.captain.ikrpg.model.Attributes.Career;
+import com.random.captain.ikrpg.model.BaseCharacter;
+import com.random.captain.ikrpg.model.Creators.PrereqCheckResult;
 
 public class ChooseCareerFragment extends Fragment
 {
@@ -46,7 +48,12 @@ public class ChooseCareerFragment extends Fragment
 		final List<Career> validCareers = new ArrayList<Career>(30);
 		for(Career career : Career.values())
 		{
-			if(career.meetsPrereq(hostActivity.race, hostActivity.archetype, myCareers, null, null, null, getActivity()))
+			PrereqCheckResult result = career.meetsPrereq(new BaseCharacter(hostActivity.name, hostActivity.race, hostActivity.archetype, myCareers, null, null, null, null));
+			
+			//TODO:
+			//Additional questions ARE displayed, with stars!
+			
+			if(result.additionalQuestion != null || result.isAllowed)
 			{validCareers.add(career);}
 		}
 
@@ -68,11 +75,13 @@ public class ChooseCareerFragment extends Fragment
 	{
 		if(isSecondCareer)
 		{
+			Log.i("IKRPG","Second career: "+career.toString());
 			hostActivity.career2 = career;
 			hostActivity.nextFrag(NewCharacterActivity.FragState.CAREER2);
 		}
 		else
 		{
+			Log.i("IKRPG","First career: "+career.toString());
 			hostActivity.career1 = career;
 			hostActivity.nextFrag(NewCharacterActivity.FragState.CAREER1);
 		}

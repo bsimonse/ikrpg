@@ -1,73 +1,75 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-import android.content.Context;
-import android.os.Parcelable;
+import android.support.v4.app.FragmentManager;
+import com.random.captain.ikrpg.model.Attributes.Ability;
+import com.random.captain.ikrpg.model.Attributes.Skill;
+import com.random.captain.ikrpg.model.BaseCharacter;
 import com.random.captain.ikrpg.model.Creators.PrereqCheck;
-import java.util.Set;
+import com.random.captain.ikrpg.model.Creators.PrereqCheckResult;
 
-public enum Ability implements PrereqCheck, Parcelable
+public enum Ability implements PrereqCheck
 {
 	JACK_MARSHALL("'Jack Marshall", "Kickin'",null),
 	ACE_COMMANDER("Ace Commander", "Whee", new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pAbilities.contains(Ability.JACK_MARSHALL) && pSkills.getSkillLevel(Skill.COMMAND) >= 2;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.abilities().contains(Ability.JACK_MARSHALL) && myChar.skillsBundle().getSkillLevel(Skill.COMMAND) >= 2, null);}
 	}),
 	ACROBATICS("Acrobatics","Jump", new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pStats.getBaseStat(Stat.AGILITY) >= 6;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.statsBundle().getBaseStat(Stat.AGILITY) >= 6, null);}
 	}),
 	ARCANE_ENGINEER("Arcane Engineer", "", new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.MECHANIKAL) >= 2;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.MECHANIKAL) >= 2, null);}
 	}),
 	BOMBER("Bomber","", new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.THROWN_WEAPON) >= 3;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.THROWN_WEAPON) >= 3, null);}
 	}),
 	BREW_MASTER("Brew Master","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.ALCHEMY) >= 2;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.ALCHEMY) >= 2, null);}
 	}),
 	DRIVE_ASSUALT("Drive: Assault","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pAbilities.contains(Ability.JACK_MARSHALL);}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.abilities().contains(Ability.JACK_MARSHALL), null);}
 	}),
 	DRIVE_PRONTO("Drive: Pronto","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pAbilities.contains(Ability.JACK_MARSHALL);}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.abilities().contains(Ability.JACK_MARSHALL), null);}
 	}),
 	FAST_COOK("Fast Cook","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.ALCHEMY) >= 2;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.ALCHEMY) >= 2, null);}
 	}),
 	FIELD_ALCHEMIST("Field Alchemist", "",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.ALCHEMY) >= 2;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.ALCHEMY) >= 2, null);}
 	}),
 	FIRE_IN_THE_HOLE("Fire in the Hole!","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.THROWN_WEAPON) >= 1;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.THROWN_WEAPON) >= 1, null);}
 	}),
 	FREE_STYLE("Free Style","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.ALCHEMY) >= 1;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.ALCHEMY) >= 1, null);}
 	}),
 	GRENADIER("Grenadier","Boom",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.THROWN_WEAPON) >= 1;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.THROWN_WEAPON) >= 1, null);}
 	}),
 	INSCRIBE_FORMULAE("Inscribe Formulae","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.MECHANIKAL) >= 1;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.MECHANIKAL) >= 1, null);}
 	}),
 	POISON_RESISTANCE("Poison Resistance", "Hiss", null),
 	RESOURCEFUL("Resourceful","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.MECHANIKAL) >= 3;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.MECHANIKAL) >= 3, null);}
 	}),
 	STEAMO("Steamo","",new PrereqCheck(){
-			@Override public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities, SkillsBundle pSkills, StatsBundle pStats, Context appContext)
-			{return pSkills.getSkillLevel(Skill.MECHANIKAL) >= 2;}
+			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(Skill.MECHANIKAL) >= 2, null);}
 	});
 	
 	private Ability(String pName, String pDesc, PrereqCheck pPrereqCheck)
@@ -85,11 +87,9 @@ public enum Ability implements PrereqCheck, Parcelable
 	public String description(){return description;}
 	
 	@Override
-	public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities,
-							   SkillsBundle pSkills, StatsBundle pStats, Context appContext)
+	public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
 	{
-		if(prereq == null){return true;}
-		
-		return prereq.meetsPrereq(race, archetype, careers, pAbilities, pSkills, pStats, appContext);
+		if(prereq == null){return new PrereqCheckResult(true,null);}
+		else{return prereq.meetsPrereq(myChar);}
 	}
 }

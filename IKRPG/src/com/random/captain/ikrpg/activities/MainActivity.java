@@ -1,7 +1,5 @@
 package com.random.captain.ikrpg.activities;
 
-import com.random.captain.ikrpg.model.Attributes.*;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,11 +7,9 @@ import android.util.Log;
 import android.view.View;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.model.BaseCharacter;
-import com.random.captain.ikrpg.model.Creators.CharacterCreator;
 
 public class MainActivity extends FragmentActivity
 {
-	public static final String NEW_CHARACTER = "thisIsANewCharacter";
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
     
     @Override
@@ -22,11 +18,11 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 		
-		try
+		/*try
 		{
 			
 			BaseCharacter myChar = CharacterCreator.createCharacter("Gus",Race.HUMAN, Archetype.GIFTED_FOCUSER, Career.ALCHEMIST, Career.ARCANE_MECHANIK, this);
-			SkillsBundle test = myChar.skillsBundle();
+			//SkillsBundle test = myChar.skillsBundle();
 			
 			//Modifier<Stat> test = Modifier.onTrait(Stat.PERCEPTION,1);
 			
@@ -35,12 +31,13 @@ public class MainActivity extends FragmentActivity
 			
 			Intent myIntent = new Intent();
 			Log.i("IKRPG","*Gulp*");
-			myIntent.putExtra("test", test);
+			myIntent.putExtra("test", myChar);
 			Log.i("IKRPG","Oh God oh God oh God");
 			
 			//Modifier<Stat> didItWork = myIntent.getExtras().getParcelable("test");
 			//StatsBundle didItWork = myIntent.getExtras().getParcelable("test");
-			SkillsBundle didItWork = myIntent.getExtras().getParcelable("test");
+			//SkillsBundle didItWork = myIntent.getExtras().getParcelable("test");
+			BaseCharacter didItWork = myIntent.getExtras().getParcelable("test");
 			
 			Log.i("IKRPG","Or did it?\n"+didItWork.toString());
 			
@@ -48,7 +45,7 @@ public class MainActivity extends FragmentActivity
 		catch(Exception e)
 		{
 			Log.i("IKRPG", "Yeah, good try though. "+e.getMessage());
-		}
+		}*/
     }
 
 	public void createNewCharacterTapped(View tappee)
@@ -63,8 +60,19 @@ public class MainActivity extends FragmentActivity
 	{
 		if(requestCode == NEW_CHARACTER_ACTIVITY_RESULT)
 		{
-			//It... worked?
-			Log.i("IKRPG","Character... created(?)");
+			if(resultCode == RESULT_OK)
+			{
+				BaseCharacter myChar = i.getExtras().getParcelable(NewCharacterActivity.NEW_CHARACTER);
+				Log.i("IKRPG","Character... created(?)");
+				if(myChar != null)
+				{Log.i("IKRPG",myChar.toString());}
+				else
+				{Log.i("IKRPG","Didn't come back...");}
+			}
+			else
+			{
+				Log.i("IKRPG","Character not created... *sad face*");
+			}
 		}
 	}
 }

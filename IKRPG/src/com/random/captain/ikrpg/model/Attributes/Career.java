@@ -1,15 +1,20 @@
 package com.random.captain.ikrpg.model.Attributes;
 
+import android.widget.*;
+import com.random.captain.ikrpg.model.Creators.*;
 import java.util.*;
 
-import android.content.Context;
-import android.os.Parcelable;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.Pair;
-import com.random.captain.ikrpg.model.Attributes.Race;
-import com.random.captain.ikrpg.model.Creators.PostCreateHook;
-import com.random.captain.ikrpg.model.Creators.PrereqCheck;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import com.random.captain.ikrpg.model.BaseCharacter;
 
-public enum Career implements PrereqCheck, Parcelable
+public enum Career implements PrereqCheck
 {
 	//This might be better as JSON... eh.
 	//But Laaaaaaaambda
@@ -40,23 +45,56 @@ public enum Career implements PrereqCheck, Parcelable
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
 			  new PrereqCheck(){
 				  @Override
-				  public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities,
-				  								SkillsBundle pSkills, StatsBundle pStats, Context appContext){
-					  return archetype == Archetype.GIFTED_FOCUSER || archetype == Archetype.GIFTED_WILL_WEAVER;
+				  public PrereqCheckResult meetsPrereq(BaseCharacter myChar){
+					if(myChar.archetype() == null){return new PrereqCheckResult(false, null);}
+					return new PrereqCheckResult(myChar.archetype() == Archetype.GIFTED_FOCUSER || myChar.archetype() == Archetype.GIFTED_WILL_WEAVER, null);
 				  }
 			  },
 			  new PostCreateHook(){
 				  @Override
-				  public void doPostCreateHook(Race pRace, Archetype archetype, Set<Career> pCareers, Set<Ability> pAbilities,
-				  								SkillsBundle pSkills, StatsBundle pStats, Context appContext){
-					  //Normally, user would have a choice
-					  int handWeaponLevel = pSkills.getSkillLevel(Skill.HAND_WEAPON);
-					  handWeaponLevel+=1;
-					  if(handWeaponLevel>2){handWeaponLevel=2;}
-					  pSkills.setSkillLevel(Skill.HAND_WEAPON, handWeaponLevel);
-				  }
+					public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate, final int whichHook){
+					  return new Fragment(){
+						  private ListView raceList;
+
+						  @Override
+						  public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+						  {
+							  LinearLayout root = new LinearLayout(inflater.getContext());
+							  root.setOrientation(LinearLayout.VERTICAL);
+							  root.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+							  
+							  TextView text = new TextView(inflater.getContext());
+							  text.setText("Choose a skill");
+							  root.addView(text);
+							  
+							  ListView choiceList = new ListView(inflater.getContext());
+							  final Skill[] choices = new Skill[]{Skill.HAND_WEAPON, Skill.RIFLE};
+							  choiceList.setAdapter(new ArrayAdapter<Skill>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
+							  choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+								  @Override
+								  public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+								  {
+									  Skill choice = choices[which];
+									  int currentLevel = myChar.skillsBundle().getSkillLevel(choice);
+									  currentLevel += 1;
+									  if(currentLevel > 2){currentLevel = 2;}
+									  myChar.skillsBundle().setSkillLevel(choice, currentLevel);
+									  delegate.hookComplete(whichHook);
+								  }
+							  });
+								 
+							  root.addView(choiceList);
+							  
+							  return root;
+						  }
+					  };
+					}
 			  });
 			  
+			  
+			  
+	
+	//Done!
 	private Career(String pName,
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
@@ -100,10 +138,13 @@ public enum Career implements PrereqCheck, Parcelable
 	public PostCreateHook postCreateHook(){return postCreateHook;}
 	
 	@Override
-	public boolean meetsPrereq(Race race, Archetype archetype, Set<Career> careers, Set<Ability> pAbilities,
-							   SkillsBundle pSkills, StatsBundle pStats, Context appContext)
+	public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
 	{
-		if(prereqCheck == null){return true;}
-		return prereqCheck.meetsPrereq(race, archetype, careers, pAbilities, pSkills, pStats, appContext);
+		Set<Career> careers = myChar.careers();
+		if(careers != null)
+		{for(Career c:careers){if(c!=null && c.ordinal() == this.ordinal()){return new PrereqCheckResult(false, null);}}}
+		
+		if(prereqCheck == null){return new PrereqCheckResult(true, null);}
+		else{return prereqCheck.meetsPrereq(myChar);}
 	}
 }

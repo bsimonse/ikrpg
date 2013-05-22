@@ -121,7 +121,7 @@ public class SkillsBundle implements Parcelable
 		for(Pair<Skill, Integer> skillPair : getTrainedSkills())
 		{
 			Skill skill = skillPair.first;
-			myString.append(skill.name()).append(": ").append(skillPair.second).append("\n");
+			myString.append(skill.displayName()).append(": ").append(skillPair.second).append("\n");
 		}
 		
 		return myString.toString();
@@ -130,14 +130,10 @@ public class SkillsBundle implements Parcelable
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)
 	{
-		//TODO: do
-		/*private StatsBundle stats;
-		private Map<Skill, Integer> baseSkills;
-
-		private Map<String, Modifier<Skill>> modifiers;*/
-		
+		//Stats
 		toParcel.writeParcelable(stats,0);
 		
+		//Base skills
 		toParcel.writeInt(baseSkills.size());
 		for(Skill stat : baseSkills.keySet())
 		{
@@ -145,6 +141,7 @@ public class SkillsBundle implements Parcelable
 			toParcel.writeInt(baseSkills.get(stat));
 		}
 
+		//Modifiers
 		toParcel.writeInt(modifiers.size());
 		for(String modName : modifiers.keySet())
 		{
@@ -158,7 +155,7 @@ public class SkillsBundle implements Parcelable
 		@Override
 		public SkillsBundle createFromParcel(Parcel in)
 		{
-			StatsBundle pStats = (StatsBundle)in.readParcelable(StatsBundle.class.getClassLoader());
+			StatsBundle pStats = in.readParcelable(StatsBundle.class.getClassLoader());
 			
 			int baseSize = in.readInt();
 			Map<Skill, Integer> baseSkills = new HashMap<Skill, Integer>(baseSize);
@@ -178,7 +175,7 @@ public class SkillsBundle implements Parcelable
 			for(int i=0; i<baseSize; i++)
 			{
 				key = in.readString();
-				mod = (Modifier<Skill>)(in.readParcelable(Modifier.class.getClassLoader()));
+				mod = (in.readParcelable(Modifier.class.getClassLoader()));
 				modifiers.put(key, mod);
 			}
 

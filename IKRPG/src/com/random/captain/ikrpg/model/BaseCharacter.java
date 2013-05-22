@@ -34,6 +34,9 @@ public class BaseCharacter implements Parcelable
 		statsBundle = pStats;
 	}
 	
+	public BaseCharacter()
+	{}
+	
 	public String name(){return name;}
 	public Race race(){return race;}
 	public Archetype archetype(){return archetype;}
@@ -43,20 +46,35 @@ public class BaseCharacter implements Parcelable
 	public SkillsBundle skillsBundle(){return skillsBundle;}
 	public StatsBundle statsBundle(){return statsBundle;}
 	
+	@Override
 	public int describeContents()
 	{
 		return 0; //?
 	}
 	
 	/* Parcelling */
+	@Override
 	public void writeToParcel(Parcel toParcel, int flags)
 	{
 		toParcel.writeString(name);
 		toParcel.writeSerializable(race);
 		toParcel.writeSerializable(archetype);
-		toParcel.writeTypedArray(careers.toArray(new Career[careers.size()]),0);
-		toParcel.writeTypedArray(abilities.toArray(new Ability[abilities.size()]),0);
-		toParcel.writeTypedArray(spells.toArray(new Spell[spells.size()]),0);
+		
+		int[] careerOrdinals = new int[careers.size()];int index=0;
+		for(Career c: careers){careerOrdinals[index++]=c.ordinal();}
+		toParcel.writeInt(careers.size());
+		toParcel.writeIntArray(careerOrdinals);
+		
+		int[] abilityOrdinals = new int[abilities.size()];index=0;
+		for(Ability a: abilities){abilityOrdinals[index++]=a.ordinal();}
+		toParcel.writeInt(abilities.size());
+		toParcel.writeIntArray(abilityOrdinals);
+		
+		int[] spellOrdinals = new int[spells.size()];index=0;
+		for(Spell s: spells){spellOrdinals[index++]=s.ordinal();}
+		toParcel.writeInt(spells.size());
+		toParcel.writeIntArray(spellOrdinals);
+		
 		toParcel.writeParcelable(skillsBundle,0);
 		toParcel.writeParcelable(statsBundle,0);
 	}
@@ -69,10 +87,29 @@ public class BaseCharacter implements Parcelable
 			String pName = in.readString();
 			Race pRace = (Race)in.readSerializable();
 			Archetype pArchetype = (Archetype)in.readSerializable();
-			//List<Career> = Arrays.asList(in.readTypedArray(new Career[10], Career.CREATOR));
 			
+			int careerCount = in.readInt();
+			int[] careerOrdinals = new int[careerCount]; in.readIntArray(careerOrdinals);
+			Set<Career> pCareers = new HashSet<Career>(); Career[] careers = Career.values();
+			for(int c:careerOrdinals)
+			{pCareers.add(careers[c]);}
 			
-			BaseCharacter me = new BaseCharacter(pName, pRace, pArchetype, null, null, null, null, null);
+			int abilityCount = in.readInt();
+			int[] abilityOrdinals = new int[abilityCount]; in.readIntArray(abilityOrdinals);
+			Set<Ability> pAbilities = new HashSet<Ability>(); Ability[] abilities = Ability.values();
+			for(int a:abilityOrdinals)
+			{pAbilities.add(abilities[a]);}
+			
+			int spellCount = in.readInt();
+			int[] spellOrdinals = new int[spellCount]; in.readIntArray(spellOrdinals);
+			Set<Spell> pSpells = new HashSet<Spell>(); Spell[] spells = Spell.values();
+			for(int s:spellOrdinals)
+			{pSpells.add(spells[s]);}
+			
+			SkillsBundle pSkills = in.readParcelable(SkillsBundle.class.getClassLoader());
+			StatsBundle pStats = in.readParcelable(StatsBundle.class.getClassLoader());
+			
+			BaseCharacter me = new BaseCharacter(pName, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
 			return me;
 		}
 
@@ -83,6 +120,7 @@ public class BaseCharacter implements Parcelable
 		}
 	};
 	
+	@Override
 	public String toString()
 	{
 		StringBuilder myString = new StringBuilder(100);

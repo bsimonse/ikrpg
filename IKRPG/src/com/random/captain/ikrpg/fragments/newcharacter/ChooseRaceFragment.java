@@ -3,6 +3,7 @@ package com.random.captain.ikrpg.fragments.newcharacter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class ChooseRaceFragment extends Fragment
 		
 	private void raceSelected(Race race)
 	{
+		Log.i("IKRPG","Race chosen! "+race.toString());
 		hostActivity.race = race;
 		hostActivity.nextFrag(NewCharacterActivity.FragState.RACE);
 	}
