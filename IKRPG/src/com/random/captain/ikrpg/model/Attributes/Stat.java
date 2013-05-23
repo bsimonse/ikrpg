@@ -19,8 +19,10 @@ public enum Stat
 	COMMAND("Command","CMD"),
 	CONTROL("Control","CTRL"),
 	//"Other" stats
-	ATTACK("Attack modifier","ATK"),
-	DAMAGE("Damage modifier","DMG");
+	MELEE_ATTACK("Melee attack modifier","ATK(M)"),
+	MELEE_DAMAGE("Melee damage modifier","DMG(M)"),
+	RANGED_ATTACK("Ranged attack modifier","ATK(R)"),
+	RANGED_DAMAGE("Ranged damage modifier","DMG(R)");
 	
 	private Stat(String pLongName, String pShortName)
 	{
@@ -28,22 +30,12 @@ public enum Stat
 		this.shortName = pShortName;
 	};
 	
-	String longName;
-	String shortName;
+	private String longName;
+	private String shortName;
 	
-	public String longName()
-	{
-		return longName;
-	}
-	
-	public String shortName()
-	{
-		return shortName;
-	}
+	public String longName(){return longName;}
+	public String shortName(){return shortName;}
 	
 	@Override
-	public String toString()
-	{
-		return longName+"("+shortName+")";
-	}
+	public String toString(){return longName+"("+shortName+")";}
 }

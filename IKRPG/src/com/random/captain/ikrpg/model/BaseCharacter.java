@@ -1,15 +1,15 @@
 package com.random.captain.ikrpg.model;
 import com.random.captain.ikrpg.model.Attributes.*;
-import java.util.*;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Pair;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BaseCharacter implements Parcelable
 {
 	/*Fluff*/
-	private String name;
+	private Fluff fluff;
 	
 	/*Crunch*/
 	private Race race;
@@ -19,12 +19,13 @@ public class BaseCharacter implements Parcelable
 	private Set<Spell> spells;
 	private SkillsBundle skillsBundle;
 	private StatsBundle statsBundle;
+	private int exp;
 	
 	/* Constructor */
-	public BaseCharacter(String pName, Race pRace, Archetype pArchetype, Set<Career> pCareers, Set<Ability> pAbilities,
+	public BaseCharacter(Fluff pFluff, Race pRace, Archetype pArchetype, Set<Career> pCareers, Set<Ability> pAbilities,
 							Set<Spell> pSpells, SkillsBundle pSkills, StatsBundle pStats)
 	{
-		name = pName;
+		fluff = pFluff;
 		race = pRace;
 		archetype = pArchetype;
 		careers = pCareers;
@@ -32,12 +33,13 @@ public class BaseCharacter implements Parcelable
 		spells = pSpells;
 		skillsBundle = pSkills;
 		statsBundle = pStats;
+		exp = 0;
 	}
 	
 	public BaseCharacter()
-	{}
+	{this(null,null,null,null,null,null,null,null);}
 	
-	public String name(){return name;}
+	public Fluff fluff(){return fluff;}
 	public Race race(){return race;}
 	public Archetype archetype(){return archetype;}
 	public Set<Career> careers(){return careers;}
@@ -45,6 +47,18 @@ public class BaseCharacter implements Parcelable
 	public Set<Spell> spells(){return spells;}
 	public SkillsBundle skillsBundle(){return skillsBundle;}
 	public StatsBundle statsBundle(){return statsBundle;}
+	public int exp(){return exp;}
+	
+	public void gainEXP(int pExpGain)
+	{setEXP(exp+pExpGain);}
+	
+	public void setEXP(int pExpTotal)
+	{
+		//determine bonuses gained
+		//TODO: add bonuses
+		
+		exp = pExpTotal;
+	}
 	
 	@Override
 	public int describeContents()
@@ -56,7 +70,8 @@ public class BaseCharacter implements Parcelable
 	@Override
 	public void writeToParcel(Parcel toParcel, int flags)
 	{
-		toParcel.writeString(name);
+		toParcel.writeParcelable(fluff, 0);
+		
 		toParcel.writeSerializable(race);
 		toParcel.writeSerializable(archetype);
 		
@@ -84,7 +99,8 @@ public class BaseCharacter implements Parcelable
 		@Override
 		public BaseCharacter createFromParcel(Parcel in)
 		{
-			String pName = in.readString();
+			Fluff pFluff = in.readParcelable(Fluff.class.getClassLoader());
+			
 			Race pRace = (Race)in.readSerializable();
 			Archetype pArchetype = (Archetype)in.readSerializable();
 			
@@ -109,7 +125,7 @@ public class BaseCharacter implements Parcelable
 			SkillsBundle pSkills = in.readParcelable(SkillsBundle.class.getClassLoader());
 			StatsBundle pStats = in.readParcelable(StatsBundle.class.getClassLoader());
 			
-			BaseCharacter me = new BaseCharacter(pName, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
+			BaseCharacter me = new BaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
 			return me;
 		}
 
@@ -124,9 +140,13 @@ public class BaseCharacter implements Parcelable
 	public String toString()
 	{
 		StringBuilder myString = new StringBuilder(100);
-		myString.append(name).append("\n");
-		myString.append(archetype.displayName()).append(" ").append(race.displayName());
+		
+		myString.append(fluff.toString()+"\n");
+		
+		myString.append(archetype.displayName()+" "+race.displayName());
 		myString.append("\n");
+		
+		myString.append("EXP: "+exp+"\n");
 		
 		myString.append(statsBundle.toString());
 		

@@ -1,17 +1,17 @@
 package com.random.captain.ikrpg.activities;
 
-import android.support.v4.app.*;
+import com.random.captain.ikrpg.fragments.newcharacter.*;
 import com.random.captain.ikrpg.model.Attributes.*;
 import java.util.*;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.Pair;
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.fragments.newcharacter.ChooseArchtypeFragment;
-import com.random.captain.ikrpg.fragments.newcharacter.ChooseCareerFragment;
-import com.random.captain.ikrpg.fragments.newcharacter.ChooseRaceFragment;
 import com.random.captain.ikrpg.model.BaseCharacter;
 import com.random.captain.ikrpg.model.Creators.PostCreateHook;
 import com.random.captain.ikrpg.model.Creators.PostCreateHookDelegate;
@@ -27,6 +27,7 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 		CAREER1,
 		CAREER2,
 		POSTCREATE_HOOK,
+		FLUFF,
 		DONE;
 		
 		//private FragState(){}
@@ -41,7 +42,7 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 	public Archetype archetype;
 	public Career career1;
 	public Career career2;
-	public String name;
+	public Fluff fluff;
 	
 	private Set<Career> myCareers = new HashSet<Career>(2);
 	private StatsBundle myStats;
@@ -105,7 +106,7 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 			{
 				//We did it!
 				Log.i("IKRPG","No post create hooks found");
-				nextFrag(FragState.DONE);return;
+				nextFrag(FragState.FLUFF);return;
 			}
 			
 		}
@@ -117,10 +118,10 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 			Log.i("IKRPG","Evaluating hook "+nextHook);
 			
 			if(nextHook >= postCreateHooks.size())
-			{nextFrag(FragState.DONE);return;}
+			{nextFrag(FragState.FLUFF);return;}
 			
 			PostCreateHook hook = postCreateHooks.get(nextHook);
-			Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(name, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, nextHook);
+			Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, nextHook);
 			if(doFrag != null)
 			{nextFrag = doFrag;}
 			else
@@ -129,9 +130,15 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 				nextFrag(currFrag);return;
 			}
 		}
+		else if(currFrag == FragState.FLUFF)
+		{
+			nextFrag = new ChooseFluffFragment();
+		}
 		else if(currFrag == FragState.DONE)
 		{
 			//Sweet.
+			//TODO: confirm dialog
+			
 			characterComplete();
 		}
 		
@@ -222,7 +229,7 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 	public void characterComplete()
 	{
 		Log.i("IKRPG","Creating character...");
-		BaseCharacter baby = new BaseCharacter(name, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats);
+		BaseCharacter baby = new BaseCharacter(fluff, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats);
 		Intent i = new Intent();
 		i.putExtra(NEW_CHARACTER, baby);
 		setResult(RESULT_OK, i);

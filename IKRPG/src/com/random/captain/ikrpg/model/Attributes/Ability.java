@@ -81,6 +81,7 @@ public enum Ability implements PrereqCheck
 	
 	private String name;
 	private String description;
+	private String type;
 	private PrereqCheck prereq;
 	
 	public String displayName(){return name;}

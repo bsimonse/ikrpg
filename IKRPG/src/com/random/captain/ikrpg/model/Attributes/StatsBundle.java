@@ -20,9 +20,7 @@ public class StatsBundle implements Parcelable
 		baseStats = new HashMap<Stat, Integer>();
 		
 		for(Pair<Stat, Integer> stat : stats)
-		{
-			baseStats.put(stat.first, stat.second);
-		}
+		{baseStats.put(stat.first, stat.second);}
 		
 		modifiers = new HashMap<String, Modifier<Stat>>();
 		
@@ -60,9 +58,7 @@ public class StatsBundle implements Parcelable
 	public boolean addModifier(Modifier<Stat> modifier, String key)
 	{
 		if(modifiers.containsKey(key))
-		{
-			return false;
-		}
+		{return false;}
 		
 		modifiers.put(key, modifier);
 		rederiveActiveStats();
@@ -78,12 +74,12 @@ public class StatsBundle implements Parcelable
 	
 	private void rederiveBaseStats()
 	{
-		//Cheating because null = 0;
-		//Shouldn't have to count on it, though... will probably do check later
 		int pPhy = baseStats.get(Stat.PHYSIQUE);
+		int pStr = baseStats.get(Stat.STRENGTH);
 		int pSpd = baseStats.get(Stat.SPEED);
 		int pAgi = baseStats.get(Stat.AGILITY);
 		int pPrw = baseStats.get(Stat.PROWESS);
+		int pPoi = baseStats.get(Stat.POISE);
 		int pPer = baseStats.get(Stat.PERCEPTION);
 		int pInt = baseStats.get(Stat.INTELLECT);
 		int pArc = baseStats.get(Stat.ARCANE);
@@ -94,6 +90,10 @@ public class StatsBundle implements Parcelable
 		baseStats.put(Stat.WILLPOWER, pPhy+pInt);
 		baseStats.put(Stat.COMMAND, pInt);
 		baseStats.put(Stat.CONTROL, 2*pArc);
+		baseStats.put(Stat.MELEE_ATTACK, 0);
+		baseStats.put(Stat.MELEE_DAMAGE, 0);
+		baseStats.put(Stat.RANGED_ATTACK, 0);
+		baseStats.put(Stat.RANGED_DAMAGE, 0);
 		
 		rederiveActiveStats();
 	}
@@ -103,8 +103,6 @@ public class StatsBundle implements Parcelable
 		//reset to base
 		activeStats.clear();
 		activeStats.putAll(baseStats);
-		activeStats.put(Stat.ATTACK, 0);
-		activeStats.put(Stat.DAMAGE, 0);
 		
 		//apply modifiers
 		Collection<Modifier<Stat>> m = modifiers.values();
@@ -120,16 +118,28 @@ public class StatsBundle implements Parcelable
 	@Override
 	public String toString()
 	{
-		StringBuilder myString = new StringBuilder(100);
-		myString.append("Stats:\nPHY: ").append(activeStats.get(Stat.PHYSIQUE)).append("\n");
-		myString.append("SPD: ").append(activeStats.get(Stat.SPEED)).append("\n");
-		myString.append("STR: ").append(activeStats.get(Stat.STRENGTH)).append("\n");
-		myString.append("AGI: ").append(activeStats.get(Stat.AGILITY)).append("\n");
-		myString.append("PRW: ").append(activeStats.get(Stat.PROWESS)).append("\n");
-		myString.append("POI: ").append(activeStats.get(Stat.POISE)).append("\n");
-		myString.append("INT: ").append(activeStats.get(Stat.INTELLECT)).append("\n");
-		myString.append("ARC: ").append(activeStats.get(Stat.ARCANE)).append("\n");
-		myString.append("PER: ").append(activeStats.get(Stat.PERCEPTION)).append("\n");
+		StringBuilder myString = new StringBuilder(200);
+		
+		myString.append("Stats:\n"+Stat.PHYSIQUE.toString()+activeStats.get(Stat.PHYSIQUE)+"\n");
+		myString.append(Stat.SPEED.toString()+": "+activeStats.get(Stat.SPEED)+"\n");
+		myString.append(Stat.STRENGTH.toString()+": "+activeStats.get(Stat.STRENGTH)+"\n");
+		myString.append(Stat.AGILITY.toString()+": "+activeStats.get(Stat.AGILITY)+"\n");
+		myString.append(Stat.PROWESS.toString()+": "+activeStats.get(Stat.PROWESS)+"\n");
+		myString.append(Stat.POISE.toString()+": "+activeStats.get(Stat.POISE)+"\n");
+		myString.append(Stat.INTELLECT.toString()+": "+activeStats.get(Stat.INTELLECT)+"\n");
+		myString.append(Stat.ARCANE.toString()+": "+activeStats.get(Stat.ARCANE)+"\n");
+		myString.append(Stat.PERCEPTION.toString()+": "+activeStats.get(Stat.PERCEPTION)+"\n");
+		myString.append(Stat.WILLPOWER.toString()+": "+activeStats.get(Stat.WILLPOWER)+"\n");
+		myString.append(Stat.DEFENSE.toString()+": "+activeStats.get(Stat.DEFENSE)+"\n");
+		myString.append(Stat.ARMOR.toString()+": "+activeStats.get(Stat.ARMOR)+"\n");
+		myString.append(Stat.INITIATIVE.toString()+": "+activeStats.get(Stat.INITIATIVE)+"\n");
+		myString.append(Stat.COMMAND.toString()+": "+activeStats.get(Stat.COMMAND)+"\n");
+		myString.append(Stat.CONTROL.toString()+": "+activeStats.get(Stat.CONTROL)+"\n");
+		myString.append(Stat.MELEE_ATTACK.toString()+": "+activeStats.get(Stat.MELEE_ATTACK)+"\n");
+		myString.append(Stat.MELEE_DAMAGE.toString()+": "+activeStats.get(Stat.MELEE_DAMAGE)+"\n");
+		myString.append(Stat.RANGED_ATTACK.toString()+": "+activeStats.get(Stat.RANGED_ATTACK)+"\n");
+		myString.append(Stat.RANGED_DAMAGE.toString()+": "+activeStats.get(Stat.RANGED_DAMAGE)+"\n");
+		
 		return myString.toString();
 	}
 	
@@ -174,7 +184,7 @@ public class StatsBundle implements Parcelable
 			for(int i=0; i<baseSize; i++)
 			{
 				key = in.readString();
-				mod = (Modifier<Stat>)(in.readParcelable(Modifier.class.getClassLoader()));
+				mod = (in.readParcelable(Modifier.class.getClassLoader()));
 				modifiers.put(key, mod);
 			}
 			

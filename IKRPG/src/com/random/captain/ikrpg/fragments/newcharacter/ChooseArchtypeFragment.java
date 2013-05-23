@@ -38,7 +38,7 @@ public class ChooseArchtypeFragment extends Fragment
 		final List<Archetype> validArchetypes = new ArrayList<Archetype>(5);
 		for(Archetype at : Archetype.values())
 		{
-			PrereqCheckResult result = at.meetsPrereq(new BaseCharacter(hostActivity.name, hostActivity.race, null, null, null, null, null, null));
+			PrereqCheckResult result = at.meetsPrereq(new BaseCharacter(null, hostActivity.race, null, null, null, null, null, null));
 			
 			//TODO: list additional questions with stars
 			

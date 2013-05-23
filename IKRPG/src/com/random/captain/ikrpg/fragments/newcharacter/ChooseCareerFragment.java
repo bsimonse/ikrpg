@@ -48,7 +48,7 @@ public class ChooseCareerFragment extends Fragment
 		final List<Career> validCareers = new ArrayList<Career>(30);
 		for(Career career : Career.values())
 		{
-			PrereqCheckResult result = career.meetsPrereq(new BaseCharacter(hostActivity.name, hostActivity.race, hostActivity.archetype, myCareers, null, null, null, null));
+			PrereqCheckResult result = career.meetsPrereq(new BaseCharacter(null, hostActivity.race, hostActivity.archetype, myCareers, null, null, null, null));
 			
 			//TODO:
 			//Additional questions ARE displayed, with stars!
@@ -85,6 +85,5 @@ public class ChooseCareerFragment extends Fragment
 			hostActivity.career1 = career;
 			hostActivity.nextFrag(NewCharacterActivity.FragState.CAREER1);
 		}
-		
 	}
 }
