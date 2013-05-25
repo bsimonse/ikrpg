@@ -6,12 +6,12 @@ import java.util.*;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.model.BaseCharacter;
 
 public enum Career implements PrereqCheck
@@ -47,49 +47,73 @@ public enum Career implements PrereqCheck
 				  @Override
 				  public PrereqCheckResult meetsPrereq(BaseCharacter myChar){
 					if(myChar.archetype() == null){return new PrereqCheckResult(false, null);}
-					return new PrereqCheckResult(myChar.archetype() == Archetype.GIFTED_FOCUSER || myChar.archetype() == Archetype.GIFTED_WILL_WEAVER, null);
+					return new PrereqCheckResult(myChar.archetype() == Archetype.GIFTED, null);
 				  }
 			  },
 			  new PostCreateHook(){
 				  @Override
 					public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate, final int whichHook){
-					  return new Fragment(){
-						  private ListView raceList;
+						
+						//determine if choice is needed
+						boolean handWeaponMaxed = myChar.skillsBundle().getSkillLevel(Skill.HAND_WEAPON) == 2;
+						boolean rifleMaxed = myChar.skillsBundle().getSkillLevel(Skill.RIFLE) == 2;
+						
+						if(!rifleMaxed && !handWeaponMaxed)
+						{
+							return new Fragment(){
+								private ListView raceList;
 
-						  @Override
-						  public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
-						  {
-							  LinearLayout root = new LinearLayout(inflater.getContext());
-							  root.setOrientation(LinearLayout.VERTICAL);
-							  root.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-							  
-							  TextView text = new TextView(inflater.getContext());
-							  text.setText("Choose a skill");
-							  root.addView(text);
-							  
-							  ListView choiceList = new ListView(inflater.getContext());
-							  final Skill[] choices = new Skill[]{Skill.HAND_WEAPON, Skill.RIFLE};
-							  choiceList.setAdapter(new ArrayAdapter<Skill>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
-							  choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-								  @Override
-								  public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-								  {
-									  Skill choice = choices[which];
-									  int currentLevel = myChar.skillsBundle().getSkillLevel(choice);
-									  currentLevel += 1;
-									  if(currentLevel > 2){currentLevel = 2;}
-									  myChar.skillsBundle().setSkillLevel(choice, currentLevel);
-									  delegate.hookComplete(whichHook);
-								  }
-							  });
-								 
-							  root.addView(choiceList);
-							  
-							  return root;
-						  }
-					  };
-					}
-			  });
+							  @Override
+							  public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+							  {
+								  LinearLayout root = (LinearLayout)inflater.inflate(R.layout.frag_choice_list, pRoot, false);
+								  
+								  ListView choiceList = (ListView)root.findViewById(R.id.listChoiceList);
+								  final Skill[] choices = new Skill[]{Skill.HAND_WEAPON, Skill.RIFLE};
+								  choiceList.setAdapter(new ArrayAdapter<Skill>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
+								  choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+									  @Override
+									  public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+									  {
+										  Skill choice = choices[which];
+										  int currentLevel = myChar.skillsBundle().getSkillLevel(choice);
+										  currentLevel += 1;
+										  if(currentLevel > 2){currentLevel = 2;}
+										  myChar.skillsBundle().setSkillLevel(choice, currentLevel);
+										  delegate.hookComplete(whichHook);
+									  }
+								  });
+								  
+								  TextView tv = (TextView)root.findViewById(R.id.listChoiceTitle);
+								  tv.setText("Choose a military skill to boost");
+								  
+								  return root;
+							  }
+					  		};
+						}
+						else
+						{
+							//auto-bump the appropriate skill
+							if(rifleMaxed && !handWeaponMaxed)
+							{
+								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(Skill.HAND_WEAPON);
+								myChar.skillsBundle().setSkillLevel(Skill.HAND_WEAPON, handWeaponLevel+1);
+							}
+							else if(!rifleMaxed && handWeaponMaxed)
+							{
+								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(Skill.RIFLE);
+								myChar.skillsBundle().setSkillLevel(Skill.RIFLE, handWeaponLevel+1);
+							}
+							
+							//no choice needed
+							return null;
+						}
+					  }
+					
+					@Override public int getPriority(){return 50;}
+			  }),
+			  
+	WARCASTER(null,null,null,null,null,null,null,null,null);
 			  
 			  
 			  

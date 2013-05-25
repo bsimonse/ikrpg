@@ -63,11 +63,13 @@ public class MainActivity extends FragmentActivity
 			if(resultCode == RESULT_OK)
 			{
 				BaseCharacter myChar = i.getExtras().getParcelable(NewCharacterActivity.NEW_CHARACTER);
-				Log.i("IKRPG","Character... created(?)");
 				if(myChar != null)
-				{Log.i("IKRPG",myChar.toString());}
+				{
+					Log.i("IKRPG","Character created!");
+					Log.i("IKRPG",myChar.toString());
+				}
 				else
-				{Log.i("IKRPG","Didn't come back...");}
+				{Log.i("IKRPG","Character didn't come back...");}
 			}
 			else
 			{

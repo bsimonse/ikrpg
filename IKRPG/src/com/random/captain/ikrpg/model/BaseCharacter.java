@@ -14,6 +14,7 @@ public class BaseCharacter implements Parcelable
 	/*Crunch*/
 	private Race race;
 	private Archetype archetype;
+	private GiftedTradition tradition;
 	private Set<Career> careers;
 	private Set<Ability> abilities;
 	private Set<Spell> spells;
@@ -34,6 +35,14 @@ public class BaseCharacter implements Parcelable
 		skillsBundle = pSkills;
 		statsBundle = pStats;
 		exp = 0;
+		
+		//determine tradition
+		//may have to move if rules ever change
+		if(pArchetype == Archetype.GIFTED)
+		{
+			if(pCareers.contains(Career.WARCASTER)){tradition = GiftedTradition.FOCUSER;}
+			else{tradition = GiftedTradition.WILL_WEAVER;}
+		}
 	}
 	
 	public BaseCharacter()
@@ -42,6 +51,7 @@ public class BaseCharacter implements Parcelable
 	public Fluff fluff(){return fluff;}
 	public Race race(){return race;}
 	public Archetype archetype(){return archetype;}
+	public GiftedTradition tradition(){return tradition;}
 	public Set<Career> careers(){return careers;}
 	public Set<Ability> abilities(){return abilities;}
 	public Set<Spell> spells(){return spells;}

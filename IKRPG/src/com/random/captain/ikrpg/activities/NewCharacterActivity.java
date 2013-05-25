@@ -98,6 +98,13 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 			{
 				//start with first hook
 				Log.i("IKRPG","Starting post create hooks");
+				
+				Collections.sort(postCreateHooks, new Comparator<PostCreateHook>(){
+					@Override public int compare(PostCreateHook one, PostCreateHook two)
+					{
+						return one.getPriority() - two.getPriority();
+					}
+				});
 				FragState hookStart = FragState.POSTCREATE_HOOK;
 				hookStart.which = -1;
 				nextFrag(hookStart);return;

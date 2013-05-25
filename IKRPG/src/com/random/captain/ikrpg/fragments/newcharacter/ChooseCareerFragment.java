@@ -1,5 +1,6 @@
 package com.random.captain.ikrpg.fragments.newcharacter;
 
+import android.widget.*;
 import java.util.*;
 
 import android.app.Activity;
@@ -9,9 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.activities.NewCharacterActivity;
 import com.random.captain.ikrpg.model.Attributes.Career;
@@ -34,7 +32,7 @@ public class ChooseCareerFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
 	{
-		View rootView = inflater.inflate(R.layout.frag_choose_race, root, false);
+		View rootView = inflater.inflate(R.layout.frag_choice_list, root, false);
 
 		Bundle arguments = getArguments();
 		if(arguments != null)
@@ -57,7 +55,7 @@ public class ChooseCareerFragment extends Fragment
 			{validCareers.add(career);}
 		}
 
-		careerList = (ListView)rootView.findViewById(R.id.raceList);
+		careerList = (ListView)rootView.findViewById(R.id.listChoiceList);
 		careerList.setAdapter(new ArrayAdapter<Career>(getActivity(), android.R.layout.simple_list_item_1, validCareers.toArray(new Career[validCareers.size()])));
 		careerList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
 				@Override
@@ -67,7 +65,8 @@ public class ChooseCareerFragment extends Fragment
 				}
 			});
 			
-			
+		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
+		tv.setText(isSecondCareer ? "Choose your second career" : "Choose your first career");
 		return rootView;
 	}
 

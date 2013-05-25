@@ -9,25 +9,18 @@ import com.random.captain.ikrpg.model.BaseCharacter;
 
 public enum Archetype implements PrereqCheck
 {
-	GIFTED_WILL_WEAVER("Gifted (Will Weaver)",
+	GIFTED("Gifted",
 		new PostCreateHook(){
 			@Override
 			public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int which)
-			{myChar.statsBundle().setBaseStat(Stat.ARCANE, 3);return null;}
-		},
-	
-		new PrereqCheck(){
-			@Override
-			public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.race() == Race.HUMAN, null);}
-		}
-	),
-	
-	GIFTED_FOCUSER("Gifted (Focuser)",
-		new PostCreateHook(){
-			@Override
-			public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int which)
-			{myChar.statsBundle().setBaseStat(Stat.ARCANE, 2);return null;}
+			{
+				if(myChar.tradition()==GiftedTradition.WILL_WEAVER){myChar.statsBundle().setBaseStat(Stat.ARCANE, 3);}
+				else if(myChar.tradition()==GiftedTradition.FOCUSER){myChar.statsBundle().setBaseStat(Stat.ARCANE, 2);}
+				
+				return null;
+			}
+			
+			@Override public int getPriority(){return 0;}
 		},
 	
 		new PrereqCheck(){
@@ -78,11 +71,8 @@ public enum Archetype implements PrereqCheck
 	public String displayName(){return name;}
 	public PostCreateHook postCreateHook(){return postCreateHook;}
 	
-	@Override
-	public String toString(){return displayName();}
-	
-	@Override
-	public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+	@Override public String toString(){return displayName();}
+	@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
 	{
 		if(prereq == null){return new PrereqCheckResult(true, null);}
 		return prereq.meetsPrereq(myChar);
