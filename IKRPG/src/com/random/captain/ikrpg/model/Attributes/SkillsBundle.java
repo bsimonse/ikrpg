@@ -115,7 +115,7 @@ public class SkillsBundle implements Parcelable
 		for(Pair<Skill, Integer> skillPair : getTrainedSkills())
 		{
 			Skill skill = skillPair.first;
-			myString.append(skill.displayName()).append(": ").append(skillPair.second).append("\n");
+			myString.append(skill.toString()).append(": ").append(skillPair.second).append("\n");
 		}
 		
 		return myString.toString();

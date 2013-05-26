@@ -13,26 +13,25 @@ public class Skill implements Parcelable
 	
 	public Skill(SkillEnum pSkill)
 	{
-		this(pSkill, null);
+		this(pSkill, "");
 	}
 	
 	public Skill(SkillEnum pSkill, String pQualifier)
 	{
 		skill = pSkill;
-		qualifier = pQualifier;
+		qualifier = pQualifier==null ? "" : pQualifier;
 	}
 	
 	@Override public String toString(){
-		if(qualifier == null)
-		{return displayName();}
+		if(qualifier == null || qualifier.length() < 1)
+		{return skillName();}
 		
-		return displayName()+"("+qualifier+")";
+		return skillName()+"("+qualifier+")";
 	}
 
 	@Override
 	public boolean equals(Object other)
 	{
-		Log.i("IKRPG","Comparing things!");
 		try
 		{
 			Skill p = (Skill)other;
@@ -44,11 +43,19 @@ public class Skill implements Parcelable
 		}
 	}
 
+	@Override public int hashCode()
+	{
+		int hash = 0;
+		if(skill != null){hash += 13*17*skill.ordinal();}
+		if(qualifier != null){hash += 19*qualifier.hashCode();}
+		return hash;
+	}
+	
 	public SkillEnum skillEnum(){return skill;}
 	public String qualifier(){return qualifier;}
 	
 	//mimic skillEnum API
-	public String displayName(){return skill.displayName();}
+	public String skillName(){return skill.displayName();}
 	public Stat governingStat(){return skill.governingStat();}
 	public boolean isMilitary(){return skill.isMilitary();}
 	public boolean isGeneral(){return skill.isGeneral();}
@@ -58,7 +65,7 @@ public class Skill implements Parcelable
 	//Helper methods for Career
 	public static Pair<Skill, Integer> skillPair(SkillEnum pSkill, int level)
 	{
-		return skillPair(pSkill, null, level);
+		return skillPair(pSkill, "", level);
 	}
 	
 	public static Pair<Skill, Integer> skillPair(SkillEnum pSkill, String qualifier, int level)
