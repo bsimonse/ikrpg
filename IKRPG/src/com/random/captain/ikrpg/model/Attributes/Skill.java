@@ -1,81 +1,105 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-public enum Skill
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+import android.util.Pair;
+import com.random.captain.ikrpg.model.Attributes.Modifier;
+
+public class Skill implements Parcelable
 {
-	ARCHERY("Archery",Stat.POISE, true, false, true),
-	CROSSBOW("Crossbow",Stat.POISE, true, false, true),
-	GREAT_WEAPON("Great Weapon",Stat.PROWESS, true, false, true),
-	HAND_WEAPON("Hand Weapon",Stat.PROWESS, true, false, true),
-	LANCE("Lance",Stat.PROWESS, true, false, true),
-	LIGHT_ARTILLERY("Light Artillery",Stat.POISE, true, false, true),
-	PISTOL("Pistol",Stat.POISE, true, false, true),
-	RIFLE("Rifle",Stat.POISE, true, false, true),
-	SHIELD("Shield",Stat.PROWESS, true, false, true),
-	THROWN_WEAPON("Thrown Weapon",Stat.PROWESS, true, false, true),
-	UNARMED("Unarmed Combat",Stat.PROWESS, true, false, true),
-	ALCHEMY("Alchemy",Stat.INTELLECT, false, false, false),
-	ANIMAL_HANDLING("Animal Handling",null, false, true, false),
-	BRIBERY("Bribery",null, false, false, true),
-	CLIMBING("Climbing",Stat.AGILITY, false, true, true),
-	COMMAND("Command",null, false, false, false),
-	CRAFT("Craft (X)",Stat.INTELLECT, false, false, false),
-	CRYPTOGRAPHY("Crytpography",Stat.INTELLECT, false, false, false),
-	DECEPTION("Deception",null, false, false, true),
-	DETECTION("Detection",Stat.PERCEPTION, false, true, true),
-	DISGUISE("Disguise",Stat.INTELLECT, false, false, true),
-	DRIVING("Driving",Stat.AGILITY, false, true, true),
-	ESCAPE_ARTIST("Escape Artist",Stat.AGILITY, false, false, true),
-	ETIQUETTE("Etiquette",null, false, false, true),
-	FELL_CALLING("Fell Calling",Stat.POISE, false, false, false),
-	FORENSIC_SCIENCE("Forensic Science",Stat.INTELLECT, false, false, false),
-	FORGERY("Forgery",null, false, false, false),
-	GAMLBING("Gambling",Stat.PERCEPTION, false, true, true),
-	INTERROGATION("Interrogation",Stat.INTELLECT, false, false, true),
-	INTIMIDATION("Intimidation",null, false, true, true),
-	JUMPING("Jumping",Stat.PHYSIQUE, false, true, true),
-	LAW("Law",Stat.INTELLECT, false, false, false),
-	LOCK_PICKING("Lock Picking",Stat.AGILITY, false, false, false),
-	LORE("Lore (X)",Stat.INTELLECT, false, true, true),
-	MECHANIKAL("Mechanikal Engineering",Stat.INTELLECT, false, false, false),
-	MEDICINE("Medicine",Stat.INTELLECT, false, false, true),
-	NAVIGATION("Navigation",Stat.PERCEPTION, false, false, false),
-	NEGOTIATION("Negotiation",null, false, false, false),
-	ORATORY("Oratory",null, false, false, false),
-	PICKPOCKET("Pickpocket",Stat.AGILITY, false, false, false),
-	RESEARCH("Research",Stat.INTELLECT, false, false, true),
-	RIDING("Riding",Stat.AGILITY, false, true, true),
-	ROPE_USE("Rope Use",Stat.AGILITY, false, false, true),
-	SAILING("Sailing",null, false, false, false),
-	SEDUCTION("Seduction",null, false, false, false),
-	SNEAK("Sneak",Stat.AGILITY, false, false, true),
-	STREETWISE("Streetwise",Stat.PERCEPTION, false, false, false),
-	SURVIVAL("Survival",Stat.PERCEPTION, false, false, true),
-	SWIMMING("Swimming",Stat.STRENGTH, false, true, true),
-	TRACKING("Tracking",Stat.PERCEPTION, false, false, false);
+	private SkillEnum skill;
+	private String qualifier;
 	
-	private Skill(String pName, Stat pStat, boolean pMilitary, boolean pGeneral, boolean pUntrained)
+	public Skill(SkillEnum pSkill)
 	{
-		name = pName;
-		governingStat = pStat;
-		isMilitary = pMilitary;
-		isGeneral = pGeneral;
-		canUseUntrained = pUntrained || pMilitary; //just in case
+		this(pSkill, null);
 	}
 	
+	public Skill(SkillEnum pSkill, String pQualifier)
+	{
+		skill = pSkill;
+		qualifier = pQualifier;
+	}
+	
+	@Override public String toString(){
+		if(qualifier == null)
+		{return displayName();}
+		
+		return displayName()+"("+qualifier+")";
+	}
+
 	@Override
-	public String toString(){return name;}
+	public boolean equals(Object other)
+	{
+		Log.i("IKRPG","Comparing things!");
+		try
+		{
+			Skill p = (Skill)other;
+			return p.skill == skill && p.qualifier.equals(qualifier);
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+
+	public SkillEnum skillEnum(){return skill;}
+	public String qualifier(){return qualifier;}
 	
-	//Assisting will come later
+	//mimic skillEnum API
+	public String displayName(){return skill.displayName();}
+	public Stat governingStat(){return skill.governingStat();}
+	public boolean isMilitary(){return skill.isMilitary();}
+	public boolean isGeneral(){return skill.isGeneral();}
+	public boolean isQualifiable(){return skill.isQualifiable();}
+	public boolean canUseUntrained(){return skill.canUseUntrained();}
 	
-	private String name;
-	private boolean isMilitary;
-	private boolean isGeneral;
-	private boolean canUseUntrained;
-	private Stat governingStat;
+	//Helper methods for Career
+	public static Pair<Skill, Integer> skillPair(SkillEnum pSkill, int level)
+	{
+		return skillPair(pSkill, null, level);
+	}
 	
-	public String displayName(){return name;}
-	public Stat governingStat(){return governingStat;}
-	public boolean isMilitary(){return isMilitary;}
-	public boolean isGeneral(){return isGeneral;}
-	public boolean canUseUntrained(){return canUseUntrained;}
+	public static Pair<Skill, Integer> skillPair(SkillEnum pSkill, String qualifier, int level)
+	{
+		return new Pair<Skill, Integer>(new Skill(pSkill, qualifier), level);
+	}
+	
+	/* Parcelling */
+	public void writeToParcel(Parcel toParcel, int flags)
+	{
+		toParcel.writeSerializable(skill);
+		toParcel.writeString(qualifier);
+	}
+
+	public static final Parcelable.Creator<Skill> CREATOR = new Parcelable.Creator<Skill>()
+	{
+		@Override
+		public Skill createFromParcel(Parcel in)
+		{
+			try
+			{
+				SkillEnum pSkill = (SkillEnum)in.readSerializable();
+				String pQualifier = in.readString();
+				return new Skill(pSkill, pQualifier);
+			}
+			catch(Exception e)
+			{
+				Log.e("IKRPG","Bad news, dude, Skill didn't Parcel correctly!");
+				return new Skill(null,null);
+			}
+		}
+
+		@Override
+		public Skill[] newArray(int size)
+		{
+			return new Skill[size];
+		}
+	};
+
+	public int describeContents()
+	{
+		return 0;
+	}
 }

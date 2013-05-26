@@ -21,12 +21,6 @@ public class SkillsBundle implements Parcelable
 		activeSkills = new HashMap<Skill, Integer>();
 		baseSkills = new HashMap<Skill, Integer>();
 		
-		Skill[] allSkills = Skill.values();
-		for(Skill skill : allSkills)
-		{
-			baseSkills.put(skill, 0);
-		}
-		
 		modifiers = new HashMap<String, Modifier<Skill>>();
 		
 		rederiveSkills();
@@ -64,7 +58,7 @@ public class SkillsBundle implements Parcelable
 	{
 		Collection<Pair<Skill, Integer>> skills = new ArrayList<Pair<Skill, Integer>>(20);
 		
-		for(Skill skill : Skill.values())
+		for(Skill skill : baseSkills.keySet())
 		{
 			int skillLevel = baseSkills.get(skill);
 			if(skillLevel > 0)
@@ -135,10 +129,10 @@ public class SkillsBundle implements Parcelable
 		
 		//Base skills
 		toParcel.writeInt(baseSkills.size());
-		for(Skill stat : baseSkills.keySet())
+		for(Skill skill : baseSkills.keySet())
 		{
-			toParcel.writeSerializable(stat);
-			toParcel.writeInt(baseSkills.get(stat));
+			toParcel.writeParcelable(skill, 0);
+			toParcel.writeInt(baseSkills.get(skill));
 		}
 
 		//Modifiers
@@ -163,7 +157,7 @@ public class SkillsBundle implements Parcelable
 			int value;
 			for(int i=0; i<baseSize; i++)
 			{
-				skill = (Skill)in.readSerializable();
+				skill = in.readParcelable(Skill.class.getClassLoader());
 				value = in.readInt();
 				baseSkills.put(skill, value);
 			}

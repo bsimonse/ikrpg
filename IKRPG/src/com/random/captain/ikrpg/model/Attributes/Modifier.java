@@ -6,7 +6,7 @@ import android.util.Log;
 import com.random.captain.ikrpg.model.Attributes.Modifier;
 import java.io.Serializable;
 
-public class Modifier<S extends Enum<S>> implements Parcelable
+public class Modifier<S extends Parcelable> implements Parcelable
 {
 	private int value;
 	private S trait;
@@ -28,10 +28,10 @@ public class Modifier<S extends Enum<S>> implements Parcelable
 	//Thanks, S.O.!
 	//
 	//All access is through these static methods for simplicity.
-	public static <S2 extends Enum<S2>> Modifier<S2> onTrait(S2 pTrait, int pValue)
+	public static <S2 extends Parcelable> Modifier<S2> onTrait(S2 pTrait, int pValue)
 	{return new Modifier<S2>(pTrait, pValue);}
 	
-	public static <S2 extends Enum<S2>> Modifier<S2> onTrait(S2 pTrait)
+	public static <S2 extends Parcelable> Modifier<S2> onTrait(S2 pTrait)
 	{return new Modifier<S2>(pTrait);}
 	
 	public int getValue(){return value;}
@@ -51,7 +51,7 @@ public class Modifier<S extends Enum<S>> implements Parcelable
 	{
 		toParcel.writeSerializable(genericClass);
 		toParcel.writeInt(value);
-		toParcel.writeSerializable(trait);
+		toParcel.writeParcelable(trait, 0);
 	}
 
 	public static final Parcelable.Creator<Modifier> CREATOR = new Parcelable.Creator<Modifier>()
@@ -61,10 +61,10 @@ public class Modifier<S extends Enum<S>> implements Parcelable
 		{
 			try
 			{
-				Class<Enum> which = (Class<Enum>)in.readSerializable();
+				Class which = (Class)in.readSerializable();
 				int value = in.readInt();
-				Serializable trait = in.readSerializable();
-				return Modifier.onTrait(which.cast(trait), value);
+				Parcelable trait = in.readParcelable(which.getClassLoader());
+				return Modifier.onTrait(trait, value);
 			}
 			catch(Exception e)
 			{

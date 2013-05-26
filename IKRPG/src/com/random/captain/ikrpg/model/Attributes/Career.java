@@ -19,10 +19,9 @@ public enum Career implements PrereqCheck
 	//This might be better as JSON... eh.
 	//But Laaaaaaaambda
 	ALCHEMIST("Alchemist",
-				new Pair[] {Pair.create(Skill.HAND_WEAPON, 1), Pair.create(Skill.THROWN_WEAPON, 1), Pair.create(Skill.ALCHEMY, 1), Pair.create(Skill.MEDICINE, 1)},
-				new Pair[] {Pair.create(Skill.HAND_WEAPON, 2), Pair.create(Skill.THROWN_WEAPON, 2), Pair.create(Skill.UNARMED, 2), Pair.create(Skill.ALCHEMY, 4),
-							Pair.create(Skill.CRAFT, 4), Pair.create(Skill.FORGERY, 2), Pair.create(Skill.MEDICINE,4), Pair.create(Skill.NEGOTIATION, 4),
-							Pair.create(Skill.RESEARCH, 4)},
+				new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON,1), Skill.skillPair(SkillEnum.THROWN_WEAPON, 1), Skill.skillPair(SkillEnum.ALCHEMY, 1), Skill.skillPair(SkillEnum.MEDICINE, 1)},
+				new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON, 2), Skill.skillPair(SkillEnum.THROWN_WEAPON, 2), //etc...
+							Skill.skillPair(SkillEnum.CRAFT, "", 4), Skill.skillPair(SkillEnum.RESEARCH, 4)},
 			  	new Ability[] {Ability.GRENADIER, Ability.POISON_RESISTANCE},
 				new Ability[] {Ability.BOMBER, Ability.BREW_MASTER, Ability.FAST_COOK, Ability.FIELD_ALCHEMIST, Ability.FIRE_IN_THE_HOLE, Ability.FREE_STYLE,
 								Ability.GRENADIER, Ability.POISON_RESISTANCE},
@@ -30,10 +29,9 @@ public enum Career implements PrereqCheck
 				null, null),
 								
 	ARCANE_MECHANIK("Arcane Mechanik",
-			  new Pair[] {Pair.create(Skill.CRAFT, 1), Pair.create(Skill.MECHANIKAL, 1)},
-			  new Pair[] {Pair.create(Skill.HAND_WEAPON, 2), Pair.create(Skill.LIGHT_ARTILLERY, 2), Pair.create(Skill.RIFLE, 2), Pair.create(Skill.COMMAND, 1),
-				  Pair.create(Skill.CRAFT, 4), Pair.create(Skill.CRYPTOGRAPHY, 3), Pair.create(Skill.MECHANIKAL,4), Pair.create(Skill.NEGOTIATION, 2),
-				  Pair.create(Skill.RESEARCH, 3)},
+			  new Pair[] {Skill.skillPair(SkillEnum.CRAFT, "gunsmithing", 1), Skill.skillPair(SkillEnum.CRAFT, "metalworking", 1), Skill.skillPair(SkillEnum.MECHANIKAL, 1)},
+			  new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON, 2), Skill.skillPair(SkillEnum.LIGHT_ARTILLERY, 2), //etc...
+			  		Skill.skillPair(SkillEnum.NEGOTIATION, 2), Skill.skillPair(SkillEnum.RESEARCH, 3)},
 			  new Ability[] {Ability.INSCRIBE_FORMULAE},
 			  new Ability[] {Ability.JACK_MARSHALL, Ability.ACE_COMMANDER, Ability.ARCANE_ENGINEER, Ability.DRIVE_ASSUALT, Ability.DRIVE_PRONTO,
 			  		Ability.INSCRIBE_FORMULAE, Ability.RESOURCEFUL, Ability.STEAMO},
@@ -55,8 +53,8 @@ public enum Career implements PrereqCheck
 					public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate, final int whichHook){
 						
 						//determine if choice is needed
-						boolean handWeaponMaxed = myChar.skillsBundle().getSkillLevel(Skill.HAND_WEAPON) == 2;
-						boolean rifleMaxed = myChar.skillsBundle().getSkillLevel(Skill.RIFLE) == 2;
+						boolean handWeaponMaxed = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.HAND_WEAPON)) == 2;
+						boolean rifleMaxed = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.RIFLE)) == 2;
 						
 						if(!rifleMaxed && !handWeaponMaxed)
 						{
@@ -69,17 +67,17 @@ public enum Career implements PrereqCheck
 								  LinearLayout root = (LinearLayout)inflater.inflate(R.layout.frag_choice_list, pRoot, false);
 								  
 								  ListView choiceList = (ListView)root.findViewById(R.id.listChoiceList);
-								  final Skill[] choices = new Skill[]{Skill.HAND_WEAPON, Skill.RIFLE};
-								  choiceList.setAdapter(new ArrayAdapter<Skill>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
+								  final SkillEnum[] choices = new SkillEnum[]{SkillEnum.HAND_WEAPON, SkillEnum.RIFLE};
+								  choiceList.setAdapter(new ArrayAdapter<SkillEnum>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
 								  choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 									  @Override
 									  public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 									  {
-										  Skill choice = choices[which];
-										  int currentLevel = myChar.skillsBundle().getSkillLevel(choice);
+										  SkillEnum choice = choices[which];
+										  int currentLevel = myChar.skillsBundle().getSkillLevel(new Skill(choice));
 										  currentLevel += 1;
 										  if(currentLevel > 2){currentLevel = 2;}
-										  myChar.skillsBundle().setSkillLevel(choice, currentLevel);
+										  myChar.skillsBundle().setSkillLevel(new Skill(choice), currentLevel);
 										  delegate.hookComplete(whichHook);
 									  }
 								  });
@@ -96,13 +94,13 @@ public enum Career implements PrereqCheck
 							//auto-bump the appropriate skill
 							if(rifleMaxed && !handWeaponMaxed)
 							{
-								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(Skill.HAND_WEAPON);
-								myChar.skillsBundle().setSkillLevel(Skill.HAND_WEAPON, handWeaponLevel+1);
+								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.HAND_WEAPON));
+								myChar.skillsBundle().setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), handWeaponLevel+1);
 							}
 							else if(!rifleMaxed && handWeaponMaxed)
 							{
-								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(Skill.RIFLE);
-								myChar.skillsBundle().setSkillLevel(Skill.RIFLE, handWeaponLevel+1);
+								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.RIFLE));
+								myChar.skillsBundle().setSkillLevel(new Skill(SkillEnum.RIFLE), handWeaponLevel+1);
 							}
 							
 							//no choice needed
@@ -165,9 +163,12 @@ public enum Career implements PrereqCheck
 	public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
 	{
 		Set<Career> careers = myChar.careers();
-		if(careers != null)
-		{for(Career c:careers){if(c!=null && c.ordinal() == this.ordinal()){return new PrereqCheckResult(false, null);}}}
 		
+		//duplicates not allowed
+		if(careers != null)
+		{for(Career c:careers){if(this == c){return new PrereqCheckResult(false, null);}}}
+		
+		//no prereq means allowed
 		if(prereqCheck == null){return new PrereqCheckResult(true, null);}
 		else{return prereqCheck.meetsPrereq(myChar);}
 	}
