@@ -25,11 +25,6 @@ public class ChooseFluffFragment extends Fragment
 		super.onAttach(host);
 		hostActivity = (NewCharacterActivity)host;
 		fluff = new Fluff();
-		
-		//For now
-		//fluff.name = "Sir Edgar Bartholemew";
-		//fluff.owningPlayer = "Ben";
-		//fluffComplete();
 	}
 	
 	@Override

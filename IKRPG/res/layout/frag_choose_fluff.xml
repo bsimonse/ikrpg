@@ -11,7 +11,7 @@
 		style="@style/inputRowLayout" >
 	
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Name:" />
 			
 		<EditText
@@ -24,7 +24,7 @@
 		style="@style/inputRowLayout" >
 
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Sex:" />
 
 		<RadioGroup
@@ -35,7 +35,8 @@
 				android:id="@+id/sexChoiceMale"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="Male" />
+				android:text="Male"
+				android:checked="true" />
 			<RadioButton 
 				android:id="@+id/sexChoiceFemale"
 				android:layout_width="fill_parent"
@@ -49,7 +50,7 @@
 		style="@style/inputRowLayout" >
 
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Defining characteristics:" />
 
 		<EditText
@@ -62,7 +63,7 @@
 		style="@style/inputRowLayout" >
 
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Height:" />
 
 		<EditText
@@ -75,7 +76,7 @@
 		style="@style/inputRowLayout" >
 
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Weight:" />
 
 		<EditText
@@ -88,7 +89,7 @@
 		style="@style/inputRowLayout" >
 
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Faith:" />
 
 		<EditText
@@ -101,7 +102,7 @@
 		style="@style/inputRowLayout" >
 
 		<TextView
-			style="@style/inputLabel"
+			style="@style/textLabel.inputLabel"
 			android:text="Owning player:" />
 
 		<EditText
