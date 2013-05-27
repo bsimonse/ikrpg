@@ -1,10 +1,9 @@
 package com.random.captain.ikrpg.model;
 import com.random.captain.ikrpg.model.Attributes.*;
+import java.util.*;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.HashSet;
-import java.util.Set;
 
 public class BaseCharacter implements Parcelable
 {
@@ -90,10 +89,7 @@ public class BaseCharacter implements Parcelable
 		toParcel.writeInt(careers.size());
 		toParcel.writeIntArray(careerOrdinals);
 		
-		int[] abilityOrdinals = new int[abilities.size()];index=0;
-		for(Ability a: abilities){abilityOrdinals[index++]=a.ordinal();}
-		toParcel.writeInt(abilities.size());
-		toParcel.writeIntArray(abilityOrdinals);
+		toParcel.writeParcelableArray(abilities.toArray(new Ability[0]), 0);
 		
 		int[] spellOrdinals = new int[spells.size()];index=0;
 		for(Spell s: spells){spellOrdinals[index++]=s.ordinal();}
@@ -120,11 +116,9 @@ public class BaseCharacter implements Parcelable
 			for(int c:careerOrdinals)
 			{pCareers.add(careers[c]);}
 			
-			int abilityCount = in.readInt();
-			int[] abilityOrdinals = new int[abilityCount]; in.readIntArray(abilityOrdinals);
-			Set<Ability> pAbilities = new HashSet<Ability>(); Ability[] abilities = Ability.values();
-			for(int a:abilityOrdinals)
-			{pAbilities.add(abilities[a]);}
+			Parcelable[] pAbilitiesArray = in.readParcelableArray(Ability.class.getClassLoader());
+			Set<Ability> pAbilities = new HashSet<Ability>();
+			pAbilities.addAll((List<Ability>)Arrays.asList(pAbilitiesArray));
 			
 			int spellCount = in.readInt();
 			int[] spellOrdinals = new int[spellCount]; in.readIntArray(spellOrdinals);
@@ -171,7 +165,7 @@ public class BaseCharacter implements Parcelable
 		myString.append("\nAbilities: \n");
 		for(Ability ability: abilities)
 		{
-			myString.append(ability.displayName()).append("\n");
+			myString.append(ability.toString()).append("\n");
 		}
 		
 		myString.append("\nSpells: \n");

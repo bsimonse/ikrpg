@@ -22,9 +22,9 @@ public enum Career implements PrereqCheck
 				new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON,1), Skill.skillPair(SkillEnum.THROWN_WEAPON, 1), Skill.skillPair(SkillEnum.ALCHEMY, 1), Skill.skillPair(SkillEnum.MEDICINE, 1)},
 				new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON, 2), Skill.skillPair(SkillEnum.THROWN_WEAPON, 2), //etc...
 							Skill.skillPair(SkillEnum.CRAFT, "", 4), Skill.skillPair(SkillEnum.RESEARCH, 4)},
-			  	new Ability[] {Ability.GRENADIER, Ability.POISON_RESISTANCE},
-				new Ability[] {Ability.BOMBER, Ability.BREW_MASTER, Ability.FAST_COOK, Ability.FIELD_ALCHEMIST, Ability.FIRE_IN_THE_HOLE, Ability.FREE_STYLE,
-								Ability.GRENADIER, Ability.POISON_RESISTANCE},
+			  	new Ability[] {new Ability(AbilityEnum.GRENADIER), new Ability(AbilityEnum.POISON_RESISTANCE)},
+				new Ability[] {new Ability(AbilityEnum.BOMBER), new Ability(AbilityEnum.BREW_MASTER), new Ability(AbilityEnum.FAST_COOK), new Ability(AbilityEnum.FIELD_ALCHEMIST), new Ability(AbilityEnum.FIRE_IN_THE_HOLE), new Ability(AbilityEnum.FREE_STYLE),
+								new Ability(AbilityEnum.GRENADIER), new Ability(AbilityEnum.POISON_RESISTANCE)},
 				null, null,
 				null, null),
 								
@@ -32,9 +32,9 @@ public enum Career implements PrereqCheck
 			  new Pair[] {Skill.skillPair(SkillEnum.CRAFT, "gunsmithing", 1), Skill.skillPair(SkillEnum.CRAFT, "metalworking", 1), Skill.skillPair(SkillEnum.MECHANIKAL, 1)},
 			  new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON, 2), Skill.skillPair(SkillEnum.LIGHT_ARTILLERY, 2), //etc...
 			  		Skill.skillPair(SkillEnum.NEGOTIATION, 2), Skill.skillPair(SkillEnum.RESEARCH, 3)},
-			  new Ability[] {Ability.INSCRIBE_FORMULAE},
-			  new Ability[] {Ability.JACK_MARSHALL, Ability.ACE_COMMANDER, Ability.ARCANE_ENGINEER, Ability.DRIVE_ASSUALT, Ability.DRIVE_PRONTO,
-			  		Ability.INSCRIBE_FORMULAE, Ability.RESOURCEFUL, Ability.STEAMO},
+			  new Ability[] {new Ability(AbilityEnum.INSCRIBE_FORMULAE)},
+		new Ability[] {new Ability(AbilityEnum.JACK_MARSHALL), new Ability(AbilityEnum.ACE_COMMANDER), new Ability(AbilityEnum.ARCANE_ENGINEER), new Ability(AbilityEnum.DRIVE_ASSUALT), new Ability(AbilityEnum.DRIVE_PRONTO),
+								   new Ability(AbilityEnum.INSCRIBE_FORMULAE), new Ability(AbilityEnum.RESOURCEFUL), new Ability(AbilityEnum.STEAMO)},
 			  new Spell[] {Spell.ARCANTRIK_BOLT, Spell.POLARITY_SHIELD},
 			  new Spell[] {Spell.JACKHAMMER, Spell.JUMP_START, Spell.LOCOMOTION, Spell.POWER_BOOSTER, Spell.PROTECTION_FROM_ELECTRICITY, Spell.RETURN_FIRE,
 			  				Spell.SHORT_OUT, Spell.ARCANTRIK_BOLT, Spell.ELECTRIFY, Spell.FORTIFY, Spell.POLARITY_SHIELD, Spell.POSITIVE_CHARGE,

@@ -1,96 +1,103 @@
 package com.random.captain.ikrpg.model.Attributes;
 
-import android.support.v4.app.FragmentManager;
-import com.random.captain.ikrpg.model.Attributes.Ability;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+import android.util.Pair;
+import com.random.captain.ikrpg.model.Attributes.Skill;
 import com.random.captain.ikrpg.model.Attributes.SkillEnum;
 import com.random.captain.ikrpg.model.BaseCharacter;
 import com.random.captain.ikrpg.model.Creators.PrereqCheck;
 import com.random.captain.ikrpg.model.Creators.PrereqCheckResult;
 
-public enum Ability implements PrereqCheck
+public class Ability implements Parcelable, PrereqCheck
 {
-	JACK_MARSHALL("'Jack Marshall", "Kickin'",null),
-	ACE_COMMANDER("Ace Commander", "Whee", new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.abilities().contains(Ability.JACK_MARSHALL) && myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.COMMAND)) >= 2, null);}
-	}),
-	ACROBATICS("Acrobatics","Jump", new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.statsBundle().getBaseStat(Stat.AGILITY) >= 6, null);}
-	}),
-	ARCANE_ENGINEER("Arcane Engineer", "", new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.MECHANIKAL)) >= 2, null);}
-	}),
-	BOMBER("Bomber","", new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.THROWN_WEAPON)) >= 3, null);}
-	}),
-	BREW_MASTER("Brew Master","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.ALCHEMY)) >= 2, null);}
-	}),
-	DRIVE_ASSUALT("Drive: Assault","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.abilities().contains(Ability.JACK_MARSHALL), null);}
-	}),
-	DRIVE_PRONTO("Drive: Pronto","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.abilities().contains(Ability.JACK_MARSHALL), null);}
-	}),
-	FAST_COOK("Fast Cook","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.ALCHEMY)) >= 2, null);}
-	}),
-	FIELD_ALCHEMIST("Field Alchemist", "",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.ALCHEMY)) >= 2, null);}
-	}),
-	FIRE_IN_THE_HOLE("Fire in the Hole!","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.THROWN_WEAPON)) >= 1, null);}
-	}),
-	FREE_STYLE("Free Style","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.ALCHEMY)) >= 1, null);}
-	}),
-	GRENADIER("Grenadier","Boom",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.THROWN_WEAPON)) >= 1, null);}
-	}),
-	INSCRIBE_FORMULAE("Inscribe Formulae","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.MECHANIKAL)) >= 1, null);}
-	}),
-	POISON_RESISTANCE("Poison Resistance", "Hiss", null),
-	RESOURCEFUL("Resourceful","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.MECHANIKAL)) >= 3, null);}
-	}),
-	STEAMO("Steamo","",new PrereqCheck(){
-			@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.MECHANIKAL)) >= 2, null);}
-	});
-	
-	private Ability(String pName, String pDesc, PrereqCheck pPrereqCheck)
+	private AbilityEnum ability;
+	private String qualifier;
+
+	public Ability(AbilityEnum pAbility)
 	{
-		name = pName;
-		description = pDesc;
-		prereq = pPrereqCheck;
+		this(pAbility, "");
 	}
-	
-	private String name;
-	private String description;
-	private String type;
-	private PrereqCheck prereq;
-	
-	public String displayName(){return name;}
-	public String description(){return description;}
-	
-	@Override
-	public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+
+	public Ability(AbilityEnum pAbility, String pQualifier)
 	{
-		if(prereq == null){return new PrereqCheckResult(true,null);}
-		else{return prereq.meetsPrereq(myChar);}
+		ability = pAbility;
+		qualifier = pQualifier==null ? "" : pQualifier;
+	}
+
+	@Override public String toString(){
+		if(qualifier == null || qualifier.length() < 1)
+		{return abilityName();}
+
+		return abilityName()+"("+qualifier+")";
+	}
+
+	@Override
+	public boolean equals(Object other)
+	{
+		try
+		{
+			Ability p = (Ability)other;
+			return p.ability == ability && p.qualifier.equals(qualifier);
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+
+	@Override public int hashCode()
+	{
+		int hash = 0;
+		if(ability != null){hash += 13*17*ability.ordinal();}
+		if(qualifier != null){hash += 19*qualifier.hashCode();}
+		return hash;
+	}
+
+	public AbilityEnum abilityEnum(){return ability;}
+	public String qualifier(){return qualifier;}
+
+	//mimic abilityEnum API
+	public String abilityName(){return ability.displayName();}
+	public String description(){return ability.description();}
+
+	@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar) {return ability.meetsPrereq(myChar);}
+	
+	/* Parcelling */
+	public void writeToParcel(Parcel toParcel, int flags)
+	{
+		toParcel.writeSerializable(ability);
+		toParcel.writeString(qualifier);
+	}
+
+	public static final Parcelable.Creator<Ability> CREATOR = new Parcelable.Creator<Ability>()
+	{
+		@Override
+		public Ability createFromParcel(Parcel in)
+		{
+			try
+			{
+				AbilityEnum pAbility = (AbilityEnum)in.readSerializable();
+				String pQualifier = in.readString();
+				return new Ability(pAbility, pQualifier);
+			}
+			catch(Exception e)
+			{
+				Log.e("IKRPG","Bad news, dude, Ability didn't Parcel correctly!");
+				return new Ability(null,null);
+			}
+		}
+
+		@Override
+		public Ability[] newArray(int size)
+		{
+			return new Ability[size];
+		}
+	};
+
+	public int describeContents()
+	{
+		return 0;
 	}
 }

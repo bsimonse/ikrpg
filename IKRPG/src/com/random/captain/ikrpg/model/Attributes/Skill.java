@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
-import com.random.captain.ikrpg.model.Attributes.Modifier;
 
 public class Skill implements Parcelable
 {
