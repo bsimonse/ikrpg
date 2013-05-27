@@ -4,7 +4,13 @@ import com.random.captain.ikrpg.model.BaseCharacter;
 
 public interface PostCreateHook
 {
-	public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int which);
+	//Apologies in advanced for the non-intuitive API...
+	//Something probably can and will be done to clean it up.
+	//
+	//In the meantime, your post create hook can modify any setting in myChar, and when done,
+	//call delegate.hookComplete(callbackId);.  Since that's pretty much constant, I'm sure it can be cleaned.
+	public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int callbackId);
+	public void undoPostCreateHook(BaseCharacter myChar);
 	
 	//Priority Guidlines
 	//(this is is no way official)

@@ -85,4 +85,11 @@ public class ChooseCareerFragment extends Fragment
 			hostActivity.nextFrag(NewCharacterActivity.FragState.CAREER1);
 		}
 	}
+	
+	//Bleehhhhhh please clean this up
+	public static void undo(NewCharacterActivity myAct, boolean first)
+	{
+		if(first){myAct.career1 = null;}
+		else{myAct.career2 = null;}
+	}
 }

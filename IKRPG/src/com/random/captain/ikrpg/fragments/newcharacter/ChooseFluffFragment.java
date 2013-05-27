@@ -57,6 +57,9 @@ public class ChooseFluffFragment extends Fragment
 		else{fluff.sex = "Male";}
 		
 		hostActivity.fluff = fluff;
-		hostActivity.nextFrag(NewCharacterActivity.FragState.DONE);
+		hostActivity.nextFrag(NewCharacterActivity.FragState.FLUFF);
 	}
+	
+	//Bleehhhhhh please clean this up
+	public static void undo(NewCharacterActivity myAct){myAct.fluff = null;}
 }

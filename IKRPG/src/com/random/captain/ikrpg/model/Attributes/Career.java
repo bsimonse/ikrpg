@@ -6,11 +6,11 @@ import java.util.*;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.model.BaseCharacter;
 
@@ -49,9 +49,12 @@ public enum Career implements PrereqCheck
 				  }
 			  },
 			  new PostCreateHook(){
-				  @Override
-					public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate, final int whichHook){
-						
+				  
+				  private SkillEnum incrementedSkill;
+				  private int incrementedSkillPrevValue;
+				  
+				  @Override public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate, final int whichHook)
+				  {	
 						//determine if choice is needed
 						boolean handWeaponMaxed = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.HAND_WEAPON)) == 2;
 						boolean rifleMaxed = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.RIFLE)) == 2;
@@ -73,11 +76,11 @@ public enum Career implements PrereqCheck
 									  @Override
 									  public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 									  {
-										  SkillEnum choice = choices[which];
-										  int currentLevel = myChar.skillsBundle().getSkillLevel(new Skill(choice));
-										  currentLevel += 1;
+										  incrementedSkill = choices[which];
+										  incrementedSkillPrevValue = myChar.skillsBundle().getSkillLevel(new Skill(incrementedSkill));
+										  int currentLevel = incrementedSkillPrevValue + 1;
 										  if(currentLevel > 2){currentLevel = 2;}
-										  myChar.skillsBundle().setSkillLevel(new Skill(choice), currentLevel);
+										  myChar.skillsBundle().setSkillLevel(new Skill(incrementedSkill), currentLevel);
 										  delegate.hookComplete(whichHook);
 									  }
 								  });
@@ -94,13 +97,15 @@ public enum Career implements PrereqCheck
 							//auto-bump the appropriate skill
 							if(rifleMaxed && !handWeaponMaxed)
 							{
-								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.HAND_WEAPON));
-								myChar.skillsBundle().setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), handWeaponLevel+1);
+								incrementedSkill = SkillEnum.HAND_WEAPON;
+								incrementedSkillPrevValue = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.HAND_WEAPON));
+								myChar.skillsBundle().setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), incrementedSkillPrevValue+1);
 							}
 							else if(!rifleMaxed && handWeaponMaxed)
 							{
-								int handWeaponLevel = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.RIFLE));
-								myChar.skillsBundle().setSkillLevel(new Skill(SkillEnum.RIFLE), handWeaponLevel+1);
+								incrementedSkill = SkillEnum.RIFLE;
+								incrementedSkillPrevValue = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.RIFLE));
+								myChar.skillsBundle().setSkillLevel(new Skill(SkillEnum.RIFLE), incrementedSkillPrevValue+1);
 							}
 							
 							//no choice needed
@@ -108,10 +113,11 @@ public enum Career implements PrereqCheck
 						}
 					  }
 					
+					@Override public void undoPostCreateHook(BaseCharacter myChar){Log.i("IKRPG","Undoing Arcane posthook");myChar.skillsBundle().setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
 					@Override public int getPriority(){return 50;}
 			  }),
-			  
-	WARCASTER(null,null,null,null,null,null,null,null,null);
+	PIRATE("Pirate",null,null,null,null,null,null,null,null),
+	WARCASTER("Warcaster",null,null,null,null,null,null,null,null);
 			  
 			  
 			  

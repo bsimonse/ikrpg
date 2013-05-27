@@ -68,4 +68,7 @@ public class ChooseArchtypeFragment extends Fragment
 		hostActivity.archetype = archetype;
 		hostActivity.nextFrag(NewCharacterActivity.FragState.ARCHETYPE);
 	}
+	
+	//Bleehhhhhh please clean this up
+	public static void undo(NewCharacterActivity myAct){myAct.archetype = null;}
 }

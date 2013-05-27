@@ -50,6 +50,7 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 	private Set<Ability> myAbilities = new HashSet<Ability>(10);
 	private Set<Spell> mySpells = new HashSet<Spell>(10);
 	private ArrayList<PostCreateHook> postCreateHooks = new ArrayList<PostCreateHook>(15);
+	private FragState lastFinishedFrag;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -59,94 +60,84 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 		nextFrag(FragState.START);
 	}
 
-	public void nextFrag(FragState currFrag)
+	public void nextFrag(FragState completedFrag)
 	{
+		lastFinishedFrag = completedFrag;
+		
 		Fragment nextFrag = null;
-		if(currFrag == FragState.START)
+		switch(completedFrag)
 		{
-			nextFrag = new ChooseRaceFragment();
-		}
-		else if(currFrag == FragState.RACE)
-		{
-			nextFrag = new ChooseArchtypeFragment();
-		}
-		else if(currFrag == FragState.ARCHETYPE)
-		{
-			nextFrag = new ChooseCareerFragment();
-		}
-		else if(currFrag == FragState.CAREER1)
-		{
-			nextFrag = new ChooseCareerFragment();
-			Bundle args = new Bundle();
-			args.putBoolean(SECOND_CAREER, true);
-			nextFrag.setArguments(args);
-		}
-		else if(currFrag == FragState.CAREER2)
-		{
-			//are there any other questions?
-			try
-			{createCharacter();}
-			catch(Exception e)
-			{
-				Log.e("IKRPG","Character couldn't legally be built! "+e.getMessage());
-				setResult(RESULT_FIRST_USER);
-				finish();
-			}
+			case START: nextFrag = new ChooseRaceFragment(); break;
+			case RACE: nextFrag = new ChooseArchtypeFragment(); break;
+			case ARCHETYPE: nextFrag = new ChooseCareerFragment(); break;
 			
-			//Do postcreatehooks
-			if(postCreateHooks.size() > 0)
-			{
-				//start with first hook
-				Log.i("IKRPG","Starting post create hooks");
-				
-				Collections.sort(postCreateHooks, new Comparator<PostCreateHook>(){
-					@Override public int compare(PostCreateHook one, PostCreateHook two)
+			case CAREER1:
+				nextFrag = new ChooseCareerFragment();
+				Bundle args = new Bundle();
+				args.putBoolean(SECOND_CAREER, true);
+				nextFrag.setArguments(args);
+			break;
+			
+			case CAREER2:
+				try
+				{createCharacter();}
+				catch(Exception e)
+				{
+					Log.e("IKRPG","Character couldn't legally be built! "+e.getMessage());
+					setResult(RESULT_FIRST_USER);
+					finish();
+				}
+
+				//Do postcreatehooks
+				if(postCreateHooks.size() > 0)
+				{
+					//start with first hook
+					Log.i("IKRPG","Starting post create hooks");
+
+					Collections.sort(postCreateHooks, new Comparator<PostCreateHook>(){
+							@Override public int compare(PostCreateHook one, PostCreateHook two)
+							{return one.getPriority() - two.getPriority();}
+						});
+						
+					PostCreateHook hook = postCreateHooks.get(0);
+					Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, 0);
+					if(doFrag != null)
+					{nextFrag = doFrag;}
+					else
 					{
-						return one.getPriority() - two.getPriority();
+						completedFrag = FragState.POSTCREATE_HOOK;
+						completedFrag.which = 0;
+						nextFrag(completedFrag);return;
 					}
-				});
-				FragState hookStart = FragState.POSTCREATE_HOOK;
-				hookStart.which = -1;
-				nextFrag(hookStart);return;
-			}
-			else
-			{
-				//We did it!
-				Log.i("IKRPG","No post create hooks found");
-				nextFrag(FragState.FLUFF);return;
-			}
+				}
+				else
+				{
+					Log.i("IKRPG","No post create hooks found");
+					nextFrag = new ChooseFluffFragment(); break;
+				}
+			break;
 			
-		}
-		else if(currFrag == FragState.POSTCREATE_HOOK)
-		{
-			//Which one, and what is left?
-			int nextHook = currFrag.which+1;
+			case POSTCREATE_HOOK:
+				//Which one, and what is left?
+				int nextHook = completedFrag.which+1;
+
+				if(nextHook >= postCreateHooks.size())
+				{nextFrag = new ChooseFluffFragment(); break;}
+
+				Log.i("IKRPG","Evaluating hook "+nextHook);
+
+				PostCreateHook hook = postCreateHooks.get(nextHook);
+				Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, nextHook);
+				if(doFrag != null)
+				{nextFrag = doFrag;}
+				else
+				{
+					completedFrag.which = nextHook;
+					nextFrag(completedFrag);return;
+				}
+			break;
 			
-			Log.i("IKRPG","Evaluating hook "+nextHook);
-			
-			if(nextHook >= postCreateHooks.size())
-			{nextFrag(FragState.FLUFF);return;}
-			
-			PostCreateHook hook = postCreateHooks.get(nextHook);
-			Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, nextHook);
-			if(doFrag != null)
-			{nextFrag = doFrag;}
-			else
-			{
-				currFrag.which = nextHook;
-				nextFrag(currFrag);return;
-			}
-		}
-		else if(currFrag == FragState.FLUFF)
-		{
-			nextFrag = new ChooseFluffFragment();
-		}
-		else if(currFrag == FragState.DONE)
-		{
-			//Sweet.
-			//TODO: confirm dialog
-			
-			characterComplete();
+			case FLUFF: characterComplete(); break;
 		}
 		
 		if(nextFrag != null)
@@ -158,23 +149,53 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 		}
 	}
 	
-	public void hookComplete(int which)
+	public void hookComplete(int finishedHookIndex)
 	{
-		//pop stack
-		getSupportFragmentManager().popBackStack();
-		
 		FragState finishedHook = FragState.POSTCREATE_HOOK;
-		finishedHook.which = which;
-		nextFrag(finishedHook);return;
+		finishedHook.which = finishedHookIndex;
+		nextFrag(finishedHook);
+	}
+	
+	//Oh my God my logic is convoluted
+	//Major cleanup needed after it works
+	@Override public void onBackPressed()
+	{
+		//undo previous thing
+		switch(lastFinishedFrag)
+		{
+			case START: break;//nothing to do here
+			case RACE: ChooseRaceFragment.undo(this); lastFinishedFrag = FragState.START; break;
+			case ARCHETYPE: ChooseArchtypeFragment.undo(this); lastFinishedFrag = FragState.RACE; break;
+			case CAREER1: ChooseCareerFragment.undo(this, true); lastFinishedFrag = FragState.ARCHETYPE; break;
+			case CAREER2: ChooseCareerFragment.undo(this, false); lastFinishedFrag = FragState.CAREER1; break;
+
+			case POSTCREATE_HOOK:
+				int completedFrag = lastFinishedFrag.which;
+				postCreateHooks.get(completedFrag).undoPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats));
+				if(completedFrag <= 0){lastFinishedFrag = FragState.CAREER1;}
+				else{lastFinishedFrag.which--;}
+			break;
+			 
+			case FLUFF: //remember!  Broken pattern!  Needs fixing!
+				int lastHook = postCreateHooks.size()-1;
+				postCreateHooks.get(lastHook).undoPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats));
+				lastFinishedFrag = FragState.POSTCREATE_HOOK;
+				lastFinishedFrag.which = lastHook;
+				break;
+				
+			case DONE: break; //wait, what?
+			default: break;
+		}
+		super.onBackPressed();
 	}
 	
 	public void createCharacter() //throws CharacterNotValidException
 	{
-		//TODO: revisit
-		//if(career1 == career2)
-		//{throw new CharacterNotValidException("Same career passed twice");}
-		
 		PostCreateHook aHook;
+		myCareers = new HashSet<Career>(2);
+		myAbilities = new HashSet<Ability>(10);
+		mySpells = new HashSet<Spell>(10);
+		postCreateHooks = new ArrayList<PostCreateHook>(15);
 		
 		//Setup
 		myCareers.add(career1);
@@ -188,21 +209,8 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 		
 		//Archetype
 		//Pick a bonus
-		
-		//Gotta assume this has already been done, or risk double-asking.
-		//TODO: revisist
-		//PrereqCheckResult = archetype.meetsPrereq(new BaseCharacter(name, race, archetype, myCareers, null, null, null, null));
-		//{throw new CharacterNotValidException("Archetype not compatible with Race");}
-		
 		aHook = archetype.postCreateHook();
 		if(aHook!=null){postCreateHooks.add(aHook);}
-		
-		//Careers
-		//Gotta assume this has already been done, or risk double-asking.
-		//TODO: revisist
-		//if(!career1.meetsPrereq(new BaseCharacter(name, race, archetype, null, null, null, null, null), manager) ||
-		//	!career2.meetsPrereq(new BaseCharacter(name, race, archetype, null, null, null, null, null), manager))
-		//{throw new CharacterNotValidException("Career(s) not allowed");}
 		
 		//skills
 		mySkills = new SkillsBundle(myStats);

@@ -52,4 +52,7 @@ public class ChooseRaceFragment extends Fragment
 		hostActivity.race = race;
 		hostActivity.nextFrag(NewCharacterActivity.FragState.RACE);
 	}
+	
+	//Bleehhhhhh please clean this up
+	public static void undo(NewCharacterActivity myAct){myAct.race = null;}
 }
