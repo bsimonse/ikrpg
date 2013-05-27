@@ -9,7 +9,7 @@ public interface PostCreateHook
 	//
 	//In the meantime, your post create hook can modify any setting in myChar, and when done,
 	//call delegate.hookComplete(callbackId);.  Since that's pretty much constant, I'm sure it can be cleaned.
-	public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int callbackId);
+	public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate);
 	public void undoPostCreateHook(BaseCharacter myChar);
 	
 	//Priority Guidlines

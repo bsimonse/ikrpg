@@ -6,7 +6,6 @@ import java.util.*;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,44 +15,42 @@ import com.random.captain.ikrpg.model.BaseCharacter;
 
 public enum Career implements PrereqCheck
 {
-	//This might be better as JSON... eh.
-	//But Laaaaaaaambda
 	ALCHEMIST("Alchemist",
-				new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON,1), Skill.skillPair(SkillEnum.THROWN_WEAPON, 1), Skill.skillPair(SkillEnum.ALCHEMY, 1), Skill.skillPair(SkillEnum.MEDICINE, 1)},
-				new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON, 2), Skill.skillPair(SkillEnum.THROWN_WEAPON, 2), //etc...
-							Skill.skillPair(SkillEnum.CRAFT, "", 4), Skill.skillPair(SkillEnum.RESEARCH, 4)},
-			  	new Ability[] {new Ability(AbilityEnum.GRENADIER), new Ability(AbilityEnum.POISON_RESISTANCE)},
-				new Ability[] {new Ability(AbilityEnum.BOMBER), new Ability(AbilityEnum.BREW_MASTER), new Ability(AbilityEnum.FAST_COOK), new Ability(AbilityEnum.FIELD_ALCHEMIST), new Ability(AbilityEnum.FIRE_IN_THE_HOLE), new Ability(AbilityEnum.FREE_STYLE),
-								new Ability(AbilityEnum.GRENADIER), new Ability(AbilityEnum.POISON_RESISTANCE)},
+				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
+				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(2), //etc...
+							SkillEnum.CRAFT.pair(4), SkillEnum.RESEARCH.pair(4)},
+			  	new Ability[] {AbilityEnum.GRENADIER.make(), AbilityEnum.POISON_RESISTANCE.make()},
+				new Ability[] {AbilityEnum.BOMBER.make(), AbilityEnum.BREW_MASTER.make(), AbilityEnum.FAST_COOK.make(),AbilityEnum.FIELD_ALCHEMIST.make(), AbilityEnum.FIRE_IN_THE_HOLE.make(), AbilityEnum.FREE_STYLE.make(),
+								AbilityEnum.GRENADIER.make(),AbilityEnum.POISON_RESISTANCE.make()},
 				null, null,
 				null, null),
 								
 	ARCANE_MECHANIK("Arcane Mechanik",
-			  new Pair[] {Skill.skillPair(SkillEnum.CRAFT, "gunsmithing", 1), Skill.skillPair(SkillEnum.CRAFT, "metalworking", 1), Skill.skillPair(SkillEnum.MECHANIKAL, 1)},
-			  new Pair[] {Skill.skillPair(SkillEnum.HAND_WEAPON, 2), Skill.skillPair(SkillEnum.LIGHT_ARTILLERY, 2), //etc...
-			  		Skill.skillPair(SkillEnum.NEGOTIATION, 2), Skill.skillPair(SkillEnum.RESEARCH, 3)},
-			  new Ability[] {new Ability(AbilityEnum.INSCRIBE_FORMULAE)},
-		new Ability[] {new Ability(AbilityEnum.JACK_MARSHALL), new Ability(AbilityEnum.ACE_COMMANDER), new Ability(AbilityEnum.ARCANE_ENGINEER), new Ability(AbilityEnum.DRIVE_ASSUALT), new Ability(AbilityEnum.DRIVE_PRONTO),
+				new Pair[] {SkillEnum.CRAFT.pair("gunsmithing", 1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
+				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), //etc...
+			  				SkillEnum.NEGOTIATION.pair(2), SkillEnum.RESEARCH.pair(3)},
+				new Ability[] {new Ability(AbilityEnum.INSCRIBE_FORMULAE)},
+				new Ability[] {new Ability(AbilityEnum.JACK_MARSHALL), new Ability(AbilityEnum.ACE_COMMANDER), new Ability(AbilityEnum.ARCANE_ENGINEER), new Ability(AbilityEnum.DRIVE_ASSUALT), new Ability(AbilityEnum.DRIVE_PRONTO),
 								   new Ability(AbilityEnum.INSCRIBE_FORMULAE), new Ability(AbilityEnum.RESOURCEFUL), new Ability(AbilityEnum.STEAMO)},
-			  new Spell[] {Spell.ARCANTRIK_BOLT, Spell.POLARITY_SHIELD},
-			  new Spell[] {Spell.JACKHAMMER, Spell.JUMP_START, Spell.LOCOMOTION, Spell.POWER_BOOSTER, Spell.PROTECTION_FROM_ELECTRICITY, Spell.RETURN_FIRE,
+				new Spell[] {Spell.ARCANTRIK_BOLT, Spell.POLARITY_SHIELD},
+				new Spell[] {Spell.JACKHAMMER, Spell.JUMP_START, Spell.LOCOMOTION, Spell.POWER_BOOSTER, Spell.PROTECTION_FROM_ELECTRICITY, Spell.RETURN_FIRE,
 			  				Spell.SHORT_OUT, Spell.ARCANTRIK_BOLT, Spell.ELECTRIFY, Spell.FORTIFY, Spell.POLARITY_SHIELD, Spell.POSITIVE_CHARGE,
 							Spell.REDLINE, Spell.TEMPER_METAL, Spell.BROADSIDE, Spell.ELECTRICAL_BLAST, Spell.FAIL_SAFE, Spell.FORCE_FIELD,
 							Spell.FULL_THROTTLE, Spell.GRIND, Spell.GUIDED_FIRE, Spell.IRON_AGGRESSION, Spell.SUPERIORITY, Spell.BLACK_OUT,
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
-			  new PrereqCheck(){
-				  @Override
-				  public PrereqCheckResult meetsPrereq(BaseCharacter myChar){
-					if(myChar.archetype() == null){return new PrereqCheckResult(false, null);}
-					return new PrereqCheckResult(myChar.archetype() == Archetype.GIFTED, null);
-				  }
-			  },
-			  new PostCreateHook(){
+				new PrereqCheck(){
+					@Override
+					public PrereqCheckResult meetsPrereq(BaseCharacter myChar){
+						if(myChar.archetype() == null){return new PrereqCheckResult(false, null);}
+						return new PrereqCheckResult(myChar.archetype() == Archetype.GIFTED, null);
+					}
+			  	},
+				new PostCreateHook(){
 				  
 				  private SkillEnum incrementedSkill;
 				  private int incrementedSkillPrevValue;
 				  
-				  @Override public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate, final int whichHook)
+				  @Override public Fragment doPostCreateHook(final BaseCharacter myChar, final PostCreateHookDelegate delegate)
 				  {	
 						//determine if choice is needed
 						boolean handWeaponMaxed = myChar.skillsBundle().getSkillLevel(new Skill(SkillEnum.HAND_WEAPON)) == 2;
@@ -81,7 +78,7 @@ public enum Career implements PrereqCheck
 										  int currentLevel = incrementedSkillPrevValue + 1;
 										  if(currentLevel > 2){currentLevel = 2;}
 										  myChar.skillsBundle().setSkillLevel(new Skill(incrementedSkill), currentLevel);
-										  delegate.hookComplete(whichHook);
+										  delegate.hookComplete();
 									  }
 								  });
 								  
@@ -113,7 +110,7 @@ public enum Career implements PrereqCheck
 						}
 					  }
 					
-					@Override public void undoPostCreateHook(BaseCharacter myChar){Log.i("IKRPG","Undoing Arcane posthook");myChar.skillsBundle().setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
+					@Override public void undoPostCreateHook(BaseCharacter myChar){myChar.skillsBundle().setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
 					@Override public int getPriority(){return 50;}
 			  }),
 	PIRATE("Pirate",null,null,null,null,null,null,null,null),
@@ -171,8 +168,7 @@ public enum Career implements PrereqCheck
 		Set<Career> careers = myChar.careers();
 		
 		//duplicates not allowed
-		if(careers != null)
-		{for(Career c:careers){if(this == c){return new PrereqCheckResult(false, null);}}}
+		if(careers != null && careers.contains(this)){return new PrereqCheckResult(false, null);}
 		
 		//no prereq means allowed
 		if(prereqCheck == null){return new PrereqCheckResult(true, null);}

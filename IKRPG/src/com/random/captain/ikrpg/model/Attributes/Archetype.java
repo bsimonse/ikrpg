@@ -13,7 +13,7 @@ public enum Archetype implements PrereqCheck
 		new PostCreateHook(){
 			private int prevBaseArcaneStat;
 			@Override
-			public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate, int which)
+			public Fragment doPostCreateHook(BaseCharacter myChar, PostCreateHookDelegate delegate)
 			{
 				prevBaseArcaneStat = myChar.statsBundle().getBaseStat(Stat.ARCANE);
 				if(myChar.tradition()==GiftedTradition.WILL_WEAVER){myChar.statsBundle().setBaseStat(Stat.ARCANE, 3);}

@@ -69,11 +69,15 @@ public class BaseCharacter implements Parcelable
 		exp = pExpTotal;
 	}
 	
-	@Override
-	public int describeContents()
-	{
-		return 0; //?
-	}
+	/* Convenience methods for hooks and prereqs*/
+	
+	public boolean hasAbility(AbilityEnum ability){return abilities.contains(new Ability(ability));}
+	public boolean hasAbility(AbilityEnum ability, String qualifier){return abilities.contains(new Ability(ability, qualifier));}
+	
+	public int getSkillLevel(SkillEnum skill){return skillsBundle.getSkillLevel(skill.make());}
+	public int getSkillLevel(SkillEnum skill, String qualifier){return skillsBundle.getSkillLevel(skill.make(qualifier));}
+	
+	public int getBaseStat(Stat stat){return statsBundle.getBaseStat(stat);}
 	
 	/* Parcelling */
 	@Override
@@ -133,12 +137,10 @@ public class BaseCharacter implements Parcelable
 			return me;
 		}
 
-		@Override
-		public BaseCharacter[] newArray(int size)
-		{
-			return new BaseCharacter[size];
-		}
+		@Override public BaseCharacter[] newArray(int size) {return new BaseCharacter[size];}
 	};
+	
+	@Override public int describeContents(){return 0;}
 	
 	@Override
 	public String toString()
@@ -156,23 +158,17 @@ public class BaseCharacter implements Parcelable
 		
 		myString.append("\nCareers: \n");
 		for(Career career: careers)
-		{
-			myString.append(career.displayName()).append("\n");
-		}
+		{myString.append(career.displayName()).append("\n");}
 		
 		myString.append(skillsBundle.toString());
 		
 		myString.append("\nAbilities: \n");
 		for(Ability ability: abilities)
-		{
-			myString.append(ability.toString()).append("\n");
-		}
+		{myString.append(ability.toString()).append("\n");}
 		
 		myString.append("\nSpells: \n");
 		for(Spell spell: spells)
-		{
-			myString.append(spell.displayName()).append("\n");
-		}
+		{myString.append(spell.displayName()).append("\n");}
 		
 		return myString.toString();
 	}

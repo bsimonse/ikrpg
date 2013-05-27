@@ -44,7 +44,6 @@ public class ChooseFluffFragment extends Fragment
 	
 	private void fluffComplete()
 	{
-		Log.i("IKRPG","Fluff selected");
 		fluff.name = ((EditText)(getView().findViewById(R.id.nameInput))).getText().toString();
 		fluff.characteristics = ((EditText)(getView().findViewById(R.id.characteristicsInput))).getText().toString();
 		fluff.height = ((EditText)(getView().findViewById(R.id.heightInput))).getText().toString();
@@ -60,6 +59,5 @@ public class ChooseFluffFragment extends Fragment
 		hostActivity.nextFrag(NewCharacterActivity.FragState.FLUFF);
 	}
 	
-	//Bleehhhhhh please clean this up
 	public static void undo(NewCharacterActivity myAct){myAct.fluff = null;}
 }

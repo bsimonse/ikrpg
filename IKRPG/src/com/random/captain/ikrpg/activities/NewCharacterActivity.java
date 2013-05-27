@@ -16,9 +16,11 @@ import com.random.captain.ikrpg.model.BaseCharacter;
 import com.random.captain.ikrpg.model.Creators.PostCreateHook;
 import com.random.captain.ikrpg.model.Creators.PostCreateHookDelegate;
 	
-public class NewCharacterActivity extends FragmentActivity implements PostCreateHookDelegate
+public class NewCharacterActivity extends FragmentActivity
 {
 	public static String NEW_CHARACTER = "thisIsABrandNewCharacter";
+	public static String SECOND_CAREER = "thisIsMySecondCareer";
+	
 	public static enum FragState
 	{
 		START,
@@ -30,13 +32,9 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 		FLUFF,
 		DONE;
 		
-		//private FragState(){}
-		
 		private int which;
 		public void setWhich(int pWhich){which=pWhich;}
 	}
-	
-	public static String SECOND_CAREER = "thisIsMySecondCareer";
 	
 	public Race race;
 	public Archetype archetype;
@@ -92,15 +90,19 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 				if(postCreateHooks.size() > 0)
 				{
 					//start with first hook
-					Log.i("IKRPG","Starting post create hooks");
-
 					Collections.sort(postCreateHooks, new Comparator<PostCreateHook>(){
 							@Override public int compare(PostCreateHook one, PostCreateHook two)
 							{return one.getPriority() - two.getPriority();}
 						});
 						
 					PostCreateHook hook = postCreateHooks.get(0);
-					Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, 0);
+					Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats),
+						new PostCreateHookDelegate(){
+							private int hookIndex = 0;
+							@Override public void hookComplete()
+							{NewCharacterActivity.this.hookComplete(hookIndex);}
+						});
+						
 					if(doFrag != null)
 					{nextFrag = doFrag;}
 					else
@@ -112,22 +114,24 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 				}
 				else
 				{
-					Log.i("IKRPG","No post create hooks found");
 					nextFrag = new ChooseFluffFragment(); break;
 				}
 			break;
 			
 			case POSTCREATE_HOOK:
 				//Which one, and what is left?
-				int nextHook = completedFrag.which+1;
+				final int nextHook = completedFrag.which+1;
 
 				if(nextHook >= postCreateHooks.size())
 				{nextFrag = new ChooseFluffFragment(); break;}
 
-				Log.i("IKRPG","Evaluating hook "+nextHook);
-
 				PostCreateHook hook = postCreateHooks.get(nextHook);
-				Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats), this, nextHook);
+				Fragment doFrag = hook.doPostCreateHook(new BaseCharacter(null, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats),
+					new PostCreateHookDelegate(){
+						private int hookIndex = nextHook;
+						@Override public void hookComplete()
+						{NewCharacterActivity.this.hookComplete(hookIndex);}
+					});
 				if(doFrag != null)
 				{nextFrag = doFrag;}
 				else
@@ -243,7 +247,6 @@ public class NewCharacterActivity extends FragmentActivity implements PostCreate
 	
 	public void characterComplete()
 	{
-		Log.i("IKRPG","Creating character...");
 		BaseCharacter baby = new BaseCharacter(fluff, race, archetype, myCareers, myAbilities, mySpells, mySkills, myStats);
 		Intent i = new Intent();
 		i.putExtra(NEW_CHARACTER, baby);

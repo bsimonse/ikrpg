@@ -1,5 +1,7 @@
 package com.random.captain.ikrpg.model.Attributes;
 
+import android.util.Pair;
+
 public enum SkillEnum
 {
 	ARCHERY("Archery",Stat.POISE, true, false, false, true),
@@ -81,4 +83,11 @@ public enum SkillEnum
 	public boolean isGeneral(){return isGeneral;}
 	public boolean isQualifiable(){return isQualifiable;}
 	public boolean canUseUntrained(){return canUseUntrained;}
+	
+	//Are these necessary/helpful?
+	public Skill make(){return new Skill(this);}
+	public Skill make(String qualifier){return new Skill(this, qualifier);}
+	
+	public Pair<Skill, Integer> pair(int skillLevel){return new Pair<Skill,Integer>(new Skill(this),skillLevel);}
+	public Pair<Skill, Integer> pair(String qualifier, int skillLevel){return new Pair<Skill, Integer>(new Skill(this, qualifier),skillLevel);}
 }

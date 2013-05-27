@@ -61,17 +61,6 @@ public class Skill implements Parcelable
 	public boolean isQualifiable(){return skill.isQualifiable();}
 	public boolean canUseUntrained(){return skill.canUseUntrained();}
 	
-	//Helper methods for Career
-	public static Pair<Skill, Integer> skillPair(SkillEnum pSkill, int level)
-	{
-		return skillPair(pSkill, "", level);
-	}
-	
-	public static Pair<Skill, Integer> skillPair(SkillEnum pSkill, String qualifier, int level)
-	{
-		return new Pair<Skill, Integer>(new Skill(pSkill, qualifier), level);
-	}
-	
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)
 	{
@@ -93,19 +82,12 @@ public class Skill implements Parcelable
 			catch(Exception e)
 			{
 				Log.e("IKRPG","Bad news, dude, Skill didn't Parcel correctly!");
-				return new Skill(null,null);
+				return new Skill(null);
 			}
 		}
 
-		@Override
-		public Skill[] newArray(int size)
-		{
-			return new Skill[size];
-		}
+		@Override public Skill[] newArray(int size){return new Skill[size];}
 	};
 
-	public int describeContents()
-	{
-		return 0;
-	}
+	@Override public int describeContents(){return 0;}
 }
