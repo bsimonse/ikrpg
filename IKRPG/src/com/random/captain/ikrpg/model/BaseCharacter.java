@@ -78,6 +78,7 @@ public class BaseCharacter implements Parcelable
 	public int getSkillLevel(SkillEnum skill, String qualifier){return skillsBundle.getSkillLevel(skill.make(qualifier));}
 	
 	public int getBaseStat(Stat stat){return statsBundle.getBaseStat(stat);}
+	public int getMaxStat(Stat stat){return statsBundle.getMaxStat(stat);}
 	
 	/* Parcelling */
 	@Override

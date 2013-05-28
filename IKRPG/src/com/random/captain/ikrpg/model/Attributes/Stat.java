@@ -67,15 +67,8 @@ public enum Stat implements Parcelable
 			}
 		}
 
-		@Override
-		public Stat[] newArray(int size)
-		{
-			return new Stat[size];
-		}
+		@Override public Stat[] newArray(int size) {return new Stat[size];}
 	};
 
-	public int describeContents()
-	{
-		return 0;
-	}
+	public int describeContents(){return 0;}
 }

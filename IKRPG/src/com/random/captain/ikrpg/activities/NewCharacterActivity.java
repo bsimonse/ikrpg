@@ -207,7 +207,7 @@ public class NewCharacterActivity extends FragmentActivity
 		
 		//Race
 		//Mostly for stats, and post-create bonuses
-		myStats = new StatsBundle(race.startStats());
+		myStats = new StatsBundle(race.startStats(), race.heroStats());
 		aHook = race.postCreateHook();
 		if(aHook != null){postCreateHooks.add(aHook);}
 		
@@ -243,6 +243,9 @@ public class NewCharacterActivity extends FragmentActivity
 		if(aHook!=null){postCreateHooks.add(aHook);}
 		aHook = career2.postCreateHook();
 		if(aHook!=null){postCreateHooks.add(aHook);}
+		
+		//advancement point hook
+		postCreateHooks.add(new ChooseAdvancementPointsHook());
 	}
 	
 	public void characterComplete()

@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+	<ListView
+		android:id="@+id/chooseAdvancementPointsList"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+	
+	<Button
+		android:id="@+id/chooseAdvancementPointsSubmit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Submit"
+		android:padding="10dp" />
+	
+</LinearLayout>

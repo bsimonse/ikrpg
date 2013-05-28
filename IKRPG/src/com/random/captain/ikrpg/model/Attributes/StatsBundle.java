@@ -11,30 +11,27 @@ public class StatsBundle implements Parcelable
 {
 	private Map<Stat, Integer> activeStats;
 	private Map<Stat, Integer> baseStats;
+	private Map<Stat, Integer> maxStats;
 	
 	private Map<String, Modifier<Stat>> modifiers;
 	
-	public StatsBundle(Collection<Pair<Stat, Integer>> stats)
+	public StatsBundle(Collection<Pair<Stat, Integer>> pBaseStats, Collection<Pair<Stat, Integer>> pMaxStats)
 	{
 		activeStats = new HashMap<Stat, Integer>();
 		baseStats = new HashMap<Stat, Integer>();
+		maxStats = new HashMap<Stat, Integer>();
 		
-		for(Pair<Stat, Integer> stat : stats)
+		for(Pair<Stat, Integer> stat : pBaseStats)
 		{baseStats.put(stat.first, stat.second);}
 		
+		for(Pair<Stat, Integer> stat : pMaxStats)
+		{maxStats.put(stat.first, stat.second);}
+		
 		modifiers = new HashMap<String, Modifier<Stat>>();
 		
 		rederiveBaseStats();
 	}
-	
-	public StatsBundle(Map<Stat, Integer> pBaseStats)
-	{
-		baseStats = pBaseStats;
-		activeStats = new HashMap<Stat, Integer>();
-		modifiers = new HashMap<String, Modifier<Stat>>();
-		rederiveBaseStats();
-	}
-	
+
 	public int getStat(Stat stat)
 	{
 		Integer value = activeStats.get(stat);
@@ -49,6 +46,13 @@ public class StatsBundle implements Parcelable
 		return value.intValue();
 	}
 
+	public int getMaxStat(Stat stat)
+	{
+		Integer value = maxStats.get(stat);
+		if(value==null){return -1;}
+		return value.intValue();
+	}
+	
 	public void setBaseStat(Stat stat, int value)
 	{
 		baseStats.put(stat, value);
