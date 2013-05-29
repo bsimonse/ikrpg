@@ -147,6 +147,23 @@ public class StatsBundle implements Parcelable
 		return myString.toString();
 	}
 	
+	public StatsBundle clone()
+	{
+		Map<Stat, Integer> cloneBaseStats = new HashMap<Stat, Integer>(10);
+		for(Stat stat: baseStats.keySet())
+		{cloneBaseStats.put(stat, baseStats.get(stat));}
+		
+		Map<Stat, Integer> cloneMaxStats = new HashMap<Stat, Integer>(10);
+		for(Stat stat: maxStats.keySet())
+		{cloneMaxStats.put(stat, maxStats.get(stat));}
+		
+		Map<String, Modifier<Stat>> cloneModifiers = new HashMap<String, Modifier<Stat>>(10);
+		for(String modName: modifiers.keySet())
+		{cloneModifiers.put(modName, modifiers.get(modName));}
+		
+		return new StatsBundle(cloneBaseStats, cloneMaxStats, cloneModifiers);
+	}
+	
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)
 	{
@@ -155,6 +172,13 @@ public class StatsBundle implements Parcelable
 		{
 			toParcel.writeSerializable(stat);
 			toParcel.writeInt(baseStats.get(stat));
+		}
+		
+		toParcel.writeInt(maxStats.size());
+		for(Stat stat : maxStats.keySet())
+		{
+			toParcel.writeSerializable(stat);
+			toParcel.writeInt(maxStats.get(stat));
 		}
 		
 		toParcel.writeInt(modifiers.size());
@@ -182,6 +206,15 @@ public class StatsBundle implements Parcelable
 			}
 			
 			baseSize = in.readInt();
+			Map<Stat, Integer> maxStats = new HashMap<Stat, Integer>(baseSize);
+			for(int i=0; i<baseSize; i++)
+			{
+				stat = (Stat)in.readSerializable();
+				value = in.readInt();
+				maxStats.put(stat, value);
+			}
+			
+			baseSize = in.readInt();
 			Map<String, Modifier<Stat>> modifiers = new HashMap<String, Modifier<Stat>>(baseSize);
 			String key;
 			Modifier<Stat> mod;
@@ -192,7 +225,7 @@ public class StatsBundle implements Parcelable
 				modifiers.put(key, mod);
 			}
 			
-			StatsBundle me = new StatsBundle(baseStats, modifiers);
+			StatsBundle me = new StatsBundle(baseStats, maxStats, modifiers);
 			return me;
 		}
 
@@ -203,16 +236,14 @@ public class StatsBundle implements Parcelable
 		}
 	};
 	
-	private StatsBundle(Map<Stat, Integer> pBaseStats, Map<String, Modifier<Stat>> pModifiers)
+	private StatsBundle(Map<Stat, Integer> pBaseStats, Map<Stat, Integer> pMaxStats, Map<String, Modifier<Stat>> pModifiers)
 	{
 		baseStats = pBaseStats;
+		maxStats = pMaxStats;
 		activeStats = new HashMap<Stat, Integer>();
 		modifiers = pModifiers;
 		rederiveBaseStats();
 	}
 	
-	public int describeContents()
-	{
-		return 0;
-	}
+	@Override public int describeContents(){return 0;}
 }

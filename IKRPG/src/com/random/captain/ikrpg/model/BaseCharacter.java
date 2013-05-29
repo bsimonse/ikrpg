@@ -80,6 +80,8 @@ public class BaseCharacter implements Parcelable
 	public int getBaseStat(Stat stat){return statsBundle.getBaseStat(stat);}
 	public int getMaxStat(Stat stat){return statsBundle.getMaxStat(stat);}
 	
+	public void setStatsBundle(StatsBundle b){statsBundle = b;}
+	
 	/* Parcelling */
 	@Override
 	public void writeToParcel(Parcel toParcel, int flags)
