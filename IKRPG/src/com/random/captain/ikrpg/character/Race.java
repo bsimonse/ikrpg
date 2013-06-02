@@ -31,7 +31,7 @@ public enum Race
 							Pair<Stat, Integer>[] pHeroStats,
 							Pair<Stat, Integer>[] pVetStats,
 							Pair<Stat, Integer>[] pEpicStats,
-							PostCreateHook pPostCreateHook)
+							zzCreateCharacterHook pPostCreateHook)
 	{
 		name = pName;
 		startStats = Arrays.asList(pStartStats);
@@ -46,7 +46,7 @@ public enum Race
 	private Collection<Pair<Stat, Integer>> heroStats;
 	private Collection<Pair<Stat, Integer>> vetStats;
 	private Collection<Pair<Stat, Integer>> epicStats;
-	private PostCreateHook postCreateHook;
+	private zzCreateCharacterHook postCreateHook;
 	
 	@Override
 	public String toString(){return displayName();}
@@ -55,5 +55,5 @@ public enum Race
 	public Collection<Pair<Stat, Integer>> heroStats(){return Collections.unmodifiableCollection(heroStats);}
 	public Collection<Pair<Stat, Integer>> vetStats(){return Collections.unmodifiableCollection(vetStats);}
 	public Collection<Pair<Stat, Integer>> epicStats(){return Collections.unmodifiableCollection(epicStats);}
-	public PostCreateHook postCreateHook(){return postCreateHook;}
+	public zzCreateCharacterHook postCreateHook(){return postCreateHook;}
 }

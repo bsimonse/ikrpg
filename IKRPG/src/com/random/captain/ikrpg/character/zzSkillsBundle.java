@@ -6,21 +6,21 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
 
-class SkillsBundle implements Parcelable
+class zzSkillsBundle implements Parcelable
 {
-	private StatsBundle stats;
+	private zzStatsBundle stats;
 	private Map<Skill, Integer> activeSkills;
 	private Map<Skill, Integer> baseSkills;
 	
-	private Map<String, Modifier<Skill>> modifiers;
+	private Map<String, zzModifier<Skill>> modifiers;
 	
-	SkillsBundle(StatsBundle pStats, Set<Career> pCareers)
+	zzSkillsBundle(zzStatsBundle pStats, Set<Career> pCareers)
 	{
 		stats = pStats;
 		activeSkills = new HashMap<Skill, Integer>();
 		baseSkills = new HashMap<Skill, Integer>();
 		
-		modifiers = new HashMap<String, Modifier<Skill>>();
+		modifiers = new HashMap<String, zzModifier<Skill>>();
 		
 		//get starting skills
 		if(pCareers != null)
@@ -49,7 +49,7 @@ class SkillsBundle implements Parcelable
 		rederiveSkills();
 	}
 	
-	SkillsBundle(StatsBundle pStats, Map<Skill, Integer> pBaseSkills, Map<String, Modifier<Skill>> pModifiers)
+	zzSkillsBundle(zzStatsBundle pStats, Map<Skill, Integer> pBaseSkills, Map<String, zzModifier<Skill>> pModifiers)
 	{
 		stats = pStats;
 		baseSkills = pBaseSkills;
@@ -104,7 +104,7 @@ class SkillsBundle implements Parcelable
 		return skills;
 	}
 	
-	boolean addModifier(Modifier<Skill> modifier, String key)
+	boolean addModifier(zzModifier<Skill> modifier, String key)
 	{
 		if(modifiers.containsKey(key))
 		{
@@ -130,8 +130,8 @@ class SkillsBundle implements Parcelable
 		activeSkills.putAll(baseSkills);
 
 		//apply modifiers
-		Collection<Modifier<Skill>> m = modifiers.values();
-		for(Modifier<Skill> modifier : m)
+		Collection<zzModifier<Skill>> m = modifiers.values();
+		for(zzModifier<Skill> modifier : m)
 		{
 			Skill skill = modifier.trait;
 			Integer value = activeSkills.get(skill);
@@ -155,7 +155,7 @@ class SkillsBundle implements Parcelable
 	}
 	
 	@Override
-	public SkillsBundle clone(){return new SkillsBundle(stats.clone(), new HashMap<Skill, Integer>(baseSkills), new HashMap<String, Modifier<Skill>>(modifiers));}
+	public zzSkillsBundle clone(){return new zzSkillsBundle(stats.clone(), new HashMap<Skill, Integer>(baseSkills), new HashMap<String, zzModifier<Skill>>(modifiers));}
 	
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)
@@ -180,12 +180,12 @@ class SkillsBundle implements Parcelable
 		}
 	}
 
-	public static final Parcelable.Creator<SkillsBundle> CREATOR = new Parcelable.Creator<SkillsBundle>()
+	public static final Parcelable.Creator<zzSkillsBundle> CREATOR = new Parcelable.Creator<zzSkillsBundle>()
 	{
 		@Override
-		public SkillsBundle createFromParcel(Parcel in)
+		public zzSkillsBundle createFromParcel(Parcel in)
 		{
-			StatsBundle pStats = in.readParcelable(StatsBundle.class.getClassLoader());
+			zzStatsBundle pStats = in.readParcelable(zzStatsBundle.class.getClassLoader());
 			
 			int baseSize = in.readInt();
 			Map<Skill, Integer> baseSkills = new HashMap<Skill, Integer>(baseSize);
@@ -199,24 +199,24 @@ class SkillsBundle implements Parcelable
 			}
 
 			baseSize = in.readInt();
-			Map<String, Modifier<Skill>> modifiers = new HashMap<String, Modifier<Skill>>(baseSize);
+			Map<String, zzModifier<Skill>> modifiers = new HashMap<String, zzModifier<Skill>>(baseSize);
 			String key;
-			Modifier<Skill> mod;
+			zzModifier<Skill> mod;
 			for(int i=0; i<baseSize; i++)
 			{
 				key = in.readString();
-				mod = (in.readParcelable(Modifier.class.getClassLoader()));
+				mod = (in.readParcelable(zzModifier.class.getClassLoader()));
 				modifiers.put(key, mod);
 			}
 
-			SkillsBundle me = new SkillsBundle(pStats, baseSkills, modifiers);
+			zzSkillsBundle me = new zzSkillsBundle(pStats, baseSkills, modifiers);
 			return me;
 		}
 
 		@Override
-		public SkillsBundle[] newArray(int size)
+		public zzSkillsBundle[] newArray(int size)
 		{
-			return new SkillsBundle[size];
+			return new zzSkillsBundle[size];
 		}
 	};
 	

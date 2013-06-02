@@ -2,19 +2,19 @@ package com.random.captain.ikrpg.character;
 
 import android.support.v4.app.Fragment;
 
-abstract class PostCreateHook extends Fragment
+abstract class zzCreateCharacterHook extends Fragment
 {
-	protected BaseCharacter myChar;
-	protected PostCreateHookDelegate delegate;
+	protected zzBaseCharacter myChar;
+	protected zzCreateCharacterHookDelegate delegate;
 	
-	void startPostCreateHook(BaseCharacter pChar, PostCreateHookDelegate pDelegate)
+	void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 	{
 		myChar = pChar;
 		delegate = pDelegate;
 	}
 	
 	abstract boolean hasUI();
-	abstract void undoPostCreateHook();
+	abstract void undoHook();
 
 	//Priority Guidlines
 	//(this is is no way official)
@@ -29,7 +29,7 @@ abstract class PostCreateHook extends Fragment
 	abstract int getPriority();
 }	
 
-interface PostCreateHookDelegate
+interface zzCreateCharacterHookDelegate
 {
 	public void hookComplete();
 }

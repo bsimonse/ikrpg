@@ -5,7 +5,7 @@ import java.util.*;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class BaseCharacter implements Parcelable
+class zzBaseCharacter implements Parcelable
 {
 	/*Fluff*/
 	Fluff fluff;
@@ -17,13 +17,13 @@ public class BaseCharacter implements Parcelable
 	Set<Career> careers;
 	Set<Ability> abilities;
 	Set<Spell> spells;
-	SkillsBundle skillsBundle;
-	StatsBundle statsBundle;
+	zzSkillsBundle skillsBundle;
+	zzStatsBundle statsBundle;
 	int exp;
 	
 	/* Constructor */
-	BaseCharacter(Fluff pFluff, Race pRace, Archetype pArchetype, Set<Career> pCareers, Set<Ability> pAbilities,
-							Set<Spell> pSpells, SkillsBundle pSkills, StatsBundle pStats)
+	zzBaseCharacter(Fluff pFluff, Race pRace, Archetype pArchetype, Set<Career> pCareers, Set<Ability> pAbilities,
+							Set<Spell> pSpells, zzSkillsBundle pSkills, zzStatsBundle pStats)
 	{
 		fluff = pFluff;
 		race = pRace;
@@ -36,7 +36,7 @@ public class BaseCharacter implements Parcelable
 		exp = 0;
 	}
 	
-	BaseCharacter()
+	zzBaseCharacter()
 	{
 		this(new Fluff(),null,null,new HashSet<Career>(),new HashSet<Ability>(),new HashSet<Spell>(),null, null);
 	}
@@ -97,10 +97,10 @@ public class BaseCharacter implements Parcelable
 		toParcel.writeParcelable(statsBundle,0);
 	}
 	
-	public static final Parcelable.Creator<BaseCharacter> CREATOR = new Parcelable.Creator<BaseCharacter>()
+	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
 	{
 		@Override
-		public BaseCharacter createFromParcel(Parcel in)
+		public zzBaseCharacter createFromParcel(Parcel in)
 		{
 			Fluff pFluff = in.readParcelable(Fluff.class.getClassLoader());
 			
@@ -123,14 +123,14 @@ public class BaseCharacter implements Parcelable
 			for(int s:spellOrdinals)
 			{pSpells.add(spells[s]);}
 			
-			SkillsBundle pSkills = in.readParcelable(SkillsBundle.class.getClassLoader());
-			StatsBundle pStats = in.readParcelable(StatsBundle.class.getClassLoader());
+			zzSkillsBundle pSkills = in.readParcelable(zzSkillsBundle.class.getClassLoader());
+			zzStatsBundle pStats = in.readParcelable(zzStatsBundle.class.getClassLoader());
 			
-			BaseCharacter me = new BaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
+			zzBaseCharacter me = new zzBaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
 			return me;
 		}
 
-		@Override public BaseCharacter[] newArray(int size) {return new BaseCharacter[size];}
+		@Override public zzBaseCharacter[] newArray(int size) {return new zzBaseCharacter[size];}
 	};
 	
 	@Override public int describeContents(){return 0;}

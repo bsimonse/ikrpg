@@ -3,15 +3,15 @@ package com.random.captain.ikrpg.character;
 import android.os.Bundle;
 import com.random.captain.ikrpg.character.Stat;
 
-public enum Archetype implements PrereqCheck
+public enum Archetype implements zzPrereqCheck
 {
 	GIFTED("Gifted",
-		new PostCreateHook(){
+		new zzCreateCharacterHook(){
 			private final String PREV_BASE_ARCANE_STAT = "thisWasThePreviousArcaneStat";
 			
-			@Override public void startPostCreateHook(BaseCharacter pChar, PostCreateHookDelegate pDelegate)
+			@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 			{
-				super.startPostCreateHook(pChar, pDelegate);
+				super.startHook(pChar, pDelegate);
 				if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
 				else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
 				
@@ -21,46 +21,46 @@ public enum Archetype implements PrereqCheck
 				if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.statsBundle.setBaseStat(Stat.ARCANE, 3);}
 				else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.statsBundle.setBaseStat(Stat.ARCANE, 2);}
 			}
-			@Override public void undoPostCreateHook(){myChar.statsBundle.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
+			@Override public void undoHook(){myChar.statsBundle.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
 			@Override public int getPriority(){return 0;} //no choice necessary
 			@Override public boolean hasUI(){return false;}
 		},
 	
-		new PrereqCheck(){
+		new zzPrereqCheck(){
 			@Override
-			public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.race() == Race.HUMAN, null);}
+			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null);}
 		}
 	),
 	
 	INTELLECTUAL("Intellectual",
 		null,
-		new PrereqCheck(){
+		new zzPrereqCheck(){
 			@Override
-			public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.race() == Race.HUMAN, null); }
+			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null); }
 		}
 	),
 	
 	MIGHTY("Mighty",
 		null,
-		new PrereqCheck(){
+		new zzPrereqCheck(){
 			@Override
-			public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.race() == Race.HUMAN, null);}
+			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null);}
 		}
 	),
 	
 	SKILLED("Skilled",
 		null,
-		new PrereqCheck(){
+		new zzPrereqCheck(){
 			@Override
-			public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
-			{return new PrereqCheckResult(myChar.race() == Race.HUMAN, null);}
+			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null);}
 		}
 	);
 	
-	private Archetype(String pName, PostCreateHook pHook, PrereqCheck pPrereq)
+	private Archetype(String pName, zzCreateCharacterHook pHook, zzPrereqCheck pPrereq)
 	{
 		name = pName;
 		postCreateHook = pHook;
@@ -68,16 +68,16 @@ public enum Archetype implements PrereqCheck
 	}
 	
 	private String name;
-	private PostCreateHook postCreateHook;
-	private PrereqCheck prereq;
+	private zzCreateCharacterHook postCreateHook;
+	private zzPrereqCheck prereq;
 	
 	public String displayName(){return name;}
-	PostCreateHook postCreateHook(){return postCreateHook;}
+	zzCreateCharacterHook postCreateHook(){return postCreateHook;}
 	
 	@Override public String toString(){return displayName();}
-	@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+	@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 	{
-		if(prereq == null){return new PrereqCheckResult(true, null);}
+		if(prereq == null){return new zzPrereqCheckResult(true, null);}
 		return prereq.meetsPrereq(myChar);
 	}
 }

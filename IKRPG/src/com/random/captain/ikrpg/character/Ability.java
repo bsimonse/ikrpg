@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-class Ability implements Parcelable, PrereqCheck
+public class Ability implements Parcelable, zzPrereqCheck
 {
 	private AbilityEnum ability;
 	private String qualifier;
@@ -56,7 +56,7 @@ class Ability implements Parcelable, PrereqCheck
 	public String abilityName(){return ability.displayName();}
 	public String description(){return ability.description();}
 
-	@Override public PrereqCheckResult meetsPrereq(BaseCharacter myChar) {return ability.meetsPrereq(myChar);}
+	@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar) {return ability.meetsPrereq(myChar);}
 	
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)

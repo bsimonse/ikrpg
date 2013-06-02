@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.BaseCharacter;
+import com.random.captain.ikrpg.character.PC;
 import com.random.captain.ikrpg.character.NewCharacterServiceActivity;
 
 public class MainActivity extends FragmentActivity
@@ -63,7 +63,7 @@ public class MainActivity extends FragmentActivity
 		{
 			if(resultCode == RESULT_OK)
 			{
-				BaseCharacter myChar = i.getExtras().getParcelable(NewCharacterServiceActivity.NEW_CHARACTER);
+				PC myChar = i.getExtras().getParcelable(NewCharacterServiceActivity.NEW_CHARACTER);
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");

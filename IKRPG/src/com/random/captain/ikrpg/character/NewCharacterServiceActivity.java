@@ -22,9 +22,9 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		public void setWhich(int pWhich){which=pWhich;}
 	}
 	
-	private ArrayList<PostCreateHook> postCreateHooks = new ArrayList<PostCreateHook>(15);
+	private ArrayList<zzCreateCharacterHook> postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 	private CreateHook lastFinishedHook;
-	private BaseCharacter buildingChar;
+	private zzBaseCharacter buildingChar;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -32,7 +32,7 @@ public class NewCharacterServiceActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_new_character);
 		
-		buildingChar = new BaseCharacter();
+		buildingChar = new zzBaseCharacter();
 		nextFrag(CreateHook.START);
 	}
 
@@ -40,7 +40,7 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	{
 		lastFinishedHook = completedHook;
 		
-		final PostCreateHook nextHook;
+		final zzCreateCharacterHook nextHook;
 		final CreateHook hookType;
 		final Bundle args = new Bundle();
 		
@@ -119,8 +119,8 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		if(nextHook != null)
 		{
 			nextHook.setArguments(args);
-			nextHook.startPostCreateHook(buildingChar,
-				new PostCreateHookDelegate(){
+			nextHook.startHook(buildingChar,
+				new zzCreateCharacterHookDelegate(){
 					@Override public void hookComplete()
 					{NewCharacterServiceActivity.this.hookComplete(hookType);}
 				});
@@ -145,21 +145,21 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		if(manager.getBackStackEntryCount() <= 1)
 		{
 			Intent i = new Intent();
-			i.putExtra(NEW_CHARACTER, (BaseCharacter)null);
+			i.putExtra(NEW_CHARACTER, (zzBaseCharacter)null);
 			setResult(RESULT_OK, i);
 			finish();
 			return;
 		}
 		
 		//undo previous thing
-		PostCreateHook topFrag = (PostCreateHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-1).getName());
-		PostCreateHook prevFrag = (PostCreateHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
+		zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-1).getName());
+		zzCreateCharacterHook prevFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
 		
 		//If we were on a dynamic hook, decrement
 		if(topFrag.getPriority() >= 0){CreateHook.POSTCREATE_HOOK.which--;}
 		
 		//Undo previous frag that we're chosing again
-		prevFrag.undoPostCreateHook();
+		prevFrag.undoHook();
 		
 		manager.popBackStackImmediate();
 		if(!prevFrag.hasUI())
@@ -168,12 +168,12 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	
 	public void createCharacter() //throws CharacterNotValidException
 	{
-		PostCreateHook aHook;
-		postCreateHooks = new ArrayList<PostCreateHook>(15);
+		zzCreateCharacterHook aHook;
+		postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 		
 		//Race
 		//Mostly for stats, and post-create bonuses
-		buildingChar.statsBundle = new StatsBundle(buildingChar.race.startStats(), buildingChar.race.heroStats());
+		buildingChar.statsBundle = new zzStatsBundle(buildingChar.race.startStats(), buildingChar.race.heroStats());
 		aHook = buildingChar.race.postCreateHook();
 		if(aHook != null){postCreateHooks.add(aHook);}
 		
@@ -183,7 +183,7 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		if(aHook!=null){postCreateHooks.add(aHook);}
 		
 		//skills
-		buildingChar.skillsBundle = new SkillsBundle(buildingChar.statsBundle, buildingChar.careers);
+		buildingChar.skillsBundle = new zzSkillsBundle(buildingChar.statsBundle, buildingChar.careers);
 		
 		//Careers; Abilities, spells, and post hooks
 		for(Career career : buildingChar.careers)
@@ -198,8 +198,8 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		postCreateHooks.add(new ChooseAdvancementPointsHook());
 		
 		//sort hooks
-		Collections.sort(postCreateHooks, new Comparator<PostCreateHook>(){
-				@Override public int compare(PostCreateHook one, PostCreateHook two)
+		Collections.sort(postCreateHooks, new Comparator<zzCreateCharacterHook>(){
+				@Override public int compare(zzCreateCharacterHook one, zzCreateCharacterHook two)
 				{return one.getPriority() - two.getPriority();}
 			});
 	}
@@ -207,7 +207,7 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	public void characterComplete()
 	{
 		Intent i = new Intent();
-		i.putExtra(NEW_CHARACTER, buildingChar);
+		i.putExtra(NEW_CHARACTER, new PC(buildingChar));
 		setResult(RESULT_OK, i);
 		finish();
 	}

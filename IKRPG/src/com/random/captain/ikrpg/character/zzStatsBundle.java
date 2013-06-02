@@ -8,15 +8,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-class StatsBundle implements Parcelable
+class zzStatsBundle implements Parcelable
 {
 	private Map<Stat, Integer> activeStats;
 	private Map<Stat, Integer> baseStats;
 	private Map<Stat, Integer> maxStats;
 	
-	private Map<String, Modifier<Stat>> modifiers;
+	private Map<String, zzModifier<Stat>> modifiers;
 	
-	public StatsBundle(Collection<Pair<Stat, Integer>> pBaseStats, Collection<Pair<Stat, Integer>> pMaxStats)
+	public zzStatsBundle(Collection<Pair<Stat, Integer>> pBaseStats, Collection<Pair<Stat, Integer>> pMaxStats)
 	{
 		activeStats = new HashMap<Stat, Integer>();
 		baseStats = new HashMap<Stat, Integer>();
@@ -28,12 +28,12 @@ class StatsBundle implements Parcelable
 		for(Pair<Stat, Integer> stat : pMaxStats)
 		{maxStats.put(stat.first, stat.second);}
 		
-		modifiers = new HashMap<String, Modifier<Stat>>();
+		modifiers = new HashMap<String, zzModifier<Stat>>();
 		
 		deriveStats();
 	}
 
-	private StatsBundle(Map<Stat, Integer> pBaseStats, Map<Stat, Integer> pMaxStats, Map<String, Modifier<Stat>> pModifiers)
+	private zzStatsBundle(Map<Stat, Integer> pBaseStats, Map<Stat, Integer> pMaxStats, Map<String, zzModifier<Stat>> pModifiers)
 	{
 		baseStats = pBaseStats;
 		maxStats = pMaxStats;
@@ -69,7 +69,7 @@ class StatsBundle implements Parcelable
 		deriveStats();
 	}
 	
-	public boolean addModifier(Modifier<Stat> modifier, String key)
+	public boolean addModifier(zzModifier<Stat> modifier, String key)
 	{
 		if(modifiers.containsKey(key))
 		{return false;}
@@ -119,8 +119,8 @@ class StatsBundle implements Parcelable
 		activeStats.putAll(baseStats);
 		
 		//apply modifiers
-		Collection<Modifier<Stat>> m = modifiers.values();
-		for(Modifier<Stat> modifier : m)
+		Collection<zzModifier<Stat>> m = modifiers.values();
+		for(zzModifier<Stat> modifier : m)
 		{
 			Stat stat = modifier.trait;
 			Integer value = activeStats.get(stat);
@@ -157,7 +157,7 @@ class StatsBundle implements Parcelable
 		return myString.toString();
 	}
 	
-	public StatsBundle clone()
+	public zzStatsBundle clone()
 	{
 		Log.i("IKRPG","Cloning!");
 		Map<Stat, Integer> cloneBaseStats = new HashMap<Stat, Integer>(10);
@@ -168,11 +168,11 @@ class StatsBundle implements Parcelable
 		for(Stat stat: maxStats.keySet())
 		{cloneMaxStats.put(stat, maxStats.get(stat));}
 		
-		Map<String, Modifier<Stat>> cloneModifiers = new HashMap<String, Modifier<Stat>>(10);
+		Map<String, zzModifier<Stat>> cloneModifiers = new HashMap<String, zzModifier<Stat>>(10);
 		for(String modName: modifiers.keySet())
 		{cloneModifiers.put(modName, modifiers.get(modName));}
 		
-		return new StatsBundle(cloneBaseStats, cloneMaxStats, cloneModifiers);
+		return new zzStatsBundle(cloneBaseStats, cloneMaxStats, cloneModifiers);
 	}
 	
 	/* Parcelling */
@@ -200,10 +200,10 @@ class StatsBundle implements Parcelable
 		}
 	}
 
-	public static final Parcelable.Creator<StatsBundle> CREATOR = new Parcelable.Creator<StatsBundle>()
+	public static final Parcelable.Creator<zzStatsBundle> CREATOR = new Parcelable.Creator<zzStatsBundle>()
 	{
 		@Override
-		public StatsBundle createFromParcel(Parcel in)
+		public zzStatsBundle createFromParcel(Parcel in)
 		{
 			int baseSize = in.readInt();
 			Map<Stat, Integer> baseStats = new HashMap<Stat, Integer>(baseSize);
@@ -226,24 +226,24 @@ class StatsBundle implements Parcelable
 			}
 			
 			baseSize = in.readInt();
-			Map<String, Modifier<Stat>> modifiers = new HashMap<String, Modifier<Stat>>(baseSize);
+			Map<String, zzModifier<Stat>> modifiers = new HashMap<String, zzModifier<Stat>>(baseSize);
 			String key;
-			Modifier<Stat> mod;
+			zzModifier<Stat> mod;
 			for(int i=0; i<baseSize; i++)
 			{
 				key = in.readString();
-				mod = (in.readParcelable(Modifier.class.getClassLoader()));
+				mod = (in.readParcelable(zzModifier.class.getClassLoader()));
 				modifiers.put(key, mod);
 			}
 			
-			StatsBundle me = new StatsBundle(baseStats, maxStats, modifiers);
+			zzStatsBundle me = new zzStatsBundle(baseStats, maxStats, modifiers);
 			return me;
 		}
 
 		@Override
-		public StatsBundle[] newArray(int size)
+		public zzStatsBundle[] newArray(int size)
 		{
-			return new StatsBundle[size];
+			return new zzStatsBundle[size];
 		}
 	};
 	

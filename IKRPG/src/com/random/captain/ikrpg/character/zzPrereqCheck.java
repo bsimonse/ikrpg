@@ -2,17 +2,17 @@ package com.random.captain.ikrpg.character;
 
 import android.support.v4.app.Fragment;
 
-interface PrereqCheck
+interface zzPrereqCheck
 {
-	PrereqCheckResult meetsPrereq(BaseCharacter myChar);
+	zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar);
 }
 	
-class PrereqCheckResult
+class zzPrereqCheckResult
 {
 	boolean isAllowed;
 	Fragment additionalQuestion;
 	
-	PrereqCheckResult(boolean pIsAllowed, Fragment pAdditionalQuestion)
+	zzPrereqCheckResult(boolean pIsAllowed, Fragment pAdditionalQuestion)
 	{
 		isAllowed = pIsAllowed;
 		additionalQuestion = pAdditionalQuestion;

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.random.captain.ikrpg.R;
 
-public enum Career implements PrereqCheck
+public enum Career implements zzPrereqCheck
 {
 	ALCHEMIST("Alchemist",
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
@@ -36,14 +36,14 @@ public enum Career implements PrereqCheck
 							Spell.REDLINE, Spell.TEMPER_METAL, Spell.BROADSIDE, Spell.ELECTRICAL_BLAST, Spell.FAIL_SAFE, Spell.FORCE_FIELD,
 							Spell.FULL_THROTTLE, Spell.GRIND, Spell.GUIDED_FIRE, Spell.IRON_AGGRESSION, Spell.SUPERIORITY, Spell.BLACK_OUT,
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
-				new PrereqCheck(){
+				new zzPrereqCheck(){
 					@Override
-					public PrereqCheckResult meetsPrereq(BaseCharacter myChar){
-						if(myChar.archetype == null){return new PrereqCheckResult(false, null);}
-						return new PrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);
+					public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+						if(myChar.archetype == null){return new zzPrereqCheckResult(false, null);}
+						return new zzPrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);
 					}
 			  	},
-				new PostCreateHook()
+				new zzCreateCharacterHook()
 				{
 					private SkillEnum incrementedSkill;
 					private int incrementedSkillPrevValue;
@@ -76,7 +76,7 @@ public enum Career implements PrereqCheck
 					@Override public boolean hasUI()
 					{return (myChar.getSkillLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillLevel(SkillEnum.RIFLE) < 2);}
 					
-				 	@Override public void startPostCreateHook(BaseCharacter pChar, PostCreateHookDelegate pDelegate)
+				 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 				 	{	
 					 	myChar = pChar;
 						delegate = pDelegate;
@@ -102,7 +102,7 @@ public enum Career implements PrereqCheck
 						}
 					}
 					
-					@Override public void undoPostCreateHook()
+					@Override public void undoHook()
 					{myChar.skillsBundle.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
 					
 					@Override public int getPriority(){return 50;}
@@ -119,7 +119,7 @@ public enum Career implements PrereqCheck
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
-					PrereqCheck pPrereqCheck, PostCreateHook pPostCreateHook)
+					zzPrereqCheck pPrereqCheck, zzCreateCharacterHook pPostCreateHook)
 	{
 		name = pName;
 		startingSkills = pStartSkills != null ? Arrays.asList(pStartSkills) : new ArrayList<Pair<Skill, Integer>>(10);
@@ -145,8 +145,8 @@ public enum Career implements PrereqCheck
 	private Collection<Ability> careerAbilities;
 	private Collection<Spell> startingSpells;
 	private Collection<Spell> careerSpells;
-	private PrereqCheck prereqCheck;
-	private PostCreateHook postCreateHook;
+	private zzPrereqCheck prereqCheck;
+	private zzCreateCharacterHook postCreateHook;
 	
 	public String displayName(){return name;}
 	public Collection<Pair<Skill, Integer>> startingSkills(){return Collections.unmodifiableCollection(startingSkills);}
@@ -155,18 +155,18 @@ public enum Career implements PrereqCheck
 	public Collection<Ability> careerAbilities(){return Collections.unmodifiableCollection(careerAbilities);}
 	public Collection<Spell> startingSpells(){return Collections.unmodifiableCollection(startingSpells);}
 	public Collection<Spell> careerSpells(){return Collections.unmodifiableCollection(careerSpells);}
-	PostCreateHook postCreateHook(){return postCreateHook;}
+	zzCreateCharacterHook postCreateHook(){return postCreateHook;}
 	
 	@Override
-	public PrereqCheckResult meetsPrereq(BaseCharacter myChar)
+	public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 	{
 		Set<Career> careers = myChar.careers;
 		
 		//duplicates not allowed
-		if(careers != null && careers.contains(this)){return new PrereqCheckResult(false, null);}
+		if(careers != null && careers.contains(this)){return new zzPrereqCheckResult(false, null);}
 		
 		//no prereq means allowed
-		if(prereqCheck == null){return new PrereqCheckResult(true, null);}
+		if(prereqCheck == null){return new zzPrereqCheckResult(true, null);}
 		else{return prereqCheck.meetsPrereq(myChar);}
 	}
 }
