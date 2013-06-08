@@ -206,8 +206,13 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	
 	public void characterComplete()
 	{
+		PC finalChar = new PC(buildingChar);
+		
+		//make character sheet
+		new CharacterSheetServiceTask(this).execute(finalChar);
+		
 		Intent i = new Intent();
-		i.putExtra(NEW_CHARACTER, new PC(buildingChar));
+		i.putExtra(NEW_CHARACTER, finalChar);
 		setResult(RESULT_OK, i);
 		finish();
 	}

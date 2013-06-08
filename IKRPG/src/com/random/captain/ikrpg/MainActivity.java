@@ -8,6 +8,7 @@ import android.view.View;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.PC;
 import com.random.captain.ikrpg.character.NewCharacterServiceActivity;
+import com.random.captain.ikrpg.character.CharacterSheetServiceTask;
 
 public class MainActivity extends FragmentActivity
 {
@@ -19,34 +20,17 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 		
-		/*try
+		try
 		{
+			PC me = CharacterSheetServiceTask.getDummyCharacter();
 			
-			BaseCharacter myChar = CharacterCreator.createCharacter("Gus",Race.HUMAN, Archetype.GIFTED_FOCUSER, Career.ALCHEMIST, Career.ARCANE_MECHANIK, this);
-			//SkillsBundle test = myChar.skillsBundle();
-			
-			//Modifier<Stat> test = Modifier.onTrait(Stat.PERCEPTION,1);
-			
-			//StatsBundle test = new StatsBundle(Race.HUMAN.startStats());
-			//test.addModifier(Modifier.onTrait(Stat.PERCEPTION, 10),"Kick-ass");
-			
-			Intent myIntent = new Intent();
-			Log.i("IKRPG","*Gulp*");
-			myIntent.putExtra("test", myChar);
-			Log.i("IKRPG","Oh God oh God oh God");
-			
-			//Modifier<Stat> didItWork = myIntent.getExtras().getParcelable("test");
-			//StatsBundle didItWork = myIntent.getExtras().getParcelable("test");
-			//SkillsBundle didItWork = myIntent.getExtras().getParcelable("test");
-			BaseCharacter didItWork = myIntent.getExtras().getParcelable("test");
-			
-			Log.i("IKRPG","Or did it?\n"+didItWork.toString());
-			
+			CharacterSheetServiceTask task = new CharacterSheetServiceTask(this);
+			task.execute(me);
 		}
 		catch(Exception e)
 		{
 			Log.i("IKRPG", "Yeah, good try though. "+e.getMessage());
-		}*/
+		}
     }
 
 	public void createNewCharacterTapped(View tappee)
