@@ -19,11 +19,12 @@ class zzBaseCharacter implements Parcelable
 	Set<Spell> spells;
 	zzSkillsBundle skillsBundle;
 	zzStatsBundle statsBundle;
+	zzLevel level;
 	int exp;
 	
 	/* Constructor */
 	zzBaseCharacter(Fluff pFluff, Race pRace, Archetype pArchetype, Set<Career> pCareers, Set<Ability> pAbilities,
-							Set<Spell> pSpells, zzSkillsBundle pSkills, zzStatsBundle pStats)
+							Set<Spell> pSpells, zzSkillsBundle pSkills, zzStatsBundle pStats, int pExp)
 	{
 		fluff = pFluff;
 		race = pRace;
@@ -33,12 +34,13 @@ class zzBaseCharacter implements Parcelable
 		spells = pSpells;
 		skillsBundle = pSkills;
 		statsBundle = pStats;
-		exp = 0;
+		exp = pExp;
+		level = zzLevel.getLevelForEXP(pExp);
 	}
 	
 	zzBaseCharacter()
 	{
-		this(new Fluff(),null,null,new HashSet<Career>(),new HashSet<Ability>(),new HashSet<Spell>(),null, null);
+		this(new Fluff(),null,null,new HashSet<Career>(),new HashSet<Ability>(),new HashSet<Spell>(),null, null,0);
 	}
 	
 	public Fluff fluff(){return fluff;}
@@ -95,6 +97,8 @@ class zzBaseCharacter implements Parcelable
 		
 		toParcel.writeParcelable(skillsBundle,0);
 		toParcel.writeParcelable(statsBundle,0);
+		
+		toParcel.writeInt(exp);
 	}
 	
 	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
@@ -126,7 +130,8 @@ class zzBaseCharacter implements Parcelable
 			zzSkillsBundle pSkills = in.readParcelable(zzSkillsBundle.class.getClassLoader());
 			zzStatsBundle pStats = in.readParcelable(zzStatsBundle.class.getClassLoader());
 			
-			zzBaseCharacter me = new zzBaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
+			int pExp = in.readInt();
+			zzBaseCharacter me = new zzBaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats, pExp);
 			return me;
 		}
 

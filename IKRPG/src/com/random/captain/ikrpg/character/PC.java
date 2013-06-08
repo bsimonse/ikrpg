@@ -10,7 +10,7 @@ public class PC extends zzBaseCharacter
 {
 	public PC()
 	{
-		super(null, null, null, null, null, null, null, null);
+		super(null, null, null, null, null, null, null, null,0);
 	}
 	
 	//temporary; not really a copy constructor
@@ -57,7 +57,7 @@ public class PC extends zzBaseCharacter
 			zzSkillsBundle pSkills = in.readParcelable(zzSkillsBundle.class.getClassLoader());
 			zzStatsBundle pStats = in.readParcelable(zzStatsBundle.class.getClassLoader());
 
-			zzBaseCharacter me = new zzBaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats);
+			zzBaseCharacter me = new zzBaseCharacter(pFluff, pRace, pArchetype, pCareers, pAbilities, pSpells, pSkills, pStats,0);
 			return new PC(me);
 		}
 

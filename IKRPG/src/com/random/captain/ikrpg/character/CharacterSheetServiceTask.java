@@ -25,6 +25,9 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	private Paint blackStatsLarge;
 	private Paint blackStatsMedium;
 	private Paint blackStatsSmall;
+	private Paint phyPaint;
+	private Paint agiPaint;
+	private Paint intPaint;
 	
 	public CharacterSheetServiceTask(Context pContext)
 	{
@@ -87,31 +90,40 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		blackFluffLeft = new Paint();
 		blackFluffLeft.setARGB(255,0,0,0);
 		blackFluffLeft.setAntiAlias(true);
-		blackFluffLeft.setTextSize(10);
+		blackFluffLeft.setTextSize(20);
 		blackFluffLeft.setTypeface(Typeface.DEFAULT);
 
 		blackFluffCenter = new Paint(blackFluffLeft);
 		blackFluffCenter.setTextAlign(Paint.Align.CENTER);
 
 		blackStatsLarge = new Paint(blackFluffCenter);
-		blackStatsLarge.setTextSize(18);
+		blackStatsLarge.setTextSize(36);
 		
 		blackStatsMedium = new Paint(blackStatsLarge);
-		blackStatsMedium.setTextSize(14);
+		blackStatsMedium.setTextSize(28);
 		
 		blackStatsSmall = new Paint(blackStatsLarge);
-		blackStatsSmall.setTextSize(10);
+		blackStatsSmall.setTextSize(20);
+		
+		phyPaint = new Paint();
+		phyPaint.setARGB(255,57,163,167);
+		
+		agiPaint = new Paint();
+		agiPaint.setARGB(255,192,27,0);
+		
+		intPaint = new Paint();
+		intPaint.setARGB(255,91,124,39);
 	}
 	
 	private void writeFluff(PC c)
 	{
-		canvas.drawText(c.fluff.name,32,65,blackFluffLeft);
-		canvas.drawText(c.fluff.sex,245,65,blackFluffCenter);
-		canvas.drawText(c.fluff.characteristics,273,65,blackFluffLeft);
-		canvas.drawText(c.fluff.weight,528,65,blackFluffLeft);
+		canvas.drawText(c.fluff.name,64,130,blackFluffLeft);
+		canvas.drawText(c.fluff.sex,490,130,blackFluffCenter);
+		canvas.drawText(c.fluff.characteristics,546,130,blackFluffLeft);
+		canvas.drawText(c.fluff.weight,1056,130,blackFluffLeft);
 		
-		canvas.drawText(c.archetype.toString(),32,87,blackFluffLeft);
-		canvas.drawText(c.race.toString(),113,87,blackFluffLeft);
+		canvas.drawText(c.archetype.toString(),64,174,blackFluffLeft);
+		canvas.drawText(c.race.toString(),226,174,blackFluffLeft);
 		
 		String careerString = "";
 		for(Career career : c.careers)
@@ -119,36 +131,68 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 			if(careerString.length() > 0){careerString += "/";}
 			careerString += career.toString();
 		}
-		canvas.drawText(careerString, 189,87,blackFluffLeft);
+		canvas.drawText(careerString, 378,174,blackFluffLeft);
 		
-		canvas.drawText(c.fluff.faith, 297,87,blackFluffLeft);
-		canvas.drawText(c.fluff.owningPlayer, 378,87,blackFluffLeft);
-		canvas.drawText(c.fluff.height, 528,87,blackFluffLeft);
-		}
+		canvas.drawText(c.fluff.faith, 594,174,blackFluffLeft);
+		canvas.drawText(c.fluff.owningPlayer, 756,174,blackFluffLeft);
+		canvas.drawText(c.fluff.height, 1056,174,blackFluffLeft);
+		
+		canvas.drawText(""+c.exp, 1279,174,blackFluffCenter);
+		canvas.drawText(c.level.toString(), 1279,130,blackFluffCenter);
+	}
 	
 	private void writeStats(PC c)
 	{
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PHYSIQUE), 54, 327, blackStatsLarge);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.AGILITY), 54, 418, blackStatsLarge);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.INTELLECT), 54, 509, blackStatsLarge);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PHYSIQUE), 108, 654, blackStatsLarge);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.AGILITY), 108, 836, blackStatsLarge);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.INTELLECT), 108, 1018, blackStatsLarge);
 		
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.SPEED), 116, 306, blackStatsMedium);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.STRENGTH), 116, 344, blackStatsMedium);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PROWESS), 116, 397, blackStatsMedium);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.POISE), 116, 435, blackStatsMedium);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.ARCANE), 117, 488, blackStatsMedium);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PERCEPTION), 117, 526, blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.SPEED), 232, 612, blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.STRENGTH), 232, 688, blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PROWESS), 232, 794, blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.POISE), 232, 870, blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.ARCANE), 232, 976, blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PERCEPTION), 232, 1054, blackStatsMedium);
 		
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PHYSIQUE), 85, 332, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.AGILITY), 85, 423, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.INTELLECT), 85, 514, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PHYSIQUE), 170, 664, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.AGILITY), 170, 846, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.INTELLECT), 170, 1028, blackStatsSmall);
 
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.SPEED), 138, 311, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.STRENGTH), 138, 350, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PROWESS), 138, 402, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.POISE), 138, 441, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.ARCANE), 138, 493, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PERCEPTION), 138, 532, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.SPEED), 276, 622, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.STRENGTH), 276, 700, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PROWESS), 276, 804, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.POISE), 276, 882, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.ARCANE), 276, 986, blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PERCEPTION), 276, 1064, blackStatsSmall);
+		
+		canvas.drawText(""+c.statsBundle.getStat(Stat.DEFENSE), 726,900,blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.ARMOR), 726,994,blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.INITIATIVE), 726,1085,blackStatsMedium);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.COMMAND),726,1177,blackStatsMedium);
+		
+		int phyStat = c.statsBundle.getBaseStat(Stat.PHYSIQUE);
+		if(phyStat<10){canvas.drawCircle(893,988,11,phyPaint);}
+		if(phyStat<9){canvas.drawCircle(866,997,11,phyPaint);}
+		if(phyStat<8){canvas.drawCircle(886,1010,11,phyPaint);}
+		if(phyStat<7){canvas.drawCircle(866,1023,11,phyPaint);}
+		if(phyStat<6){canvas.drawCircle(890,1033,10,phyPaint);}
+		if(phyStat<5){canvas.drawCircle(874,1048,10,phyPaint);}
+		
+		int agiStat = c.statsBundle.getBaseStat(Stat.AGILITY);
+		if(agiStat<8){canvas.drawCircle(999,1021,11,agiPaint);}
+		if(agiStat<7){canvas.drawCircle(998,996,11,agiPaint);}
+		if(agiStat<6){canvas.drawCircle(978,1012,10,agiPaint);}
+		if(agiStat<5){canvas.drawCircle(973,991,10,agiPaint);}
+		if(agiStat<4){canvas.drawCircle(957,1012,9,agiPaint);}
+		
+		int intStat = c.statsBundle.getBaseStat(Stat.INTELLECT);
+		if(intStat<8){canvas.drawCircle(931,1114,11,intPaint);}
+		if(intStat<7){canvas.drawCircle(953,1124,11,intPaint);}
+		if(intStat<6){canvas.drawCircle(948,1099,10,intPaint);}
+		if(intStat<5){canvas.drawCircle(969,1104,10,intPaint);}
+		if(intStat<4){canvas.drawCircle(957,1080,9,intPaint);}
+		
+		
 	}
 	
 	private void writeSkills(PC c)

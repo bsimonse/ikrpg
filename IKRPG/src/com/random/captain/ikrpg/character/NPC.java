@@ -6,6 +6,6 @@ public class NPC extends zzBaseCharacter
 {
 	public NPC()
 	{
-		super(null, null, null, null, null, null, null, null);
+		super(null, null, null, null, null, null, null, null,0);
 	}
 }
