@@ -59,7 +59,7 @@ public enum Career implements zzPrereqCheck
 							@Override public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 							{
 								incrementedSkill = choices[which];
-								incrementedSkillPrevValue = myChar.skillsBundle.getSkillLevel(new Skill(incrementedSkill));
+								incrementedSkillPrevValue = myChar.skillsBundle.getBaseSkillLevel(new Skill(incrementedSkill));
 								int currentLevel = incrementedSkillPrevValue + 1;
 								if(currentLevel > 2){currentLevel = 2;}
 								myChar.skillsBundle.setSkillLevel(new Skill(incrementedSkill), currentLevel);

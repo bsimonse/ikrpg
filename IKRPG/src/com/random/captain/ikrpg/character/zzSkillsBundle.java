@@ -59,14 +59,18 @@ class zzSkillsBundle implements Parcelable
 		rederiveSkills();
 	}
 	
-	int getSkillCheckValue(Skill skill)
+	int getSkillLevel(Skill skill)
 	{
 		Integer value = activeSkills.get(skill);
-		if(value == null){return 0;}
-		return value.intValue();
+		if(value == null){value = 0;}
+		
+		Stat stat = skill.governingStat();
+		if(stat == null){return -1;}
+		
+		return value+stats.getStat(stat);
 	}
 	
-	int getSkillLevel(Skill skill)
+	int getBaseSkillLevel(Skill skill)
 	{
 		Integer value = baseSkills.get(skill);
 		if(value == null){return 0;}

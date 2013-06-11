@@ -1,18 +1,18 @@
 package com.random.captain.ikrpg.character;
 
 import android.graphics.*;
+import java.util.*;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
+import android.util.Pair;
 import com.random.captain.ikrpg.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
@@ -25,9 +25,17 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	private Paint blackStatsLarge;
 	private Paint blackStatsMedium;
 	private Paint blackStatsSmall;
+	private Paint skillName;
 	private Paint phyPaint;
 	private Paint agiPaint;
 	private Paint intPaint;
+	
+	//name these better later, because these names suck.
+	int dif = 34;
+	int base = 292;
+	int parentX = 986;
+	int skillX = 1049;
+	int totalX = 1104;
 	
 	public CharacterSheetServiceTask(Context pContext)
 	{
@@ -82,6 +90,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		writeStats(c);
 		writeSkills(c);
 		writeAbilities(c);
+		writeModifiers(c);
 	}
 	
 	private void setupPaints()
@@ -113,6 +122,9 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		
 		intPaint = new Paint();
 		intPaint.setARGB(255,91,124,39);
+		
+		skillName = new Paint(blackFluffLeft);
+		skillName.setTextSize(13);
 	}
 	
 	private void writeFluff(PC c)
@@ -131,7 +143,11 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 			if(careerString.length() > 0){careerString += "/";}
 			careerString += career.toString();
 		}
-		canvas.drawText(careerString, 378,174,blackFluffLeft);
+		
+		Paint careerPaint = new Paint(blackFluffLeft);
+		float careerFontSize = careerPaint.getTextSize();
+		while(careerPaint.measureText(careerString) > 210){careerFontSize=careerFontSize-1;careerPaint.setTextSize(careerFontSize);}
+		canvas.drawText(careerString, 378,174,careerPaint);
 		
 		canvas.drawText(c.fluff.faith, 594,174,blackFluffLeft);
 		canvas.drawText(c.fluff.owningPlayer, 756,174,blackFluffLeft);
@@ -191,16 +207,97 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		if(intStat<6){canvas.drawCircle(948,1099,10,intPaint);}
 		if(intStat<5){canvas.drawCircle(969,1104,10,intPaint);}
 		if(intStat<4){canvas.drawCircle(957,1080,9,intPaint);}
-		
-		
 	}
 	
 	private void writeSkills(PC c)
 	{
+		//start with hard-written skills
+		Collection<Pair<Skill,Integer>> trainedSkills = handleHardWrittenSkills(c);
 		
+		int militaryIndex = 4;
+		int occupIndex = 10;
+		
+		for(Pair<Skill,Integer> skill : trainedSkills)
+		{
+			int count = -1;
+			//determine y value
+			if(skill.first.isMilitary()){count=militaryIndex; militaryIndex++;}
+			else{count=occupIndex; occupIndex++;}
+			
+			Stat bStat = skill.first.governingStat();
+			if(bStat != null)
+			{
+				canvas.drawText(""+c.statsBundle.getStat(bStat), parentX, base+count*dif, blackStatsSmall);
+				canvas.drawText(""+c.skillsBundle.getSkillLevel(skill.first), totalX, base+count*dif, blackStatsSmall);
+			}
+			else
+			{
+				canvas.drawText("*", parentX, base+count*dif, blackStatsSmall);
+				canvas.drawText("*", totalX, base+count*dif, blackStatsSmall);
+			}
+			
+			String shortSkillName;
+			if(bStat == null){shortSkillName = "SOCIAL";}
+			else{shortSkillName = bStat.shortName();}
+			canvas.drawText(""+skill.second, skillX, base+count*dif, blackStatsSmall);
+			canvas.drawText(skill.first.toString()+" ("+shortSkillName+")", 800, base+count*dif-2, skillName);
+		}
+	}
+	
+	//Probably going way overboard, but I don't like modifying variables without warning.
+	private Collection<Pair<Skill,Integer>> handleHardWrittenSkills(PC c)
+	{
+		Collection<Pair<Skill,Integer>> trainedSkills =c.skillsBundle.getTrainedSkills();
+		Collection<Pair<Skill,Integer>> trainedSkillsCopy = new ArrayList<Pair<Skill,Integer>>(trainedSkills);
+		
+		canvas.drawText(""+c.statsBundle.getStat(Stat.PROWESS),parentX,base,blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.PROWESS),parentX,base+dif,blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.POISE),parentX,base+dif*2,blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.POISE),parentX,base+dif*3,blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.PERCEPTION),parentX,base+dif*7,blackStatsSmall);
+		canvas.drawText(""+c.statsBundle.getStat(Stat.AGILITY),parentX,base+dif*8,blackStatsSmall);
+		canvas.drawText("*",986,base+dif*9,blackStatsSmall);
+		
+		canvas.drawText(""+c.skillsBundle.getSkillLevel(SkillEnum.HAND_WEAPON.make()),totalX,base,blackStatsSmall);
+		canvas.drawText(""+c.skillsBundle.getSkillLevel(SkillEnum.GREAT_WEAPON.make()),totalX,base+dif,blackStatsSmall);
+		canvas.drawText(""+c.skillsBundle.getSkillLevel(SkillEnum.PISTOL.make()),totalX,base+dif*2,blackStatsSmall);
+		canvas.drawText(""+c.skillsBundle.getSkillLevel(SkillEnum.RIFLE.make()),totalX,base+dif*3,blackStatsSmall);
+		canvas.drawText(""+c.skillsBundle.getSkillLevel(SkillEnum.DETECTION.make()),totalX,base+dif*7,blackStatsSmall);
+		canvas.drawText(""+c.skillsBundle.getSkillLevel(SkillEnum.SNEAK.make()),totalX,base+dif*8,blackStatsSmall);
+		canvas.drawText("*",totalX,base+dif*9,blackStatsSmall);
+		
+		for(Pair<Skill,Integer> skill : trainedSkills)
+		{
+			int count = -1;
+			
+			switch(skill.first.skillEnum())
+			{
+				case HAND_WEAPON: count = 0; break;
+				case GREAT_WEAPON: count = 1; break;
+				case PISTOL: count = 2; break;
+				case RIFLE: count = 3; break;
+				case DETECTION: count = 7; break;
+				case SNEAK: count = 8; break;
+				case COMMAND: count = 9; break;
+				default: count = -1; break;
+			}
+			
+			if(count > -1)
+			{
+				canvas.drawText(""+skill.second, skillX, base+count*dif, blackStatsSmall);
+				trainedSkillsCopy.remove(skill);
+			}
+		}
+		
+		return trainedSkillsCopy;
 	}
 	
 	private void writeAbilities(PC c)
+	{
+		
+	}
+	
+	private void writeModifiers(PC c)
 	{
 		
 	}

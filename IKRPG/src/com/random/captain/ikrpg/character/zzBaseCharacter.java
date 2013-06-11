@@ -55,7 +55,7 @@ class zzBaseCharacter implements Parcelable
 	public void gainEXP(int pExpGain)
 	{setEXP(exp+pExpGain);}
 	
-	public void setEXP(int pExpTotal)
+	void setEXP(int pExpTotal)
 	{
 		//determine bonuses gained
 		//TODO: add bonuses
@@ -68,8 +68,8 @@ class zzBaseCharacter implements Parcelable
 	public boolean hasAbility(AbilityEnum ability){return abilities.contains(new Ability(ability));}
 	public boolean hasAbility(AbilityEnum ability, String qualifier){return abilities.contains(new Ability(ability, qualifier));}
 	
-	public int getSkillLevel(SkillEnum skill){return skillsBundle.getSkillLevel(skill.make());}
-	public int getSkillLevel(SkillEnum skill, String qualifier){return skillsBundle.getSkillLevel(skill.make(qualifier));}
+	public int getSkillLevel(SkillEnum skill){return skillsBundle.getBaseSkillLevel(skill.make());}
+	public int getSkillLevel(SkillEnum skill, String qualifier){return skillsBundle.getBaseSkillLevel(skill.make(qualifier));}
 	
 	public int getBaseStat(Stat stat){return statsBundle.getBaseStat(stat);}
 	public int getMaxStat(Stat stat){return statsBundle.getMaxStat(stat);}
