@@ -1,9 +1,8 @@
 package com.random.captain.ikrpg.character;
 
+import java.util.*;
+
 import android.util.Pair;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 public enum Race
 {
@@ -31,14 +30,14 @@ public enum Race
 							Pair<Stat, Integer>[] pHeroStats,
 							Pair<Stat, Integer>[] pVetStats,
 							Pair<Stat, Integer>[] pEpicStats,
-							zzCreateCharacterHook pPostCreateHook)
+							zzCreateCharacterHook[] pPostCreateHooks)
 	{
 		name = pName;
 		startStats = Arrays.asList(pStartStats);
 		heroStats = Arrays.asList(pHeroStats);
 		vetStats = Arrays.asList(pVetStats);
 		epicStats = Arrays.asList(pEpicStats);
-		postCreateHook = pPostCreateHook;
+		postCreateHooks = pPostCreateHooks != null ? Arrays.asList(pPostCreateHooks) : new ArrayList<zzCreateCharacterHook>(10);
 	}
 	
 	private String name;
@@ -46,14 +45,47 @@ public enum Race
 	private Collection<Pair<Stat, Integer>> heroStats;
 	private Collection<Pair<Stat, Integer>> vetStats;
 	private Collection<Pair<Stat, Integer>> epicStats;
-	private zzCreateCharacterHook postCreateHook;
+	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
 	@Override
 	public String toString(){return displayName();}
 	public String displayName(){return name;}
-	public Collection<Pair<Stat, Integer>> startStats(){return Collections.unmodifiableCollection(startStats);}
-	public Collection<Pair<Stat, Integer>> heroStats(){return Collections.unmodifiableCollection(heroStats);}
-	public Collection<Pair<Stat, Integer>> vetStats(){return Collections.unmodifiableCollection(vetStats);}
-	public Collection<Pair<Stat, Integer>> epicStats(){return Collections.unmodifiableCollection(epicStats);}
-	public zzCreateCharacterHook postCreateHook(){return postCreateHook;}
+	
+	public int getStartStat(Stat pStat)
+	{
+		for(Pair<Stat, Integer> stat : startStats)
+		{if(stat.first == pStat){return stat.second;}}
+		
+		return 0; //?
+	}
+	
+	public int getHeroStatCap(Stat pStat)
+	{
+		for(Pair<Stat, Integer> stat : heroStats)
+		{if(stat.first == pStat){return stat.second;}}
+
+		return 0; //?
+	}
+	
+	public int getVeteranStatCap(Stat pStat)
+	{
+		for(Pair<Stat, Integer> stat : vetStats)
+		{if(stat.first == pStat){return stat.second;}}
+
+		return 0; //?
+	}
+	
+	public int getEpicStatCap(Stat pStat)
+	{
+		for(Pair<Stat, Integer> stat : epicStats)
+		{if(stat.first == pStat){return stat.second;}}
+
+		return 0; //?
+	}
+
+	Collection<Pair<Stat, Integer>> startStats(){return Collections.unmodifiableCollection(startStats);}
+	Collection<Pair<Stat, Integer>> heroStats(){return Collections.unmodifiableCollection(heroStats);}
+	Collection<Pair<Stat, Integer>> vetStats(){return Collections.unmodifiableCollection(vetStats);}
+	Collection<Pair<Stat, Integer>> epicStats(){return Collections.unmodifiableCollection(epicStats);}
+	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 }

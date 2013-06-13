@@ -43,7 +43,7 @@ public enum Career implements zzPrereqCheck
 						return new zzPrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);
 					}
 			  	},
-				new zzCreateCharacterHook()
+				new zzCreateCharacterHook[] { new zzCreateCharacterHook()
 				{
 					private SkillEnum incrementedSkill;
 					private int incrementedSkillPrevValue;
@@ -106,12 +106,10 @@ public enum Career implements zzPrereqCheck
 					{myChar.skillsBundle.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
 					
 					@Override public int getPriority(){return 50;}
-			  }),
+			  }}),
 			  
 	PIRATE("Pirate",null,null,null,null,null,null,null,null),
 	WARCASTER("Warcaster",null,null,null,null,null,null,null,null);
-			  
-			  
 			  
 	
 	//Done!
@@ -119,7 +117,7 @@ public enum Career implements zzPrereqCheck
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
-					zzPrereqCheck pPrereqCheck, zzCreateCharacterHook pPostCreateHook)
+					zzPrereqCheck pPrereqCheck, zzCreateCharacterHook[] pPostCreateHook)
 	{
 		name = pName;
 		startingSkills = pStartSkills != null ? Arrays.asList(pStartSkills) : new ArrayList<Pair<Skill, Integer>>(10);
@@ -129,7 +127,7 @@ public enum Career implements zzPrereqCheck
 		startingSpells = pStartSpells != null ? Arrays.asList(pStartSpells) : new ArrayList<Spell>(10);
 		careerSpells = pSpells != null ? Arrays.asList(pSpells) : new ArrayList<Spell>(10);
 		prereqCheck = pPrereqCheck;
-		postCreateHook = pPostCreateHook;
+		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCreateCharacterHook>(10);
 	}
 	
 	@Override
@@ -146,7 +144,7 @@ public enum Career implements zzPrereqCheck
 	private Collection<Spell> startingSpells;
 	private Collection<Spell> careerSpells;
 	private zzPrereqCheck prereqCheck;
-	private zzCreateCharacterHook postCreateHook;
+	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
 	public String displayName(){return name;}
 	public Collection<Pair<Skill, Integer>> startingSkills(){return Collections.unmodifiableCollection(startingSkills);}
@@ -155,7 +153,7 @@ public enum Career implements zzPrereqCheck
 	public Collection<Ability> careerAbilities(){return Collections.unmodifiableCollection(careerAbilities);}
 	public Collection<Spell> startingSpells(){return Collections.unmodifiableCollection(startingSpells);}
 	public Collection<Spell> careerSpells(){return Collections.unmodifiableCollection(careerSpells);}
-	zzCreateCharacterHook postCreateHook(){return postCreateHook;}
+	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
 	@Override
 	public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)

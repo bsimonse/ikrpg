@@ -167,7 +167,6 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.STRENGTH), 232, 688, blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PROWESS), 232, 794, blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.POISE), 232, 870, blackStatsMedium);
-		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.ARCANE), 232, 976, blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PERCEPTION), 232, 1054, blackStatsMedium);
 		
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PHYSIQUE), 170, 664, blackStatsSmall);
@@ -178,13 +177,22 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.STRENGTH), 276, 700, blackStatsSmall);
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PROWESS), 276, 804, blackStatsSmall);
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.POISE), 276, 882, blackStatsSmall);
-		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.ARCANE), 276, 986, blackStatsSmall);
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PERCEPTION), 276, 1064, blackStatsSmall);
 		
 		canvas.drawText(""+c.statsBundle.getStat(Stat.DEFENSE), 726,900,blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getStat(Stat.ARMOR), 726,994,blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getStat(Stat.INITIATIVE), 726,1085,blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getStat(Stat.COMMAND),726,1177,blackStatsMedium);
+		
+		//There's probably a better way to handle this than making Arcane a one-off, but oh well.
+		int arcaneValue = c.statsBundle.getBaseStat(Stat.ARCANE);
+		String arcaneString = "";
+		
+		arcaneString = arcaneValue > 0 ? ""+arcaneValue : "-";
+		canvas.drawText(arcaneString, 232, 976, blackStatsMedium);
+		arcaneValue = c.statsBundle.getMaxStat(Stat.ARCANE);
+		arcaneString = arcaneValue > 0 ? ""+arcaneValue : "-";
+		canvas.drawText(arcaneString, 276, 986, blackStatsSmall);
 		
 		int phyStat = c.statsBundle.getBaseStat(Stat.PHYSIQUE);
 		if(phyStat<10){canvas.drawCircle(893,988,11,phyPaint);}

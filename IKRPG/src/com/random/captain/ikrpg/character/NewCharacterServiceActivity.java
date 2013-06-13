@@ -168,19 +168,19 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	
 	public void createCharacter() //throws CharacterNotValidException
 	{
-		zzCreateCharacterHook aHook;
+		Collection<zzCreateCharacterHook> aHooks;
 		postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 		
 		//Race
 		//Mostly for stats, and post-create bonuses
 		buildingChar.statsBundle = new zzStatsBundle(buildingChar.race.startStats(), buildingChar.race.heroStats());
-		aHook = buildingChar.race.postCreateHook();
-		if(aHook != null){postCreateHooks.add(aHook);}
+		aHooks = buildingChar.race.postCreateHooks();
+		if(aHooks != null){postCreateHooks.addAll(aHooks);}
 		
 		//Archetype
 		//Pick a bonus
-		aHook = buildingChar.archetype.postCreateHook();
-		if(aHook!=null){postCreateHooks.add(aHook);}
+		aHooks = buildingChar.archetype.postCreateHooks();
+		if(aHooks!=null){postCreateHooks.addAll(aHooks);}
 		
 		//skills
 		buildingChar.skillsBundle = new zzSkillsBundle(buildingChar.statsBundle, buildingChar.careers);
@@ -190,8 +190,8 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		{
 			buildingChar.abilities.addAll(career.startingAbilities());
 			buildingChar.spells.addAll(career.startingSpells());
-			aHook = career.postCreateHook();
-			if(aHook!=null){postCreateHooks.add(aHook);}
+			aHooks = career.postCreateHooks();
+			if(aHooks!=null){postCreateHooks.addAll(aHooks);}
 		}
 		
 		//advancement point hook

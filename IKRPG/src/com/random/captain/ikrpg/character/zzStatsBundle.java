@@ -86,6 +86,11 @@ class zzStatsBundle implements Parcelable
 		return result;
 	}
 	
+	void setMaxStat(Stat stat, int value)
+	{
+		maxStats.put(stat, value);
+	}
+	
 	private void deriveStats()
 	{
 		int pPhy = baseStats.get(Stat.PHYSIQUE);
