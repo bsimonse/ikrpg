@@ -39,17 +39,7 @@ public enum Archetype implements zzPrereqCheck
 	
 	INTELLECTUAL("Intellectual",
 		new zzCreateCharacterHook[] { 
-			new zzCreateCharacterHook(){
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
-				{
-					super.startHook(pChar, pDelegate);
-					myChar.statsBundle.setBaseStat(Stat.ARCANE,0);
-					myChar.statsBundle.setMaxStat(Stat.ARCANE,0);
-				}
-				@Override public void undoHook(){myChar.statsBundle.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
-				@Override public int getPriority(){return 0;} //no choice necessary
-				@Override public boolean hasUI(){return false;}
-			}
+			nonGiftedArcaneHook()
 		},
 		new zzPrereqCheck(){
 			@Override
@@ -60,17 +50,7 @@ public enum Archetype implements zzPrereqCheck
 	
 	MIGHTY("Mighty",
 		new zzCreateCharacterHook[] { 
-			new zzCreateCharacterHook(){
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
-				{
-					super.startHook(pChar, pDelegate);
-					myChar.statsBundle.setBaseStat(Stat.ARCANE,0);
-					myChar.statsBundle.setMaxStat(Stat.ARCANE,0);
-				}
-				@Override public void undoHook(){myChar.statsBundle.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
-				@Override public int getPriority(){return 0;} //no choice necessary
-				@Override public boolean hasUI(){return false;}
-			}
+			nonGiftedArcaneHook()
 		},
 		new zzPrereqCheck(){
 			@Override
@@ -81,17 +61,7 @@ public enum Archetype implements zzPrereqCheck
 	
 	SKILLED("Skilled",
 		new zzCreateCharacterHook[] { 
-			new zzCreateCharacterHook(){
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
-				{
-					super.startHook(pChar, pDelegate);
-					myChar.statsBundle.setBaseStat(Stat.ARCANE,0);
-					myChar.statsBundle.setMaxStat(Stat.ARCANE,0);
-				}
-				@Override public void undoHook(){myChar.statsBundle.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
-				@Override public int getPriority(){return 0;} //no choice necessary
-				@Override public boolean hasUI(){return false;}
-			}
+			nonGiftedArcaneHook()
 		},
 		new zzPrereqCheck(){
 			@Override
@@ -113,6 +83,21 @@ public enum Archetype implements zzPrereqCheck
 	
 	public String displayName(){return name;}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	
+	static private zzCreateCharacterHook nonGiftedArcaneHook()
+	{
+		return new zzCreateCharacterHook(){
+				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+				{
+					super.startHook(pChar, pDelegate);
+					myChar.statsBundle.setBaseStat(Stat.ARCANE,0);
+					myChar.statsBundle.setMaxStat(Stat.ARCANE,0);
+				}
+				@Override public void undoHook(){myChar.statsBundle.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
+				@Override public int getPriority(){return 0;} //no choice necessary
+				@Override public boolean hasUI(){return false;}
+			};
+	}
 	
 	@Override public String toString(){return displayName();}
 	@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
