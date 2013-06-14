@@ -54,7 +54,9 @@ public class Ability implements Parcelable, zzPrereqCheck
 
 	//mimic abilityEnum API
 	public String abilityName(){return ability.displayName();}
-	public String description(){return ability.description();}
+	public String longDescription(){return ability.longDescription();}
+	public String shortDescription(){return ability.shortDescription();}
+	public String pageNumber(){return ability.pageNumbrer();}
 
 	@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar) {return ability.meetsPrereq(myChar);}
 	

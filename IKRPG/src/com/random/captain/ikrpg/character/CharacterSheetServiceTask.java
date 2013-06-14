@@ -20,8 +20,10 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	private Context context;
 	private Canvas canvas;
 	
+	//name these better later, because these names suck.
 	private Paint blackFluffLeft;
 	private Paint blackFluffCenter;
+	private Paint blackFluffRight;
 	private Paint blackStatsLarge;
 	private Paint blackStatsMedium;
 	private Paint blackStatsSmall;
@@ -30,60 +32,59 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	private Paint agiPaint;
 	private Paint intPaint;
 	
-	//name these better later, because these names suck.
+	//these too
 	int dif = 34;
-	int base = 292;
-	int parentX = 986;
-	int skillX = 1049;
-	int totalX = 1104;
+	int base = 291;
+	int parentX = 987;
+	int skillX = 1051;
+	int totalX = 1105;
 	
 	public CharacterSheetServiceTask(Context pContext)
-	{
-		context = pContext.getApplicationContext();
-	}
+	{context = pContext.getApplicationContext();}
 	
 	@Override public Void doInBackground(PC... pcs)
 	{
-		PC myChar = pcs[0];
-		if(myChar != null)
+		for(PC myChar : pcs)
 		{
-			try
+			if(myChar != null)
 			{
-				Drawable baseSheet = context.getResources().getDrawable(R.drawable.char_sheet_1);
-				int width = baseSheet.getIntrinsicWidth();
-				int height = baseSheet.getIntrinsicHeight();
-				baseSheet.setBounds(0,0,width,height);
-				Bitmap b = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888);
-				canvas = new Canvas();
-				canvas.setBitmap(b);
-				
-				baseSheet.draw(canvas);
-				
-				fillInCharacter(myChar);
-				
-				//Make sure to make name file safe before shipping
-				File f = new File(Environment.getExternalStorageDirectory(), myChar.fluff.name+".png");
-				f.createNewFile();
-				
-				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				b.compress(Bitmap.CompressFormat.PNG, 0, stream);
-				FileOutputStream os = new FileOutputStream(f);
-				os.write(stream.toByteArray());
-				
-				stream.flush();stream.close();
-				os.flush();os.close();
-				Log.i("IKRPG","Hooray!");
-			}
-			catch(Exception e)
-			{
-				Log.i("IKRPG","Drat. "+e.getLocalizedMessage()+"\n"+e.getStackTrace());
+				try
+				{
+					Drawable baseSheet = context.getResources().getDrawable(R.drawable.char_sheet_1);
+					int width = baseSheet.getIntrinsicWidth();
+					int height = baseSheet.getIntrinsicHeight();
+					baseSheet.setBounds(0,0,width,height);
+					Bitmap b = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888);
+					canvas = new Canvas();
+					canvas.setBitmap(b);
+					
+					baseSheet.draw(canvas);
+					
+					fillInCharacter(myChar);
+					
+					//Make sure to make name file safe before shipping
+					File f = new File(Environment.getExternalStorageDirectory(), myChar.fluff.name+".png");
+					f.createNewFile();
+					
+					ByteArrayOutputStream stream = new ByteArrayOutputStream();
+					b.compress(Bitmap.CompressFormat.PNG, 0, stream);
+					FileOutputStream os = new FileOutputStream(f);
+					os.write(stream.toByteArray());
+					
+					stream.flush();stream.close();
+					os.flush();os.close();
+					Log.i("IKRPG","Hooray!");
+				}
+				catch(Exception e)
+				{
+					Log.i("IKRPG","Drat. "+e.getLocalizedMessage()+"\n"+e.getStackTrace());
+				}
 			}
 		}
-		
 		return null;
 	}
 	
-	private void fillInCharacter(PC c)
+	protected void fillInCharacter(PC c)
 	{
 		setupPaints();
 		writeFluff(c);
@@ -93,18 +94,21 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		writeModifiers(c);
 	}
 	
-	private void setupPaints()
+	protected void setupPaints()
 	{
 		//Setup paints
 		blackFluffLeft = new Paint();
-		blackFluffLeft.setARGB(255,0,0,0);
+		blackFluffLeft.setARGB(255,44,49,50);
 		blackFluffLeft.setAntiAlias(true);
 		blackFluffLeft.setTextSize(20);
-		blackFluffLeft.setTypeface(Typeface.DEFAULT);
+		blackFluffLeft.setTypeface(Typeface.createFromAsset(context.getAssets(), "ITC_Elan_Black.ttf"));
 
 		blackFluffCenter = new Paint(blackFluffLeft);
 		blackFluffCenter.setTextAlign(Paint.Align.CENTER);
 
+		blackFluffRight = new Paint(blackFluffLeft);
+		blackFluffRight.setTextAlign(Paint.Align.RIGHT);
+		
 		blackStatsLarge = new Paint(blackFluffCenter);
 		blackStatsLarge.setTextSize(36);
 		
@@ -127,15 +131,15 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		skillName.setTextSize(13);
 	}
 	
-	private void writeFluff(PC c)
+	protected void writeFluff(PC c)
 	{
 		canvas.drawText(c.fluff.name,64,130,blackFluffLeft);
-		canvas.drawText(c.fluff.sex,490,130,blackFluffCenter);
-		canvas.drawText(c.fluff.characteristics,546,130,blackFluffLeft);
-		canvas.drawText(c.fluff.weight,1056,130,blackFluffLeft);
+		canvas.drawText(c.fluff.sex.toUpperCase(),490,130,blackFluffCenter);
+		canvas.drawText(c.fluff.characteristics.toUpperCase(),546,130,blackFluffLeft);
+		canvas.drawText(c.fluff.weight.toUpperCase(),1056,130,blackFluffLeft);
 		
-		canvas.drawText(c.archetype.toString(),64,174,blackFluffLeft);
-		canvas.drawText(c.race.toString(),226,174,blackFluffLeft);
+		canvas.drawText(c.archetype.toString().toUpperCase(),64,174,blackFluffLeft);
+		canvas.drawText(c.race.toString().toUpperCase(),226,174,blackFluffLeft);
 		
 		String careerString = "";
 		for(Career career : c.careers)
@@ -144,20 +148,21 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 			careerString += career.toString();
 		}
 		
+		careerString = careerString.toUpperCase();
 		Paint careerPaint = new Paint(blackFluffLeft);
 		float careerFontSize = careerPaint.getTextSize();
 		while(careerPaint.measureText(careerString) > 210){careerFontSize=careerFontSize-1;careerPaint.setTextSize(careerFontSize);}
 		canvas.drawText(careerString, 378,174,careerPaint);
 		
-		canvas.drawText(c.fluff.faith, 594,174,blackFluffLeft);
+		canvas.drawText(c.fluff.faith.toUpperCase(), 594,174,blackFluffLeft);
 		canvas.drawText(c.fluff.owningPlayer, 756,174,blackFluffLeft);
-		canvas.drawText(c.fluff.height, 1056,174,blackFluffLeft);
+		canvas.drawText(c.fluff.height.toUpperCase(), 1056,174,blackFluffLeft);
 		
 		canvas.drawText(""+c.exp, 1279,174,blackFluffCenter);
-		canvas.drawText(c.level.toString(), 1279,130,blackFluffCenter);
+		canvas.drawText(c.level.toString().toUpperCase(), 1279,130,blackFluffCenter);
 	}
 	
-	private void writeStats(PC c)
+	protected void writeStats(PC c)
 	{
 		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.PHYSIQUE), 108, 654, blackStatsLarge);
 		canvas.drawText(""+c.statsBundle.getBaseStat(Stat.AGILITY), 108, 836, blackStatsLarge);
@@ -179,6 +184,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.POISE), 276, 882, blackStatsSmall);
 		canvas.drawText(""+c.statsBundle.getMaxStat(Stat.PERCEPTION), 276, 1064, blackStatsSmall);
 		
+		canvas.drawText(""+c.statsBundle.getStat(Stat.WILLPOWER), 176, 1160,blackStatsLarge);
 		canvas.drawText(""+c.statsBundle.getStat(Stat.DEFENSE), 726,900,blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getStat(Stat.ARMOR), 726,994,blackStatsMedium);
 		canvas.drawText(""+c.statsBundle.getStat(Stat.INITIATIVE), 726,1085,blackStatsMedium);
@@ -194,6 +200,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		arcaneString = arcaneValue > 0 ? ""+arcaneValue : "-";
 		canvas.drawText(arcaneString, 276, 986, blackStatsSmall);
 		
+		//Life spiral
 		int phyStat = c.statsBundle.getBaseStat(Stat.PHYSIQUE);
 		if(phyStat<10){canvas.drawCircle(893,988,11,phyPaint);}
 		if(phyStat<9){canvas.drawCircle(866,997,11,phyPaint);}
@@ -217,7 +224,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		if(intStat<4){canvas.drawCircle(957,1080,9,intPaint);}
 	}
 	
-	private void writeSkills(PC c)
+	protected void writeSkills(PC c)
 	{
 		//start with hard-written skills
 		Collection<Pair<Skill,Integer>> trainedSkills = handleHardWrittenSkills(c);
@@ -244,16 +251,22 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 				canvas.drawText("*", totalX, base+count*dif, blackStatsSmall);
 			}
 			
-			String shortSkillName;
-			if(bStat == null){shortSkillName = "SOCIAL";}
-			else{shortSkillName = bStat.shortName();}
 			canvas.drawText(""+skill.second, skillX, base+count*dif, blackStatsSmall);
-			canvas.drawText(skill.first.toString()+" ("+shortSkillName+")", 800, base+count*dif-2, skillName);
+			
+			String shortStatName;
+			if(bStat == null){shortStatName = "SOCIAL";}
+			else{shortStatName = bStat.shortName();}
+			
+			String skillDisplayName = skill.first.toString()+" ("+shortStatName+")";
+			skillDisplayName=skillDisplayName.toUpperCase();
+			Paint skillPaint = new Paint(skillName);
+			float skillFontSize = skillPaint.getTextSize();
+			while(skillPaint.measureText(skillDisplayName) > 167){skillFontSize--;skillPaint.setTextSize(skillFontSize);}
+			canvas.drawText(skillDisplayName, 801, base+count*dif-2, skillPaint);
 		}
 	}
 	
-	//Probably going way overboard, but I don't like modifying variables without warning.
-	private Collection<Pair<Skill,Integer>> handleHardWrittenSkills(PC c)
+	protected Collection<Pair<Skill,Integer>> handleHardWrittenSkills(PC c)
 	{
 		Collection<Pair<Skill,Integer>> trainedSkills =c.skillsBundle.getTrainedSkills();
 		Collection<Pair<Skill,Integer>> trainedSkillsCopy = new ArrayList<Pair<Skill,Integer>>(trainedSkills);
@@ -300,12 +313,25 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		return trainedSkillsCopy;
 	}
 	
-	private void writeAbilities(PC c)
+	protected void writeAbilities(PC c)
 	{
+		int baseYValue = 307;
+		int yIncrement = 34;
 		
+		//Try my style
+		String abilityString;
+		int abilityIndex = 0;
+		for(Ability ability : c.abilities)
+		{
+			int yPosition = baseYValue+yIncrement*abilityIndex;
+			abilityString = ability.abilityName()+" ("+ability.shortDescription()+")";
+			canvas.drawText(abilityString.toUpperCase(), 1172, yPosition, blackFluffLeft);
+			canvas.drawText(ability.pageNumber().toUpperCase(), 1619, yPosition, blackFluffRight);
+			abilityIndex++;
+		}
 	}
 	
-	private void writeModifiers(PC c)
+	protected void writeModifiers(PC c)
 	{
 		
 	}
@@ -334,7 +360,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		myC.careers = careers;
 		
 		myC.statsBundle = new zzStatsBundle(Race.HUMAN.startStats(), Race.HUMAN.heroStats());
-		
+		myC.skillsBundle = new zzSkillsBundle(myC.statsBundle, myC.careers);
 		return myC;
 	}
 }
