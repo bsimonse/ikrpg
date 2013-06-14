@@ -134,7 +134,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	protected void writeFluff(PC c)
 	{
 		canvas.drawText(c.fluff.name,64,130,blackFluffLeft);
-		canvas.drawText(c.fluff.sex.toUpperCase(),490,130,blackFluffCenter);
+		canvas.drawText(c.fluff.sex.toUpperCase(),493,130,blackFluffCenter);
 		canvas.drawText(c.fluff.characteristics.toUpperCase(),546,130,blackFluffLeft);
 		canvas.drawText(c.fluff.weight.toUpperCase(),1056,130,blackFluffLeft);
 		
