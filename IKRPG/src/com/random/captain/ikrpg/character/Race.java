@@ -3,10 +3,12 @@ package com.random.captain.ikrpg.character;
 import java.util.*;
 
 import android.util.Pair;
+import com.random.captain.ikrpg.IKRPGApp;
+import com.random.captain.ikrpg.R;
 
 public enum Race
 {
-	HUMAN("Human",
+	HUMAN(R.string.human_name,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
 			Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
@@ -26,13 +28,13 @@ public enum Race
 		  null
 		);
 	
-	private Race(String pName, Pair<Stat, Integer>[] pStartStats,
+	private Race(int pNameResourceID, Pair<Stat, Integer>[] pStartStats,
 							Pair<Stat, Integer>[] pHeroStats,
 							Pair<Stat, Integer>[] pVetStats,
 							Pair<Stat, Integer>[] pEpicStats,
 							zzCreateCharacterHook[] pPostCreateHooks)
 	{
-		name = pName;
+		name = IKRPGApp.getContext().getString(pNameResourceID);
 		startStats = Arrays.asList(pStartStats);
 		heroStats = Arrays.asList(pHeroStats);
 		vetStats = Arrays.asList(pVetStats);
