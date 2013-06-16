@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--Skills-->
+	<!--Military-->
+	<string name="archery_name">Hello World, MainActivity!</string>
+	<string name="archery_desc">Hello World, MainActivity!</string>
+
+	<string name="crossbow_name">Hello World, MainActivity!</string>
+	<string name="crossbow_desc">Hello World, MainActivity!</string>
+
+	<string name="great_weapon_name">Hello World, MainActivity!</string>
+	<string name="great_weapon_desc">Hello World, MainActivity!</string>
+
+	<string name="hand_weapon_name">Hello World, MainActivity!</string>
+	<string name="hand_weapon_desc">Hello World, MainActivity!</string>
+
+	<string name="lance_name">Hello World, MainActivity!</string>
+	<string name="lance_desc">Hello World, MainActivity!</string>
+
+	<string name="light_artillery_name">Hello World, MainActivity!</string>
+	<string name="light_artillery_desc">Hello World, MainActivity!</string>
+
+	<string name="pistol_name">Hello World, MainActivity!</string>
+	<string name="pistol_desc">Hello World, MainActivity!</string>
+
+	<string name="rifle_name">Hello World, MainActivity!</string>
+	<string name="rifle_desc">Hello World, MainActivity!</string>
+
+	<string name="shield_name">Hello World, MainActivity!</string>
+	<string name="shield_desc">Hello World, MainActivity!</string>
+
+	<string name="thrown_weapon_name">Hello World, MainActivity!</string>
+	<string name="thrown_weapon_desc">Hello World, MainActivity!</string>
+
+	<string name="unarmed_combat_name">Hello World, MainActivity!</string>
+	<string name="unarmed_combat_desc">Hello World, MainActivity!</string>
+
+	<!--Occupational-->
+	<string name="alchemy_name">Hello World, MainActivity!</string>
+	<string name="alchemy_desc">Hello World, MainActivity!</string>
+
+	<string name="bribery_name">Hello World, MainActivity!</string>
+	<string name="bribery_desc">Hello World, MainActivity!</string>
+
+	<string name="command_name">Hello World, MainActivity!</string>
+	<string name="command_desc">Hello World, MainActivity!</string>
+
+	<string name="craft_name">Hello World, MainActivity!</string>
+	<string name="craft_desc">Hello World, MainActivity!</string>
+
+	<string name="cryptography_name">Hello World, MainActivity!</string>
+	<string name="cryptography_desc">Hello World, MainActivity!</string>
+
+	<string name="deception_name">Hello World, MainActivity!</string>
+	<string name="deception_desc">Hello World, MainActivity!</string>
+
+	<string name="disguise_name">Hello World, MainActivity!</string>
+	<string name="disguise_desc">Hello World, MainActivity!</string>
+
+	<string name="escape_artist_name">Hello World, MainActivity!</string>
+	<string name="escape_artist_desc">Hello World, MainActivity!</string>
+
+	<string name="etiquette_name">Hello World, MainActivity!</string>
+	<string name="etiquette_desc">Hello World, MainActivity!</string>
+
+	<string name="fell_calling_name">Hello World, MainActivity!</string>
+	<string name="fell_calling_desc">Hello World, MainActivity!</string>
+
+	<string name="forensic_science_name">Hello World, MainActivity!</string>
+	<string name="forensic_science_desc">Hello World, MainActivity!</string>
+
+	<string name="forgery_name">Hello World, MainActivity!</string>
+	<string name="forgery_desc">Hello World, MainActivity!</string>
+
+	<string name="interrogation_name">Hello World, MainActivity!</string>
+	<string name="interrogation_desc">Hello World, MainActivity!</string>
+
+	<string name="law_name">Hello World, MainActivity!</string>
+	<string name="law_desc">Hello World, MainActivity!</string>
+
+	<string name="lock_picking_name">Hello World, MainActivity!</string>
+	<string name="lock_picking_desc">Hello World, MainActivity!</string>
+
+	<string name="mechanikal_engineering_name">Hello World, MainActivity!</string>
+	<string name="mechanikal_engineering_desc">Hello World, MainActivity!</string>
+
+	<string name="medicine_name">Hello World, MainActivity!</string>
+	<string name="medicine_desc">Hello World, MainActivity!</string>
+
+	<string name="navigation_name">Hello World, MainActivity!</string>
+	<string name="navigation_desc">Hello World, MainActivity!</string>
+
+	<string name="negotiation_name">Hello World, MainActivity!</string>
+	<string name="negotiation_desc">Hello World, MainActivity!</string>
+
+	<string name="oratory_name">Hello World, MainActivity!</string>
+	<string name="oratory_desc">Hello World, MainActivity!</string>
+
+	<string name="pickpocket_name">Hello World, MainActivity!</string>
+	<string name="pickpocket_desc">Hello World, MainActivity!</string>
+
+	<string name="research_name">Hello World, MainActivity!</string>
+	<string name="research_desc">Hello World, MainActivity!</string>
+
+	<string name="rope_use_name">Hello World, MainActivity!</string>
+	<string name="rope_use_desc">Hello World, MainActivity!</string>
+
+	<string name="sailing_name">Hello World, MainActivity!</string>
+	<string name="sailing_desc">Hello World, MainActivity!</string>
+
+	<string name="seduction_name">Hello World, MainActivity!</string>
+	<string name="seduction_desc">Hello World, MainActivity!</string>
+
+	<string name="sneak_name">Hello World, MainActivity!</string>
+	<string name="sneak_desc">Hello World, MainActivity!</string>
+
+	<string name="streetwise_name">Hello World, MainActivity!</string>
+	<string name="streetwise_desc">Hello World, MainActivity!</string>
+
+	<string name="survival_name">Hello World, MainActivity!</string>
+	<string name="survival_desc">Hello World, MainActivity!</string>
+
+	<string name="tracking_name">Hello World, MainActivity!</string>
+	<string name="tracking_desc">Hello World, MainActivity!</string>
+
+	<!--General-->
+	<string name="animal_handling_name">Hello World, MainActivity!</string>
+	<string name="animal_handling_desc">Hello World, MainActivity!</string>
+
+	<string name="climbing_name">Hello World, MainActivity!</string>
+	<string name="climbing_desc">Hello World, MainActivity!</string>
+
+	<string name="detection_name">Hello World, MainActivity!</string>
+	<string name="detection_desc">Hello World, MainActivity!</string>
+
+	<string name="driving_name">Hello World, MainActivity!</string>
+	<string name="driving_desc">Hello World, MainActivity!</string>
+
+	<string name="gambling_name">Hello World, MainActivity!</string>
+	<string name="gambling_desc">Hello World, MainActivity!</string>
+
+	<string name="intimidation_name">Hello World, MainActivity!</string>
+	<string name="intimidation_desc">Hello World, MainActivity!</string>
+
+	<string name="jumping_name">Hello World, MainActivity!</string>
+	<string name="jumping_desc">Hello World, MainActivity!</string>
+
+	<string name="lore_name">Hello World, MainActivity!</string>
+	<string name="lore_desc">Hello World, MainActivity!</string>
+
+	<string name="riding_name">Hello World, MainActivity!</string>
+	<string name="riding_desc">Hello World, MainActivity!</string>
+
+	<string name="swimming_name">Hello World, MainActivity!</string>
+	<string name="swimming_desc">Hello World, MainActivity!</string>
+	
+</resources>

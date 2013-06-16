@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="human_name">Spell</string>
+    <string name="human_desc">Desc</string>
+
+    <string name="dwarf_name">Spell</string>
+    <string name="dwarf_desc">Desc</string>
+
+    <string name="gobber_name">Spell</string>
+    <string name="gobber_desc">Desc</string>
+	
+    <string name="iosan_name">Spell</string>
+    <string name="iosan_desc">Desc</string>
+
+    <string name="nyss_name">Spell</string>
+    <string name="nyss_desc">Desc</string>
+
+    <string name="ogrun_name">Spell</string>
+    <string name="ogrun_desc">Desc</string>
+	
+    <string name="trollkin_name">Spell</string>
+    <string name="trollkin_desc">Desc</string>
+</resources>

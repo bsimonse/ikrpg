@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="arcane_bolt_name">Spell</string>
+    <string name="arcane_bolt_desc">Desc</string>
+
+	<string name="arcane_strike_name">Spell</string>
+    <string name="arcane_strike_desc">Desc</string>
+
+	<string name="arcantrik_bolt_name">Spell</string>
+    <string name="arcantrik_bolt_desc">Desc</string>
+
+	<string name="ashen_cloud_name">Spell</string>
+    <string name="ashen_cloud_desc">Desc</string>
+
+	<string name="ashes_to_ashes_name">Spell</string>
+    <string name="ashes_to_ashes_desc">Desc</string>
+
+	<string name="aura_of_protection_name">Spell</string>
+    <string name="aura_of_protection_desc">Desc</string>
+
+	<string name="awareness_name">Spell</string>
+    <string name="awareness_desc">Desc</string>
+
+	<string name="banishing_ward_name">Spell</string>
+    <string name="banishing_ward_desc">Desc</string>
+
+	<string name="barrier_of_flames_name">Spell</string>
+    <string name="barrier_of_flames_desc">Desc</string>
+
+	<string name="battering_ram_name">Spell</string>
+    <string name="battering_ram_desc">Desc</string>
+
+	<string name="batten_down_the_hatches_name">Spell</string>
+    <string name="batten_down_the_hatches_desc">Desc</string>
+
+	<string name="black_out_name">Spell</string>
+    <string name="black_out_desc">Desc</string>
+
+	<string name="blade_of_radiance_name">Spell</string>
+    <string name="blade_of_radiance_desc">Desc</string>
+
+	<string name="blazing_effigy_name">Spell</string>
+    <string name="blazing_effigy_desc">Desc</string>
+
+	<string name="blessing_of_health_name">Spell</string>
+    <string name="blessing_of_health_desc">Desc</string>
+
+	<string name="blessing_of_morrow_name">Spell</string>
+    <string name="blessing_of_morrow_desc">Desc</string>
+
+	<string name="blessings_of_war_name">Spell</string>
+    <string name="blessings_of_war_desc">Desc</string>
+
+	<string name="blizzard_name">Spell</string>
+    <string name="blizzard_desc">Desc</string>
+
+	<string name="brittle_frost_name">Spell</string>
+    <string name="brittle_frost_desc">Desc</string>
+
+	<string name="boundless_charge_name">Spell</string>
+    <string name="boundless_charge_desc">Desc</string>
+
+	<string name="broadside_name">Spell</string>
+    <string name="broadside_desc">Desc</string>
+
+	<string name="celerity_name">Spell</string>
+    <string name="celerity_desc">Desc</string>
+
+	<string name="chain_lightning_name">Spell</string>
+    <string name="chain_lightning_desc">Desc</string>
+
+	<string name="chiller_name">Spell</string>
+    <string name="chiller_desc">Desc</string>
+
+	<string name="cleansing_fire_name">Spell</string>
+    <string name="cleansing_fire_desc">Desc</string>
+
+	<string name="convection_name">Spell</string>
+    <string name="convection_desc">Desc</string>
+
+	<string name="crevasse_name">Spell</string>
+    <string name="crevasse_desc">Desc</string>
+
+	<string name="crusaders_call_name">Spell</string>
+    <string name="crusaders_call_desc">Desc</string>
+
+	<string name="daylight_name">Spell</string>
+    <string name="daylight_desc">Desc</string>
+
+	<string name="deceleration_name">Spell</string>
+    <string name="deceleration_desc">Desc</string>
+
+	<string name="deep_freeze_name">Spell</string>
+    <string name="deep_freeze_desc">Desc</string>
+
+	<string name="earthquake_name">Spell</string>
+    <string name="earthquake_desc">Desc</string>
+
+	<string name="earths_cradle_name">Spell</string>
+    <string name="earths_cradle_desc">Desc</string>
+
+	<string name="earthsplitter_name">Spell</string>
+    <string name="earthsplitter_desc">Desc</string>
+
+	<string name="electrical_blast_name">Spell</string>
+    <string name="electrical_blast_desc">Desc</string>
+
+	<string name="electrify_name">Spell</string>
+    <string name="electrify_desc">Desc</string>
+
+	<string name="eliminator_name">Spell</string>
+    <string name="eliminator_desc">Desc</string>
+
+	<string name="entangle_name">Spell</string>
+    <string name="entangle_desc">Desc</string>
+
+	<string name="eyes_of_truth_name">Spell</string>
+    <string name="eyes_of_truth_desc">Desc</string>
+
+	<string name="extinguisher_name">Spell</string>
+    <string name="extinguisher_desc">Desc</string>
+
+	<string name="fail_safe_name">Spell</string>
+    <string name="fail_safe_desc">Desc</string>
+
+	<string name="fair_winds_name">Spell</string>
+    <string name="fair_winds_desc">Desc</string>
+
+	<string name="fire_group_name">Spell</string>
+    <string name="fire_group_desc">Desc</string>
+
+	<string name="fire_starter_name">Spell</string>
+    <string name="fire_starter_desc">Desc</string>
+
+	<string name="flames_of_wrath_name">Spell</string>
+    <string name="flames_of_wrath_desc">Desc</string>
+
+	<string name="flare_name">Spell</string>
+    <string name="flare_desc">Desc</string>
+
+	<string name="fog_of_war_name">Spell</string>
+    <string name="fog_of_war_desc">Desc</string>
+
+	<string name="force_field_name">Spell</string>
+    <string name="force_field_desc">Desc</string>
+
+	<string name="force_hammer_name">Spell</string>
+    <string name="force_hammer_desc">Desc</string>
+
+	<string name="force_of_fath_name">Spell</string>
+    <string name="force_of_fath_desc">Desc</string>
+
+	<string name="fortify_name">Spell</string>
+    <string name="fortify_desc">Desc</string>
+
+	<string name="foxhole_name">Spell</string>
+    <string name="foxhole_desc">Desc</string>
+
+	<string name="freezing_grip_name">Spell</string>
+    <string name="freezing_grip_desc">Desc</string>
+
+	<string name="freezing_mist_name">Spell</string>
+    <string name="freezing_mist_desc">Desc</string>
+
+	<string name="frozen_ground_name">Spell</string>
+    <string name="frozen_ground_desc">Desc</string>
+
+	<string name="frostbite_name">Spell</string>
+    <string name="frostbite_desc">Desc</string>
+
+	<string name="fuel_the_flames_name">Spell</string>
+    <string name="fuel_the_flames_desc">Desc</string>
+
+	<string name="full_throttle_name">Spell</string>
+    <string name="full_throttle_desc">Desc</string>
+
+	<string name="grind_name">Spell</string>
+    <string name="grind_desc">Desc</string>
+
+	<string name="guided_blade_name">Spell</string>
+    <string name="guided_blade_desc">Desc</string>
+
+	<string name="guided_fire_name">Spell</string>
+    <string name="guided_fire_desc">Desc</string>
+
+	<string name="hand_of_fate_name">Spell</string>
+    <string name="hand_of_fate_desc">Desc</string>
+
+	<string name="heal_name">Spell</string>
+    <string name="heal_desc">Desc</string>
+
+	<string name="heightened_reflexes_name">Spell</string>
+    <string name="heightened_reflexes_desc">Desc</string>
+
+	<string name="hex_blast_name">Spell</string>
+    <string name="hex_blast_desc">Desc</string>
+
+	<string name="hoarfrost_name">Spell</string>
+    <string name="hoarfrost_desc">Desc</string>
+
+	<string name="howling_flames_name">Spell</string>
+    <string name="howling_flames_desc">Desc</string>
+
+	<string name="hymn_of_battle_name">Spell</string>
+    <string name="hymn_of_battle_desc">Desc</string>
+
+	<string name="hymn_of_passage_name">Spell</string>
+    <string name="hymn_of_passage_desc">Desc</string>
+
+	<string name="hymn_of_shielding_name">Spell</string>
+    <string name="hymn_of_shielding_desc">Desc</string>
+
+	<string name="ice_bolt_name">Spell</string>
+    <string name="ice_bolt_desc">Desc</string>
+
+	<string name="ice_shield_name">Spell</string>
+    <string name="ice_shield_desc">Desc</string>
+
+	<string name="icy_grip_name">Spell</string>
+    <string name="icy_grip_desc">Desc</string>
+
+	<string name="ignite_name">Spell</string>
+    <string name="ignite_desc">Desc</string>
+
+	<string name="immolation_name">Spell</string>
+    <string name="immolation_desc">Desc</string>
+
+	<string name="inferno_name">Spell</string>
+    <string name="inferno_desc">Desc</string>
+
+	<string name="influence_name">Spell</string>
+    <string name="influence_desc">Desc</string>
+
+	<string name="inhospitable_ground_name">Spell</string>
+    <string name="inhospitable_ground_desc">Desc</string>
+
+	<string name="iron_aggression_name">Spell</string>
+    <string name="iron_aggression_desc">Desc</string>
+
+	<string name="jackhammer_name">Spell</string>
+    <string name="jackhammer_desc">Desc</string>
+
+	<string name="jump_start_name">Spell</string>
+    <string name="jump_start_desc">Desc</string>
+
+	<string name="lamentation_name">Spell</string>
+    <string name="lamentation_desc">Desc</string>
+
+	<string name="light_in_the_darkness_name">Spell</string>
+    <string name="light_in_the_darkness_desc">Desc</string>
+
+	<string name="lightning_tendrils_name">Spell</string>
+    <string name="lightning_tendrils_desc">Desc</string>
+
+	<string name="locomotion_name">Spell</string>
+    <string name="locomotion_desc">Desc</string>
+
+	<string name="mirage_name">Spell</string>
+    <string name="mirage_desc">Desc</string>
+
+	<string name="obliteration_name">Spell</string>
+    <string name="obliteration_desc">Desc</string>
+
+	<string name="occultation_name">Spell</string>
+    <string name="occultation_desc">Desc</string>
+
+	<string name="overmind_name">Spell</string>
+    <string name="overmind_desc">Desc</string>
+
+	<string name="polarity_shield_name">Spell</string>
+    <string name="polarity_shield_desc">Desc</string>
+
+	<string name="positive_charge_name">Spell</string>
+    <string name="positive_charge_desc">Desc</string>
+
+	<string name="power_booster_name">Spell</string>
+    <string name="power_booster_desc">Desc</string>
+
+	<string name="prayer_for_guidance_name">Spell</string>
+    <string name="prayer_for_guidance_desc">Desc</string>
+
+	<string name="protection_from_cold_name">Spell</string>
+    <string name="protection_from_cold_desc">Desc</string>
+
+	<string name="protection_from_corrosion_name">Spell</string>
+    <string name="protection_from_corrosion_desc">Desc</string>
+
+	<string name="protection_from_electricity_name">Spell</string>
+    <string name="protection_from_electricity_desc">Desc</string>
+
+	<string name="protection_from_fire_name">Spell</string>
+    <string name="protection_from_fire_desc">Desc</string>
+
+	<string name="purification_name">Spell</string>
+    <string name="purification_desc">Desc</string>
+
+	<string name="raging_winds_name">Spell</string>
+    <string name="raging_winds_desc">Desc</string>
+
+	<string name="razor_wind_name">Spell</string>
+    <string name="razor_wind_desc">Desc</string>
+
+	<string name="redline_name">Spell</string>
+    <string name="redline_desc">Desc</string>
+
+	<string name="refuge_name">Spell</string>
+    <string name="refuge_desc">Desc</string>
+
+	<string name="return_fire_spell_name">Spell</string>
+    <string name="return_fire_desc">Desc</string>
+
+	<string name="rift_name">Spell</string>
+    <string name="rift_desc">Desc</string>
+
+	<string name="righteous_flames_name">Spell</string>
+    <string name="righteous_flames_desc">Desc</string>
+
+	<string name="rime_name">Spell</string>
+    <string name="rime_desc">Desc</string>
+
+	<string name="rock_hammer_name">Spell</string>
+    <string name="rock_hammer_desc">Desc</string>
+
+	<string name="rock_wall_name">Spell</string>
+    <string name="rock_wall_desc">Desc</string>
+
+	<string name="rune_shot_accuracy_name">Spell</string>
+    <string name="rune_shot_accuracy_desc">Desc</string>
+
+	<string name="rune_shot_black_penny_name">Spell</string>
+    <string name="rune_shot_black_penny_desc">Desc</string>
+
+	<string name="rune_shot_brutal_name">Spell</string>
+    <string name="rune_shot_brutal_desc">Desc</string>
+
+	<string name="rune_shot_detonator_name">Spell</string>
+    <string name="rune_shot_detonator_desc">Desc</string>
+
+	<string name="rune_shot_earth_shaker_name">Spell</string>
+    <string name="rune_shot_earth_shaker_desc">Desc</string>
+
+	<string name="rune_shot_fire_beacon_name">Spell</string>
+    <string name="rune_shot_fire_beacon_desc">Desc</string>
+
+	<string name="rune_shot_freeze_fire_name">Spell</string>
+    <string name="rune_shot_freeze_fire_desc">Desc</string>
+
+	<string name="rune_shot_heart_stopper_name">Spell</string>
+    <string name="rune_shot_heart_stopper_desc">Desc</string>
+
+	<string name="rune_shot_iron_rot_name">Spell</string>
+    <string name="rune_shot_iron_rot_desc">Desc</string>
+
+	<string name="rune_shot_molten_shot_name">Spell</string>
+    <string name="rune_shot_molten_shot_desc">Desc</string>
+
+	<string name="rune_shot_momentum_name">Spell</string>
+    <string name="rune_shot_momentum_desc">Desc</string>
+
+	<string name="rune_shot_phantom_seeker_name">Spell</string>
+    <string name="rune_shot_phantom_seeker_desc">Desc</string>
+
+	<string name="rune_shot_shadow_fire_name">Spell</string>
+    <string name="rune_shot_shadow_fire_desc">Desc</string>
+	
+	<string name="rune_shot_silencer_name">Spell</string>
+    <string name="rune_shot_silencer_desc">Desc</string>
+	
+	<string name="rune_shot_spell_cracker_name">Spell</string>
+    <string name="rune_shot_spell_cracker_desc">Desc</string>
+	
+	<string name="rune_shot_spontaneous_combustion_name">Spell</string>
+    <string name="rune_shot_spontaneous_combustion_desc">Desc</string>
+	
+	<string name="rune_shot_thunderbolt_name">Spell</string>
+    <string name="rune_shot_thunderbolt_desc">Desc</string>
+	
+	<string name="rune_shot_trick_shot_name">Spell</string>
+    <string name="rune_shot_trick_shot_desc">Desc</string>
+	
+	<string name="sanguine_blessing_name">Spell</string>
+    <string name="sanguine_blessing_desc">Desc</string>
+	
+	<string name="sea_of_fire_name">Spell</string>
+    <string name="sea_of_fire_desc">Desc</string>
+	
+	<string name="shatter_storm_name">Spell</string>
+    <string name="shatter_storm_desc">Desc</string>
+	
+	<string name="shield_of_faith_name">Spell</string>
+    <string name="shield_of_faith_desc">Desc</string>
+	
+	<string name="shock_wave_name">Spell</string>
+    <string name="shock_wave_desc">Desc</string>
+	
+	<string name="short_out_name">Spell</string>
+    <string name="short_out_desc">Desc</string>
+	
+	<string name="snipe_name">Spell</string>
+    <string name="snipe_desc">Desc</string>
+	
+	<string name="solid_ground_name">Spell</string>
+    <string name="solid_ground_desc">Desc</string>
+	
+	<string name="solovins_boon_name">Spell</string>
+    <string name="solovins_boon_desc">Desc</string>
+	
+	<string name="star_fire_name">Spell</string>
+    <string name="star_fire_desc">Desc</string>
+	
+	<string name="staying_winters_hand_name">Spell</string>
+    <string name="staying_winters_hand_desc">Desc</string>
+	
+	<string name="stone_stance_name">Spell</string>
+    <string name="stone_stance_desc">Desc</string>
+	
+	<string name="stone_strength_name">Spell</string>
+    <string name="stone_strength_desc">Desc</string>
+	
+	<string name="storm_tossed_name">Spell</string>
+    <string name="storm_tossed_desc">Desc</string>
+	
+	<string name="sunburst_name">Spell</string>
+    <string name="sunburst_desc">Desc</string>
+	
+	<string name="superiority_name">Spell</string>
+    <string name="superiority_desc">Desc</string>
+	
+	<string name="telekinesis_name">Spell</string>
+    <string name="telekinesis_desc">Desc</string>
+	
+	<string name="temper_metal_name">Spell</string>
+    <string name="temper_metal_desc">Desc</string>
+	
+	<string name="tempest_name">Spell</string>
+    <string name="tempest_desc">Desc</string>
+	
+	<string name="tide_of_steel_name">Spell</string>
+    <string name="tide_of_steel_desc">Desc</string>
+	
+	<string name="tornado_name">Spell</string>
+    <string name="tornado_desc">Desc</string>
+	
+	<string name="transference_name">Spell</string>
+    <string name="transference_desc">Desc</string>
+	
+	<string name="triage_name">Spell</string>
+    <string name="triage_desc">Desc</string>
+	
+	<string name="true_path_name">Spell</string>
+    <string name="true_path_desc">Desc</string>
+	
+	<string name="true_sight_name">Spell</string>
+    <string name="true_sight_desc">Desc</string>
+	
+	<string name="vision_name">Spell</string>
+    <string name="vision_desc">Desc</string>
+	
+	<string name="voltaic_lock_name">Spell</string>
+    <string name="voltaic_lock_desc">Desc</string>
+	
+	<string name="wall_of_fire_name">Spell</string>
+    <string name="wall_of_fire_desc">Desc</string>
+	
+	<string name="white_out_name">Spell</string>
+    <string name="white_out_desc">Desc</string>
+	
+	<string name="wind_blast_name">Spell</string>
+    <string name="wind_blast_desc">Desc</string>
+	
+	<string name="wind_strike_name">Spell</string>
+    <string name="wind_strike_desc">Desc</string>
+	
+	<string name="winds_of_air_name">Spell</string>
+    <string name="wings_of_air_desc">Desc</string>
+	
+	<string name="winter_storm_name">Spell</string>
+    <string name="winter_storm_desc">Desc</string>
+	
+	<string name="zephyr_name">Spell</string>
+    <string name="zephyr_desc">Desc</string>
+	
+</resources>

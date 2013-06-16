@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--Abilities-->
+	<string name="jack_marshal_name">:4)</string>
+	<string name="jack_marshal_longDesc">:4)</string>
+	<string name="jack_marshal_shortDesc">:4)</string>
+	<string name="jack_marshal_page">:4)</string>
+
+	<string name="ace_commander_name">Hello World, MainActivity!</string>
+	<string name="ace_commander_longDesc">Hello World, MainActivity!</string>
+	<string name="ace_commander_shortDesc">Hello World, MainActivity!</string>
+	<string name="ace_commander_page">Hello World, MainActivity!</string>
+
+	<string name="acrobatics_name">Hello World, MainActivity!</string>
+	<string name="acrobatics_longDesc">Hello World, MainActivity!</string>
+	<string name="acrobatics_shortDesc">Hello World, MainActivity!</string>
+	<string name="acrobatics_page">Hello World, MainActivity!</string>
+
+	<string name="advisor_name">Hello World, MainActivity!</string>
+	<string name="advisor_longDesc">Hello World, MainActivity!</string>
+	<string name="advisor_shortDesc">Hello World, MainActivity!</string>
+	<string name="advisor_page">Hello World, MainActivity!</string>
+
+	<string name="ambush_name">Hello World, MainActivity!</string>
+	<string name="ambush_longDesc">Hello World, MainActivity!</string>
+	<string name="ambush_shortDesc">Hello World, MainActivity!</string>
+	<string name="ambush_page">Hello World, MainActivity!</string>
+
+	<string name="anatomical_precision_name">Hello World, MainActivity!</string>
+	<string name="anatomical_precision_longDesc">Hello World, MainActivity!</string>
+	<string name="anatomical_precision_shortDesc">Hello World, MainActivity!</string>
+	<string name="anatomical_precision_page">Hello World, MainActivity!</string>
+
+	<string name="appraise_name">Hello World, MainActivity!</string>
+	<string name="appraise_longDesc">Hello World, MainActivity!</string>
+	<string name="appraise_shortDesc">Hello World, MainActivity!</string>
+	<string name="appraise_page">Hello World, MainActivity!</string>
+
+	<string name="arcane_assassin_name">Hello World, MainActivity!</string>
+	<string name="arcane_assassin_longDesc">Hello World, MainActivity!</string>
+	<string name="arcane_assassin_shortDesc">Hello World, MainActivity!</string>
+	<string name="arcane_assassin_page">Hello World, MainActivity!</string>
+
+	<string name="arcane_defenses_name">Hello World, MainActivity!</string>
+	<string name="arcane_defenses_longDesc">Hello World, MainActivity!</string>
+	<string name="arcane_defenses_shortDesc">Hello World, MainActivity!</string>
+	<string name="arcane_defenses_page">Hello World, MainActivity!</string>
+
+	<string name="arcane_engineer_name">Hello World, MainActivity!</string>
+	<string name="arcane_engineer_longDesc">Hello World, MainActivity!</string>
+	<string name="arcane_engineer_shortDesc">Hello World, MainActivity!</string>
+	<string name="arcane_engineer_page">Hello World, MainActivity!</string>
+
+	<string name="arcane_precision_name">Hello World, MainActivity!</string>
+	<string name="arcane_precision_longDesc">Hello World, MainActivity!</string>
+	<string name="arcane_precision_shortDesc">Hello World, MainActivity!</string>
+	<string name="arcane_precision_page">Hello World, MainActivity!</string>
+
+	<string name="arcane_scholar_name">Hello World, MainActivity!</string>
+	<string name="arcane_scholar_longDesc">Hello World, MainActivity!</string>
+	<string name="arcane_scholar_shortDesc">Hello World, MainActivity!</string>
+	<string name="arcane_scholar_page">Hello World, MainActivity!</string>
+
+	<string name="astute_name">Hello World, MainActivity!</string>
+	<string name="astute_longDesc">Hello World, MainActivity!</string>
+	<string name="astute_shortDesc">Hello World, MainActivity!</string>
+	<string name="astute_page">Hello World, MainActivity!</string>
+
+	<string name="backstab_name">Hello World, MainActivity!</string>
+	<string name="backstab_longDesc">Hello World, MainActivity!</string>
+	<string name="backstab_shortDesc">Hello World, MainActivity!</string>
+	<string name="backstab_page">Hello World, MainActivity!</string>
+
+	<string name="battle_commander_name">Hello World, MainActivity!</string>
+	<string name="battle_commander_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_commander_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_commander_page">Hello World, MainActivity!</string>
+
+	<string name="battle_plan_call_to_action_name">Hello World, MainActivity!</string>
+	<string name="battle_plan_call_to_action_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_call_to_action_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_call_to_action_page">Hello World, MainActivity!</string>
+
+	<string name="battle_plan_coordinated_strike_name">Hello World, MainActivity!</string>
+	<string name="battle_plan_coordinated_strike_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_coordinated_strike_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_coordinated_strike_page">Hello World, MainActivity!</string>
+
+	<string name="battle_plan_desperate_pace_name">Hello World, MainActivity!</string>
+	<string name="battle_plan_desperate_pace_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_desperate_pace_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_desperate_pace_page">Hello World, MainActivity!</string>
+
+	<string name="battle_plan_go_to_ground_name">Hello World, MainActivity!</string>
+	<string name="battle_plan_go_to_ground_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_go_to_ground_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_go_to_ground_page">Hello World, MainActivity!</string>
+
+	<string name="battle_plan_reconnaissance_name">Hello World, MainActivity!</string>
+	<string name="battle_plan_reconnaissance_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_reconnaissance_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_reconnaissance_page">Hello World, MainActivity!</string>
+
+	<string name="battle_plan_shadow_name">Hello World, MainActivity!</string>
+	<string name="battle_plan_shadow_longDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_shadow_shortDesc">Hello World, MainActivity!</string>
+	<string name="battle_plan_shadow_page">Hello World, MainActivity!</string>
+
+	<string name="bayonet_charge_name">Hello World, MainActivity!</string>
+	<string name="bayonet_charge_longDesc">Hello World, MainActivity!</string>
+	<string name="bayonet_charge_shortDesc">Hello World, MainActivity!</string>
+	<string name="bayonet_charge_page">Hello World, MainActivity!</string>
+
+	<string name="big_game_hunter_name">Hello World, MainActivity!</string>
+	<string name="big_game_hunter_longDesc">Hello World, MainActivity!</string>
+	<string name="big_game_hunter_shortDesc">Hello World, MainActivity!</string>
+	<string name="big_game_hunter_page">Hello World, MainActivity!</string>
+
+	<string name="binding_name">Hello World, MainActivity!</string>
+	<string name="binding_longDesc">Hello World, MainActivity!</string>
+	<string name="binding_shortDesc">Hello World, MainActivity!</string>
+	<string name="binding_page">Hello World, MainActivity!</string>
+
+	<string name="blaster_name">Hello World, MainActivity!</string>
+	<string name="blaster_longDesc">Hello World, MainActivity!</string>
+	<string name="blaster_shortDesc">Hello World, MainActivity!</string>
+	<string name="blaster_page">Hello World, MainActivity!</string>
+
+	<string name="blood_spiller_name">Hello World, MainActivity!</string>
+	<string name="blood_spiller_longDesc">Hello World, MainActivity!</string>
+	<string name="blood_spiller_shortDesc">Hello World, MainActivity!</string>
+	<string name="blood_spiller_page">Hello World, MainActivity!</string>
+
+	<string name="bodge_name">Hello World, MainActivity!</string>
+	<string name="bodge_longDesc">Hello World, MainActivity!</string>
+	<string name="bodge_shortDesc">Hello World, MainActivity!</string>
+	<string name="bodge_page">Hello World, MainActivity!</string>
+
+	<string name="bodyguard_name">Hello World, MainActivity!</string>
+	<string name="bodyguard_longDesc">Hello World, MainActivity!</string>
+	<string name="bodyguard_shortDesc">Hello World, MainActivity!</string>
+	<string name="bodyguard_page">Hello World, MainActivity!</string>
+
+	<string name="bomber_name">Hello World, MainActivity!</string>
+	<string name="bomber_longDesc">Hello World, MainActivity!</string>
+	<string name="bomber_shortDesc">Hello World, MainActivity!</string>
+	<string name="bomber_page">Hello World, MainActivity!</string>
+
+	<string name="bond_name">Hello World, MainActivity!</string>
+	<string name="bond_longDesc">Hello World, MainActivity!</string>
+	<string name="bond_shortDesc">Hello World, MainActivity!</string>
+	<string name="bond_page">Hello World, MainActivity!</string>
+
+	<string name="brew_master_name">Hello World, MainActivity!</string>
+	<string name="brew_master_longDesc">Hello World, MainActivity!</string>
+	<string name="brew_master_shortDesc">Hello World, MainActivity!</string>
+	<string name="brew_master_page">Hello World, MainActivity!</string>
+
+	<string name="camouflage_name">Hello World, MainActivity!</string>
+	<string name="camouflage_longDesc">Hello World, MainActivity!</string>
+	<string name="camouflage_shortDesc">Hello World, MainActivity!</string>
+	<string name="camouflage_page">Hello World, MainActivity!</string>
+
+	<string name="card_sharp_name">Hello World, MainActivity!</string>
+	<string name="card_sharp_longDesc">Hello World, MainActivity!</string>
+	<string name="card_sharp_shortDesc">Hello World, MainActivity!</string>
+	<string name="card_sharp_page">Hello World, MainActivity!</string>
+
+	<string name="cautious_advance_name">Hello World, MainActivity!</string>
+	<string name="cautious_advance_longDesc">Hello World, MainActivity!</string>
+	<string name="cautious_advance_shortDesc">Hello World, MainActivity!</string>
+	<string name="cautious_advance_page">Hello World, MainActivity!</string>
+
+	<string name="cavalry_charge_name">Hello World, MainActivity!</string>
+	<string name="cavalry_charge_longDesc">Hello World, MainActivity!</string>
+	<string name="cavalry_charge_shortDesc">Hello World, MainActivity!</string>
+	<string name="cavalry_charge_page">Hello World, MainActivity!</string>
+
+	<string name="chain_attack_bleed_out_name">Hello World, MainActivity!</string>
+	<string name="chain_attack_bleed_out_longDesc">Hello World, MainActivity!</string>
+	<string name="chain_attack_bleed_out_shortDesc">Hello World, MainActivity!</string>
+	<string name="chain_attack_bleed_out_page">Hello World, MainActivity!</string>
+
+	<string name="chain_attack_pin_down_name">Hello World, MainActivity!</string>
+	<string name="chain_attack_pin_down_longDesc">Hello World, MainActivity!</string>
+	<string name="chain_attack_pin_down_shortDesc">Hello World, MainActivity!</string>
+	<string name="chain_attack_pin_down_page">Hello World, MainActivity!</string>
+
+	<string name="choir_name">Hello World, MainActivity!</string>
+	<string name="choir_longDesc">Hello World, MainActivity!</string>
+	<string name="choir_shortDesc">Hello World, MainActivity!</string>
+	<string name="choir_page">Hello World, MainActivity!</string>
+
+	<string name="cleave_name">Hello World, MainActivity!</string>
+	<string name="cleave_longDesc">Hello World, MainActivity!</string>
+	<string name="cleave_shortDesc">Hello World, MainActivity!</string>
+	<string name="cleave_page">Hello World, MainActivity!</string>
+
+	<string name="combat_rider_name">Hello World, MainActivity!</string>
+	<string name="combat_rider_longDesc">Hello World, MainActivity!</string>
+	<string name="combat_rider_shortDesc">Hello World, MainActivity!</string>
+	<string name="combat_rider_page">Hello World, MainActivity!</string>
+
+	<string name="conniver_name">Hello World, MainActivity!</string>
+	<string name="conniver_longDesc">Hello World, MainActivity!</string>
+	<string name="conniver_shortDesc">Hello World, MainActivity!</string>
+	<string name="conniver_page">Hello World, MainActivity!</string>
+
+	<string name="cover_identity_name">Hello World, MainActivity!</string>
+	<string name="cover_identity_longDesc">Hello World, MainActivity!</string>
+	<string name="cover_identity_shortDesc">Hello World, MainActivity!</string>
+	<string name="cover_identity_page">Hello World, MainActivity!</string>
+
+	<string name="crackshot_name">Hello World, MainActivity!</string>
+	<string name="crackshot_longDesc">Hello World, MainActivity!</string>
+	<string name="crackshot_shortDesc">Hello World, MainActivity!</string>
+	<string name="crackshot_page">Hello World, MainActivity!</string>
+
+	<string name="craft_rune_shot_name">Hello World, MainActivity!</string>
+	<string name="craft_rune_shot_longDesc">Hello World, MainActivity!</string>
+	<string name="craft_rune_shot_shortDesc">Hello World, MainActivity!</string>
+	<string name="craft_rune_shot_page">Hello World, MainActivity!</string>
+
+	<string name="crossbowman_name">Hello World, MainActivity!</string>
+	<string name="crossbowman_longDesc">Hello World, MainActivity!</string>
+	<string name="crossbowman_shortDesc">Hello World, MainActivity!</string>
+	<string name="crossbowman_page">Hello World, MainActivity!</string>
+
+	<string name="defender_name">Hello World, MainActivity!</string>
+	<string name="defender_longDesc">Hello World, MainActivity!</string>
+	<string name="defender_shortDesc">Hello World, MainActivity!</string>
+	<string name="defender_page">Hello World, MainActivity!</string>
+
+	<string name="defensive_line_name">Hello World, MainActivity!</string>
+	<string name="defensive_line_longDesc">Hello World, MainActivity!</string>
+	<string name="defensive_line_shortDesc">Hello World, MainActivity!</string>
+	<string name="defensive_line_page">Hello World, MainActivity!</string>
+
+	<string name="dig_in_name">Hello World, MainActivity!</string>
+	<string name="dig_in_longDesc">Hello World, MainActivity!</string>
+	<string name="dig_in_shortDesc">Hello World, MainActivity!</string>
+	<string name="dig_in_page">Hello World, MainActivity!</string>
+
+	<string name="disease_resistance_name">Hello World, MainActivity!</string>
+	<string name="disease_resistance_longDesc">Hello World, MainActivity!</string>
+	<string name="disease_resistance_shortDesc">Hello World, MainActivity!</string>
+	<string name="disease_resistance_page">Hello World, MainActivity!</string>
+
+	<string name="dispel_name">:4)</string>
+	<string name="dispel_longDesc">:4)</string>
+	<string name="dispel_shortDesc">:4)</string>
+	<string name="dispel_page">:4)</string>
+
+	<string name="dodger_name">Hello World, MainActivity!</string>
+	<string name="dodger_longDesc">Hello World, MainActivity!</string>
+	<string name="dodger_shortDesc">Hello World, MainActivity!</string>
+	<string name="dodger_page">Hello World, MainActivity!</string>
+
+	<string name="drive_ancillary_attack_name">Hello World, MainActivity!</string>
+	<string name="drive_ancillary_attack_longDesc">Hello World, MainActivity!</string>
+	<string name="drive_ancillary_attack_shortDesc">Hello World, MainActivity!</string>
+	<string name="drive_ancillary_attack_page">Hello World, MainActivity!</string>
+
+	<string name="drive_assault_name">Hello World, MainActivity!</string>
+	<string name="drive_assault_longDesc">Hello World, MainActivity!</string>
+	<string name="drive_assault_shortDesc">Hello World, MainActivity!</string>
+	<string name="drive_assault_page">Hello World, MainActivity!</string>
+
+	<string name="drive_off_road_name">Hello World, MainActivity!</string>
+	<string name="drive_off_road_longDesc">Hello World, MainActivity!</string>
+	<string name="drive_off_road_shortDesc">Hello World, MainActivity!</string>
+	<string name="drive_off_road_page">Hello World, MainActivity!</string>
+
+	<string name="drive_pronto_name">Hello World, MainActivity!</string>
+	<string name="drive_pronto_longDesc">Hello World, MainActivity!</string>
+	<string name="drive_pronto_shortDesc">Hello World, MainActivity!</string>
+	<string name="drive_pronto_page">Hello World, MainActivity!</string>
+
+	<string name="dual_shot_name">Hello World, MainActivity!</string>
+	<string name="dual_shot_longDesc">Hello World, MainActivity!</string>
+	<string name="dual_shot_shortDesc">Hello World, MainActivity!</string>
+	<string name="dual_shot_page">Hello World, MainActivity!</string>
+
+	<string name="elemental_mastery_name">Hello World, MainActivity!</string>
+	<string name="elemental_mastery_longDesc">Hello World, MainActivity!</string>
+	<string name="elemental_mastery_shortDesc">Hello World, MainActivity!</string>
+	<string name="elemental_mastery_page">Hello World, MainActivity!</string>
+
+	<string name="empower_name">Hello World, MainActivity!</string>
+	<string name="empower_longDesc">Hello World, MainActivity!</string>
+	<string name="empower_shortDesc">Hello World, MainActivity!</string>
+	<string name="empower_page">Hello World, MainActivity!</string>
+
+	<string name="expert_rider_name">Hello World, MainActivity!</string>
+	<string name="expert_rider_longDesc">Hello World, MainActivity!</string>
+	<string name="expert_rider_shortDesc">Hello World, MainActivity!</string>
+	<string name="expert_rider_page">Hello World, MainActivity!</string>
+
+	<string name="fast_cook_name">Hello World, MainActivity!</string>
+	<string name="fast_cook_longDesc">Hello World, MainActivity!</string>
+	<string name="fast_cook_shortDesc">Hello World, MainActivity!</string>
+	<string name="fast_cook_page">Hello World, MainActivity!</string>
+
+	<string name="fast_draw_name">Hello World, MainActivity!</string>
+	<string name="fast_draw_longDesc">Hello World, MainActivity!</string>
+	<string name="fast_draw_shortDesc">Hello World, MainActivity!</string>
+	<string name="fast_draw_page">Hello World, MainActivity!</string>
+
+	<string name="fast_rearm_name">Hello World, MainActivity!</string>
+	<string name="fast_rearm_longDesc">Hello World, MainActivity!</string>
+	<string name="fast_rearm_shortDesc">Hello World, MainActivity!</string>
+	<string name="fast_rearm_page">Hello World, MainActivity!</string>
+
+	<string name="fast_reload_name">Hello World, MainActivity!</string>
+	<string name="fast_reload_longDesc">Hello World, MainActivity!</string>
+	<string name="fast_reload_shortDesc">Hello World, MainActivity!</string>
+	<string name="fast_reload_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_cacophony_name">Hello World, MainActivity!</string>
+	<string name="fell_call_cacophony_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_cacophony_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_cacophony_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_call_of_defiance_name">Hello World, MainActivity!</string>
+	<string name="fell_call_call_of_defiance_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_call_of_defiance_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_call_of_defiance_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_ground_shaker_name">Hello World, MainActivity!</string>
+	<string name="fell_call_ground_shaker_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_ground_shaker_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_ground_shaker_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_heroic_ballad_name">Hello World, MainActivity!</string>
+	<string name="fell_call_heroic_ballad_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_heroic_ballad_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_heroic_ballad_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_reverberation_name">Hello World, MainActivity!</string>
+	<string name="fell_call_reverberation_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_reverberation_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_reverberation_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_signal_call_name">Hello World, MainActivity!</string>
+	<string name="fell_call_signal_call_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_signal_call_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_signal_call_page">Hello World, MainActivity!</string>
+
+	<string name="fell_call_sonic_blast_name">Hello World, MainActivity!</string>
+	<string name="fell_call_sonic_blast_longDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_sonic_blast_shortDesc">Hello World, MainActivity!</string>
+	<string name="fell_call_sonic_blast_page">Hello World, MainActivity!</string>
+
+	<string name="field_alchemist_name">Hello World, MainActivity!</string>
+	<string name="field_alchemist_longDesc">Hello World, MainActivity!</string>
+	<string name="field_alchemist_shortDesc">Hello World, MainActivity!</string>
+	<string name="field_alchemist_page">Hello World, MainActivity!</string>
+
+	<string name="field_marshal_magical_attack_name">Hello World, MainActivity!</string>
+	<string name="field_marshal_magical_attack_longDesc">Hello World, MainActivity!</string>
+	<string name="field_marshal_magical_attack_shortDesc">Hello World, MainActivity!</string>
+	<string name="field_marshal_magical_attack_page">Hello World, MainActivity!</string>
+
+	<string name="field_marshal_relentless_charge_name">Hello World, MainActivity!</string>
+	<string name="field_marshal_relentless_charge_longDesc">Hello World, MainActivity!</string>
+	<string name="field_marshal_relentless_charge_shortDesc">Hello World, MainActivity!</string>
+	<string name="field_marshal_relentless_charge_page">Hello World, MainActivity!</string>
+
+	<string name="field_marshal_shield_guard_name">Hello World, MainActivity!</string>
+	<string name="field_marshal_shield_guard_longDesc">Hello World, MainActivity!</string>
+	<string name="field_marshal_shield_guard_shortDesc">Hello World, MainActivity!</string>
+	<string name="field_marshal_shield_guard_page">Hello World, MainActivity!</string>
+
+	<string name="find_cover_name">Hello World, MainActivity!</string>
+	<string name="find_cover_longDesc">Hello World, MainActivity!</string>
+	<string name="find_cover_shortDesc">Hello World, MainActivity!</string>
+	<string name="find_cover_page">Hello World, MainActivity!</string>
+
+	<string name="fire_in_the_hole_name">Hello World, MainActivity!</string>
+	<string name="fire_in_the_hole_longDesc">Hello World, MainActivity!</string>
+	<string name="fire_in_the_hole_shortDesc">Hello World, MainActivity!</string>
+	<string name="fire_in_the_hole_page">Hello World, MainActivity!</string>
+
+	<string name="fleet_foot_name">Hello World, MainActivity!</string>
+	<string name="fleet_foot_longDesc">Hello World, MainActivity!</string>
+	<string name="fleet_foot_shortDesc">Hello World, MainActivity!</string>
+	<string name="fleet_foot_page">Hello World, MainActivity!</string>
+
+	<string name="free_style_name">Hello World, MainActivity!</string>
+	<string name="free_style_longDesc">Hello World, MainActivity!</string>
+	<string name="free_style_shortDesc">Hello World, MainActivity!</string>
+	<string name="free_style_page">Hello World, MainActivity!</string>
+
+	<string name="gang_name">Hello World, MainActivity!</string>
+	<string name="gang_longDesc">Hello World, MainActivity!</string>
+	<string name="gang_shortDesc">Hello World, MainActivity!</string>
+	<string name="gang_page">Hello World, MainActivity!</string>
+
+	<string name="get_away_name">Hello World, MainActivity!</string>
+	<string name="get_away_longDesc">Hello World, MainActivity!</string>
+	<string name="get_away_shortDesc">Hello World, MainActivity!</string>
+	<string name="get_away_page">Hello World, MainActivity!</string>
+
+	<string name="girded_name">Hello World, MainActivity!</string>
+	<string name="girded_longDesc">Hello World, MainActivity!</string>
+	<string name="girded_shortDesc">Hello World, MainActivity!</string>
+	<string name="girded_page">Hello World, MainActivity!</string>
+
+	<string name="good_breeding_name">Hello World, MainActivity!</string>
+	<string name="good_breeding_longDesc">Hello World, MainActivity!</string>
+	<string name="good_breeding_shortDesc">Hello World, MainActivity!</string>
+	<string name="good_breeding_page">Hello World, MainActivity!</string>
+
+	<string name="great_power_name">Hello World, MainActivity!</string>
+	<string name="great_power_longDesc">Hello World, MainActivity!</string>
+	<string name="great_power_shortDesc">Hello World, MainActivity!</string>
+	<string name="great_power_page">Hello World, MainActivity!</string>
+
+	<string name="grenadier_name">Hello World, MainActivity!</string>
+	<string name="grenadier_longDesc">Hello World, MainActivity!</string>
+	<string name="grenadier_shortDesc">Hello World, MainActivity!</string>
+	<string name="grenadier_page">Hello World, MainActivity!</string>
+
+	<string name="gunfighter_name">Hello World, MainActivity!</string>
+	<string name="gunfighter_longDesc">Hello World, MainActivity!</string>
+	<string name="gunfighter_shortDesc">Hello World, MainActivity!</string>
+	<string name="gunfighter_page">Hello World, MainActivity!</string>
+
+	<string name="head_butt_name">Hello World, MainActivity!</string>
+	<string name="head_butt_longDesc">Hello World, MainActivity!</string>
+	<string name="head_butt_shortDesc">Hello World, MainActivity!</string>
+	<string name="head_butt_page">Hello World, MainActivity!</string>
+
+	<string name="hit_the_deck_name">Hello World, MainActivity!</string>
+	<string name="hit_the_deck_longDesc">Hello World, MainActivity!</string>
+	<string name="hit_the_deck_shortDesc">Hello World, MainActivity!</string>
+	<string name="hit_the_deck_page">Hello World, MainActivity!</string>
+
+	<string name="hyper_awareness_name">Hello World, MainActivity!</string>
+	<string name="hyper_awareness_longDesc">Hello World, MainActivity!</string>
+	<string name="hyper_awareness_shortDesc">Hello World, MainActivity!</string>
+	<string name="hyper_awareness_page">Hello World, MainActivity!</string>
+
+	<string name="immunity_cold_name">Hello World, MainActivity!</string>
+	<string name="immunity_cold_longDesc">Hello World, MainActivity!</string>
+	<string name="immunity_cold_shortDesc">Hello World, MainActivity!</string>
+	<string name="immunity_cold_page">Hello World, MainActivity!</string>
+
+	<string name="immunity_corrosion_name">Hello World, MainActivity!</string>
+	<string name="immunity_corrosion_longDesc">Hello World, MainActivity!</string>
+	<string name="immunity_corrosion_shortDesc">Hello World, MainActivity!</string>
+	<string name="immunity_corrosion_page">Hello World, MainActivity!</string>
+
+	<string name="immunity_electricity_name">Hello World, MainActivity!</string>
+	<string name="immunity_electricity_longDesc">Hello World, MainActivity!</string>
+	<string name="immunity_electricity_shortDesc">Hello World, MainActivity!</string>
+	<string name="immunity_electricity_page">Hello World, MainActivity!</string>
+
+	<string name="immunity_fire_name">Hello World, MainActivity!</string>
+	<string name="immunity_fire_longDesc">Hello World, MainActivity!</string>
+	<string name="immunity_fire_shortDesc">Hello World, MainActivity!</string>
+	<string name="immunity_fire_page">Hello World, MainActivity!</string>
+
+	<string name="inscribe_formulae_name">Hello World, MainActivity!</string>
+	<string name="inscribe_formulae_longDesc">Hello World, MainActivity!</string>
+	<string name="inscribe_formulae_shortDesc">Hello World, MainActivity!</string>
+	<string name="inscribe_formulae_page">Hello World, MainActivity!</string>
+
+	<string name="iron_sentinel_name">Hello World, MainActivity!</string>
+	<string name="iron_sentinel_longDesc">Hello World, MainActivity!</string>
+	<string name="iron_sentinel_shortDesc">Hello World, MainActivity!</string>
+	<string name="iron_sentinel_page">Hello World, MainActivity!</string>
+
+	<string name="iron_will_name">Hello World, MainActivity!</string>
+	<string name="iron_will_longDesc">Hello World, MainActivity!</string>
+	<string name="iron_will_shortDesc">Hello World, MainActivity!</string>
+	<string name="iron_will_page">Hello World, MainActivity!</string>
+
+	<string name="keen_eyed_name">Hello World, MainActivity!</string>
+	<string name="keen_eyed_longDesc">Hello World, MainActivity!</string>
+	<string name="keen_eyed_shortDesc">Hello World, MainActivity!</string>
+	<string name="keen_eyed_page">Hello World, MainActivity!</string>
+
+	<string name="language_name">Hello World, MainActivity!</string>
+	<string name="language_longDesc">Hello World, MainActivity!</string>
+	<string name="language_shortDesc">Hello World, MainActivity!</string>
+	<string name="language_page">Hello World, MainActivity!</string>
+
+	<string name="legacy_of_bragg_name">Hello World, MainActivity!</string>
+	<string name="legacy_of_bragg_longDesc">Hello World, MainActivity!</string>
+	<string name="legacy_of_bragg_shortDesc">Hello World, MainActivity!</string>
+	<string name="legacy_of_bragg_page">Hello World, MainActivity!</string>
+
+	<string name="light_cavalry_name">:4)</string>
+	<string name="light_cavalry_longDesc">:4)</string>
+	<string name="light_cavalry_shortDesc">:4)</string>
+	<string name="light_cavalry_page">:4)</string>
+
+	<string name="load_bearing_name">Hello World, MainActivity!</string>
+	<string name="load_bearing_longDesc">Hello World, MainActivity!</string>
+	<string name="load_bearing_shortDesc">Hello World, MainActivity!</string>
+	<string name="load_bearing_page">Hello World, MainActivity!</string>
+
+	<string name="mage_killer_name">Hello World, MainActivity!</string>
+	<string name="mage_killer_longDesc">Hello World, MainActivity!</string>
+	<string name="mage_killer_shortDesc">Hello World, MainActivity!</string>
+	<string name="mage_killer_page">Hello World, MainActivity!</string>
+
+	<string name="marksman_name">Hello World, MainActivity!</string>
+	<string name="marksman_longDesc">Hello World, MainActivity!</string>
+	<string name="marksman_shortDesc">Hello World, MainActivity!</string>
+	<string name="marksman_page">Hello World, MainActivity!</string>
+
+	<string name="natural_leader_name">Hello World, MainActivity!</string>
+	<string name="natural_leader_longDesc">Hello World, MainActivity!</string>
+	<string name="natural_leader_shortDesc">Hello World, MainActivity!</string>
+	<string name="natural_leader_page">Hello World, MainActivity!</string>
+
+	<string name="night_fighter_name">Hello World, MainActivity!</string>
+	<string name="night_fighter_longDesc">Hello World, MainActivity!</string>
+	<string name="night_fighter_shortDesc">Hello World, MainActivity!</string>
+	<string name="night_fighter_page">Hello World, MainActivity!</string>
+
+	<string name="parry_name">Hello World, MainActivity!</string>
+	<string name="parry_longDesc">Hello World, MainActivity!</string>
+	<string name="parry_shortDesc">Hello World, MainActivity!</string>
+	<string name="parry_page">Hello World, MainActivity!</string>
+
+	<string name="pathfinder_name">Hello World, MainActivity!</string>
+	<string name="pathfinder_longDesc">Hello World, MainActivity!</string>
+	<string name="pathfinder_shortDesc">Hello World, MainActivity!</string>
+	<string name="pathfinder_page">Hello World, MainActivity!</string>
+
+	<string name="poison_resistance_name">Hello World, MainActivity!</string>
+	<string name="poison_resistance_longDesc">Hello World, MainActivity!</string>
+	<string name="poison_resistance_shortDesc">Hello World, MainActivity!</string>
+	<string name="poison_resistance_page">Hello World, MainActivity!</string>
+
+	<string name="port_of_call_name">Hello World, MainActivity!</string>
+	<string name="port_of_call_longDesc">Hello World, MainActivity!</string>
+	<string name="port_of_call_shortDesc">Hello World, MainActivity!</string>
+	<string name="port_of_call_page">Hello World, MainActivity!</string>
+
+	<string name="precision_strike_name">Hello World, MainActivity!</string>
+	<string name="precision_strike_longDesc">Hello World, MainActivity!</string>
+	<string name="precision_strike_shortDesc">Hello World, MainActivity!</string>
+	<string name="precision_strike_page">Hello World, MainActivity!</string>
+
+	<string name="press_the_attack_name">Hello World, MainActivity!</string>
+	<string name="press_the_attack_longDesc">Hello World, MainActivity!</string>
+	<string name="press_the_attack_shortDesc">Hello World, MainActivity!</string>
+	<string name="press_the_attack_page">Hello World, MainActivity!</string>
+
+	<string name="privilege_name">Hello World, MainActivity!</string>
+	<string name="privilege_longDesc">Hello World, MainActivity!</string>
+	<string name="privilege_shortDesc">Hello World, MainActivity!</string>
+	<string name="privilege_page">Hello World, MainActivity!</string>
+
+	<string name="prowl_name">Hello World, MainActivity!</string>
+	<string name="prowl_longDesc">Hello World, MainActivity!</string>
+	<string name="prowl_shortDesc">Hello World, MainActivity!</string>
+	<string name="prowl_page">Hello World, MainActivity!</string>
+
+	<string name="pursuit_name">Hello World, MainActivity!</string>
+	<string name="pursuit_longDesc">Hello World, MainActivity!</string>
+	<string name="pursuit_shortDesc">Hello World, MainActivity!</string>
+	<string name="pursuit_page">Hello World, MainActivity!</string>
+
+	<string name="quick_work_name">Hello World, MainActivity!</string>
+	<string name="quick_work_longDesc">Hello World, MainActivity!</string>
+	<string name="quick_work_shortDesc">Hello World, MainActivity!</string>
+	<string name="quick_work_page">Hello World, MainActivity!</string>
+
+	<string name="rallying_cry_name">Hello World, MainActivity!</string>
+	<string name="rallying_cry_longDesc">Hello World, MainActivity!</string>
+	<string name="rallying_cry_shortDesc">Hello World, MainActivity!</string>
+	<string name="rallying_cry_page">Hello World, MainActivity!</string>
+
+	<string name="relentless_charge_name">Hello World, MainActivity!</string>
+	<string name="relentless_charge_longDesc">Hello World, MainActivity!</string>
+	<string name="relentless_charge_shortDesc">Hello World, MainActivity!</string>
+	<string name="relentless_charge_page">Hello World, MainActivity!</string>
+
+	<string name="resourceful_name">Hello World, MainActivity!</string>
+	<string name="resourceful_longDesc">Hello World, MainActivity!</string>
+	<string name="resourceful_shortDesc">Hello World, MainActivity!</string>
+	<string name="resourceful_page">Hello World, MainActivity!</string>
+
+	<string name="retaliatory_strike_name">Hello World, MainActivity!</string>
+	<string name="retaliatory_strike_longDesc">Hello World, MainActivity!</string>
+	<string name="retaliatory_strike_shortDesc">Hello World, MainActivity!</string>
+	<string name="retaliatory_strike_page">Hello World, MainActivity!</string>
+
+	<string name="return_fire_ability_name">Hello World, MainActivity!</string>
+	<string name="return_fire_ability_longDesc">Hello World, MainActivity!</string>
+	<string name="return_fire_ability_shortDesc">Hello World, MainActivity!</string>
+	<string name="return_fire_ability_page">Hello World, MainActivity!</string>
+
+	<string name="ride_by_attack_name">Hello World, MainActivity!</string>
+	<string name="ride_by_attack_longDesc">Hello World, MainActivity!</string>
+	<string name="ride_by_attack_shortDesc">Hello World, MainActivity!</string>
+	<string name="ride_by_attack_page">Hello World, MainActivity!</string>
+
+	<string name="riposte_name">Hello World, MainActivity!</string>
+	<string name="riposte_longDesc">Hello World, MainActivity!</string>
+	<string name="riposte_shortDesc">Hello World, MainActivity!</string>
+	<string name="riposte_page">Hello World, MainActivity!</string>
+
+	<string name="rock_solid_name">Hello World, MainActivity!</string>
+	<string name="rock_solid_longDesc">Hello World, MainActivity!</string>
+	<string name="rock_solid_shortDesc">Hello World, MainActivity!</string>
+	<string name="rock_solid_page">Hello World, MainActivity!</string>
+
+	<string name="roll_with_it_name">Hello World, MainActivity!</string>
+	<string name="roll_with_it_longDesc">Hello World, MainActivity!</string>
+	<string name="roll_with_it_shortDesc">Hello World, MainActivity!</string>
+	<string name="roll_with_it_page">Hello World, MainActivity!</string>
+
+	<string name="saddle_shot_name">Hello World, MainActivity!</string>
+	<string name="saddle_shot_longDesc">Hello World, MainActivity!</string>
+	<string name="saddle_shot_shortDesc">Hello World, MainActivity!</string>
+	<string name="saddle_shot_page">Hello World, MainActivity!</string>
+
+	<string name="scrounge_name">Hello World, MainActivity!</string>
+	<string name="scrounge_longDesc">Hello World, MainActivity!</string>
+	<string name="scrounge_shortDesc">Hello World, MainActivity!</string>
+	<string name="scrounge_page">Hello World, MainActivity!</string>
+
+	<string name="sentry_name">Hello World, MainActivity!</string>
+	<string name="sentry_longDesc">Hello World, MainActivity!</string>
+	<string name="sentry_shortDesc">Hello World, MainActivity!</string>
+	<string name="sentry_page">Hello World, MainActivity!</string>
+
+	<string name="set_defense_name">Hello World, MainActivity!</string>
+	<string name="set_defense_longDesc">Hello World, MainActivity!</string>
+	<string name="set_defense_shortDesc">Hello World, MainActivity!</string>
+	<string name="set_defense_page">Hello World, MainActivity!</string>
+
+	<string name="shadow_magic_name">Hello World, MainActivity!</string>
+	<string name="shadow_magic_longDesc">Hello World, MainActivity!</string>
+	<string name="shadow_magic_shortDesc">Hello World, MainActivity!</string>
+	<string name="shadow_magic_page">Hello World, MainActivity!</string>
+
+	<string name="shield_guard_name">Hello World, MainActivity!</string>
+	<string name="shield_guard_longDesc">Hello World, MainActivity!</string>
+	<string name="shield_guard_shortDesc">Hello World, MainActivity!</string>
+	<string name="shield_guard_page">Hello World, MainActivity!</string>
+
+	<string name="shield_slam_name">Hello World, MainActivity!</string>
+	<string name="shield_slam_longDesc">Hello World, MainActivity!</string>
+	<string name="shield_slam_shortDesc">Hello World, MainActivity!</string>
+	<string name="shield_slam_page">Hello World, MainActivity!</string>
+
+	<string name="signal_language_name">Hello World, MainActivity!</string>
+	<string name="signal_language_longDesc">Hello World, MainActivity!</string>
+	<string name="signal_language_shortDesc">Hello World, MainActivity!</string>
+	<string name="signal_language_page">Hello World, MainActivity!</string>
+
+	<string name="sniper_name">Hello World, MainActivity!</string>
+	<string name="sniper_longDesc">Hello World, MainActivity!</string>
+	<string name="sniper_shortDesc">Hello World, MainActivity!</string>
+	<string name="sniper_page">Hello World, MainActivity!</string>
+
+	<string name="specialization_name">Hello World, MainActivity!</string>
+	<string name="specialization_longDesc">Hello World, MainActivity!</string>
+	<string name="specialization_shortDesc">Hello World, MainActivity!</string>
+	<string name="specialization_page">Hello World, MainActivity!</string>
+
+	<string name="steady_name">Hello World, MainActivity!</string>
+	<string name="steady_longDesc">Hello World, MainActivity!</string>
+	<string name="steady_shortDesc">Hello World, MainActivity!</string>
+	<string name="steady_page">Hello World, MainActivity!</string>
+
+	<string name="steamo_name">Hello World, MainActivity!</string>
+	<string name="steamo_longDesc">Hello World, MainActivity!</string>
+	<string name="steamo_shortDesc">Hello World, MainActivity!</string>
+	<string name="steamo_page">Hello World, MainActivity!</string>
+
+	<string name="sucker_name">Hello World, MainActivity!</string>
+	<string name="sucker_longDesc">Hello World, MainActivity!</string>
+	<string name="sucker_shortDesc">Hello World, MainActivity!</string>
+	<string name="sucker_page">Hello World, MainActivity!</string>
+
+	<string name="swift_hunter_name">Hello World, MainActivity!</string>
+	<string name="swift_hunter_longDesc">Hello World, MainActivity!</string>
+	<string name="swift_hunter_shortDesc">Hello World, MainActivity!</string>
+	<string name="swift_hunter_page">Hello World, MainActivity!</string>
+
+	<string name="swift_rider_name">Hello World, MainActivity!</string>
+	<string name="swift_rider_longDesc">Hello World, MainActivity!</string>
+	<string name="swift_rider_shortDesc">Hello World, MainActivity!</string>
+	<string name="swift_rider_page">Hello World, MainActivity!</string>
+
+	<string name="take_down_name">Hello World, MainActivity!</string>
+	<string name="take_down_longDesc">Hello World, MainActivity!</string>
+	<string name="take_down_shortDesc">Hello World, MainActivity!</string>
+	<string name="take_down_page">Hello World, MainActivity!</string>
+
+	<string name="targeteer_name">Hello World, MainActivity!</string>
+	<string name="targeteer_longDesc">Hello World, MainActivity!</string>
+	<string name="targeteer_shortDesc">Hello World, MainActivity!</string>
+	<string name="targeteer_page">Hello World, MainActivity!</string>
+
+	<string name="team_leader_name">Hello World, MainActivity!</string>
+	<string name="team_leader_longDesc">Hello World, MainActivity!</string>
+	<string name="team_leader_shortDesc">Hello World, MainActivity!</string>
+	<string name="team_leader_page">Hello World, MainActivity!</string>
+
+	<string name="traceless_path_name">Hello World, MainActivity!</string>
+	<string name="traceless_path_longDesc">Hello World, MainActivity!</string>
+	<string name="traceless_path_shortDesc">Hello World, MainActivity!</string>
+	<string name="traceless_path_page">Hello World, MainActivity!</string>
+
+	<string name="truth_reader_name">Hello World, MainActivity!</string>
+	<string name="truth_reader_longDesc">Hello World, MainActivity!</string>
+	<string name="truth_reader_shortDesc">Hello World, MainActivity!</string>
+	<string name="truth_reader_page">Hello World, MainActivity!</string>
+
+	<string name="tune_up_name">Hello World, MainActivity!</string>
+	<string name="tune_up_longDesc">Hello World, MainActivity!</string>
+	<string name="tune_up_shortDesc">Hello World, MainActivity!</string>
+	<string name="tune_up_page">Hello World, MainActivity!</string>
+
+	<string name="two_weapon_fighting_name">Hello World, MainActivity!</string>
+	<string name="two_weapon_fighting_longDesc">Hello World, MainActivity!</string>
+	<string name="two_weapon_fighting_shortDesc">Hello World, MainActivity!</string>
+	<string name="two_weapon_fighting_page">Hello World, MainActivity!</string>
+
+	<string name="university_education_name">Hello World, MainActivity!</string>
+	<string name="university_education_longDesc">Hello World, MainActivity!</string>
+	<string name="university_education_shortDesc">Hello World, MainActivity!</string>
+	<string name="university_education_page">Hello World, MainActivity!</string>
+
+	<string name="waylay_name">Hello World, MainActivity!</string>
+	<string name="waylay_longDesc">Hello World, MainActivity!</string>
+	<string name="waylay_shortDesc">Hello World, MainActivity!</string>
+	<string name="waylay_page">Hello World, MainActivity!</string>
+	
+</resources>

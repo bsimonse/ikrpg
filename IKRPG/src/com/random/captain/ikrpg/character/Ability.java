@@ -85,11 +85,7 @@ public class Ability implements Parcelable, zzPrereqCheck
 			}
 		}
 
-		@Override
-		public Ability[] newArray(int size)
-		{
-			return new Ability[size];
-		}
+		@Override public Ability[] newArray(int size){return new Ability[size];}
 	};
 
 	@Override public int describeContents(){return 0;}
