@@ -19,12 +19,12 @@ public enum Archetype implements zzPrereqCheck
 					else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
 					
 					Bundle args = getArguments();
-					int value = myChar.statsBundle.getBaseStat(Stat.ARCANE);
+					int value = myChar.getBaseStat(Stat.ARCANE);
 					args.putInt(PREV_BASE_ARCANE_STAT, value);
-					if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.statsBundle.setBaseStat(Stat.ARCANE, 3);}
-					else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.statsBundle.setBaseStat(Stat.ARCANE, 2);}
+					if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.setBaseStat(Stat.ARCANE, 3);}
+					else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.setBaseStat(Stat.ARCANE, 2);}
 				}
-				@Override public void undoHook(){myChar.statsBundle.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
+				@Override public void undoHook(){myChar.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
 				@Override public int getPriority(){return 0;} //no choice necessary
 				@Override public boolean hasUI(){return false;}
 			}
@@ -90,10 +90,10 @@ public enum Archetype implements zzPrereqCheck
 				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 				{
 					super.startHook(pChar, pDelegate);
-					myChar.statsBundle.setBaseStat(Stat.ARCANE,0);
-					myChar.statsBundle.setMaxStat(Stat.ARCANE,0);
+					myChar.setBaseStat(Stat.ARCANE,0);
+					myChar.setMaxStat(Stat.ARCANE,0);
 				}
-				@Override public void undoHook(){myChar.statsBundle.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
+				@Override public void undoHook(){myChar.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
 				@Override public int getPriority(){return 0;} //no choice necessary
 				@Override public boolean hasUI(){return false;}
 			};

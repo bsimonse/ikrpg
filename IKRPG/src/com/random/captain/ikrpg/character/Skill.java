@@ -1,8 +1,11 @@
 package com.random.captain.ikrpg.character;
 
+import com.google.gson.*;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import java.lang.reflect.Type;
 
 public class Skill implements Parcelable
 {
@@ -17,7 +20,7 @@ public class Skill implements Parcelable
 	public Skill(SkillEnum pSkill, String pQualifier)
 	{
 		skill = pSkill;
-		qualifier = pQualifier==null ? "" : pQualifier;
+		qualifier = pQualifier == null ? "" : pQualifier;
 	}
 	
 	@Override public String toString(){
@@ -89,4 +92,26 @@ public class Skill implements Parcelable
 	};
 
 	@Override public int describeContents(){return 0;}
+}
+	
+class SkillSerializer implements JsonSerializer<Skill>
+{
+	@Override
+	public JsonElement serialize(Skill pSkill, Type pType, JsonSerializationContext pContext)
+	{
+		Log.i("IKRPG","Putting in skill");
+		int ordinal = pSkill.skillEnum().ordinal();
+		return new JsonPrimitive(ordinal);
+	}
+}
+
+class SkillDeserializer implements JsonDeserializer<Skill>
+{
+	@Override
+	public Skill deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		int ordinal = pJson.getAsInt();
+		Log.i("IKRPG","Getting out skill "+ordinal);
+		return new Skill(SkillEnum.values()[ordinal]);
+	}
 }

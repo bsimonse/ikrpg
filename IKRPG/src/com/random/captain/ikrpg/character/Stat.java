@@ -40,8 +40,8 @@ public enum Stat implements Parcelable
 	public String longName(){return longName;}
 	public String shortName(){return shortName;}
 	
-	@Override
-	public String toString(){return longName+" ("+shortName+")";}
+	//@Override
+	//public String toString(){return longName+" ("+shortName+")";}
 	
 	/* Parcelling */
 	public void writeToParcel(Parcel toParcel, int flags)

@@ -166,14 +166,20 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		{onBackPressed();}
 	}
 	
-	public void createCharacter() //throws CharacterNotValidException
+	protected void createCharacter() //throws CharacterNotValidException
 	{
+		Log.i("IKRPG","Making character...");
 		Collection<zzCreateCharacterHook> aHooks;
 		postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 		
 		//Race
 		//Mostly for stats, and post-create bonuses
-		buildingChar.statsBundle = new zzStatsBundle(buildingChar.race.startStats(), buildingChar.race.heroStats());
+		for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
+		{buildingChar.baseStats.put(startStat.first, startStat.second);Log.i("IKRPG","Putting base stat "+startStat.first.toString());}
+		for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
+		{buildingChar.maxStats.put(maxStat.first, maxStat.second);}
+		buildingChar.deriveStats();
+		
 		aHooks = buildingChar.race.postCreateHooks();
 		if(aHooks != null){postCreateHooks.addAll(aHooks);}
 		
@@ -183,7 +189,8 @@ public class NewCharacterServiceActivity extends FragmentActivity
 		if(aHooks!=null){postCreateHooks.addAll(aHooks);}
 		
 		//skills
-		buildingChar.skillsBundle = new zzSkillsBundle(buildingChar.statsBundle, buildingChar.careers);
+		buildingChar.setBaseSkills(buildingChar.careers);
+		buildingChar.deriveSkillCheckLevels();
 		
 		//Careers; Abilities, spells, and post hooks
 		for(Career career : buildingChar.careers)
@@ -207,6 +214,8 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	public void characterComplete()
 	{
 		PC finalChar = new PC(buildingChar);
+		
+		Log.i("IKRPG",""+finalChar.getSkillCheckLevel(SkillEnum.RIFLE.make()));
 		
 		//make character sheet
 		new CharacterSheetServiceTask(this).execute(finalChar);

@@ -167,7 +167,7 @@ class ChooseCareerFragment extends zzCreateCharacterHook
 	
 class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 {
-	private zzStatsBundle oldStats;
+	private Map<Stat, Integer> oldBaseStats;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
@@ -194,19 +194,16 @@ class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 
 	@Override void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 	{
-		myChar = pChar;
-		delegate = pDelegate;
-
-		oldStats = myChar.statsBundle.clone();
+		super.startHook(pChar, pDelegate);
+		oldBaseStats = myChar.baseStats;
 	}
 
 	@Override public void undoHook()
 	{
-		zzStatsBundle charStats = myChar.statsBundle;
 		for(Stat stat : Stat.values())
 		{
-			int oldValue = oldStats.getBaseStat(stat);
-			if(oldValue >= 0){charStats.setBaseStat(stat, oldValue);}
+			int oldValue = oldBaseStats.get(stat);
+			if(oldValue >= 0){myChar.setBaseStat(stat, oldValue);}
 		}
 	}
 
@@ -243,9 +240,8 @@ class ChooseAdvancementPointsAdapter extends BaseAdapter
 
 	public void lockInStats()
 	{
-		zzStatsBundle stats = character.statsBundle;
 		for(Stat stat : eligibleStats.keySet())
-		{stats.setBaseStat(stat, eligibleStats.get(stat));}
+		{character.setBaseStat(stat, eligibleStats.get(stat));}
 	}
 
 	@Override public int getCount(){return eStatsList.size();}

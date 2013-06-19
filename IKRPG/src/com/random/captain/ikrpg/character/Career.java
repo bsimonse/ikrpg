@@ -59,10 +59,10 @@ public enum Career implements zzPrereqCheck
 							@Override public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 							{
 								incrementedSkill = choices[which];
-								incrementedSkillPrevValue = myChar.skillsBundle.getBaseSkillLevel(new Skill(incrementedSkill));
+								incrementedSkillPrevValue = myChar.getSkillBaseLevel(new Skill(incrementedSkill));
 								int currentLevel = incrementedSkillPrevValue + 1;
 								if(currentLevel > 2){currentLevel = 2;}
-								myChar.skillsBundle.setSkillLevel(new Skill(incrementedSkill), currentLevel);
+								myChar.setSkillLevel(new Skill(incrementedSkill), currentLevel);
 								delegate.hookComplete();
 							}
 						});
@@ -74,7 +74,7 @@ public enum Career implements zzPrereqCheck
 					}
 					
 					@Override public boolean hasUI()
-					{return (myChar.getSkillLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillLevel(SkillEnum.RIFLE) < 2);}
+					{return (myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillBaseLevel(SkillEnum.RIFLE) < 2);}
 					
 				 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 				 	{	
@@ -83,27 +83,27 @@ public enum Career implements zzPrereqCheck
 						
 						if(!hasUI())
 						{
-							boolean handWeaponMaxed = myChar.getSkillLevel(SkillEnum.HAND_WEAPON) == 2;
-							boolean rifleMaxed = myChar.getSkillLevel(SkillEnum.RIFLE) == 2;
+							boolean handWeaponMaxed = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) == 2;
+							boolean rifleMaxed = myChar.getSkillBaseLevel(SkillEnum.RIFLE) == 2;
 							
 							//auto-bump the appropriate skill
 							if(rifleMaxed && !handWeaponMaxed)
 							{
 								incrementedSkill = SkillEnum.HAND_WEAPON;
-								incrementedSkillPrevValue = myChar.getSkillLevel(SkillEnum.HAND_WEAPON);
-								myChar.skillsBundle.setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), incrementedSkillPrevValue+1);
+								incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON);
+								myChar.setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), incrementedSkillPrevValue+1);
 							}
 							else if(!rifleMaxed && handWeaponMaxed)
 							{
 								incrementedSkill = SkillEnum.RIFLE;
-								incrementedSkillPrevValue = myChar.getSkillLevel(SkillEnum.RIFLE);
-								myChar.skillsBundle.setSkillLevel(new Skill(SkillEnum.RIFLE), incrementedSkillPrevValue+1);
+								incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.RIFLE);
+								myChar.setSkillLevel(new Skill(SkillEnum.RIFLE), incrementedSkillPrevValue+1);
 							}
 						}
 					}
 					
 					@Override public void undoHook()
-					{myChar.skillsBundle.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
+					{myChar.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
 					
 					@Override public int getPriority(){return 50;}
 			  }}),
