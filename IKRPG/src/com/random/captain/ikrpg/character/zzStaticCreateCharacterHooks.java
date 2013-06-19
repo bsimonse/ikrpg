@@ -195,7 +195,8 @@ class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	@Override void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 	{
 		super.startHook(pChar, pDelegate);
-		oldBaseStats = myChar.baseStats;
+		oldBaseStats = new HashMap<Stat, Integer>();
+		oldBaseStats.putAll(myChar.baseStats);
 	}
 
 	@Override public void undoHook()
