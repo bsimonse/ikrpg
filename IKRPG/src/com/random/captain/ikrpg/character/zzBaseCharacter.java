@@ -1,13 +1,14 @@
 package com.random.captain.ikrpg.character;
 
+import com.google.gson.*;
 import java.util.*;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.util.Pair;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
 
 class zzBaseCharacter implements Parcelable
 {
@@ -23,10 +24,10 @@ class zzBaseCharacter implements Parcelable
 	Set<Spell> spells;
 	
 	Map<Skill, Integer> baseSkills;
-	Map<Skill, Integer> activeSkills;
+	transient Map<Skill, Integer> activeSkills;
 	Map<String, zzModifier<Skill>> skillModifiers;
 	
-	Map<Stat, Integer> activeStats;
+	transient Map<Stat, Integer> activeStats;
 	Map<Stat, Integer> baseStats;
 	Map<Stat, Integer> maxStats;
 	Map<String, zzModifier<Stat>> statModifiers;
@@ -36,7 +37,6 @@ class zzBaseCharacter implements Parcelable
 	
 	zzBaseCharacter()
 	{
-		Log.i("IKRPG","Made new, blank, character");
 		fluff = new Fluff();
 		careers = new HashSet<Career>();
 		abilities = new HashSet<Ability>();
@@ -162,7 +162,6 @@ class zzBaseCharacter implements Parcelable
 	
 	void deriveSkillCheckLevels()
 	{
-		Log.i("IKRPG","Deriving skills...");
 		//reset to base
 		activeSkills.clear();
 		activeSkills.putAll(baseSkills);
@@ -498,20 +497,181 @@ class zzBaseCharacter implements Parcelable
 	public String toJson()
 	{
 		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(Skill.class,new SkillSerializer());
-		//builder.registerTypeAdapter(zzSkillsBundle.class,new zzSkillsBundleSerializer());
-
+		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new SkillMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new StatMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Skill>>>(){}.getType(), new SkillModifierMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Stat>>>(){}.getType(), new StatModifierMapSerializer());
 		Gson gson = builder.create();
 		return gson.toJson(this);
 	}
 
-	public static zzBaseCharacter fromJson(String json)
+	public static zzBaseCharacter fromJson(String jsonString)
 	{
 		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(Skill.class,new SkillDeserializer());
-		//builder.registerTypeAdapter(zzSkillsBundle.class,new zzSkillsBundleDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new SkillMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new StatMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Skill>>>(){}.getType(), new SkillModifierMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Stat>>>(){}.getType(), new StatModifierMapDeserializer());
 		Gson gson = builder.create();
+		zzBaseCharacter myChar = gson.fromJson(jsonString, zzBaseCharacter.class);
+		
+		//rederive
+		myChar.deriveStats();
+		myChar.deriveSkillCheckLevels();
+		myChar.level = zzLevel.getLevelForEXP(myChar.exp);
+		
+		return myChar;
+	}
+}
+	
+class SkillMapSerializer implements JsonSerializer<Map<Skill, Integer>>
+{
+	@Override
+	public JsonElement serialize(Map<Skill, Integer> pSkills, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(Skill skill : pSkills.keySet())
+		{
+			obj = new JsonObject();
+			obj.addProperty("skillOrdinal",skill.skillEnum().ordinal());
+			obj.addProperty("skillQualifier",skill.qualifier());
+			obj.addProperty("level",pSkills.get(skill));
+			array.add(obj);
+		}
+		
+		return array;
+	}
+}
+	
+class SkillMapDeserializer implements JsonDeserializer<Map<Skill,Integer>>
+{
+	@Override
+	public Map<Skill,Integer> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<Skill,Integer> skillMap = new HashMap<Skill,Integer>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonObject skillJson : array)
+		{
+			SkillEnum skill = SkillEnum.values()[skillJson.get("skillOrdinal").getAsInt()];
+			skillMap.put(new Skill(skill, skillJson.get("skillQualifier").getAsString()),skillJson.get("level").getAsInt());
+		}
+		
+		return skillMap;
+	}
+}
+	
+class StatMapSerializer implements JsonSerializer<Map<Stat, Integer>>
+{
+	@Override
+	public JsonElement serialize(Map<Stat, Integer> pStats, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(Stat stat : pStats.keySet())
+		{
+			obj = new JsonObject();
+			obj.addProperty("statOrdinal",stat.ordinal());
+			obj.addProperty("level",pStats.get(stat));
+			array.add(obj);
+		}
 
-		return gson.fromJson(json, zzBaseCharacter.class);
+		return array;
+	}
+}
+
+class StatMapDeserializer implements JsonDeserializer<Map<Stat,Integer>>
+{
+	@Override
+	public Map<Stat,Integer> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<Stat,Integer> statMap = new HashMap<Stat,Integer>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonObject statJson : array)
+		{
+			statMap.put(Stat.values()[statJson.get("statOrdinal").getAsInt()],statJson.get("level").getAsInt());
+		}
+
+		return statMap;
+	}
+}
+
+class SkillModifierMapSerializer implements JsonSerializer<Map<String, zzModifier<Skill>>>
+{
+	@Override
+	public JsonElement serialize(Map<String, zzModifier<Skill>> pMods, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(String modName : pMods.keySet())
+		{
+			zzModifier<Skill> modifier = pMods.get(modName);
+			obj = new JsonObject();
+			obj.addProperty("modifierName",modName);
+			obj.addProperty("modifierSkillOrdinal",modifier.trait.skillEnum().ordinal());
+			obj.addProperty("modifierSkillQualifier",modifier.trait.qualifier());
+			obj.addProperty("value",modifier.value);
+			array.add(obj);
+		}
+
+		return array;
+	}
+}
+
+class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, zzModifier<Skill>>>
+{
+	@Override
+	public Map<String, zzModifier<Skill>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<String, zzModifier<Skill>> modMap = new HashMap<String, zzModifier<Skill>>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonObject modJson : array)
+		{
+			SkillEnum se = SkillEnum.values()[modJson.get("modifierSkillOrdinal").getAsInt()];
+			Skill s = new Skill(se, modJson.get("modifierSkillQualifier").getAsString());
+			zzModifier<Skill> myMod = new zzModifier<Skill>(s, modJson.get("value").getAsInt());
+			modMap.put(modJson.get("modifierName").getAsString(),myMod);
+		}
+
+		return modMap;
+	}
+}
+	
+class StatModifierMapSerializer implements JsonSerializer<Map<String, zzModifier<Stat>>>
+{
+	@Override
+	public JsonElement serialize(Map<String, zzModifier<Stat>> pMods, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(String modName : pMods.keySet())
+		{
+			zzModifier<Stat> modifier = pMods.get(modName);
+			obj = new JsonObject();
+			obj.addProperty("modifierName",modName);
+			obj.addProperty("modifierStatOrdinal",modifier.trait.ordinal());
+			obj.addProperty("value",modifier.value);
+			array.add(obj);
+		}
+
+		return array;
+	}
+}
+
+class StatModifierMapDeserializer implements JsonDeserializer<Map<String, zzModifier<Stat>>>
+{
+	@Override
+	public Map<String, zzModifier<Stat>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<String, zzModifier<Stat>> modMap = new HashMap<String, zzModifier<Stat>>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonObject modJson : array)
+		{
+			Stat stat = Stat.values()[modJson.get("modifierStatOrdinal").getAsInt()];
+			zzModifier<Stat> myMod = new zzModifier<Stat>(stat, modJson.get("value").getAsInt());
+			modMap.put(modJson.get("modifierName").getAsString(),myMod);
+		}
+
+		return modMap;
 	}
 }

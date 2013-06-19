@@ -59,7 +59,12 @@ public class MainActivity extends FragmentActivity
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");
-					Log.i("IKRPG",myChar.toString());
+					//Log.i("IKRPG",myChar.toString());
+					
+					String json = myChar.toJson();
+					PC other = PC.fromJson(json);
+					Log.i("IKRPG",json);
+					Log.i("IKRPG",other.toString());
 				}
 				else
 				{Log.i("IKRPG","Character didn't come back...");}

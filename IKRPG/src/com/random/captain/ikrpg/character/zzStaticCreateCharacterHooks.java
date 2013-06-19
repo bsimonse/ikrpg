@@ -278,7 +278,6 @@ class ChooseAdvancementPointsAdapter extends BaseAdapter
 					{
 						increases++;
 						eligibleStats.put(pStat, newValue);
-						Log.i("IKRPG","New value of "+pStat.shortName()+" is "+newValue);
 						notifyDataSetChanged();
 					}
 				}
@@ -294,7 +293,6 @@ class ChooseAdvancementPointsAdapter extends BaseAdapter
 					{
 						increases--;
 						eligibleStats.put(pStat, newValue);
-						Log.i("IKRPG","New value of "+pStat.shortName()+" is "+newValue);
 						notifyDataSetChanged();
 					}
 				}

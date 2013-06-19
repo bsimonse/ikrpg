@@ -10,8 +10,8 @@ class zzModifier<S extends Parcelable> implements Parcelable
 	S trait;
 	Class<S> genericClass;
 	
-	private zzModifier (S pTrait){this(pTrait, 0);}	
-	private zzModifier(S pTrait, int pValue)
+	zzModifier (S pTrait){this(pTrait, 0);}	
+	zzModifier(S pTrait, int pValue)
 	{
 		trait = pTrait;
 		value = pValue;
@@ -22,11 +22,11 @@ class zzModifier<S extends Parcelable> implements Parcelable
 	//Thanks, S.O.!
 	//
 	//All access is through these static methods for simplicity.
-	static <S2 extends Parcelable> zzModifier<S2> onTrait(S2 pTrait, int pValue)
+	/*static <S2 extends Parcelable> zzModifier<S2> onTrait(S2 pTrait, int pValue)
 	{return new zzModifier<S2>(pTrait, pValue);}
 	
 	static <S2 extends Parcelable> zzModifier<S2> onTrait(S2 pTrait)
-	{return new zzModifier<S2>(pTrait);}
+	{return new zzModifier<S2>(pTrait);}*/
 	
 	//future improvement will allow for setting here, rather than incrementing
 	int modifiedValue(int base){return base + value;}
@@ -53,12 +53,12 @@ class zzModifier<S extends Parcelable> implements Parcelable
 				Class which = (Class)in.readSerializable();
 				int value = in.readInt();
 				Parcelable trait = in.readParcelable(which.getClassLoader());
-				return zzModifier.onTrait(trait, value);
+				return new zzModifier(trait, value);
 			}
 			catch(Exception e)
 			{
 				Log.e("IKRPG","Bad news, dude, Modifier didn't Parcel correctly!");
-				return zzModifier.onTrait(null, 0);
+				return null;//ew zzModifier(null, 0);
 			}
 		}
 

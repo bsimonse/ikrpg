@@ -232,8 +232,6 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 		int militaryIndex = 4;
 		int occupIndex = 10;
 		
-		Log.i("IKRPG","Starting non-standard skills...");
-		
 		for(Pair<Skill,Integer> skill : trainedSkills)
 		{
 			int count = -1;

@@ -93,25 +93,3 @@ public class Skill implements Parcelable
 
 	@Override public int describeContents(){return 0;}
 }
-	
-class SkillSerializer implements JsonSerializer<Skill>
-{
-	@Override
-	public JsonElement serialize(Skill pSkill, Type pType, JsonSerializationContext pContext)
-	{
-		Log.i("IKRPG","Putting in skill");
-		int ordinal = pSkill.skillEnum().ordinal();
-		return new JsonPrimitive(ordinal);
-	}
-}
-
-class SkillDeserializer implements JsonDeserializer<Skill>
-{
-	@Override
-	public Skill deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
-	{
-		int ordinal = pJson.getAsInt();
-		Log.i("IKRPG","Getting out skill "+ordinal);
-		return new Skill(SkillEnum.values()[ordinal]);
-	}
-}

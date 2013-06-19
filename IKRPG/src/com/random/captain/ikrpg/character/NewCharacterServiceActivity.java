@@ -168,14 +168,13 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	
 	protected void createCharacter() //throws CharacterNotValidException
 	{
-		Log.i("IKRPG","Making character...");
 		Collection<zzCreateCharacterHook> aHooks;
 		postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 		
 		//Race
 		//Mostly for stats, and post-create bonuses
 		for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
-		{buildingChar.baseStats.put(startStat.first, startStat.second);Log.i("IKRPG","Putting base stat "+startStat.first.toString());}
+		{buildingChar.baseStats.put(startStat.first, startStat.second);}
 		for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
 		{buildingChar.maxStats.put(maxStat.first, maxStat.second);}
 		buildingChar.deriveStats();
@@ -214,8 +213,6 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	public void characterComplete()
 	{
 		PC finalChar = new PC(buildingChar);
-		
-		Log.i("IKRPG",""+finalChar.getSkillCheckLevel(SkillEnum.RIFLE.make()));
 		
 		//make character sheet
 		new CharacterSheetServiceTask(this).execute(finalChar);
