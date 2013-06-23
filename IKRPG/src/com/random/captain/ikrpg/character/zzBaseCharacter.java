@@ -464,6 +464,9 @@ class zzBaseCharacter implements Parcelable
 	
 	@Override
 	public String toString()
+	{return fluff.name;}
+	
+	public String toFullString()
 	{
 		StringBuilder myString = new StringBuilder(100);
 		

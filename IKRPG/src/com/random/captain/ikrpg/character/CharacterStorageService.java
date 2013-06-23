@@ -14,11 +14,16 @@ import java.util.Set;
 
 public class CharacterStorageService
 {
+	//IT'S DANGEROUS TO CODE ALONE
+	//TAKE THESE
 	public interface LoadingDelegate<T extends zzBaseCharacter>
 	{public void charactersLoaded(Set<T> characters);}
 	
 	public interface SavingDelegate
 	{public void characterSaveComplete(boolean succeeded);}
+	
+	
+	
 	
 	private Context c;
 	
@@ -80,7 +85,6 @@ public class CharacterStorageService
 					while((line = reader.readLine()) != null){sb.append(line);}
 		
 					stream.close();
-					
 					Method m = charClass.getMethod("fromJson", String.class);
 					T character = charClass.cast(m.invoke(null, sb.toString()));
 					characters.add(character);

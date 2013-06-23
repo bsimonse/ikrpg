@@ -14,7 +14,8 @@
     <application
 		android:name=".IKRPGApp"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+		android:theme="@android:style/Theme.Holo" >
         <activity
             android:label="@string/app_name"
             android:name="MainActivity" >
@@ -27,7 +28,8 @@
 		
 		<activity
 			android:name=".character.NewCharacterServiceActivity"
-			android:configChanges="orientation|keyboardHidden" />
+			android:configChanges="orientation|keyboardHidden"
+		/>
 		
     </application>
 
