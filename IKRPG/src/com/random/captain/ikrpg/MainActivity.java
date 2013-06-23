@@ -1,7 +1,5 @@
 package com.random.captain.ikrpg;
 
-import com.random.captain.ikrpg.character.*;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,9 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.character.CharacterStorageService;
+import com.random.captain.ikrpg.character.NewCharacterServiceActivity;
+import com.random.captain.ikrpg.character.PC;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import com.google.gag.annotation.remark.LOL;
 
 
 public class MainActivity extends FragmentActivity
@@ -26,24 +27,29 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 		
-		//try loading character?!
-		new LoadCharacterServiceTask<PC>(this, PC.class, new LoadCharacterServiceTask.Delegate<PC>(){
+		//load existing characters
+		CharacterStorageService chars = new CharacterStorageService(this);
+		chars.loadCharacters(chars.getSavedCharacterNames(), PC.class, new CharacterStorageService.LoadingDelegate<PC>(){
 			@Override public void charactersLoaded(Set<PC> characters)
 			{
 				myChars = characters;
-				if(characters != null && characters.size() > 0)	
+				if(myChars != null && myChars.size() > 0)	
 				{	
-					Log.i("IKRPG","Holy crap.");
-					new Toast(MainActivity.this).makeText(MainActivity.this, "Character... loaded!?", Toast.LENGTH_SHORT).show();
-					Log.i("IKRPG",myChars.toArray(new PC[0])[0].toString());
+					new Toast(MainActivity.this).makeText(MainActivity.this, "Characters loaded!", Toast.LENGTH_SHORT).show();
+					StringBuilder b = new StringBuilder("Characters loaded:\n");
+					for(PC myChar : myChars.toArray(new PC[0]))
+					{
+						b.append(myChar.fluff().name+"\n");
+					}
+					Log.i("IKRPG",b.toString());
 				}
 				else
 				{
-					new Toast(MainActivity.this).makeText(MainActivity.this, "Couldn't load Billy", Toast.LENGTH_SHORT).show();
-					Log.i("IKRPG","Billy doesn't exist yet.");
+					Log.e("IKRPG","Characters failed to load.  Sad.");
+					new Toast(MainActivity.this).makeText(MainActivity.this, "Couldn't load characters!", Toast.LENGTH_SHORT).show();
 				}
 			}
-		}).execute("Billy");
+		});
     }
 
 	public void createNewCharacterTapped(View tappee)
@@ -66,14 +72,16 @@ public class MainActivity extends FragmentActivity
 					Log.i("IKRPG","Character created!");
 					
 					//save character
-					new SaveCharacterServiceTask<PC>(this, new SaveCharacterServiceTask.Delegate()
+					Set<PC> characters = new HashSet<PC>();
+					characters.add(myChar);
+					new CharacterStorageService(this).saveCharacter(characters, new CharacterStorageService.SavingDelegate()
 					{
 						@Override public void characterSaveComplete(boolean worked)
 						{
 							if(worked){new Toast(MainActivity.this).makeText(MainActivity.this, "Character saved!", Toast.LENGTH_SHORT).show();}
 							else{new Toast(MainActivity.this).makeText(MainActivity.this, "Character save failed.", Toast.LENGTH_SHORT).show();}
 						}
-					}).execute(myChar);
+					});
 				}
 				else
 				{Log.i("IKRPG","Character didn't come back...");}

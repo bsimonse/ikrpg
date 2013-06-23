@@ -6,6 +6,8 @@ import java.util.*;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
+import com.google.gag.annotation.disclaimer.HandsOff;
+import com.google.gag.enumeration.Consequence;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
@@ -158,7 +160,9 @@ class zzBaseCharacter implements Parcelable
 	public boolean hasAbility(AbilityEnum ability, String qualifier){return abilities.contains(new Ability(ability, qualifier));}
 
 	/* Hidden methods */
-	
+	@HandsOff(
+		byOrderOf = "Me",
+		onPainOf = Consequence.PAPER_CUT)
 	void deriveSkillCheckLevels()
 	{
 		//reset to base
