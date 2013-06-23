@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
 class zzBaseCharacter implements Parcelable

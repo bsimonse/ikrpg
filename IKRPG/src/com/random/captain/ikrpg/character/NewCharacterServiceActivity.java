@@ -212,14 +212,37 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	
 	public void characterComplete()
 	{
-		PC finalChar = new PC(buildingChar);
-		
-		//make character sheet
-		new CharacterSheetServiceTask(this).execute(finalChar);
-		
 		Intent i = new Intent();
-		i.putExtra(NEW_CHARACTER, finalChar);
+		i.putExtra(NEW_CHARACTER, new PC(buildingChar));
 		setResult(RESULT_OK, i);
 		finish();
+	}
+	
+	public static PC getDummyCharacter()
+	{
+		PC myC = new PC();
+
+		Fluff fluff = new Fluff();
+		fluff.name = "Felix";
+		fluff.sex = "Male";
+		fluff.characteristics = "Battle scar";
+		fluff.weight = "185 lbs";
+		fluff.faith = "Morrowan";
+		fluff.owningPlayer = "You";
+		fluff.height = "5' 11\"";
+		myC.fluff = fluff;
+
+		myC.race = Race.HUMAN;
+
+		myC.archetype = Archetype.MIGHTY;
+
+		Set<Career> careers = new HashSet<Career>(2);
+		careers.add(Career.ALCHEMIST);
+		careers.add(Career.PIRATE);
+		myC.careers = careers;
+
+		//myC.statsBundle = new zzStatsBundle(Race.HUMAN.startStats(), Race.HUMAN.heroStats());
+		//myC.skillsBundle = new zzSkillsBundle(myC.statsBundle, myC.careers);
+		return myC;
 	}
 }

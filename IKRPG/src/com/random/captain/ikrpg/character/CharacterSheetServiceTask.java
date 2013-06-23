@@ -14,9 +14,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-
-public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
+public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 {
+	public interface CharacterSheetServiceTaskDelegate
+	{
+		public void characterSheetComplete(boolean succeeded);
+	}
+	
+	private CharacterSheetServiceTaskDelegate delegate;
 	private Context context;
 	private Canvas canvas;
 	
@@ -39,10 +44,10 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	int skillX = 1051;
 	int totalX = 1105;
 	
-	public CharacterSheetServiceTask(Context pContext)
-	{context = pContext.getApplicationContext();}
+	public CharacterSheetServiceTask(Context pContext, CharacterSheetServiceTaskDelegate pDelegate)
+	{context = pContext.getApplicationContext();delegate = pDelegate;}
 	
-	@Override public Void doInBackground(PC... pcs)
+	@Override protected Boolean doInBackground(PC... pcs)
 	{
 		for(PC myChar : pcs)
 		{
@@ -78,10 +83,16 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 				catch(Exception e)
 				{
 					Log.i("IKRPG","Drat. "+e.getMessage());
+					return false;
 				}
 			}
 		}
-		return null;
+		return true;	//even trivial success is true
+	}
+	
+	@Override protected void onPostExecute(Boolean success)
+	{
+		if(delegate != null){delegate.characterSheetComplete(success);}
 	}
 	
 	protected void fillInCharacter(PC c)
@@ -333,33 +344,5 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Void>
 	protected void writeModifiers(PC c)
 	{
 		
-	}
-	
-	public static PC getDummyCharacter()
-	{
-		PC myC = new PC();
-		
-		Fluff fluff = new Fluff();
-		fluff.name = "Felix";
-		fluff.sex = "Male";
-		fluff.characteristics = "Battle scar";
-		fluff.weight = "185 lbs";
-		fluff.faith = "Morrowan";
-		fluff.owningPlayer = "You";
-		fluff.height = "5' 11\"";
-		myC.fluff = fluff;
-		
-		myC.race = Race.HUMAN;
-		
-		myC.archetype = Archetype.MIGHTY;
-		
-		Set<Career> careers = new HashSet<Career>(2);
-		careers.add(Career.ALCHEMIST);
-		careers.add(Career.PIRATE);
-		myC.careers = careers;
-		
-		//myC.statsBundle = new zzStatsBundle(Race.HUMAN.startStats(), Race.HUMAN.heroStats());
-		//myC.skillsBundle = new zzSkillsBundle(myC.statsBundle, myC.careers);
-		return myC;
 	}
 }

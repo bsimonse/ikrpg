@@ -1,44 +1,47 @@
 package com.random.captain.ikrpg;
 
+import com.random.captain.ikrpg.character.*;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.CharacterSheetServiceTask;
-import com.random.captain.ikrpg.character.NewCharacterServiceActivity;
-import com.random.captain.ikrpg.character.PC;
-import com.google.gson.*;
-import com.random.captain.ikrpg.character.SkillEnum;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends FragmentActivity
 {
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
     
+	private Set<PC> myChars = new HashSet<PC>();
+	
     @Override
     public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 		
-		//try
-		//{
-			//PC me = CharacterSheetServiceTask.getDummyCharacter();
-			//CharacterSheetServiceTask task = new CharacterSheetServiceTask(this);
-			//task.execute(me);
-			
-			//String jSON = me.toJson();
-			//Log.i("IKRPG",jSON);
-			//PC other = PC.fromJson(jSON);
-			//Log.i("IKRPG",other.toString());
-			
-			//Log.i("IKRPG","It worked. Kinda.");
-		//}
-		//catch(Exception e)
-		//{
-		//	Log.i("IKRPG", "Yeah, good try though. "+e.getMessage());
-		//}
+		//try loading character?!
+		new LoadCharacterServiceTask<PC>(this, PC.class, new LoadCharacterServiceTask.Delegate<PC>(){
+			@Override public void charactersLoaded(Set<PC> characters)
+			{
+				myChars = characters;
+				if(characters != null && characters.size() > 0)	
+				{	
+					Log.i("IKRPG","Holy crap.");
+					new Toast(MainActivity.this).makeText(MainActivity.this, "Character... loaded!?", Toast.LENGTH_SHORT).show();
+					Log.i("IKRPG",myChars.toArray(new PC[0])[0].toString());
+				}
+				else
+				{
+					new Toast(MainActivity.this).makeText(MainActivity.this, "Couldn't load Billy", Toast.LENGTH_SHORT).show();
+					Log.i("IKRPG","Billy doesn't exist yet.");
+				}
+			}
+		}).execute("Billy");
     }
 
 	public void createNewCharacterTapped(View tappee)
@@ -59,12 +62,16 @@ public class MainActivity extends FragmentActivity
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");
-					//Log.i("IKRPG",myChar.toString());
 					
-					String json = myChar.toJson();
-					PC other = PC.fromJson(json);
-					Log.i("IKRPG",json);
-					Log.i("IKRPG",other.toString());
+					//save character
+					new SaveCharacterServiceTask<PC>(this, new SaveCharacterServiceTask.Delegate()
+					{
+						@Override public void characterSaveComplete(boolean worked)
+						{
+							if(worked){new Toast(MainActivity.this).makeText(MainActivity.this, "Character saved!", Toast.LENGTH_SHORT).show();}
+							else{new Toast(MainActivity.this).makeText(MainActivity.this, "Character save failed.", Toast.LENGTH_SHORT).show();}
+						}
+					}).execute(myChar);
 				}
 				else
 				{Log.i("IKRPG","Character didn't come back...");}
