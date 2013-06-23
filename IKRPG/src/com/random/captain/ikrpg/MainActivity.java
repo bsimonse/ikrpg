@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.random.captain.ikrpg.R;
 import java.util.HashSet;
 import java.util.Set;
+import com.google.gag.annotation.remark.LOL;
+
 
 public class MainActivity extends FragmentActivity
 {

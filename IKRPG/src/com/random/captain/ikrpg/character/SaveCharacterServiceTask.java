@@ -37,7 +37,7 @@ public class SaveCharacterServiceTask<T extends zzBaseCharacter> extends AsyncTa
 				os.write(outputJson.getBytes("UTF-8"));
 					
 				os.flush();os.close();
-				Log.i("IKRPG","Saved "+myChar.fluff.name);
+				Log.i("IKRPG","Saved "+myChar.fluff.name+"!");
 			}
 			catch(Exception e)
 			{
