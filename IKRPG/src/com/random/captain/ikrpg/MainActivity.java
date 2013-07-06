@@ -2,16 +2,15 @@ package com.random.captain.ikrpg;
 
 import android.view.*;
 import android.widget.*;
+import com.random.captain.ikrpg.character.*;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.CharacterStorageService;
-import com.random.captain.ikrpg.character.NewCharacterServiceActivity;
-import com.random.captain.ikrpg.character.PC;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +27,18 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 		
+		//Cheating!
+		PC Pascal = CharacterSheetService.getPascal();
+		CharacterSheetService s = new CharacterSheetService(this);
+		s.drawCharacterSheet(Pascal, new CharacterSheetService.Delegate(){
+				@Override
+				public void characterSheetComplete(boolean success)
+				{
+					//Toast!
+					if(success){new Toast(MainActivity.this).makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
+				}
+			});
+			
 		//load existing characters
 		CharacterStorageService chars = new CharacterStorageService(this);
 		chars.loadCharacters(chars.getSavedCharacterNames(), PC.class, new CharacterStorageService.LoadingDelegate<PC>(){
@@ -51,6 +62,7 @@ public class MainActivity extends FragmentActivity
 				}
 			}
 		});
+		
     }
 
 	@ShoutOutTo("Android Docs")

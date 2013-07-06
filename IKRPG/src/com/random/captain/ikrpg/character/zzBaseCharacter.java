@@ -254,16 +254,14 @@ class zzBaseCharacter implements Parcelable
 	
 	protected void deriveStats()
 	{
-		int pPhy = baseStats.get(Stat.PHYSIQUE);
-		int pStr = baseStats.get(Stat.STRENGTH);
-		int pSpd = baseStats.get(Stat.SPEED);
-		int pAgi = baseStats.get(Stat.AGILITY);
-		int pPrw = baseStats.get(Stat.PROWESS);
-		int pPoi = baseStats.get(Stat.POISE);
-		int pPer = baseStats.get(Stat.PERCEPTION);
-		int pInt = baseStats.get(Stat.INTELLECT);
-		int pArc = baseStats.get(Stat.ARCANE);
-
+		int pPhy = clean(baseStats.get(Stat.PHYSIQUE));
+		int pSpd = clean(baseStats.get(Stat.SPEED));
+		int pAgi = clean(baseStats.get(Stat.AGILITY));
+		int pPrw = clean(baseStats.get(Stat.PROWESS));
+		int pPer = clean(baseStats.get(Stat.PERCEPTION));
+		int pInt = clean(baseStats.get(Stat.INTELLECT));
+		int pArc = clean(baseStats.get(Stat.ARCANE));
+		
 		baseStats.put(Stat.DEFENSE, pSpd+pAgi+pPer);
 		baseStats.put(Stat.INITIATIVE,pSpd+pPrw+pPer);
 		baseStats.put(Stat.ARMOR, pPhy);
@@ -278,6 +276,9 @@ class zzBaseCharacter implements Parcelable
 		deriveActiveStats();
 	}
 
+	private int clean(Integer x)
+	{if(x == null){return 0;}return x.intValue();}
+	
 	protected void deriveActiveStats()
 	{
 		//reset to base

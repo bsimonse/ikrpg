@@ -18,8 +18,8 @@
     <string name="cutthroat_name">Career</string>
     <string name="cutthroat_desc">Desc</string>
 
-    <string name="duelist_name">Career</string>
-    <string name="duelist_desc">Desc</string>
+    <string name="duelist_name">Duelist</string>
+    <string name="duelist_desc">Stabbity stab stab</string>
 
     <string name="explorer_name">Career</string>
     <string name="explorer_desc">Desc</string>
@@ -54,8 +54,8 @@
     <string name="miltary_officer_name">Career</string>
     <string name="miltary_officer_desc">Desc</string>
 
-    <string name="pirate_name">Career</string>
-    <string name="pirate_desc">Desc</string>
+    <string name="pirate_name">Pirate</string>
+    <string name="pirate_desc">Arrrrrr</string>
 
     <string name="priest_of_menoth_name">Career</string>
     <string name="priest_of_menoth_desc">Desc</string>

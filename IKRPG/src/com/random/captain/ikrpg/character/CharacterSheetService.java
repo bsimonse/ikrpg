@@ -3,10 +3,13 @@ package com.random.captain.ikrpg.character;
 import android.graphics.*;
 import java.util.*;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
 import com.random.captain.ikrpg.R;
@@ -14,14 +17,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
+public class CharacterSheetService
 {
-	public interface CharacterSheetServiceTaskDelegate
+	public interface Delegate
 	{
 		public void characterSheetComplete(boolean succeeded);
 	}
-	
-	private CharacterSheetServiceTaskDelegate delegate;
+
 	private Context context;
 	private Canvas canvas;
 	
@@ -36,6 +38,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 	private Paint phyPaint;
 	private Paint agiPaint;
 	private Paint intPaint;
+	private Paint abilityPaint;
 	
 	//these too
 	int dif = 34;
@@ -44,57 +47,89 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 	int skillX = 1051;
 	int totalX = 1105;
 	
-	public CharacterSheetServiceTask(Context pContext, CharacterSheetServiceTaskDelegate pDelegate)
-	{context = pContext.getApplicationContext();delegate = pDelegate;}
+	public CharacterSheetService(Context pContext)
+	{context = pContext.getApplicationContext();}
 	
-	@Override protected Boolean doInBackground(PC... pcs)
+	public void drawCharacterSheet(PC bob, Delegate dan)
 	{
-		for(PC myChar : pcs)
+		new CharacterSheetServiceTask(bob,dan).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+	
+	private class CharacterSheetServiceTask extends AsyncTask<Void, Void, Boolean>
+	{	
+		private PC pc;
+		private CharacterSheetService.Delegate delegate;
+		private int notificationId = 1000;
+		private Notification noti;
+		
+		CharacterSheetServiceTask(PC pPC, CharacterSheetService.Delegate pDelegate)
 		{
-			if(myChar != null)
+			pc=pPC;
+			delegate=pDelegate;
+			if(pc!=null)
 			{
-				try
-				{
-					Drawable baseSheet = context.getResources().getDrawable(R.drawable.char_sheet_1);
-					int width = baseSheet.getIntrinsicWidth();
-					int height = baseSheet.getIntrinsicHeight();
-					baseSheet.setBounds(0,0,width,height);
-					Bitmap b = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888);
-					canvas = new Canvas();
-					canvas.setBitmap(b);
-					
-					baseSheet.draw(canvas);
-					
-					fillInCharacter(myChar);
-					
-					//Make sure to make name file safe before shipping
-
-					File f = new File(Environment.getExternalStorageDirectory(), myChar.fluff.name+".png");
-					f.createNewFile();
-					
-					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					b.compress(Bitmap.CompressFormat.PNG, 0, stream);
-					FileOutputStream os = new FileOutputStream(f);
-					os.write(stream.toByteArray());
-					
-					stream.flush();stream.close();
-					os.flush();os.close();
-				}
-				catch(Exception e)
-				{
-					Log.i("IKRPG","Drat. "+e.getMessage());
-					return false;
-				}
+				notificationId=pc.fluff.name.hashCode();
 			}
 		}
-		return true;	//even trivial success is true
-	}
+		
+		@Override protected void onPreExecute()
+		{
+			noti = new NotificationCompat.Builder(context).setSmallIcon(android.R.drawable.ic_menu_gallery)
+			.setContentTitle("IKRPG")
+			.setContentText("Drawing "+pc.fluff.name+"'s character sheet")
+			.build();
+			
+			NotificationManager man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+			man.notify(notificationId, noti);
+		}
 	
-	@Override protected void onPostExecute(Boolean success)
-	{
-		if(delegate != null){delegate.characterSheetComplete(success);}
-	}
+		@Override protected Boolean doInBackground(Void... nothing)
+		{
+			if(pc != null)
+				{
+					try
+					{
+						Drawable baseSheet = context.getResources().getDrawable(R.drawable.char_sheet_1);
+						int width = baseSheet.getIntrinsicWidth();
+						int height = baseSheet.getIntrinsicHeight();
+						baseSheet.setBounds(0,0,width,height);
+						Bitmap b = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888);
+						canvas = new Canvas();
+						canvas.setBitmap(b);
+						
+						baseSheet.draw(canvas);
+						fillInCharacter(pc);
 	
+						//Make sure to make name file safe before shipping
+						String fileName = pc.fluff.name;
+						File f = new File(Environment.getExternalStorageDirectory(), "Pascal.png");
+						f.createNewFile();
+						
+						ByteArrayOutputStream stream = new ByteArrayOutputStream();
+						b.compress(Bitmap.CompressFormat.PNG, 0, stream);
+						FileOutputStream os = new FileOutputStream(f);
+						os.write(stream.toByteArray());
+						
+						stream.flush();stream.close();
+						os.flush();os.close();
+					}
+					catch(Exception e)
+					{
+						Log.i("IKRPG","Drat. "+e.getMessage());
+						return false;
+					}
+				}
+			return true;	//even trivial success is true
+		}
+		
+		@Override protected void onPostExecute(Boolean success)
+		{
+			if(delegate != null){delegate.characterSheetComplete(success);}
+			NotificationManager man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+			man.cancel(notificationId);
+		}
+	
+	}
 	protected void fillInCharacter(PC c)
 	{
 		setupPaints();
@@ -140,6 +175,9 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 		
 		skillName = new Paint(blackFluffLeft);
 		skillName.setTextSize(13);
+		
+		abilityPaint = new Paint(blackFluffLeft);
+		abilityPaint.setTextSize(16);
 	}
 	
 	protected void writeFluff(PC c)
@@ -240,15 +278,33 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 		//start with hard-written skills
 		Collection<Pair<Skill,Integer>> trainedSkills = handleHardWrittenSkills(c);
 		
+		List<Pair<Skill,Integer>> sortedSkills = new ArrayList<Pair<Skill,Integer>>(trainedSkills);
+		Collections.sort(sortedSkills, new Comparator<Pair<Skill,Integer>>()
+		{
+			@Override public int compare(Pair<Skill,Integer> one, Pair<Skill,Integer> two)
+			{
+				String oneName = one.first.skillName(); String twoName = two.first.skillName();
+				return oneName.compareTo(twoName);
+			}
+		});
+		
 		int militaryIndex = 4;
 		int occupIndex = 10;
 		
-		for(Pair<Skill,Integer> skill : trainedSkills)
+		for(Pair<Skill,Integer> skill : sortedSkills)
 		{
 			int count = -1;
+			
 			//determine y value
-			if(skill.first.isMilitary()){count=militaryIndex; militaryIndex++;}
-			else{count=occupIndex; occupIndex++;}
+			if(skill.first.isMilitary() || occupIndex > 16)
+			{
+				count=militaryIndex; militaryIndex++;
+				//if we're out... then we're just out of room.
+			}
+			else
+			{
+				count=occupIndex;occupIndex++;
+			}
 			
 			Stat bStat = skill.first.governingStat();
 			if(bStat != null)
@@ -313,7 +369,7 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 				default: count = -1; break;
 			}
 			
-			if(count > 0)
+			if(count > -1)
 			{
 				canvas.drawText(""+skill.second, skillX, base+count*dif, blackStatsSmall);
 				trainedSkillsCopy.remove(skill);
@@ -328,14 +384,29 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 		int baseYValue = 307;
 		int yIncrement = 34;
 		
+		List<Ability> sortedAbilities = new ArrayList<Ability>(c.abilities);
+		Collections.sort(sortedAbilities, new Comparator<Ability>()
+			{
+				@Override public int compare(Ability one, Ability two)
+				{
+					//Sort by page number, then alphabet
+					int result = one.pageNumber().compareTo(two.pageNumber());
+					if(result != 0){return result;}
+					
+					return one.toString().compareTo(two.toString());
+				}
+			});
+			
 		//Try my style
-		String abilityString;
 		int abilityIndex = 0;
-		for(Ability ability : c.abilities)
+		for(Ability ability : sortedAbilities)
 		{
 			int yPosition = baseYValue+yIncrement*abilityIndex;
-			abilityString = ability.abilityName()+" ("+ability.shortDescription()+")";
-			canvas.drawText(abilityString.toUpperCase(), 1172, yPosition, blackFluffLeft);
+			//abilityString = ability.toString()+" ("+ability.shortDescription()+")";
+			String abilityName = ability.toString().toUpperCase();
+			String abilityDesc = ("("+ability.shortDescription()+")").toUpperCase();
+			canvas.drawText(abilityName, 1172, yPosition, abilityPaint);
+			canvas.drawText(abilityDesc, Math.round(1172+abilityPaint.measureText(abilityName)+4), yPosition - 1, skillName);
 			canvas.drawText(ability.pageNumber().toUpperCase(), 1619, yPosition, blackFluffRight);
 			abilityIndex++;
 		}
@@ -344,5 +415,85 @@ public class CharacterSheetServiceTask extends AsyncTask<PC, Void, Boolean>
 	protected void writeModifiers(PC c)
 	{
 		
+	}
+	
+	//Cheating!
+	public static PC getPascal()
+	{
+		zzBaseCharacter pascal = new zzBaseCharacter();
+		
+		//Fluff
+		Fluff fluff = new Fluff();
+		fluff.name = "Pascal Bateu";
+		fluff.sex = "Male";
+		fluff.weight = "170 lbs";
+		fluff.faith = "Morrowan";
+		fluff.owningPlayer = "Ben";
+		fluff.height = "5' 11\"";
+		fluff.characteristics = "";
+		pascal.fluff = fluff;
+		
+		//Race
+		pascal.race = Race.HUMAN;
+		
+		//Archetype
+		pascal.archetype = Archetype.MIGHTY;
+		
+		//Careers
+		Set<Career> careers = new HashSet<Career>(2);
+		careers.add(Career.PIRATE);
+		careers.add(Career.DUELIST);
+		pascal.careers = careers;
+		
+		//Stats
+		pascal.setBaseStat(Stat.PHYSIQUE, 6);
+		pascal.setMaxStat(Stat.PHYSIQUE, 7);
+		pascal.setBaseStat(Stat.SPEED, 7);
+		pascal.setMaxStat(Stat.SPEED, 7);
+		pascal.setBaseStat(Stat.STRENGTH, 5);
+		pascal.setMaxStat(Stat.STRENGTH, 6);
+		pascal.setBaseStat(Stat.AGILITY, 4);
+		pascal.setMaxStat(Stat.AGILITY, 5);
+		pascal.setBaseStat(Stat.PROWESS, 4);
+		pascal.setMaxStat(Stat.PROWESS, 5);
+		pascal.setBaseStat(Stat.POISE, 4);
+		pascal.setMaxStat(Stat.POISE, 5);
+		pascal.setBaseStat(Stat.INTELLECT, 3);
+		pascal.setMaxStat(Stat.INTELLECT, 5);
+		pascal.setBaseStat(Stat.PERCEPTION, 4);
+		pascal.setMaxStat(Stat.PERCEPTION, 5);
+		
+		//Armor modifiers!
+		pascal.addStatModifier(new zzModifier<Stat>(Stat.ARMOR, 7), "ARMOR_BONUS");
+		pascal.addStatModifier(new zzModifier<Stat>(Stat.DEFENSE, -2), "DEF_PENALTY");
+		
+		//Skills
+		Map<Skill, Integer> skills = new HashMap<Skill,Integer>(20);
+		skills.put(SkillEnum.HAND_WEAPON.make(), 2);
+		skills.put(SkillEnum.PISTOL.make(), 2);
+		skills.put(SkillEnum.CLIMBING.make(), 1);
+		skills.put(SkillEnum.INTIMIDATION.make(), 2);
+		skills.put(SkillEnum.SWIMMING.make(), 1);
+		skills.put(SkillEnum.SAILING.make(), 1);
+		skills.put(SkillEnum.GAMLBING.make(), 1);
+		skills.put(SkillEnum.JUMPING.make(), 1);
+		skills.put(SkillEnum.STREETWISE.make(), 1);
+		skills.put(SkillEnum.LAW.make(), 1);
+		skills.put(SkillEnum.NEGOTIATION.make(), 1);
+		pascal.setBaseSkills(skills);
+		
+		//Abilities
+		Set<Ability> abilities = new HashSet<Ability>();
+		abilities.add(AbilityEnum.PRECISION_STRIKE.make());
+		abilities.add(AbilityEnum.MIGHTY.make());
+		abilities.add(AbilityEnum.FEAT_INVULNERABLE.make());
+		abilities.add(AbilityEnum.GANG.make());
+		abilities.add(AbilityEnum.STEADY.make());
+		abilities.add(AbilityEnum.SPECIALIZATION.make("Cutlass"));
+		abilities.add(AbilityEnum.PARRY.make());
+		abilities.add(AbilityEnum.RIPOSTE.make());
+		pascal.abilities = abilities;
+		
+		return new PC(pascal);
 	}
 }

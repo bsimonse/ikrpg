@@ -391,10 +391,10 @@
 	<string name="free_style_shortDesc">Hello World, MainActivity!</string>
 	<string name="free_style_page">Hello World, MainActivity!</string>
 
-	<string name="gang_name">Hello World, MainActivity!</string>
-	<string name="gang_longDesc">Hello World, MainActivity!</string>
-	<string name="gang_shortDesc">Hello World, MainActivity!</string>
-	<string name="gang_page">Hello World, MainActivity!</string>
+	<string name="gang_name">Gang</string>
+	<string name="gang_longDesc">Long Desc here</string>
+	<string name="gang_shortDesc">+1 attack/damage with ally in melee</string>
+	<string name="gang_page">163</string>
 
 	<string name="get_away_name">Hello World, MainActivity!</string>
 	<string name="get_away_longDesc">Hello World, MainActivity!</string>
@@ -521,10 +521,10 @@
 	<string name="night_fighter_shortDesc">Hello World, MainActivity!</string>
 	<string name="night_fighter_page">Hello World, MainActivity!</string>
 
-	<string name="parry_name">Hello World, MainActivity!</string>
-	<string name="parry_longDesc">Hello World, MainActivity!</string>
-	<string name="parry_shortDesc">Hello World, MainActivity!</string>
-	<string name="parry_page">Hello World, MainActivity!</string>
+	<string name="parry_name">Parry</string>
+	<string name="parry_longDesc">Long desc here</string>
+	<string name="parry_shortDesc">Immune to free strikes</string>
+	<string name="parry_page">165</string>
 
 	<string name="pathfinder_name">Hello World, MainActivity!</string>
 	<string name="pathfinder_longDesc">Hello World, MainActivity!</string>
@@ -541,10 +541,10 @@
 	<string name="port_of_call_shortDesc">Hello World, MainActivity!</string>
 	<string name="port_of_call_page">Hello World, MainActivity!</string>
 
-	<string name="precision_strike_name">Hello World, MainActivity!</string>
-	<string name="precision_strike_longDesc">Hello World, MainActivity!</string>
-	<string name="precision_strike_shortDesc">Hello World, MainActivity!</string>
-	<string name="precision_strike_page">Hello World, MainActivity!</string>
+	<string name="precision_strike_name">Precision Strike</string>
+	<string name="precision_strike_longDesc">Long desc here</string>
+	<string name="precision_strike_shortDesc">Choose which damage column is hit</string>
+	<string name="precision_strike_page">165</string>
 
 	<string name="press_the_attack_name">Hello World, MainActivity!</string>
 	<string name="press_the_attack_longDesc">Hello World, MainActivity!</string>
@@ -601,10 +601,10 @@
 	<string name="ride_by_attack_shortDesc">Hello World, MainActivity!</string>
 	<string name="ride_by_attack_page">Hello World, MainActivity!</string>
 
-	<string name="riposte_name">Hello World, MainActivity!</string>
-	<string name="riposte_longDesc">Hello World, MainActivity!</string>
-	<string name="riposte_shortDesc">Hello World, MainActivity!</string>
-	<string name="riposte_page">Hello World, MainActivity!</string>
+	<string name="riposte_name">Riposte</string>
+	<string name="riposte_longDesc">Long desc here</string>
+	<string name="riposte_shortDesc">Once/round, free melee attack when missed</string>
+	<string name="riposte_page">166</string>
 
 	<string name="rock_solid_name">Hello World, MainActivity!</string>
 	<string name="rock_solid_longDesc">Hello World, MainActivity!</string>
@@ -661,15 +661,15 @@
 	<string name="sniper_shortDesc">Hello World, MainActivity!</string>
 	<string name="sniper_page">Hello World, MainActivity!</string>
 
-	<string name="specialization_name">Hello World, MainActivity!</string>
-	<string name="specialization_longDesc">Hello World, MainActivity!</string>
-	<string name="specialization_shortDesc">Hello World, MainActivity!</string>
-	<string name="specialization_page">Hello World, MainActivity!</string>
+	<string name="specialization_name">Specialization</string>
+	<string name="specialization_longDesc">Long desc here</string>
+	<string name="specialization_shortDesc">No attack penalty from weapon</string>
+	<string name="specialization_page">167</string>
 
-	<string name="steady_name">Hello World, MainActivity!</string>
-	<string name="steady_longDesc">Hello World, MainActivity!</string>
-	<string name="steady_shortDesc">Hello World, MainActivity!</string>
-	<string name="steady_page">Hello World, MainActivity!</string>
+	<string name="steady_name">Steady</string>
+	<string name="steady_longDesc">Long Desc here</string>
+	<string name="steady_shortDesc">Can\'t be knocked down</string>
+	<string name="steady_page">167</string>
 
 	<string name="steamo_name">Hello World, MainActivity!</string>
 	<string name="steamo_longDesc">Hello World, MainActivity!</string>
@@ -735,5 +735,15 @@
 	<string name="waylay_longDesc">Hello World, MainActivity!</string>
 	<string name="waylay_shortDesc">Hello World, MainActivity!</string>
 	<string name="waylay_page">Hello World, MainActivity!</string>
+	
+	<string name="mighty_name">Mighty</string>
+	<string name="mighty_longDesc">Long desc here.</string>
+	<string name="mighty_shortDesc">+1 melee damage die</string>
+	<string name="mighty_page">116</string>
+	
+	<string name="feat_invulnerable_name">Feat: Invulnerable</string>
+	<string name="feat_invulnerable_longDesc">Long Desc here</string>
+	<string name="feat_invulnerable_shortDesc">+3 ARM for one round</string>
+	<string name="feat_invulnerable_page">116</string>
 	
 </resources>

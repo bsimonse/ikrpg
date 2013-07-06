@@ -3,17 +3,18 @@ package com.random.captain.ikrpg.character;
 import android.widget.*;
 import java.util.*;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
 
 public enum Career implements zzPrereqCheck
 {
-	ALCHEMIST("Alchemist",
+	ALCHEMIST(R.string.alchemist_name,
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(2), //etc...
 							SkillEnum.CRAFT.pair(4), SkillEnum.RESEARCH.pair(4)},
@@ -23,7 +24,7 @@ public enum Career implements zzPrereqCheck
 				null, null,
 				null, null),
 								
-	ARCANE_MECHANIK("Arcane Mechanik",
+	ARCANE_MECHANIK(R.string.arcane_mechanik_name,
 				new Pair[] {SkillEnum.CRAFT.pair("gunsmithing", 1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), //etc...
 			  				SkillEnum.NEGOTIATION.pair(2), SkillEnum.RESEARCH.pair(3)},
@@ -107,19 +108,20 @@ public enum Career implements zzPrereqCheck
 					
 					@Override public int getPriority(){return 50;}
 			  }}),
-			  
-	PIRATE("Pirate",null,null,null,null,null,null,null,null),
-	WARCASTER("Warcaster",null,null,null,null,null,null,null,null);
+	DUELIST(R.string.duelist_name,null,null,null,null,null,null,null,null),		  
+	PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
+	WARCASTER(R.string.warcaster_name,null,null,null,null,null,null,null,null);
 			  
 	
 	//Done!
-	private Career(String pName,
+	private Career(int pNameResource,
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
 					zzPrereqCheck pPrereqCheck, zzCreateCharacterHook[] pPostCreateHook)
 	{
-		name = pName;
+		Context c = IKRPGApp.getContext();
+		name = c.getString(pNameResource);
 		startingSkills = pStartSkills != null ? Arrays.asList(pStartSkills) : new ArrayList<Pair<Skill, Integer>>(10);
 		careerSkills = pSkills != null ? Arrays.asList(pSkills) : new ArrayList<Pair<Skill, Integer>>(10);
 		startingAbilities = pStartAbilities != null ? Arrays.asList(pStartAbilities) : new ArrayList<Ability>(10);

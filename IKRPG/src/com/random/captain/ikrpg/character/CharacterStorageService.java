@@ -45,12 +45,12 @@ public class CharacterStorageService
 	
 	public <T extends zzBaseCharacter> void loadCharacters(Set<String> characterNames, Class<T> pCharClass, CharacterStorageService.LoadingDelegate<T> pDelegate)
 	{
-		new LoadCharacterTask<T>(pCharClass, pDelegate).execute(characterNames.toArray(new String[0]));
+		new LoadCharacterTask<T>(pCharClass, pDelegate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, characterNames.toArray(new String[0]));
 	}
 	
 	public <T extends zzBaseCharacter> void saveCharacter(Set<T> characters, CharacterStorageService.SavingDelegate pDelegate)
 	{
-		new SaveCharacterTask<T>(pDelegate, characters).execute();
+		new SaveCharacterTask<T>(pDelegate, characters).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, Set<T>>
