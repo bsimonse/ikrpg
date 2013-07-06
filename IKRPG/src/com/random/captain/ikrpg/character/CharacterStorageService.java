@@ -10,6 +10,8 @@ import com.google.gag.annotation.disclaimer.ProbablyIllegalIn;
 import com.google.gag.annotation.remark.Hack;
 import com.google.gag.enumeration.RegionType;
 import java.lang.reflect.Method;
+import java.net.URLEncoder;
+import java.net.URLDecoder;
 
 public class CharacterStorageService
 {
@@ -38,7 +40,7 @@ public class CharacterStorageService
 		Set<String> charNames = new HashSet<String>();
 		for(File file : c.getDir("characters",Context.MODE_PRIVATE).listFiles())
 		{
-			charNames.add(file.getName());
+			charNames.add(fileNameToCharacterName(file.getName()));
 		}
 		
 		return charNames;
@@ -57,6 +59,16 @@ public class CharacterStorageService
 	public void deleteCharacter(String charName, CharacterStorageService.DeleteDelegate pDelegate)
 	{
 		new DeleteCharacterTask(pDelegate, charName).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+	
+	private String fileNameToCharacterName(String fileName)
+	{
+		return URLDecoder.decode(fileName);
+	}
+	
+	private String characterNameToFileName(String characterName)
+	{
+		return URLEncoder.encode(characterName);
 	}
 	
 	private class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, TreeSet<T>>
@@ -89,7 +101,7 @@ public class CharacterStorageService
 				try
 				{
 					File dir = c.getDir("characters",Context.MODE_PRIVATE);
-					File inFile = new File(dir, name);
+					File inFile = new File(dir, characterNameToFileName(name));
 					stream = new FileInputStream(inFile);
 					BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 					
@@ -133,7 +145,7 @@ public class CharacterStorageService
 			try
 			{
 				File dir = c.getDir("characters",Context.MODE_PRIVATE);
-				File outFile = new File(dir, myChar.fluff.name);
+				File outFile = new File(dir, characterNameToFileName(myChar.fluff.name));
 				
 				String outputJson = myChar.toJson();
 				FileOutputStream os = new FileOutputStream(outFile);
@@ -172,7 +184,7 @@ public class CharacterStorageService
 			try
 			{
 				File dir = c.getDir("characters",Context.MODE_PRIVATE);
-				File outFile = new File(dir, charName);
+				File outFile = new File(dir, characterNameToFileName(charName));
 
 				return outFile.delete();
 			}

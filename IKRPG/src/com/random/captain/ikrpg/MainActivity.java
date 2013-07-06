@@ -28,7 +28,7 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.act_main);
 		
 		//Cheating!
-		PC Pascal = CharacterSheetService.getPascal();
+		/*PC Pascal = CharacterSheetService.getPascal();
 		CharacterSheetService s = new CharacterSheetService(this);
 		s.drawCharacterSheet(Pascal, new CharacterSheetService.Delegate(){
 				@Override
@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity
 					//Toast!
 					if(success){new Toast(MainActivity.this).makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
 				}
-			});
+			});*/
     }
 
 	@Override
