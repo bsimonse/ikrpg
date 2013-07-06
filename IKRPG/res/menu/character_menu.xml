@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/print_character"
+		android:title="Print Character Sheet"
+		android:icon="@android:drawable/ic_menu_crop"
+		android:showAsAction="ifRoom|withText" />
+	<item android:id="@+id/delete_character"
+		android:title="Delete this Character"
+		android:icon="@android:drawable/ic_delete"
+		android:showAsAction="ifRoom|withText" />
+</menu>

@@ -1,6 +1,7 @@
 package com.random.captain.ikrpg.character;
 
 import java.io.*;
+import java.util.*;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,8 +10,6 @@ import com.google.gag.annotation.disclaimer.ProbablyIllegalIn;
 import com.google.gag.annotation.remark.Hack;
 import com.google.gag.enumeration.RegionType;
 import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CharacterStorageService
 {
@@ -20,8 +19,10 @@ public class CharacterStorageService
 	{public void charactersLoaded(Set<T> characters);}
 	
 	public interface SavingDelegate
-	{public void characterSaveComplete(boolean succeeded);}
+	{public void characterSaved(boolean succeeded);}
 	
+	public interface DeleteDelegate
+	{public void characterDeleted(boolean succeeded);}
 	
 	
 	
@@ -48,16 +49,27 @@ public class CharacterStorageService
 		new LoadCharacterTask<T>(pCharClass, pDelegate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, characterNames.toArray(new String[0]));
 	}
 	
-	public <T extends zzBaseCharacter> void saveCharacter(Set<T> characters, CharacterStorageService.SavingDelegate pDelegate)
+	public <T extends zzBaseCharacter> void saveCharacter(T character, CharacterStorageService.SavingDelegate pDelegate)
 	{
-		new SaveCharacterTask<T>(pDelegate, characters).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new SaveCharacterTask<T>(pDelegate, character).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
-
-	private class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, Set<T>>
+	
+	public void deleteCharacter(String charName, CharacterStorageService.DeleteDelegate pDelegate)
+	{
+		new DeleteCharacterTask(pDelegate, charName).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+	
+	private class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, TreeSet<T>>
 	{
 		private CharacterStorageService.LoadingDelegate<T> delegate;
 		private Class<T> charClass;
-		private Set<T> characters = new HashSet<T>();
+		private TreeSet<T> characters = new TreeSet<T>(new Comparator<T>(){
+			@Override
+			public int compare(T t1, T t2)
+			{
+				return t1.fluff.name.compareTo(t2.fluff.name);
+			}
+		});
 		
 		public LoadCharacterTask(Class<T> pCharClass, CharacterStorageService.LoadingDelegate<T> pDelegate)
 		{
@@ -67,7 +79,7 @@ public class CharacterStorageService
 	
 		@Hack
 		@ProbablyIllegalIn(number = 30, region = RegionType.STATES)
-		@Override protected Set<T> doInBackground(String... names)
+		@Override protected TreeSet<T> doInBackground(String... names)
 		{
 			for(String name : names)
 			{
@@ -99,7 +111,7 @@ public class CharacterStorageService
 			return characters;
 		}
 	
-		@Override protected void onPostExecute(Set<T> chars)
+		@Override protected void onPostExecute(TreeSet<T> chars)
 		{
 			if(delegate != null){delegate.charactersLoaded(chars);}
 		}
@@ -108,42 +120,72 @@ public class CharacterStorageService
 	private class SaveCharacterTask<T extends zzBaseCharacter> extends AsyncTask<Void, Void, Boolean>
 	{
 		private CharacterStorageService.SavingDelegate delegate;
-		Set<T> characters;
+		T myChar;
 	
-		public SaveCharacterTask(CharacterStorageService.SavingDelegate pDelegate, Set<T> pCharacters)
+		public SaveCharacterTask(CharacterStorageService.SavingDelegate pDelegate, T pChar)
 		{
 			delegate = pDelegate;
-			characters = pCharacters;
+			myChar = pChar;
 		}
 
 		@Override protected Boolean doInBackground(Void... unused)
-		{
-			for(T myChar : characters)
+		{			
+			try
 			{
-				try
-				{
-					File dir = c.getDir("characters",Context.MODE_PRIVATE);
-					File outFile = new File(dir, myChar.fluff.name);
-					
-					String outputJson = myChar.toJson();
-					FileOutputStream os = new FileOutputStream(outFile);
-					os.write(outputJson.getBytes("UTF-8"));
-					
-					os.flush();os.close();
-				}
-				catch(Exception e)
-				{
-					Log.e("IKRPG","Didn't save!  "+e.getMessage());
-					return false;
-				}
+				File dir = c.getDir("characters",Context.MODE_PRIVATE);
+				File outFile = new File(dir, myChar.fluff.name);
+				
+				String outputJson = myChar.toJson();
+				FileOutputStream os = new FileOutputStream(outFile);
+				os.write(outputJson.getBytes("UTF-8"));
+				
+				os.flush();os.close();
 			}
-	
+			catch(Exception e)
+			{
+				Log.e("IKRPG","Didn't save!  "+e.getMessage());
+				return false;
+			}
+			
 			return true;
 		}
 	
 		@Override protected void onPostExecute(Boolean success)
 		{
-			if(delegate != null){delegate.characterSaveComplete(success);}
+			if(delegate != null){delegate.characterSaved(success);}
 		}
-	}	
+	}
+	
+	private class DeleteCharacterTask extends AsyncTask<Void, Void, Boolean>
+	{
+		private CharacterStorageService.DeleteDelegate delegate;
+		String charName;
+
+		public DeleteCharacterTask(CharacterStorageService.DeleteDelegate pDelegate, String pCharName)
+		{
+			delegate = pDelegate;
+			charName = pCharName;
+		}
+
+		@Override protected Boolean doInBackground(Void... unused)
+		{			
+			try
+			{
+				File dir = c.getDir("characters",Context.MODE_PRIVATE);
+				File outFile = new File(dir, charName);
+
+				return outFile.delete();
+			}
+			catch(Exception e)
+			{
+				Log.e("IKRPG","Wait, character delete threw exception?  "+e.getMessage());
+				return false;
+			}
+		}
+
+		@Override protected void onPostExecute(Boolean success)
+		{
+			if(delegate != null){delegate.characterDeleted(success);}
+		}
+	}
 }

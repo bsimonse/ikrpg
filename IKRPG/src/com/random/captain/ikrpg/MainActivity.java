@@ -5,10 +5,10 @@ import android.widget.*;
 import com.random.captain.ikrpg.character.*;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.AdapterView.OnItemClickListener;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
 import java.util.HashSet;
@@ -38,33 +38,60 @@ public class MainActivity extends FragmentActivity
 					if(success){new Toast(MainActivity.this).makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
 				}
 			});
-			
-		//load existing characters
-		CharacterStorageService chars = new CharacterStorageService(this);
-		chars.loadCharacters(chars.getSavedCharacterNames(), PC.class, new CharacterStorageService.LoadingDelegate<PC>(){
-			@Override public void charactersLoaded(Set<PC> characters)
-			{
-				ProgressBar proBar = (ProgressBar)findViewById(R.id.loadingCharacterSpinner);
-				proBar.setVisibility(View.GONE);
-				
-				myChars = characters;
-				if(myChars != null && myChars.size() > 0)	
-				{	
-					ListView characterList = (ListView)findViewById(R.id.characterList);
-					characterList.setVisibility(View.VISIBLE);
-					myListAdapter = new ArrayAdapter<PC>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new PC[0]));
-					characterList.setAdapter(myListAdapter);
-				}
-				else
-				{
-					Log.e("IKRPG","Characters failed to load.  Sad.");
-					new Toast(MainActivity.this).makeText(MainActivity.this, "Couldn't load characters!", Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
-		
     }
 
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		
+		reloadCharacters();
+	}
+	
+	private void reloadCharacters()
+	{
+		ProgressBar proBar = (ProgressBar)findViewById(R.id.loadingCharacterSpinner);
+		proBar.setVisibility(View.VISIBLE);
+
+		//(re)load existing characters
+		CharacterStorageService chars = new CharacterStorageService(this);
+		chars.loadCharacters(chars.getSavedCharacterNames(), PC.class, new CharacterStorageService.LoadingDelegate<PC>(){
+				@Override public void charactersLoaded(Set<PC> characters)
+				{
+					ProgressBar proBar = (ProgressBar)findViewById(R.id.loadingCharacterSpinner);
+					proBar.setVisibility(View.GONE);
+
+					myChars = characters;
+					if(myChars != null && myChars.size() > 0)	
+					{	
+						ListView characterList = (ListView)findViewById(R.id.characterList);
+						characterList.setVisibility(View.VISIBLE);
+						myListAdapter = new ArrayAdapter<PC>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new PC[0]));
+						characterList.setAdapter(myListAdapter);
+						characterList.setOnItemClickListener(characterClicked);
+					}
+					else
+					{
+						Log.e("IKRPG","Characters failed to load.  Sad.");
+						new Toast(MainActivity.this).makeText(MainActivity.this, "Couldn't load characters!", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+	}
+	
+	private OnItemClickListener characterClicked = new OnItemClickListener()
+	{
+		@Override
+		public void onItemClick(AdapterView<?> adapter, View v, int position, long huh)
+		{
+			PC whichChar = (PC)myListAdapter.getItem(position);
+			Intent i = new Intent(MainActivity.this, CharacterHomeActivity.class);
+			i.putExtra("CHAR",whichChar);
+			startActivity(i);
+		}
+	};
+	
+	
 	@ShoutOutTo("Android Docs")
 	@Override
 	public boolean onCreateOptionsMenu(Menu pMenu)
@@ -96,25 +123,23 @@ public class MainActivity extends FragmentActivity
 		{
 			if(resultCode == RESULT_OK)
 			{
-				PC myChar = i.getExtras().getParcelable(NewCharacterServiceActivity.NEW_CHARACTER);
+				final PC myChar = i.getExtras().getParcelable(NewCharacterServiceActivity.NEW_CHARACTER);
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");
 					
 					//save character
-					myChars.add(myChar);
-					Set<PC> characters = new HashSet<PC>();
-					characters.add(myChar);
-					new CharacterStorageService(this).saveCharacter(characters, new CharacterStorageService.SavingDelegate()
+					new CharacterStorageService(this).saveCharacter(myChar, new CharacterStorageService.SavingDelegate()
 					{
-						@Override public void characterSaveComplete(boolean worked)
+						@Override public void characterSaved(boolean worked)
 						{
-							if(worked){new Toast(MainActivity.this).makeText(MainActivity.this, "Character saved!", Toast.LENGTH_SHORT).show();}
-							else{new Toast(MainActivity.this).makeText(MainActivity.this, "Character save failed.", Toast.LENGTH_SHORT).show();}
-							
-							ListView characterList = (ListView)findViewById(R.id.characterList);
-							myListAdapter = new ArrayAdapter<PC>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new PC[0]));
-							characterList.setAdapter(myListAdapter);
+							if(worked)
+							{
+								new Toast(MainActivity.this).makeText(MainActivity.this, "Character saved!", Toast.LENGTH_SHORT).show();
+								reloadCharacters();
+							}
+							else
+							{new Toast(MainActivity.this).makeText(MainActivity.this, "Character save failed.", Toast.LENGTH_SHORT).show();}
 						}
 					});
 				}

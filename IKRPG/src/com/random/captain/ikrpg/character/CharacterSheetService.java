@@ -16,6 +16,7 @@ import com.random.captain.ikrpg.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.URLEncoder;
 
 public class CharacterSheetService
 {
@@ -101,8 +102,8 @@ public class CharacterSheetService
 						fillInCharacter(pc);
 	
 						//Make sure to make name file safe before shipping
-						String fileName = pc.fluff.name;
-						File f = new File(Environment.getExternalStorageDirectory(), "Pascal.png");
+						String fileName = fileNameSafeString(pc.fluff.name);
+						File f = new File(Environment.getExternalStorageDirectory(), fileName+".png");
 						f.createNewFile();
 						
 						ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -130,6 +131,14 @@ public class CharacterSheetService
 		}
 	
 	}
+	
+	private String fileNameSafeString(String toConvert)
+	{
+		//can be improved later
+		String b = toConvert.replace(" ","_");
+		return b;
+	}
+	
 	protected void fillInCharacter(PC c)
 	{
 		setupPaints();

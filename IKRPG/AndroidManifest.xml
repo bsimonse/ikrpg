@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
 		
+		<activity android:name=".CharacterHomeActivity" />
+	
 		<activity
 			android:name=".character.NewCharacterServiceActivity"
 			android:configChanges="orientation|keyboardHidden"
