@@ -8,15 +8,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.random.captain.ikrpg.character.Skill;
 
-public class PC extends zzBaseCharacter
+public class Character extends zzBaseCharacter
 {
-	public PC()
-	{
-		super();
-	}
-	
-	//temporary; not really a copy constructor
-	public PC(zzBaseCharacter base)
+	//conversion constructor
+	Character(zzBaseCharacter base)
 	{
 		super();
 		if(base.fluff!=null){fluff=base.fluff;}
@@ -37,24 +32,20 @@ public class PC extends zzBaseCharacter
 		deriveSkillCheckLevels();
 	}
 	
-	public static final Parcelable.Creator<PC> CREATOR = new Parcelable.Creator<PC>()
+	public static final Parcelable.Creator<Character> CREATOR = new Parcelable.Creator<Character>()
 	{
 		@Override
-		public PC createFromParcel(Parcel in)
+		public Character createFromParcel(Parcel in)
 		{
-			return new PC(zzBaseCharacter.CREATOR.createFromParcel(in));
+			return new Character(zzBaseCharacter.CREATOR.createFromParcel(in));
 		}
 
-		@Override public PC[] newArray(int size) {return new PC[size];}
+		@Override public Character[] newArray(int size) {return new Character[size];}
 	};
 	
 	public String toJson()
-	{
-		return super.toJson();
-	}
+	{return super.toJson();}
 
-	public static PC fromJson(String json)
-	{
-		return new PC(zzBaseCharacter.fromJson(json));
-	}
+	public static Character fromJson(String json)
+	{return new Character(zzBaseCharacter.fromJson(json));}
 }

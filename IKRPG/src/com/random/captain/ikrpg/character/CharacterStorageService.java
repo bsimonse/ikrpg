@@ -9,9 +9,10 @@ import android.util.Log;
 import com.google.gag.annotation.disclaimer.ProbablyIllegalIn;
 import com.google.gag.annotation.remark.Hack;
 import com.google.gag.enumeration.RegionType;
+import com.random.captain.ikrpg.IKRPGApp;
 import java.lang.reflect.Method;
-import java.net.URLEncoder;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 public class CharacterStorageService
 {
@@ -28,16 +29,10 @@ public class CharacterStorageService
 	
 	
 	
-	private Context c;
-	
-	public CharacterStorageService(Context pContext)
-	{
-		c = pContext;
-	}
-	
-	public Set<String> getSavedCharacterNames()
+	public static Set<String> getSavedCharacterNames()
 	{
 		Set<String> charNames = new HashSet<String>();
+		Context c = IKRPGApp.getContext();
 		for(File file : c.getDir("characters",Context.MODE_PRIVATE).listFiles())
 		{
 			charNames.add(fileNameToCharacterName(file.getName()));
@@ -46,32 +41,32 @@ public class CharacterStorageService
 		return charNames;
 	}
 	
-	public <T extends zzBaseCharacter> void loadCharacters(Set<String> characterNames, Class<T> pCharClass, CharacterStorageService.LoadingDelegate<T> pDelegate)
+	public static <T extends zzBaseCharacter> void loadCharacters(Set<String> characterNames, Class<T> pCharClass, CharacterStorageService.LoadingDelegate<T> pDelegate)
 	{
 		new LoadCharacterTask<T>(pCharClass, pDelegate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, characterNames.toArray(new String[0]));
 	}
 	
-	public <T extends zzBaseCharacter> void saveCharacter(T character, CharacterStorageService.SavingDelegate pDelegate)
+	public static <T extends zzBaseCharacter> void saveCharacter(T character, CharacterStorageService.SavingDelegate pDelegate)
 	{
 		new SaveCharacterTask<T>(pDelegate, character).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
-	public void deleteCharacter(String charName, CharacterStorageService.DeleteDelegate pDelegate)
+	public static void deleteCharacter(String charName, CharacterStorageService.DeleteDelegate pDelegate)
 	{
 		new DeleteCharacterTask(pDelegate, charName).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
-	private String fileNameToCharacterName(String fileName)
+	private static String fileNameToCharacterName(String fileName)
 	{
 		return URLDecoder.decode(fileName);
 	}
 	
-	private String characterNameToFileName(String characterName)
+	private static String characterNameToFileName(String characterName)
 	{
 		return URLEncoder.encode(characterName);
 	}
 	
-	private class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, TreeSet<T>>
+	private static class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, TreeSet<T>>
 	{
 		private CharacterStorageService.LoadingDelegate<T> delegate;
 		private Class<T> charClass;
@@ -100,6 +95,7 @@ public class CharacterStorageService
 				
 				try
 				{
+					Context c = IKRPGApp.getContext();
 					File dir = c.getDir("characters",Context.MODE_PRIVATE);
 					File inFile = new File(dir, characterNameToFileName(name));
 					stream = new FileInputStream(inFile);
@@ -129,7 +125,7 @@ public class CharacterStorageService
 		}
 	}
 	
-	private class SaveCharacterTask<T extends zzBaseCharacter> extends AsyncTask<Void, Void, Boolean>
+	private static class SaveCharacterTask<T extends zzBaseCharacter> extends AsyncTask<Void, Void, Boolean>
 	{
 		private CharacterStorageService.SavingDelegate delegate;
 		T myChar;
@@ -144,6 +140,7 @@ public class CharacterStorageService
 		{			
 			try
 			{
+				Context c = IKRPGApp.getContext();
 				File dir = c.getDir("characters",Context.MODE_PRIVATE);
 				File outFile = new File(dir, characterNameToFileName(myChar.fluff.name));
 				
@@ -168,7 +165,7 @@ public class CharacterStorageService
 		}
 	}
 	
-	private class DeleteCharacterTask extends AsyncTask<Void, Void, Boolean>
+	private static class DeleteCharacterTask extends AsyncTask<Void, Void, Boolean>
 	{
 		private CharacterStorageService.DeleteDelegate delegate;
 		String charName;
@@ -183,6 +180,7 @@ public class CharacterStorageService
 		{			
 			try
 			{
+				Context c = IKRPGApp.getContext();
 				File dir = c.getDir("characters",Context.MODE_PRIVATE);
 				File outFile = new File(dir, characterNameToFileName(charName));
 

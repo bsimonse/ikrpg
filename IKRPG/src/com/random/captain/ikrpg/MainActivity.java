@@ -2,7 +2,6 @@ package com.random.captain.ikrpg;
 
 import android.view.*;
 import android.widget.*;
-import com.random.captain.ikrpg.character.*;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +10,19 @@ import android.util.Log;
 import android.widget.AdapterView.OnItemClickListener;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.character.Character;
+import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
+import com.random.captain.ikrpg.character.CharacterStorageService;
 import java.util.HashSet;
 import java.util.Set;
 
 
 public class MainActivity extends FragmentActivity
 {
+	public static final String PC_EXTRA = "IKRPG_PC";
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
     private ArrayAdapter myListAdapter;
-	private Set<PC> myChars = new HashSet<PC>();
+	private Set<Character> myChars = new HashSet<Character>();
 	
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -44,7 +47,6 @@ public class MainActivity extends FragmentActivity
 	public void onResume()
 	{
 		super.onResume();
-		
 		reloadCharacters();
 	}
 	
@@ -54,9 +56,8 @@ public class MainActivity extends FragmentActivity
 		proBar.setVisibility(View.VISIBLE);
 
 		//(re)load existing characters
-		CharacterStorageService chars = new CharacterStorageService(this);
-		chars.loadCharacters(chars.getSavedCharacterNames(), PC.class, new CharacterStorageService.LoadingDelegate<PC>(){
-				@Override public void charactersLoaded(Set<PC> characters)
+		CharacterStorageService.loadCharacters(CharacterStorageService.getSavedCharacterNames(), Character.class, new CharacterStorageService.LoadingDelegate<Character>(){
+				@Override public void charactersLoaded(Set<Character> characters)
 				{
 					ProgressBar proBar = (ProgressBar)findViewById(R.id.loadingCharacterSpinner);
 					proBar.setVisibility(View.GONE);
@@ -66,7 +67,7 @@ public class MainActivity extends FragmentActivity
 					{	
 						ListView characterList = (ListView)findViewById(R.id.characterList);
 						characterList.setVisibility(View.VISIBLE);
-						myListAdapter = new ArrayAdapter<PC>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new PC[0]));
+						myListAdapter = new ArrayAdapter<Character>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new Character[0]));
 						characterList.setAdapter(myListAdapter);
 						characterList.setOnItemClickListener(characterClicked);
 					}
@@ -84,9 +85,9 @@ public class MainActivity extends FragmentActivity
 		@Override
 		public void onItemClick(AdapterView<?> adapter, View v, int position, long huh)
 		{
-			PC whichChar = (PC)myListAdapter.getItem(position);
+			Character whichChar = (Character)myListAdapter.getItem(position);
 			Intent i = new Intent(MainActivity.this, CharacterHomeActivity.class);
-			i.putExtra("CHAR",whichChar);
+			i.putExtra(PC_EXTRA,whichChar);
 			startActivity(i);
 		}
 	};
@@ -108,7 +109,7 @@ public class MainActivity extends FragmentActivity
 		{
 			case R.id.new_character:
 				//Start new character activity!!
-				Intent i = new Intent(this, NewCharacterServiceActivity.class);
+				Intent i = new Intent(this, CharacterCreationServiceActivity.class);
 				startActivityForResult(i, NEW_CHARACTER_ACTIVITY_RESULT);
 				return true;
 			default:
@@ -123,13 +124,13 @@ public class MainActivity extends FragmentActivity
 		{
 			if(resultCode == RESULT_OK)
 			{
-				final PC myChar = i.getExtras().getParcelable(NewCharacterServiceActivity.NEW_CHARACTER);
+				final Character myChar = i.getExtras().getParcelable(CharacterCreationServiceActivity.NEW_CHARACTER);
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");
 					
 					//save character
-					new CharacterStorageService(this).saveCharacter(myChar, new CharacterStorageService.SavingDelegate()
+					CharacterStorageService.saveCharacter(myChar, new CharacterStorageService.SavingDelegate()
 					{
 						@Override public void characterSaved(boolean worked)
 						{

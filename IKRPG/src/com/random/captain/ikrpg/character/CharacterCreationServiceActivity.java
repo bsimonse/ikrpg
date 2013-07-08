@@ -9,7 +9,7 @@ import android.util.Log;
 import android.util.Pair;
 import com.random.captain.ikrpg.R;
 	
-public class NewCharacterServiceActivity extends FragmentActivity
+public class CharacterCreationServiceActivity extends FragmentActivity
 {
 	public static String NEW_CHARACTER = "thisIsABrandNewCharacter";
 	private int nameIndex;
@@ -122,7 +122,7 @@ public class NewCharacterServiceActivity extends FragmentActivity
 			nextHook.startHook(buildingChar,
 				new zzCreateCharacterHookDelegate(){
 					@Override public void hookComplete()
-					{NewCharacterServiceActivity.this.hookComplete(hookType);}
+					{CharacterCreationServiceActivity.this.hookComplete(hookType);}
 				});
 			
 			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -213,36 +213,8 @@ public class NewCharacterServiceActivity extends FragmentActivity
 	public void characterComplete()
 	{
 		Intent i = new Intent();
-		i.putExtra(NEW_CHARACTER, new PC(buildingChar));
+		i.putExtra(NEW_CHARACTER, new Character(buildingChar));
 		setResult(RESULT_OK, i);
 		finish();
-	}
-	
-	public static PC getDummyCharacter()
-	{
-		PC myC = new PC();
-
-		Fluff fluff = new Fluff();
-		fluff.name = "Felix";
-		fluff.sex = "Male";
-		fluff.characteristics = "Battle scar";
-		fluff.weight = "185 lbs";
-		fluff.faith = "Morrowan";
-		fluff.owningPlayer = "You";
-		fluff.height = "5' 11\"";
-		myC.fluff = fluff;
-
-		myC.race = Race.HUMAN;
-
-		myC.archetype = Archetype.MIGHTY;
-
-		Set<Career> careers = new HashSet<Career>(2);
-		careers.add(Career.ALCHEMIST);
-		careers.add(Career.PIRATE);
-		myC.careers = careers;
-
-		//myC.statsBundle = new zzStatsBundle(Race.HUMAN.startStats(), Race.HUMAN.heroStats());
-		//myC.skillsBundle = new zzSkillsBundle(myC.statsBundle, myC.careers);
-		return myC;
 	}
 }

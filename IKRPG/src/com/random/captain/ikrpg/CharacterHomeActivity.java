@@ -1,19 +1,31 @@
 package com.random.captain.ikrpg;
+import android.view.*;
+import android.widget.*;
+
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.CharacterSheetService;
 import com.random.captain.ikrpg.character.CharacterStorageService;
-import com.random.captain.ikrpg.character.PC;
+import com.random.captain.ikrpg.character.Character;
 
 public class CharacterHomeActivity extends Activity
 {
-	private PC billy;
+	private Character mainChar;
+	private ListView myList;
+	private ArrayAdapter myAdapter;
+	
+	private enum Actions
+	{
+		GAIN_EXP("Gain EXP"), GEAR("Manage Gear"), BUFF("Manage Buffs"), SKILL_CHECK("Skill Check");
+		
+		private Actions(String pName)
+		{name=pName;}
+		
+		private String name;
+		@Override public String toString(){return name;}
+	}
 	
 	@Override
 	public void onCreate(Bundle b)
@@ -21,19 +33,37 @@ public class CharacterHomeActivity extends Activity
         super.onCreate(b);
         setContentView(R.layout.act_character_home);
 		
-		billy = (PC)getIntent().getExtras().get("CHAR");
+		mainChar = (Character)getIntent().getExtras().get(MainActivity.PC_EXTRA);
+		if(mainChar == null){setResult(RESULT_FIRST_USER); finish(); return;}
+		
+		myList = (ListView)findViewById(R.id.char_home_actions);
+		myAdapter = new ArrayAdapter<Actions>(this, android.R.layout.simple_list_item_1, Actions.values());
+		myList.setAdapter(myAdapter);
+		myList.setOnItemClickListener(listener);
+		setTitle(mainChar.fluff().name);
 	}
 	
-	@Override
-	public void onResume()
+	private OnItemClickListener listener = new OnItemClickListener()
 	{
-		super.onResume();
-		if(billy != null)
+		@Override public void onItemClick(AdapterView av, View v, int which, long um)
 		{
-			TextView tv = (TextView)findViewById(R.id.char_home_name);
-			tv.setText(billy.fluff().name);
+			Actions action = Actions.values()[which];
+			
+			switch(action)
+			{
+				case GAIN_EXP:
+				break;
+				case GEAR:
+				break;
+				case BUFF:
+				break;
+				case SKILL_CHECK:
+				break;
+				
+				default:break;
+			}
 		}
-	}
+	};
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu pMenu)
@@ -50,12 +80,11 @@ public class CharacterHomeActivity extends Activity
 		{
 			case R.id.print_character:
 				
-				CharacterSheetService css = new CharacterSheetService(this);
-				css.drawCharacterSheet(billy, new CharacterSheetService.Delegate(){
+				CharacterSheetService.drawCharacterSheet(mainChar, new CharacterSheetService.Delegate(){
 					@Override public void characterSheetComplete(boolean worked)
 					{
 						if(worked)
-						{new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, billy.fluff().name+" printed!", Toast.LENGTH_SHORT).show();}
+						{new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, mainChar.fluff().name+" printed!", Toast.LENGTH_SHORT).show();}
 						else
 						{new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, "Couldn't print character sheet.", Toast.LENGTH_LONG).show();}
 					}
@@ -65,14 +94,14 @@ public class CharacterHomeActivity extends Activity
 			case R.id.delete_character:
 			
 				//Are you sure?  Of course you're sure.
-				
-				CharacterStorageService s = new CharacterStorageService(this);
-				s.deleteCharacter(billy.fluff().name, new CharacterStorageService.DeleteDelegate(){
+				//Or... I could
+				//TODO: Prompt user
+				CharacterStorageService.deleteCharacter(mainChar.fluff().name, new CharacterStorageService.DeleteDelegate(){
 					@Override public void characterDeleted(boolean worked)
 					{
 						if(worked)
 						{
-							new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, billy.fluff().name+" deleted!", Toast.LENGTH_SHORT).show();
+							new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, mainChar.fluff().name+" deleted!", Toast.LENGTH_SHORT).show();
 							CharacterHomeActivity.this.finish();
 						}
 						else
