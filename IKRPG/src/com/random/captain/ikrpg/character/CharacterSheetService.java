@@ -17,6 +17,7 @@ import com.random.captain.ikrpg.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
 
 public class CharacterSheetService
 {
@@ -57,7 +58,8 @@ public class CharacterSheetService
 		private Character pc;
 		private CharacterSheetService.Delegate delegate;
 		private int notificationId = 1000;
-		private Notification noti;
+		private NotificationCompat.Builder notiBuilder;
+		private NotificationManager man;
 		private Canvas canvas;
 		
 		CharacterSheetServiceTask(Character pPC, CharacterSheetService.Delegate pDelegate)
@@ -75,13 +77,14 @@ public class CharacterSheetService
 		
 		@Override protected void onPreExecute()
 		{
-			noti = new NotificationCompat.Builder(context).setSmallIcon(android.R.drawable.ic_menu_gallery)
+			notiBuilder = new NotificationCompat.Builder(context);
+			notiBuilder.setSmallIcon(android.R.drawable.ic_menu_gallery)
 			.setContentTitle("IKRPG")
 			.setContentText("Drawing "+pc.fluff.name+"'s character sheet")
-			.build();
+			.setProgress(100,0,false);
 			
-			NotificationManager man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-			man.notify(notificationId, noti);
+			man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+			man.notify(notificationId, notiBuilder.build());
 		}
 	
 		@Override protected Boolean doInBackground(Void... nothing)
@@ -99,6 +102,8 @@ public class CharacterSheetService
 						canvas.setBitmap(b);
 						
 						baseSheet.draw(canvas);
+						notiBuilder.setProgress(100,10, false).setContentText("Filling in sheet...");
+						man.notify(notificationId, notiBuilder.build());
 						fillInCharacter(pc);
 	
 						String fileName = fileNameSafeString(pc.fluff.name);
@@ -106,9 +111,22 @@ public class CharacterSheetService
 						f.createNewFile();
 						
 						ByteArrayOutputStream stream = new ByteArrayOutputStream();
+						notiBuilder.setProgress(100,20, false).setContentText("Compressing to PNG...");
+						man.notify(notificationId, notiBuilder.build());
 						b.compress(Bitmap.CompressFormat.PNG, 0, stream);
 						FileOutputStream os = new FileOutputStream(f);
-						os.write(stream.toByteArray());
+						
+						byte[] bytes = stream.toByteArray();
+						int maxSize = bytes.length;
+						int step = 160384;
+						for(int i=0; i<maxSize; i+=step)
+						{
+							notiBuilder.setProgress(maxSize, i, false).setContentText("Writing to disk...");
+							man.notify(notificationId, notiBuilder.build());
+							
+							if(i+step > maxSize){step = maxSize - i;}
+							os.write(bytes, i, step);
+						}
 						
 						stream.flush();stream.close();
 						os.flush();os.close();
