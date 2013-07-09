@@ -9,6 +9,7 @@ import android.util.Pair;
 import com.google.gag.annotation.disclaimer.HandsOff;
 import com.google.gag.enumeration.Consequence;
 import com.google.gson.reflect.TypeToken;
+import com.random.captain.ikrpg.gear.GearPack;
 import java.lang.reflect.Type;
 
 class zzBaseCharacter implements Parcelable
@@ -26,12 +27,15 @@ class zzBaseCharacter implements Parcelable
 	
 	Map<Skill, Integer> baseSkills;
 	transient Map<Skill, Integer> activeSkills;
-	Map<String, zzModifier<Skill>> skillModifiers;
+	Map<String, Modifier<Skill>> skillModifiers;
 	
 	transient Map<Stat, Integer> activeStats;
 	Map<Stat, Integer> baseStats;
 	Map<Stat, Integer> maxStats;
-	Map<String, zzModifier<Stat>> statModifiers;
+	Map<String, Modifier<Stat>> statModifiers;
+	
+	/*Gear*/
+	GearPack gear;
 	
 	zzLevel level;
 	int exp;
@@ -44,11 +48,12 @@ class zzBaseCharacter implements Parcelable
 		spells = new HashSet<Spell>();
 		baseSkills = new HashMap<Skill, Integer>();
 		activeSkills = new HashMap<Skill, Integer>();
-		skillModifiers = new HashMap<String, zzModifier<Skill>>();
+		skillModifiers = new HashMap<String, Modifier<Skill>>();
 		activeStats = new HashMap<Stat, Integer>();
 		baseStats = new HashMap<Stat, Integer>();
 		maxStats = new HashMap<Stat, Integer>();
-		statModifiers = new HashMap<String, zzModifier<Stat>>();
+		statModifiers = new HashMap<String, Modifier<Stat>>();
+		gear = new GearPack();
 	}
 	
 	public Fluff fluff(){return fluff;} //It's editable on purpose... fluff can't affect anything.  Might change later just in case.
@@ -101,7 +106,7 @@ class zzBaseCharacter implements Parcelable
 		return skills;
 	}
 	
-	public boolean addSkillModifier(zzModifier<Skill> modifier, String key)
+	public boolean addSkillModifier(Modifier<Skill> modifier, String key)
 	{
 		if(skillModifiers.containsKey(key))
 		{return false;}
@@ -137,7 +142,7 @@ class zzBaseCharacter implements Parcelable
 		return value == null ? 0 : value;
 	}
 	
-	public boolean addStatModifier(zzModifier<Stat> modifier, String key)
+	public boolean addStatModifier(Modifier<Stat> modifier, String key)
 	{
 		if(statModifiers.containsKey(key))
 		{return false;}
@@ -170,8 +175,8 @@ class zzBaseCharacter implements Parcelable
 		activeSkills.putAll(baseSkills);
 
 		//apply modifiers
-		Collection<zzModifier<Skill>> m = skillModifiers.values();
-		for(zzModifier<Skill> modifier : m)
+		Collection<Modifier<Skill>> m = skillModifiers.values();
+		for(Modifier<Skill> modifier : m)
 		{
 			Skill skill = modifier.trait;
 			Integer value = activeSkills.get(skill);
@@ -286,8 +291,8 @@ class zzBaseCharacter implements Parcelable
 		activeStats.putAll(baseStats);
 
 		//apply modifiers
-		Collection<zzModifier<Stat>> m = statModifiers.values();
-		for(zzModifier<Stat> modifier : m)
+		Collection<Modifier<Stat>> m = statModifiers.values();
+		for(Modifier<Stat> modifier : m)
 		{
 			Stat stat = modifier.trait;
 			Integer value = activeStats.get(stat);
@@ -362,6 +367,9 @@ class zzBaseCharacter implements Parcelable
 		
 		//Exp
 		toParcel.writeInt(exp);
+		
+		//Gear
+		toParcel.writeParcelable(gear,0);
 	}
 	
 	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
@@ -409,12 +417,12 @@ class zzBaseCharacter implements Parcelable
 			me.baseSkills=pSkills;
 			
 			//Skill modifiers
-			Map<String, zzModifier<Skill>> pSkillModifiers = new HashMap<String, zzModifier<Skill>>();
+			Map<String, Modifier<Skill>> pSkillModifiers = new HashMap<String, Modifier<Skill>>();
 			int skillModifierCount = in.readInt();
 			for(int i=0; i<skillModifierCount; i++)
 			{
 				String name = in.readString();
-				zzModifier<Skill> modifier= in.readParcelable(zzModifier.class.getClassLoader());
+				Modifier<Skill> modifier= in.readParcelable(Modifier.class.getClassLoader());
 				pSkillModifiers.put(name,modifier);
 			}
 			me.skillModifiers = pSkillModifiers;
@@ -442,19 +450,22 @@ class zzBaseCharacter implements Parcelable
 			me.maxStats=pMaxStats;
 			
 			//Stat modifiers
-			Map<String, zzModifier<Stat>> pStatModifiers = new HashMap<String, zzModifier<Stat>>();
+			Map<String, Modifier<Stat>> pStatModifiers = new HashMap<String, Modifier<Stat>>();
 			int statModifierCount = in.readInt();
 			for(int i=0; i<statModifierCount; i++)
 			{
 				String name = in.readString();
-				zzModifier<Stat> modifier= in.readParcelable(zzModifier.class.getClassLoader());
+				Modifier<Stat> modifier= in.readParcelable(Modifier.class.getClassLoader());
 				pStatModifiers.put(name,modifier);
 			}
 			me.statModifiers = pStatModifiers;
 			
+			//EXP
 			me.exp = in.readInt();
 			me.level = zzLevel.getLevelForEXP(me.exp);
 			
+			//Gear
+			me.gear = in.readParcelable(GearPack.class.getClassLoader());
 			return me;
 		}
 
@@ -506,8 +517,8 @@ class zzBaseCharacter implements Parcelable
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new SkillMapSerializer());
 		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new StatMapSerializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Skill>>>(){}.getType(), new SkillModifierMapSerializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Stat>>>(){}.getType(), new StatModifierMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new SkillModifierMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new StatModifierMapSerializer());
 		Gson gson = builder.create();
 		return gson.toJson(this);
 	}
@@ -517,8 +528,8 @@ class zzBaseCharacter implements Parcelable
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new SkillMapDeserializer());
 		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new StatMapDeserializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Skill>>>(){}.getType(), new SkillModifierMapDeserializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, zzModifier<Stat>>>(){}.getType(), new StatModifierMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new SkillModifierMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new StatModifierMapDeserializer());
 		Gson gson = builder.create();
 		zzBaseCharacter myChar = gson.fromJson(jsonString, zzBaseCharacter.class);
 		
@@ -603,16 +614,16 @@ class StatMapDeserializer implements JsonDeserializer<Map<Stat,Integer>>
 	}
 }
 
-class SkillModifierMapSerializer implements JsonSerializer<Map<String, zzModifier<Skill>>>
+class SkillModifierMapSerializer implements JsonSerializer<Map<String, Modifier<Skill>>>
 {
 	@Override
-	public JsonElement serialize(Map<String, zzModifier<Skill>> pMods, Type pType, JsonSerializationContext pContext)
+	public JsonElement serialize(Map<String, Modifier<Skill>> pMods, Type pType, JsonSerializationContext pContext)
 	{
 		JsonArray array = new JsonArray();
 		JsonObject obj;
 		for(String modName : pMods.keySet())
 		{
-			zzModifier<Skill> modifier = pMods.get(modName);
+			Modifier<Skill> modifier = pMods.get(modName);
 			obj = new JsonObject();
 			obj.addProperty("modifierName",modName);
 			obj.addProperty("modifierSkillOrdinal",modifier.trait.skillEnum().ordinal());
@@ -625,18 +636,18 @@ class SkillModifierMapSerializer implements JsonSerializer<Map<String, zzModifie
 	}
 }
 
-class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, zzModifier<Skill>>>
+class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, Modifier<Skill>>>
 {
 	@Override
-	public Map<String, zzModifier<Skill>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	public Map<String, Modifier<Skill>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
 	{
-		Map<String, zzModifier<Skill>> modMap = new HashMap<String, zzModifier<Skill>>();
+		Map<String, Modifier<Skill>> modMap = new HashMap<String, Modifier<Skill>>();
 		JsonArray array = (JsonArray)pJson;
 		for(JsonObject modJson : array)
 		{
 			SkillEnum se = SkillEnum.values()[modJson.get("modifierSkillOrdinal").getAsInt()];
 			Skill s = new Skill(se, modJson.get("modifierSkillQualifier").getAsString());
-			zzModifier<Skill> myMod = new zzModifier<Skill>(s, modJson.get("value").getAsInt());
+			Modifier<Skill> myMod = new Modifier<Skill>(s, modJson.get("value").getAsInt());
 			modMap.put(modJson.get("modifierName").getAsString(),myMod);
 		}
 
@@ -644,16 +655,16 @@ class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, zzMod
 	}
 }
 	
-class StatModifierMapSerializer implements JsonSerializer<Map<String, zzModifier<Stat>>>
+class StatModifierMapSerializer implements JsonSerializer<Map<String, Modifier<Stat>>>
 {
 	@Override
-	public JsonElement serialize(Map<String, zzModifier<Stat>> pMods, Type pType, JsonSerializationContext pContext)
+	public JsonElement serialize(Map<String, Modifier<Stat>> pMods, Type pType, JsonSerializationContext pContext)
 	{
 		JsonArray array = new JsonArray();
 		JsonObject obj;
 		for(String modName : pMods.keySet())
 		{
-			zzModifier<Stat> modifier = pMods.get(modName);
+			Modifier<Stat> modifier = pMods.get(modName);
 			obj = new JsonObject();
 			obj.addProperty("modifierName",modName);
 			obj.addProperty("modifierStatOrdinal",modifier.trait.ordinal());
@@ -665,17 +676,17 @@ class StatModifierMapSerializer implements JsonSerializer<Map<String, zzModifier
 	}
 }
 
-class StatModifierMapDeserializer implements JsonDeserializer<Map<String, zzModifier<Stat>>>
+class StatModifierMapDeserializer implements JsonDeserializer<Map<String, Modifier<Stat>>>
 {
 	@Override
-	public Map<String, zzModifier<Stat>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	public Map<String, Modifier<Stat>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
 	{
-		Map<String, zzModifier<Stat>> modMap = new HashMap<String, zzModifier<Stat>>();
+		Map<String, Modifier<Stat>> modMap = new HashMap<String, Modifier<Stat>>();
 		JsonArray array = (JsonArray)pJson;
 		for(JsonObject modJson : array)
 		{
 			Stat stat = Stat.values()[modJson.get("modifierStatOrdinal").getAsInt()];
-			zzModifier<Stat> myMod = new zzModifier<Stat>(stat, modJson.get("value").getAsInt());
+			Modifier<Stat> myMod = new Modifier<Stat>(stat, modJson.get("value").getAsInt());
 			modMap.put(modJson.get("modifierName").getAsString(),myMod);
 		}
 

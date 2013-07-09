@@ -4,29 +4,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-class zzModifier<S extends Parcelable> implements Parcelable
+public class Modifier<S extends Parcelable> implements Parcelable
 {
 	int value;
 	S trait;
 	Class<S> genericClass;
 	
-	zzModifier (S pTrait){this(pTrait, 0);}	
-	zzModifier(S pTrait, int pValue)
+	Modifier (S pTrait){this(pTrait, 0);}	
+	Modifier(S pTrait, int pValue)
 	{
 		trait = pTrait;
 		value = pValue;
 		genericClass = (Class<S>)trait.getClass();
 	}
-	
-	//Java is weird.
-	//Thanks, S.O.!
-	//
-	//All access is through these static methods for simplicity.
-	/*static <S2 extends Parcelable> zzModifier<S2> onTrait(S2 pTrait, int pValue)
-	{return new zzModifier<S2>(pTrait, pValue);}
-	
-	static <S2 extends Parcelable> zzModifier<S2> onTrait(S2 pTrait)
-	{return new zzModifier<S2>(pTrait);}*/
 	
 	//future improvement will allow for setting here, rather than incrementing
 	int modifiedValue(int base){return base + value;}
@@ -43,17 +33,17 @@ class zzModifier<S extends Parcelable> implements Parcelable
 		toParcel.writeParcelable(trait, 0);
 	}
 
-	public static final Parcelable.Creator<zzModifier> CREATOR = new Parcelable.Creator<zzModifier>()
+	public static final Parcelable.Creator<Modifier> CREATOR = new Parcelable.Creator<Modifier>()
 	{
 		@Override
-		public zzModifier createFromParcel(Parcel in)
+		public Modifier createFromParcel(Parcel in)
 		{
 			try
 			{
 				Class which = (Class)in.readSerializable();
 				int value = in.readInt();
 				Parcelable trait = in.readParcelable(which.getClassLoader());
-				return new zzModifier(trait, value);
+				return new Modifier(trait, value);
 			}
 			catch(Exception e)
 			{
@@ -62,7 +52,7 @@ class zzModifier<S extends Parcelable> implements Parcelable
 			}
 		}
 
-		@Override public zzModifier[] newArray(int size){return new zzModifier[size];}
+		@Override public Modifier[] newArray(int size){return new Modifier[size];}
 	};
 
 	@Override public int describeContents() {return 0;}

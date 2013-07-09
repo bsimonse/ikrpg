@@ -14,18 +14,20 @@ public class Character extends zzBaseCharacter
 	Character(zzBaseCharacter base)
 	{
 		super();
-		if(base.fluff!=null){fluff=base.fluff;}
-		if(base.race!=null)race=base.race;
-		if(base.archetype!=null)archetype=base.archetype;
-		if(base.tradition!=null)tradition=base.tradition;
-		if(base.careers!=null)careers=base.careers;
-		if(base.abilities!=null)abilities=base.abilities;
-		if(base.spells!=null)spells=base.spells;
-		if(base.baseSkills!=null)baseSkills=base.baseSkills;
-		if(base.skillModifiers!=null)skillModifiers=base.skillModifiers;
-		if(base.baseStats!=null)baseStats=base.baseStats;
-		if(base.maxStats!=null)maxStats=base.maxStats;
-		if(base.statModifiers!=null)statModifiers=base.statModifiers;
+		fluff=base.fluff;
+		race=base.race;
+		archetype=base.archetype;
+		tradition=base.tradition;
+		careers=base.careers;
+		abilities=base.abilities;
+		spells=base.spells;
+		baseSkills=base.baseSkills;
+		skillModifiers=base.skillModifiers;
+		baseStats=base.baseStats;
+		maxStats=base.maxStats;
+		statModifiers=base.statModifiers;
+		gear=base.gear;
+		
 		exp=base.exp;
 		level=zzLevel.getLevelForEXP(exp);
 		deriveStats();

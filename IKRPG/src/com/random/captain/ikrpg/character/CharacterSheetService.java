@@ -81,7 +81,7 @@ public class CharacterSheetService
 			notiBuilder.setSmallIcon(android.R.drawable.ic_menu_gallery)
 			.setContentTitle("IKRPG")
 			.setContentText("Drawing "+pc.fluff.name+"'s character sheet")
-			.setProgress(100,0,false);
+			.setProgress(100,0,true);
 			
 			man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 			man.notify(notificationId, notiBuilder.build());
@@ -102,7 +102,7 @@ public class CharacterSheetService
 						canvas.setBitmap(b);
 						
 						baseSheet.draw(canvas);
-						notiBuilder.setProgress(100,10, false).setContentText("Filling in sheet...");
+						notiBuilder.setProgress(100,10, true).setContentText("Filling in sheet...");
 						man.notify(notificationId, notiBuilder.build());
 						fillInCharacter(pc);
 	
@@ -111,7 +111,7 @@ public class CharacterSheetService
 						f.createNewFile();
 						
 						ByteArrayOutputStream stream = new ByteArrayOutputStream();
-						notiBuilder.setProgress(100,20, false).setContentText("Compressing to PNG...");
+						notiBuilder.setProgress(100,20, true).setContentText("Compressing to PNG...");
 						man.notify(notificationId, notiBuilder.build());
 						b.compress(Bitmap.CompressFormat.PNG, 0, stream);
 						FileOutputStream os = new FileOutputStream(f);
@@ -490,8 +490,8 @@ public class CharacterSheetService
 		pascal.setMaxStat(Stat.PERCEPTION, 5);
 		
 		//Armor modifiers!
-		pascal.addStatModifier(new zzModifier<Stat>(Stat.ARMOR, 7), "ARMOR_BONUS");
-		pascal.addStatModifier(new zzModifier<Stat>(Stat.DEFENSE, -2), "DEF_PENALTY");
+		pascal.addStatModifier(new Modifier<Stat>(Stat.ARMOR, 7), "ARMOR_BONUS");
+		pascal.addStatModifier(new Modifier<Stat>(Stat.DEFENSE, -2), "DEF_PENALTY");
 		
 		//Skills
 		Map<Skill, Integer> skills = new HashMap<Skill,Integer>(20);

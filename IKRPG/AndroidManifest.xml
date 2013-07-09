@@ -29,7 +29,7 @@
 		<activity android:name=".CharacterHomeActivity" />
 	
 		<activity
-			android:name=".character.NewCharacterServiceActivity"
+			android:name=".character.CharacterCreationServiceActivity"
 			android:configChanges="orientation|keyboardHidden"
 		/>
 		
