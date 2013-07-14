@@ -1,16 +1,29 @@
 package com.random.captain.ikrpg.character;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 abstract class zzCreateCharacterHook extends Fragment
 {
+	private static final String CHARACTER = "thisStringHasNothingToDoWithItsName";
 	protected zzBaseCharacter myChar;
 	protected zzCreateCharacterHookDelegate delegate;
 	
 	void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
 	{
+		Bundle args = getArguments();
+		args.putParcelable(CHARACTER,pChar);
+		
 		myChar = pChar;
 		delegate = pDelegate;
+	}
+	
+	@Override
+	public void onViewCreated(View v, Bundle b)
+	{
+		Bundle stuff = getArguments();
+		myChar = stuff.getParcelable(CHARACTER);
 	}
 	
 	abstract boolean hasUI();

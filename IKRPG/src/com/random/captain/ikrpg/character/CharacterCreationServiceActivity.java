@@ -1,10 +1,13 @@
 package com.random.captain.ikrpg.character;
 
-import android.support.v4.app.*;
 import java.util.*;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.Pair;
 import com.random.captain.ikrpg.R;
@@ -31,11 +34,22 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_new_character);
+	}
+	
+	@Override
+	public void onResume()
+	{
+		super.onResume();
 		
+		//if(firstTime)
+		//{
+		//Log.i("IKRPG","First time!");
+		//firstTime = false;
 		buildingChar = new zzBaseCharacter();
 		nextFrag(CreateHook.START);
+		//}
 	}
-
+	
 	public void nextFrag(CreateHook completedHook)
 	{
 		lastFinishedHook = completedHook;
@@ -47,23 +61,23 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		switch(completedHook)
 		{
 			case START:
-				nextHook = new ChooseRaceFragment();
+				nextHook = new zzStaticCreateCharacterHooks.ChooseRaceFragment();
 				hookType = CreateHook.RACE;
 				break;
 				
 			case RACE:
-				nextHook = new ChooseArchetypeHook();
+				nextHook = new zzStaticCreateCharacterHooks.ChooseArchetypeHook();
 				hookType = CreateHook.ARCHETYPE;
 				break;
 				
 			case ARCHETYPE:
-				nextHook = new ChooseCareerFragment();
+				nextHook = new zzStaticCreateCharacterHooks.ChooseCareerFragment();
 				hookType = CreateHook.CAREER1;
 				break;
 			
 			case CAREER1:
-				nextHook = new ChooseCareerFragment();
-				args.putBoolean(ChooseCareerFragment.SECOND_CAREER, true);
+				nextHook = new zzStaticCreateCharacterHooks.ChooseCareerFragment();
+				args.putBoolean(zzStaticCreateCharacterHooks.ChooseCareerFragment.SECOND_CAREER, true);
 				hookType = CreateHook.CAREER2;
 			break;
 			
@@ -87,7 +101,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 				}
 				else
 				{
-					nextHook = new ChooseFluffFragment();
+					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
 					hookType = CreateHook.FLUFF;
 					break;
 				}
@@ -98,7 +112,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 
 				if(nextPostHookCount >= postCreateHooks.size())
 				{
-					nextHook = new ChooseFluffFragment();
+					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
 					hookType = CreateHook.FLUFF;
 					break;
 				}
@@ -201,7 +215,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		}
 		
 		//advancement point hook
-		postCreateHooks.add(new ChooseAdvancementPointsHook());
+		postCreateHooks.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
 		
 		//sort hooks
 		Collections.sort(postCreateHooks, new Comparator<zzCreateCharacterHook>(){

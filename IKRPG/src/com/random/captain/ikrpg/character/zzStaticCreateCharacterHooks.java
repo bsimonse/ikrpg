@@ -12,17 +12,23 @@ import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.Archetype;
 import com.random.captain.ikrpg.character.Stat;
 
+//This isn't really a class... I just wanted to put a bunch of stuff in one file.
+//It's got to be public for Android to recreate the fragments... so no encapsulation for you.
 public class zzStaticCreateCharacterHooks
 {
-}
-
-class ChooseRaceFragment extends zzCreateCharacterHook
+	
+public static class ChooseRaceFragment extends zzCreateCharacterHook
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
 	{
-		View rootView = inflater.inflate(R.layout.frag_choice_list, root, false);
+		return inflater.inflate(R.layout.frag_choice_list, root, false);
+	}
 
+	@Override
+	public void onViewCreated(View rootView, Bundle b)
+	{
+		super.onViewCreated(rootView,b);
 		ListView raceList = (ListView)rootView.findViewById(R.id.listChoiceList);
 		raceList.setAdapter(new ArrayAdapter<Race>(getActivity(), android.R.layout.simple_list_item_1, Race.values()));
 		raceList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
@@ -35,10 +41,8 @@ class ChooseRaceFragment extends zzCreateCharacterHook
 
 		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 		tv.setText("Choose your Race");
-
-		return rootView;
 	}
-
+	
 	private void raceSelected(Race race)
 	{
 		Log.i("IKRPG","Race chosen! "+race.toString());
@@ -51,15 +55,20 @@ class ChooseRaceFragment extends zzCreateCharacterHook
 	@Override public int getPriority(){return -1;}
 }
 	
-class ChooseArchetypeHook extends zzCreateCharacterHook
+public static class ChooseArchetypeHook extends zzCreateCharacterHook
 {
 	private ListView archetypeList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
 	{
-		View rootView = inflater.inflate(R.layout.frag_choice_list, root, false);
+		return inflater.inflate(R.layout.frag_choice_list, root, false);
+	}
 
+	@Override
+	public void onViewCreated(View rootView, Bundle b)
+	{
+		super.onViewCreated(rootView, b);
 		final List<Archetype> validArchetypes = new ArrayList<Archetype>(5);
 		for(Archetype at : Archetype.values())
 		{
@@ -83,10 +92,8 @@ class ChooseArchetypeHook extends zzCreateCharacterHook
 
 		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 		tv.setText("Choose an Archetype");
-
-		return rootView;
 	}
-
+	
 	private void archetypeSelected(Archetype archetype)
 	{
 		//TODO: ask additional question!
@@ -100,19 +107,24 @@ class ChooseArchetypeHook extends zzCreateCharacterHook
 	@Override public int getPriority(){return -1;}
 }
 	
-class ChooseCareerFragment extends zzCreateCharacterHook
+public static class ChooseCareerFragment extends zzCreateCharacterHook
 {
 	static final String SECOND_CAREER = "thisIsMySecondCareer";
 	static final String CHOSEN_CAREER = "IhaveChosenThisCareer";
 
 	private ListView careerList;
 	private boolean isSecondCareer = false;
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
 	{
-		View rootView = inflater.inflate(R.layout.frag_choice_list, root, false);
-
+		return inflater.inflate(R.layout.frag_choice_list, root, false);
+	}
+	
+	@Override
+	public void onViewCreated(View rootView, Bundle b)
+	{
+		super.onViewCreated(rootView, b);
 		Bundle arguments = getArguments();
 		if(arguments != null)
 		{
@@ -143,7 +155,6 @@ class ChooseCareerFragment extends zzCreateCharacterHook
 
 		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 		tv.setText(isSecondCareer ? "Choose your second career" : "Choose your first career");
-		return rootView;
 	}
 
 	private void careerSelected(Career career)
@@ -165,15 +176,19 @@ class ChooseCareerFragment extends zzCreateCharacterHook
 	@Override public int getPriority(){return -1;}
 }
 	
-class ChooseAdvancementPointsHook extends zzCreateCharacterHook
+public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 {
 	private Map<Stat, Integer> oldBaseStats;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
 	{
-		ViewGroup root = (ViewGroup)inflater.inflate(R.layout.frag_choose_advancement_points, pRoot, false);
-
+		return inflater.inflate(R.layout.frag_choose_advancement_points, pRoot, false);
+	}
+	
+	@Override
+	public void onViewCreated(View root, Bundle b)
+	{
 		final ListView list = (ListView)root.findViewById(R.id.chooseAdvancementPointsList);
 		list.setAdapter(new ChooseAdvancementPointsAdapter(myChar, list));
 
@@ -186,8 +201,6 @@ class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 					delegate.hookComplete();
 				}
 			});
-
-		return root;
 	}
 
 	@Override boolean hasUI(){return true;}
@@ -211,7 +224,7 @@ class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	@Override public int getPriority(){return 100;}
 }
 
-class ChooseAdvancementPointsAdapter extends BaseAdapter
+public static class ChooseAdvancementPointsAdapter extends BaseAdapter
 {
 	private final static int MAX_INCREASES = 3;
 	private zzBaseCharacter character;
@@ -313,13 +326,17 @@ class ChooseAdvancementPointsAdapter extends BaseAdapter
 	}
 }
 	
-class ChooseFluffFragment extends zzCreateCharacterHook
+public static class ChooseFluffFragment extends zzCreateCharacterHook
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
 	{
-		View rootView = inflater.inflate(R.layout.frag_choose_fluff, root, false);
-
+		return inflater.inflate(R.layout.frag_choose_fluff, root, false);
+	}
+	
+	@Override
+	public void onViewCreated(View rootView, Bundle b)
+	{
 		Button doneButton = (Button)rootView.findViewById(R.id.fluffDoneButton);
 		doneButton.setOnClickListener(new View.OnClickListener(){
 				@Override
@@ -327,7 +344,6 @@ class ChooseFluffFragment extends zzCreateCharacterHook
 					fluffComplete();
 				}
 			});
-		return rootView;
 	}
 
 	private void fluffComplete()
@@ -351,4 +367,6 @@ class ChooseFluffFragment extends zzCreateCharacterHook
 	@Override public boolean hasUI(){return true;}
 	@Override public void undoHook(){myChar.fluff = null;}
 	@Override public int getPriority(){return -1;}
+}
+	
 }
