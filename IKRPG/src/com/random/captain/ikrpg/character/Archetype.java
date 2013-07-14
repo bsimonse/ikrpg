@@ -84,7 +84,7 @@ public enum Archetype implements zzPrereqCheck
 	public String displayName(){return name;}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
-	static private zzCreateCharacterHook nonGiftedArcaneHook()
+	public static zzCreateCharacterHook nonGiftedArcaneHook()
 	{
 		return new zzCreateCharacterHook(){
 				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
