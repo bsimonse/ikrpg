@@ -12,9 +12,9 @@ public enum Archetype implements zzPrereqCheck
 			new zzCreateCharacterHook(){
 				private final String PREV_BASE_ARCANE_STAT = "thisWasThePreviousArcaneStat";
 				
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
 				{
-					super.startHook(pChar, pDelegate);
+					super.startHook(pChar, pDelegate, hook);
 					if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
 					else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
 					
@@ -87,9 +87,9 @@ public enum Archetype implements zzPrereqCheck
 	public static zzCreateCharacterHook nonGiftedArcaneHook()
 	{
 		return new zzCreateCharacterHook(){
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
 				{
-					super.startHook(pChar, pDelegate);
+					super.startHook(pChar, pDelegate, hook);
 					myChar.setBaseStat(Stat.ARCANE,0);
 					myChar.setMaxStat(Stat.ARCANE,0);
 				}

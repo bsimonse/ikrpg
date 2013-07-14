@@ -205,9 +205,9 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 
 	@Override boolean hasUI(){return true;}
 
-	@Override void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+	@Override void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
 	{
-		super.startHook(pChar, pDelegate);
+		super.startHook(pChar, pDelegate, hook);
 		oldBaseStats = new HashMap<Stat, Integer>();
 		oldBaseStats.putAll(myChar.baseStats);
 	}

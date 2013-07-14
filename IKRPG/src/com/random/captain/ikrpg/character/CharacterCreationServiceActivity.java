@@ -1,13 +1,10 @@
 package com.random.captain.ikrpg.character;
 
+import android.support.v4.app.*;
 import java.util.*;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.Pair;
 import com.random.captain.ikrpg.R;
@@ -16,17 +13,10 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 {
 	public static String NEW_CHARACTER = "thisIsABrandNewCharacter";
 	private int nameIndex;
-	
-	private static enum CreateHook
-	{
-		START,RACE,ARCHETYPE,CAREER1,CAREER2,POSTCREATE_HOOK,FLUFF,DONE;
-		
-		private int which;
-		public void setWhich(int pWhich){which=pWhich;}
-	}
+	private static boolean firstTime = true;
 	
 	private ArrayList<zzCreateCharacterHook> postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
-	private CreateHook lastFinishedHook;
+	private zzCreateCharacterHook.CreateHook lastFinishedHook;
 	private zzBaseCharacter buildingChar;
 	
 	@Override
@@ -41,44 +31,61 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	{
 		super.onResume();
 		
-		//if(firstTime)
-		//{
-		//Log.i("IKRPG","First time!");
-		//firstTime = false;
-		buildingChar = new zzBaseCharacter();
-		nextFrag(CreateHook.START);
-		//}
+		//TODO: make this unstatic
+		if(firstTime)
+		{
+			Log.i("IKRPG","First time!");
+			firstTime = false;
+			buildingChar = new zzBaseCharacter();
+			nextFrag(zzCreateCharacterHook.CreateHook.START);
+		}
+		else
+		{
+			//get top frag
+			FragmentManager manager = getSupportFragmentManager();
+			int fragCount = manager.getBackStackEntryCount();
+			if(fragCount > 0)
+			{	
+				FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(fragCount-1);
+				final zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(entry.getName());
+				
+				topFrag.restartHook(new zzCreateCharacterHookDelegate(){
+					@Override public void hookComplete()
+					{CharacterCreationServiceActivity.this.hookComplete(topFrag.getHook());}
+				});
+			}
+		}
 	}
 	
-	public void nextFrag(CreateHook completedHook)
+	public void nextFrag(zzCreateCharacterHook.CreateHook completedHook)
 	{
 		lastFinishedHook = completedHook;
 		
 		final zzCreateCharacterHook nextHook;
-		final CreateHook hookType;
+		final zzCreateCharacterHook.CreateHook hookType;
 		final Bundle args = new Bundle();
 		
 		switch(completedHook)
 		{
 			case START:
 				nextHook = new zzStaticCreateCharacterHooks.ChooseRaceFragment();
-				hookType = CreateHook.RACE;
+				hookType = zzCreateCharacterHook.CreateHook.RACE;
 				break;
 				
 			case RACE:
 				nextHook = new zzStaticCreateCharacterHooks.ChooseArchetypeHook();
-				hookType = CreateHook.ARCHETYPE;
+				hookType = zzCreateCharacterHook.CreateHook.ARCHETYPE;
 				break;
 				
 			case ARCHETYPE:
 				nextHook = new zzStaticCreateCharacterHooks.ChooseCareerFragment();
-				hookType = CreateHook.CAREER1;
+				hookType = zzCreateCharacterHook.CreateHook.CAREER1;
 				break;
 			
 			case CAREER1:
 				nextHook = new zzStaticCreateCharacterHooks.ChooseCareerFragment();
 				args.putBoolean(zzStaticCreateCharacterHooks.ChooseCareerFragment.SECOND_CAREER, true);
-				hookType = CreateHook.CAREER2;
+				hookType = zzCreateCharacterHook.CreateHook.CAREER2;
 			break;
 			
 			case CAREER2:
@@ -95,31 +102,31 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 				//Do postcreatehooks
 				if(postCreateHooks.size() > 0)
 				{
-					CreateHook.POSTCREATE_HOOK.which = -1;
-					nextFrag(CreateHook.POSTCREATE_HOOK);
+					zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK.setWhich(-1);
+					nextFrag(zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK);
 					return;
 				}
 				else
 				{
 					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
-					hookType = CreateHook.FLUFF;
+					hookType = zzCreateCharacterHook.CreateHook.FLUFF;
 					break;
 				}
 			
 			case POSTCREATE_HOOK:
 				//Which one, and what is left?
-				final int nextPostHookCount = completedHook.which+1;
+				final int nextPostHookCount = completedHook.which()+1;
 
 				if(nextPostHookCount >= postCreateHooks.size())
 				{
 					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
-					hookType = CreateHook.FLUFF;
+					hookType = zzCreateCharacterHook.CreateHook.FLUFF;
 					break;
 				}
 
 				nextHook = postCreateHooks.get(nextPostHookCount);	
-				hookType = CreateHook.POSTCREATE_HOOK;
-				hookType.which = nextPostHookCount;
+				hookType = zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK;
+				hookType.setWhich(nextPostHookCount);
 			break;
 			
 			case FLUFF: nextHook = null; hookType = null; characterComplete(); break;
@@ -136,8 +143,8 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			nextHook.startHook(buildingChar,
 				new zzCreateCharacterHookDelegate(){
 					@Override public void hookComplete()
-					{CharacterCreationServiceActivity.this.hookComplete(hookType);}
-				});
+					{CharacterCreationServiceActivity.this.hookComplete(nextHook.getHook());}
+				}, hookType);
 			
 			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 			trans.replace(R.id.mainFragmentContainer, nextHook ,""+nameIndex);
@@ -149,7 +156,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		}
 	}
 	
-	public void hookComplete(CreateHook finishedHook)
+	public void hookComplete(zzCreateCharacterHook.CreateHook finishedHook)
 	{nextFrag(finishedHook);}
 	
 	@Override public void onBackPressed()
@@ -158,6 +165,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		
 		if(manager.getBackStackEntryCount() <= 1)
 		{
+			firstTime = true;
 			Intent i = new Intent();
 			i.putExtra(NEW_CHARACTER, (zzBaseCharacter)null);
 			setResult(RESULT_OK, i);
@@ -166,13 +174,22 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		}
 		
 		//undo previous thing
-		zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-1).getName());
-		zzCreateCharacterHook prevFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
+		final zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-1).getName());
+		final zzCreateCharacterHook prevFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
 		
 		//If we were on a dynamic hook, decrement
-		if(topFrag.getPriority() >= 0){CreateHook.POSTCREATE_HOOK.which--;}
+		if(topFrag.getPriority() >= 0)
+		{
+			int which = zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK.which()-1;
+			zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK.setWhich(which);
+		}
 		
 		//Undo previous frag that we're chosing again
+		//I have no idea what the best way to do this is.
+		prevFrag.restartHook(new zzCreateCharacterHookDelegate(){
+				@Override public void hookComplete()
+				{CharacterCreationServiceActivity.this.hookComplete(prevFrag.getHook());}
+			});
 		prevFrag.undoHook();
 		
 		manager.popBackStackImmediate();

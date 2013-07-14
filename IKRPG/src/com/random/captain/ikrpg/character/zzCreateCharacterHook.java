@@ -6,16 +6,39 @@ import android.view.View;
 
 abstract class zzCreateCharacterHook extends Fragment
 {
+	static enum CreateHook
+	{
+		START,RACE,ARCHETYPE,CAREER1,CAREER2,POSTCREATE_HOOK,FLUFF,DONE;
+
+		private int which;
+		public int which(){return which;}
+		public void setWhich(int pWhich){which=pWhich;}
+	}
+	
 	private static final String CHARACTER = "thisStringHasNothingToDoWithItsName";
+	private static final String HOOK = "neitherDoesThisOne";
+	
 	protected zzBaseCharacter myChar;
 	protected zzCreateCharacterHookDelegate delegate;
+	protected CreateHook hook;
 	
-	void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+	void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
 	{
 		Bundle args = getArguments();
 		args.putParcelable(CHARACTER,pChar);
+		args.putSerializable(HOOK, pHook);
 		
 		myChar = pChar;
+		delegate = pDelegate;
+		hook = pHook;
+	}
+	
+	//bleehhhhhhh
+	void restartHook(zzCreateCharacterHookDelegate pDelegate)
+	{
+		Bundle stuff = getArguments();
+		myChar = stuff.getParcelable(CHARACTER);
+		hook = (CreateHook)stuff.getSerializable(HOOK);
 		delegate = pDelegate;
 	}
 	
@@ -24,11 +47,13 @@ abstract class zzCreateCharacterHook extends Fragment
 	{
 		Bundle stuff = getArguments();
 		myChar = stuff.getParcelable(CHARACTER);
+		hook = (CreateHook)stuff.getSerializable(HOOK);
 	}
 	
 	abstract boolean hasUI();
 	abstract void undoHook();
-
+	public CreateHook getHook(){return hook;}
+	
 	//Priority Guidlines
 	//(this is is no way official)
 	//
