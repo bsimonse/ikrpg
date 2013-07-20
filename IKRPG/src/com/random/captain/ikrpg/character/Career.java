@@ -44,70 +44,8 @@ public enum Career implements zzPrereqCheck
 						return new zzPrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);
 					}
 			  	},
-				new zzCreateCharacterHook[] { new zzCreateCharacterHook()
-				{
-					private SkillEnum incrementedSkill;
-					private int incrementedSkillPrevValue;
-					
-					@Override public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
-					{
-						LinearLayout root = (LinearLayout)inflater.inflate(R.layout.frag_choice_list, pRoot, false);
-
-						ListView choiceList = (ListView)root.findViewById(R.id.listChoiceList);
-						final SkillEnum[] choices = new SkillEnum[]{SkillEnum.HAND_WEAPON, SkillEnum.RIFLE};
-						choiceList.setAdapter(new ArrayAdapter<SkillEnum>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
-						choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-							@Override public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-							{
-								incrementedSkill = choices[which];
-								incrementedSkillPrevValue = myChar.getSkillBaseLevel(new Skill(incrementedSkill));
-								int currentLevel = incrementedSkillPrevValue + 1;
-								if(currentLevel > 2){currentLevel = 2;}
-								myChar.setSkillLevel(new Skill(incrementedSkill), currentLevel);
-								delegate.hookComplete();
-							}
-						});
-
-						TextView tv = (TextView)root.findViewById(R.id.listChoiceTitle);
-						tv.setText("Choose a military skill to boost");
-
-						return root;
-					}
-					
-					@Override public boolean hasUI()
-					{return (myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillBaseLevel(SkillEnum.RIFLE) < 2);}
-					
-				 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
-				 	{	
-					 	myChar = pChar;
-						delegate = pDelegate;
-						
-						if(!hasUI())
-						{
-							boolean handWeaponMaxed = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) == 2;
-							boolean rifleMaxed = myChar.getSkillBaseLevel(SkillEnum.RIFLE) == 2;
-							
-							//auto-bump the appropriate skill
-							if(rifleMaxed && !handWeaponMaxed)
-							{
-								incrementedSkill = SkillEnum.HAND_WEAPON;
-								incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON);
-								myChar.setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), incrementedSkillPrevValue+1);
-							}
-							else if(!rifleMaxed && handWeaponMaxed)
-							{
-								incrementedSkill = SkillEnum.RIFLE;
-								incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.RIFLE);
-								myChar.setSkillLevel(new Skill(SkillEnum.RIFLE), incrementedSkillPrevValue+1);
-							}
-						}
-					}
-					
-					@Override public void undoHook()
-					{myChar.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
-					
-					@Override public int getPriority(){return 50;}
-			  }}),
+				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
+				
 	DUELIST(R.string.duelist_name,null,null,null,null,null,null,null,null),		  
 	PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
 	WARCASTER(R.string.warcaster_name,null,null,null,null,null,null,null,null);
@@ -168,5 +106,71 @@ public enum Career implements zzPrereqCheck
 		//no prereq means allowed
 		if(prereqCheck == null){return new zzPrereqCheckResult(true, null);}
 		else{return prereqCheck.meetsPrereq(myChar);}
+	}
+	
+	/* Hooks! */
+	
+	public static class ArcaneMechanikHook extends zzCreateCharacterHook
+	{
+		private SkillEnum incrementedSkill;
+		private int incrementedSkillPrevValue;
+					
+		@Override public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+		{
+			LinearLayout root = (LinearLayout)inflater.inflate(R.layout.frag_choice_list, pRoot, false);
+			ListView choiceList = (ListView)root.findViewById(R.id.listChoiceList);
+			final SkillEnum[] choices = new SkillEnum[]{SkillEnum.HAND_WEAPON, SkillEnum.RIFLE};
+			choiceList.setAdapter(new ArrayAdapter<SkillEnum>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
+			choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+				@Override public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+				{
+					incrementedSkill = choices[which];
+					incrementedSkillPrevValue = myChar.getSkillBaseLevel(new Skill(incrementedSkill));
+					int currentLevel = incrementedSkillPrevValue + 1;
+					if(currentLevel > 2){currentLevel = 2;}
+					myChar.setSkillLevel(new Skill(incrementedSkill), currentLevel);
+					delegate.hookComplete(myChar);
+				}
+			});
+
+			TextView tv = (TextView)root.findViewById(R.id.listChoiceTitle);
+			tv.setText("Choose a military skill to boost");
+
+			return root;
+		}
+					
+		@Override public boolean hasUI()
+		{return (myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillBaseLevel(SkillEnum.RIFLE) < 2);}
+					
+	 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+	 	{	
+		 	myChar = pChar;
+			delegate = pDelegate;
+						
+			if(!hasUI())
+			{
+				boolean handWeaponMaxed = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) == 2;
+				boolean rifleMaxed = myChar.getSkillBaseLevel(SkillEnum.RIFLE) == 2;
+							
+				//auto-bump the appropriate skill
+				if(rifleMaxed && !handWeaponMaxed)
+				{
+					incrementedSkill = SkillEnum.HAND_WEAPON;
+					incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON);
+					myChar.setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), incrementedSkillPrevValue+1);
+				}
+				else if(!rifleMaxed && handWeaponMaxed)
+				{
+					incrementedSkill = SkillEnum.RIFLE;
+					incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.RIFLE);
+					myChar.setSkillLevel(new Skill(SkillEnum.RIFLE), incrementedSkillPrevValue+1);
+				}
+			}
+		}
+					
+		@Override public void undoHook()
+		{myChar.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
+					
+		@Override public int getPriority(){return 50;}
 	}
 }

@@ -47,7 +47,7 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 	{
 		Log.i("IKRPG","Race chosen! "+race.toString());
 		myChar.race = race;
-		delegate.hookComplete();
+		delegate.hookComplete(myChar);
 	}
 
 	@Override public boolean hasUI(){return true;}
@@ -99,7 +99,7 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 		//TODO: ask additional question!
 		Log.i("IKRPG","Archetype chosen! "+archetype.toString());
 		myChar.archetype = archetype;
-		delegate.hookComplete();
+		delegate.hookComplete(myChar);
 	}
 
 	@Override public boolean hasUI(){return true;}
@@ -162,14 +162,13 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 		Log.i("IKRPG","Chosen career: "+career.toString());
 		getArguments().putSerializable(CHOSEN_CAREER, career);
 		myChar.careers.add(career);
-		delegate.hookComplete();
+		delegate.hookComplete(myChar);
 	}
 
 	@Override public boolean hasUI(){return true;}
 	@Override public void undoHook()
 	{
 		Career chosenCareer = (Career)getArguments().getSerializable(CHOSEN_CAREER);
-		Log.i("IKRPG","Trying to remove "+chosenCareer.toString());
 		myChar.careers.remove(chosenCareer);
 	}
 
@@ -178,7 +177,8 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 	
 public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 {
-	private Map<Stat, Integer> oldBaseStats;
+	private static final String OLD_STATS = "blahblahblahblah";
+	private HashMap<Stat, Integer> oldBaseStats;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
@@ -189,6 +189,7 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	@Override
 	public void onViewCreated(View root, Bundle b)
 	{
+		super.onViewCreated(root, b);
 		final ListView list = (ListView)root.findViewById(R.id.chooseAdvancementPointsList);
 		list.setAdapter(new ChooseAdvancementPointsAdapter(myChar, list));
 
@@ -198,7 +199,7 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 				{
 					ChooseAdvancementPointsAdapter adapter = (ChooseAdvancementPointsAdapter)list.getAdapter();
 					adapter.lockInStats();
-					delegate.hookComplete();
+					delegate.hookComplete(myChar);
 				}
 			});
 	}
@@ -210,8 +211,17 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 		super.startHook(pChar, pDelegate, hook);
 		oldBaseStats = new HashMap<Stat, Integer>();
 		oldBaseStats.putAll(myChar.baseStats);
+		
+		getArguments().putSerializable(OLD_STATS,oldBaseStats);
 	}
 
+	@Override void restartHook(zzCreateCharacterHookDelegate pDelegate)
+	{
+		super.restartHook(pDelegate);
+		if(oldBaseStats == null)
+		{oldBaseStats = (HashMap)getArguments().getSerializable(OLD_STATS);}
+	}
+	
 	@Override public void undoHook()
 	{
 		for(Stat stat : Stat.values())
@@ -361,7 +371,7 @@ public static class ChooseFluffFragment extends zzCreateCharacterHook
 		else{fluff.sex = "Male";}
 
 		myChar.fluff = fluff;
-		delegate.hookComplete();
+		delegate.hookComplete(myChar);
 	}
 
 	@Override public boolean hasUI(){return true;}

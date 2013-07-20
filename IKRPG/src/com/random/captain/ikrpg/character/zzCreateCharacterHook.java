@@ -2,6 +2,7 @@ package com.random.captain.ikrpg.character;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 abstract class zzCreateCharacterHook extends Fragment
@@ -24,16 +25,16 @@ abstract class zzCreateCharacterHook extends Fragment
 	
 	void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
 	{
-		Bundle args = getArguments();
-		args.putParcelable(CHARACTER,pChar);
-		args.putSerializable(HOOK, pHook);
-		
 		myChar = pChar;
-		delegate = pDelegate;
 		hook = pHook;
+		delegate = pDelegate;
+
+		Bundle args = getArguments();
+		args.putParcelable(CHARACTER,myChar);
+		args.putSerializable(HOOK,hook);
 	}
 	
-	//bleehhhhhhh
+	//doesn't do anything; just a clearer name
 	void restartHook(zzCreateCharacterHookDelegate pDelegate)
 	{
 		Bundle stuff = getArguments();
@@ -46,8 +47,12 @@ abstract class zzCreateCharacterHook extends Fragment
 	public void onViewCreated(View v, Bundle b)
 	{
 		Bundle stuff = getArguments();
-		myChar = stuff.getParcelable(CHARACTER);
-		hook = (CreateHook)stuff.getSerializable(HOOK);
+		
+		if(myChar==null)
+		{myChar = stuff.getParcelable(CHARACTER);}
+		
+		if(hook==null)
+		{hook = (CreateHook)stuff.getSerializable(HOOK);}
 	}
 	
 	abstract boolean hasUI();
@@ -69,5 +74,5 @@ abstract class zzCreateCharacterHook extends Fragment
 
 interface zzCreateCharacterHookDelegate
 {
-	public void hookComplete();
+	public void hookComplete(zzBaseCharacter finishedChar);
 }

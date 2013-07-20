@@ -1,40 +1,63 @@
 package com.random.captain.ikrpg.character;
 
-import android.support.v4.app.*;
 import java.util.*;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.Pair;
+import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
-	
+
+
 public class CharacterCreationServiceActivity extends FragmentActivity
 {
+	public static String SAVED_CHARACTER = "whatDoYouDoWithADrunkenSailor";
+	@ShoutOutTo("CalvinAndHobbes")
+	public static String FIRST_TIME = "howManyBoardsWouldTheMongolsHoardIfTheMongolHordesGotBored";
+	public static String NAME_INDEX = "IEvenLikeTheWordTeam";
 	public static String NEW_CHARACTER = "thisIsABrandNewCharacter";
-	private int nameIndex;
-	private static boolean firstTime = true;
+	private int nameIndex=0;
+	private boolean firstTime = true;
 	
 	private ArrayList<zzCreateCharacterHook> postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 	private zzCreateCharacterHook.CreateHook lastFinishedHook;
 	private zzBaseCharacter buildingChar;
 	
 	@Override
+	public void onSaveInstanceState(Bundle b)
+	{
+		super.onSaveInstanceState(b);
+		b.putParcelable(SAVED_CHARACTER, buildingChar);
+		b.putBoolean(FIRST_TIME, firstTime);
+		b.putInt(NAME_INDEX, nameIndex);
+	}
+	
+	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_new_character);
+		
+		if(savedInstanceState != null)
+		{
+			buildingChar = savedInstanceState.getParcelable(SAVED_CHARACTER);
+			firstTime = savedInstanceState.getBoolean(FIRST_TIME, true);
+			nameIndex = savedInstanceState.getInt(NAME_INDEX, 0);
+		}
 	}
 	
 	@Override
 	public void onResume()
 	{
 		super.onResume();
-		
-		//TODO: make this unstatic
+		Log.i("IKRPG","Rotated");
 		if(firstTime)
 		{
-			Log.i("IKRPG","First time!");
+			Log.i("IKRPG","This is the first time.");
 			firstTime = false;
 			buildingChar = new zzBaseCharacter();
 			nextFrag(zzCreateCharacterHook.CreateHook.START);
@@ -42,6 +65,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		else
 		{
 			//get top frag
+			Log.i("IKRPG","This is NOT the first time.");
 			FragmentManager manager = getSupportFragmentManager();
 			int fragCount = manager.getBackStackEntryCount();
 			if(fragCount > 0)
@@ -50,8 +74,8 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 				final zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(entry.getName());
 				
 				topFrag.restartHook(new zzCreateCharacterHookDelegate(){
-					@Override public void hookComplete()
-					{CharacterCreationServiceActivity.this.hookComplete(topFrag.getHook());}
+					@Override public void hookComplete(zzBaseCharacter theChar)
+					{CharacterCreationServiceActivity.this.hookComplete(theChar, topFrag.getHook());}
 				});
 			}
 		}
@@ -93,7 +117,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 				{createCharacter();}
 				catch(Exception e)
 				{
-					Log.e("IKRPG","Character couldn't legally be built! "+e.getMessage());
+					//Log.e("IKRPG","Character couldn't legally be built! "+e.getMessage());
 					nextHook = null; hookType = null;
 					setResult(RESULT_FIRST_USER);
 					finish();
@@ -142,13 +166,14 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			nextHook.setArguments(args);
 			nextHook.startHook(buildingChar,
 				new zzCreateCharacterHookDelegate(){
-					@Override public void hookComplete()
-					{CharacterCreationServiceActivity.this.hookComplete(nextHook.getHook());}
+					@Override public void hookComplete(zzBaseCharacter theChar)
+					{CharacterCreationServiceActivity.this.hookComplete(theChar, nextHook.getHook());}
 				}, hookType);
 			
 			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-			trans.replace(R.id.mainFragmentContainer, nextHook ,""+nameIndex);
+			trans.replace(R.id.mainFragmentContainer, nextHook, ""+nameIndex);
 			trans.addToBackStack(""+nameIndex);
+			Log.i("IKRPG","Pushing stack "+nameIndex);
 			trans.commit();
 			
 			nameIndex++;
@@ -156,11 +181,12 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		}
 	}
 	
-	public void hookComplete(zzCreateCharacterHook.CreateHook finishedHook)
-	{nextFrag(finishedHook);}
+	public void hookComplete(zzBaseCharacter pChar, zzCreateCharacterHook.CreateHook finishedHook)
+	{buildingChar=pChar;nextFrag(finishedHook);}
 	
 	@Override public void onBackPressed()
 	{
+		Log.i("IKRPG","Back");
 		FragmentManager manager = getSupportFragmentManager();
 		
 		if(manager.getBackStackEntryCount() <= 1)
@@ -187,8 +213,8 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		//Undo previous frag that we're chosing again
 		//I have no idea what the best way to do this is.
 		prevFrag.restartHook(new zzCreateCharacterHookDelegate(){
-				@Override public void hookComplete()
-				{CharacterCreationServiceActivity.this.hookComplete(prevFrag.getHook());}
+				@Override public void hookComplete(zzBaseCharacter theChar)
+				{CharacterCreationServiceActivity.this.hookComplete(theChar, prevFrag.getHook());}
 			});
 		prevFrag.undoHook();
 		
@@ -202,8 +228,6 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		Collection<zzCreateCharacterHook> aHooks;
 		postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 		
-		//Race
-		//Mostly for stats, and post-create bonuses
 		for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
 		{buildingChar.baseStats.put(startStat.first, startStat.second);}
 		for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
@@ -213,8 +237,6 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		aHooks = buildingChar.race.postCreateHooks();
 		if(aHooks != null){postCreateHooks.addAll(aHooks);}
 		
-		//Archetype
-		//Pick a bonus
 		aHooks = buildingChar.archetype.postCreateHooks();
 		if(aHooks!=null){postCreateHooks.addAll(aHooks);}
 		

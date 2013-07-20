@@ -9,25 +9,7 @@ public enum Archetype implements zzPrereqCheck
 {
 	GIFTED("Gifted",
 		new zzCreateCharacterHook[] { 
-			new zzCreateCharacterHook(){
-				private final String PREV_BASE_ARCANE_STAT = "thisWasThePreviousArcaneStat";
-				
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
-				{
-					super.startHook(pChar, pDelegate, hook);
-					if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
-					else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
-					
-					Bundle args = getArguments();
-					int value = myChar.getBaseStat(Stat.ARCANE);
-					args.putInt(PREV_BASE_ARCANE_STAT, value);
-					if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.setBaseStat(Stat.ARCANE, 3);}
-					else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.setBaseStat(Stat.ARCANE, 2);}
-				}
-				@Override public void undoHook(){myChar.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
-				@Override public int getPriority(){return 0;} //no choice necessary
-				@Override public boolean hasUI(){return false;}
-			}
+			new GiftedArcaneHook()
 		},
 	
 		new zzPrereqCheck(){
@@ -39,7 +21,7 @@ public enum Archetype implements zzPrereqCheck
 	
 	INTELLECTUAL("Intellectual",
 		new zzCreateCharacterHook[] { 
-			nonGiftedArcaneHook()
+			new NonGiftedArcaneHook()
 		},
 		new zzPrereqCheck(){
 			@Override
@@ -50,7 +32,7 @@ public enum Archetype implements zzPrereqCheck
 	
 	MIGHTY("Mighty",
 		new zzCreateCharacterHook[] { 
-			nonGiftedArcaneHook()
+			new NonGiftedArcaneHook()
 		},
 		new zzPrereqCheck(){
 			@Override
@@ -61,7 +43,7 @@ public enum Archetype implements zzPrereqCheck
 	
 	SKILLED("Skilled",
 		new zzCreateCharacterHook[] { 
-			nonGiftedArcaneHook()
+			new NonGiftedArcaneHook()
 		},
 		new zzPrereqCheck(){
 			@Override
@@ -84,19 +66,40 @@ public enum Archetype implements zzPrereqCheck
 	public String displayName(){return name;}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
-	public static zzCreateCharacterHook nonGiftedArcaneHook()
+	public static class GiftedArcaneHook extends zzCreateCharacterHook {
+		private final String PREV_BASE_ARCANE_STAT = "thisWasThePreviousArcaneStat";
+				
+		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
+		{
+			super.startHook(pChar, pDelegate, hook);
+			if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
+			else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
+			
+			Bundle args = getArguments();
+			int value = myChar.getBaseStat(Stat.ARCANE);
+			args.putInt(PREV_BASE_ARCANE_STAT, value);
+			if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.setBaseStat(Stat.ARCANE, 3);}
+			else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.setBaseStat(Stat.ARCANE, 2);}
+		}
+		@Override public void undoHook(){myChar.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
+		@Override public int getPriority(){return 0;} //no choice necessary
+		@Override public boolean hasUI(){return false;}
+	}
+	
+	public static class NonGiftedArcaneHook extends zzCreateCharacterHook
 	{
-		return new zzCreateCharacterHook(){
-				@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
-				{
-					super.startHook(pChar, pDelegate, hook);
-					myChar.setBaseStat(Stat.ARCANE,0);
-					myChar.setMaxStat(Stat.ARCANE,0);
-				}
-				@Override public void undoHook(){myChar.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));}
-				@Override public int getPriority(){return 0;} //no choice necessary
-				@Override public boolean hasUI(){return false;}
-			};
+		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
+		{
+			super.startHook(pChar, pDelegate, hook);
+			myChar.setBaseStat(Stat.ARCANE,0);
+			myChar.setMaxStat(Stat.ARCANE,0);
+		}
+		@Override public void undoHook()
+		{
+			myChar.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));
+		}
+		@Override public int getPriority(){return 0;} //no choice necessary
+		@Override public boolean hasUI(){return false;}
 	}
 	
 	@Override public String toString(){return displayName();}
