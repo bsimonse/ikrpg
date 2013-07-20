@@ -10,10 +10,6 @@ abstract class zzCreateCharacterHook extends Fragment
 	static enum CreateHook
 	{
 		START,RACE,ARCHETYPE,CAREER1,CAREER2,POSTCREATE_HOOK,FLUFF,DONE;
-
-		private int which;
-		public int which(){return which;}
-		public void setWhich(int pWhich){which=pWhich;}
 	}
 	
 	private static final String CHARACTER = "thisStringHasNothingToDoWithItsName";

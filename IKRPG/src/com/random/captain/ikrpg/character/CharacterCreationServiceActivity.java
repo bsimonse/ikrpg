@@ -20,7 +20,9 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	public static String FIRST_TIME = "howManyBoardsWouldTheMongolsHoardIfTheMongolHordesGotBored";
 	public static String NAME_INDEX = "IEvenLikeTheWordTeam";
 	public static String NEW_CHARACTER = "thisIsABrandNewCharacter";
+	public static String POST_HOOK_INDEX = "onMyGodDeaconStopIt";
 	private int nameIndex=0;
+	private int postHookIndex=0;
 	private boolean firstTime = true;
 	
 	private ArrayList<zzCreateCharacterHook> postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
@@ -34,6 +36,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		b.putParcelable(SAVED_CHARACTER, buildingChar);
 		b.putBoolean(FIRST_TIME, firstTime);
 		b.putInt(NAME_INDEX, nameIndex);
+		b.putInt(POST_HOOK_INDEX, postHookIndex);
 	}
 	
 	@Override
@@ -47,6 +50,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			buildingChar = savedInstanceState.getParcelable(SAVED_CHARACTER);
 			firstTime = savedInstanceState.getBoolean(FIRST_TIME, true);
 			nameIndex = savedInstanceState.getInt(NAME_INDEX, 0);
+			postHookIndex = savedInstanceState.getInt(POST_HOOK_INDEX, -1);
 		}
 	}
 	
@@ -54,10 +58,8 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	public void onResume()
 	{
 		super.onResume();
-		Log.i("IKRPG","Rotated");
 		if(firstTime)
 		{
-			Log.i("IKRPG","This is the first time.");
 			firstTime = false;
 			buildingChar = new zzBaseCharacter();
 			nextFrag(zzCreateCharacterHook.CreateHook.START);
@@ -65,7 +67,6 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		else
 		{
 			//get top frag
-			Log.i("IKRPG","This is NOT the first time.");
 			FragmentManager manager = getSupportFragmentManager();
 			int fragCount = manager.getBackStackEntryCount();
 			if(fragCount > 0)
@@ -77,6 +78,13 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 					@Override public void hookComplete(zzBaseCharacter theChar)
 					{CharacterCreationServiceActivity.this.hookComplete(theChar, topFrag.getHook());}
 				});
+			}
+			
+			try
+			{postCreateHooks = generateHooks(buildingChar);}
+			catch(Exception e)
+			{
+				//huh.
 			}
 		}
 	}
@@ -114,10 +122,9 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			
 			case CAREER2:
 				try
-				{createCharacter();}
+				{postCreateHooks = generateHooks(buildingChar);}
 				catch(Exception e)
 				{
-					//Log.e("IKRPG","Character couldn't legally be built! "+e.getMessage());
 					nextHook = null; hookType = null;
 					setResult(RESULT_FIRST_USER);
 					finish();
@@ -126,7 +133,6 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 				//Do postcreatehooks
 				if(postCreateHooks.size() > 0)
 				{
-					zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK.setWhich(-1);
 					nextFrag(zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK);
 					return;
 				}
@@ -139,18 +145,17 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			
 			case POSTCREATE_HOOK:
 				//Which one, and what is left?
-				final int nextPostHookCount = completedHook.which()+1;
 
-				if(nextPostHookCount >= postCreateHooks.size())
+				if(postHookIndex >= postCreateHooks.size())
 				{
 					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
 					hookType = zzCreateCharacterHook.CreateHook.FLUFF;
 					break;
 				}
 
-				nextHook = postCreateHooks.get(nextPostHookCount);	
+				nextHook = postCreateHooks.get(postHookIndex);
 				hookType = zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK;
-				hookType.setWhich(nextPostHookCount);
+				postHookIndex++;
 			break;
 			
 			case FLUFF: nextHook = null; hookType = null; characterComplete(); break;
@@ -173,7 +178,6 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 			trans.replace(R.id.mainFragmentContainer, nextHook, ""+nameIndex);
 			trans.addToBackStack(""+nameIndex);
-			Log.i("IKRPG","Pushing stack "+nameIndex);
 			trans.commit();
 			
 			nameIndex++;
@@ -206,8 +210,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		//If we were on a dynamic hook, decrement
 		if(topFrag.getPriority() >= 0)
 		{
-			int which = zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK.which()-1;
-			zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK.setWhich(which);
+			postHookIndex--;
 		}
 		
 		//Undo previous frag that we're chosing again
@@ -223,44 +226,54 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		{onBackPressed();}
 	}
 	
-	protected void createCharacter() //throws CharacterNotValidException
+	protected ArrayList<zzCreateCharacterHook> generateHooks(zzBaseCharacter myChar)
 	{
-		Collection<zzCreateCharacterHook> aHooks;
-		postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
+		Collection<zzCreateCharacterHook> hookStore;
+		ArrayList<zzCreateCharacterHook> finalHooks = new ArrayList<zzCreateCharacterHook>(15);
 		
-		for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
-		{buildingChar.baseStats.put(startStat.first, startStat.second);}
-		for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
-		{buildingChar.maxStats.put(maxStat.first, maxStat.second);}
-		buildingChar.deriveStats();
-		
-		aHooks = buildingChar.race.postCreateHooks();
-		if(aHooks != null){postCreateHooks.addAll(aHooks);}
-		
-		aHooks = buildingChar.archetype.postCreateHooks();
-		if(aHooks!=null){postCreateHooks.addAll(aHooks);}
-		
-		//skills
-		buildingChar.setBaseSkills(buildingChar.careers);
-		buildingChar.deriveSkillCheckLevels();
-		
-		//Careers; Abilities, spells, and post hooks
-		for(Career career : buildingChar.careers)
+		if(buildingChar.race != null)
 		{
-			buildingChar.abilities.addAll(career.startingAbilities());
-			buildingChar.spells.addAll(career.startingSpells());
-			aHooks = career.postCreateHooks();
-			if(aHooks!=null){postCreateHooks.addAll(aHooks);}
+			for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
+			{buildingChar.baseStats.put(startStat.first, startStat.second);}
+			for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
+			{buildingChar.maxStats.put(maxStat.first, maxStat.second);}
+			buildingChar.deriveStats();	//whoops.
+			hookStore = buildingChar.race.postCreateHooks();
+			if(hookStore != null){finalHooks.addAll(hookStore);}
+		}
+		
+		if(buildingChar.archetype != null)
+		{
+			hookStore = buildingChar.archetype.postCreateHooks();
+			if(hookStore!=null){finalHooks.addAll(hookStore);}
+		}
+		
+		if(buildingChar.careers != null)
+		{
+			//skills
+			buildingChar.setBaseSkills(buildingChar.careers);
+			buildingChar.deriveSkillCheckLevels();
+			
+			//Careers; Abilities, spells, and post hooks
+			for(Career career : buildingChar.careers)
+			{
+				buildingChar.abilities.addAll(career.startingAbilities());
+				buildingChar.spells.addAll(career.startingSpells());
+				hookStore = career.postCreateHooks();
+				if(hookStore!=null){finalHooks.addAll(hookStore);}
+			}
 		}
 		
 		//advancement point hook
-		postCreateHooks.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
+		finalHooks.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
 		
 		//sort hooks
-		Collections.sort(postCreateHooks, new Comparator<zzCreateCharacterHook>(){
+		Collections.sort(finalHooks, new Comparator<zzCreateCharacterHook>(){
 				@Override public int compare(zzCreateCharacterHook one, zzCreateCharacterHook two)
 				{return one.getPriority() - two.getPriority();}
 			});
+			
+		return finalHooks;
 	}
 	
 	public void characterComplete()
