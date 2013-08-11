@@ -31,7 +31,7 @@ public enum SkillEnum
 	FELL_CALLING("Fell Calling",Stat.POISE, false, false, false, false),
 	FORENSIC_SCIENCE("Forensic Science",Stat.INTELLECT, false, false, false, false),
 	FORGERY("Forgery",null, false, false, false, false),
-	GAMLBING("Gambling",Stat.PERCEPTION, false, true, false, true),
+	GAMBLING("Gambling",Stat.PERCEPTION, false, true, false, true),
 	INTERROGATION("Interrogation",Stat.INTELLECT, false, false, false, true),
 	INTIMIDATION("Intimidation",null, false, true, false, true),
 	JUMPING("Jumping",Stat.PHYSIQUE, false, true, false, true),

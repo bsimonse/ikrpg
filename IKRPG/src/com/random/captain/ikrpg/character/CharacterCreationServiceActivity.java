@@ -11,6 +11,7 @@ import android.util.Log;
 import android.util.Pair;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.util.Utilities;
 
 
 public class CharacterCreationServiceActivity extends FragmentActivity
@@ -278,9 +279,19 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	
 	public void characterComplete()
 	{
+		//Stamp an index on it;
+		buildingChar.index = makeIndex(buildingChar);
+		
 		Intent i = new Intent();
 		i.putExtra(NEW_CHARACTER, new Character(buildingChar));
 		setResult(RESULT_OK, i);
 		finish();
+	}
+	
+	public int makeIndex(zzBaseCharacter guy)
+	{
+		//simple hash based on character name and app random ID
+		String toHash = guy.fluff.name + Utilities.getAppID();
+		return Utilities.hashToInt(toHash);
 	}
 }

@@ -2,6 +2,7 @@ package com.random.captain.ikrpg;
 
 import android.view.*;
 import android.widget.*;
+import com.random.captain.ikrpg.character.*;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,9 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.AdapterView.OnItemClickListener;
 import com.google.gag.annotation.remark.ShoutOutTo;
+import com.random.captain.ikrpg.MainActivity;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.Character;
-import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
-import com.random.captain.ikrpg.character.CharacterStorageService;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,16 +31,15 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.act_main);
 		
 		//Cheating!
-		/*PC Pascal = CharacterSheetService.getPascal();
-		CharacterSheetService s = new CharacterSheetService(this);
-		s.drawCharacterSheet(Pascal, new CharacterSheetService.Delegate(){
+		Character Pascal = CharacterSheetService.getPascal();
+		CharacterSheetService.drawCharacterSheet(Pascal, new CharacterSheetService.Delegate(){
 				@Override
 				public void characterSheetComplete(boolean success)
 				{
 					//Toast!
 					if(success){new Toast(MainActivity.this).makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
 				}
-			});*/
+			});
     }
 
 	@Override

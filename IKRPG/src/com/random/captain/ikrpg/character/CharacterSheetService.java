@@ -478,7 +478,7 @@ public class CharacterSheetService
 		pascal.setMaxStat(Stat.SPEED, 7);
 		pascal.setBaseStat(Stat.STRENGTH, 5);
 		pascal.setMaxStat(Stat.STRENGTH, 6);
-		pascal.setBaseStat(Stat.AGILITY, 4);
+		pascal.setBaseStat(Stat.AGILITY, 5);
 		pascal.setMaxStat(Stat.AGILITY, 5);
 		pascal.setBaseStat(Stat.PROWESS, 4);
 		pascal.setMaxStat(Stat.PROWESS, 5);
@@ -497,15 +497,16 @@ public class CharacterSheetService
 		Map<Skill, Integer> skills = new HashMap<Skill,Integer>(20);
 		skills.put(SkillEnum.HAND_WEAPON.make(), 2);
 		skills.put(SkillEnum.PISTOL.make(), 2);
-		skills.put(SkillEnum.CLIMBING.make(), 1);
+		skills.put(SkillEnum.CLIMBING.make(), 2);
 		skills.put(SkillEnum.INTIMIDATION.make(), 2);
 		skills.put(SkillEnum.SWIMMING.make(), 1);
 		skills.put(SkillEnum.SAILING.make(), 1);
-		skills.put(SkillEnum.GAMLBING.make(), 1);
+		skills.put(SkillEnum.GAMBLING.make(), 1);
 		skills.put(SkillEnum.JUMPING.make(), 1);
 		skills.put(SkillEnum.STREETWISE.make(), 1);
 		skills.put(SkillEnum.LAW.make(), 1);
 		skills.put(SkillEnum.NEGOTIATION.make(), 1);
+		skills.put(SkillEnum.DECEPTION.make(),1);
 		pascal.setBaseSkills(skills);
 		
 		//Abilities

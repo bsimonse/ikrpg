@@ -9,7 +9,6 @@ public class GearPack implements Parcelable
 	int gold;
 	ArrayList<zzBaseGear> items;
 
-
 	/* Parceling */
 	
 	@Override public void writeToParcel(Parcel out, int flags)
