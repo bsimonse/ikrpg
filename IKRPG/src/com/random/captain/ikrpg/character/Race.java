@@ -8,6 +8,7 @@ import com.random.captain.ikrpg.R;
 
 public enum Race
 {
+	@SuppressWarnings("unchecked")
 	HUMAN(R.string.human_name,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),

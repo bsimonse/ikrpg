@@ -215,11 +215,12 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 		getArguments().putSerializable(OLD_STATS,oldBaseStats);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override void restartHook(zzCreateCharacterHookDelegate pDelegate)
 	{
 		super.restartHook(pDelegate);
 		if(oldBaseStats == null)
-		{oldBaseStats = (HashMap)getArguments().getSerializable(OLD_STATS);}
+		{oldBaseStats = (HashMap<Stat, Integer>)getArguments().getSerializable(OLD_STATS);}
 	}
 	
 	@Override public void undoHook()
@@ -241,12 +242,10 @@ public static class ChooseAdvancementPointsAdapter extends BaseAdapter
 	private Map<Stat, Integer> eligibleStats;
 	private List<Stat> eStatsList; //for keeping order straight
 	private int increases = 0;
-	private ListView listView;
 
 	public ChooseAdvancementPointsAdapter(zzBaseCharacter pChar, ListView pListView)
 	{
 		character = pChar;
-		listView = pListView;
 
 		//remember all stats that can be increased
 		eligibleStats = new HashMap<Stat, Integer>(10);

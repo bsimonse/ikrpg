@@ -14,7 +14,7 @@ public class CharacterHomeActivity extends Activity
 {
 	private Character mainChar;
 	private ListView myList;
-	private ArrayAdapter myAdapter;
+	private ArrayAdapter<Actions> myAdapter;
 	
 	private enum Actions
 	{
@@ -45,7 +45,7 @@ public class CharacterHomeActivity extends Activity
 	
 	private OnItemClickListener listener = new OnItemClickListener()
 	{
-		@Override public void onItemClick(AdapterView av, View v, int which, long um)
+		@Override public void onItemClick(AdapterView<?> av, View v, int which, long um)
 		{
 			Actions action = Actions.values()[which];
 			
@@ -84,9 +84,9 @@ public class CharacterHomeActivity extends Activity
 					@Override public void characterSheetComplete(boolean worked)
 					{
 						if(worked)
-						{new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, mainChar.fluff().name+" printed!", Toast.LENGTH_SHORT).show();}
+						{Toast.makeText(CharacterHomeActivity.this, mainChar.fluff().name+" printed!", Toast.LENGTH_SHORT).show();}
 						else
-						{new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, "Couldn't print character sheet.", Toast.LENGTH_LONG).show();}
+						{Toast.makeText(CharacterHomeActivity.this, "Couldn't print character sheet.", Toast.LENGTH_LONG).show();}
 					}
 				});
 				
@@ -101,11 +101,11 @@ public class CharacterHomeActivity extends Activity
 					{
 						if(worked)
 						{
-							new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, mainChar.fluff().name+" deleted!", Toast.LENGTH_SHORT).show();
+							Toast.makeText(CharacterHomeActivity.this, mainChar.fluff().name+" deleted!", Toast.LENGTH_SHORT).show();
 							CharacterHomeActivity.this.finish();
 						}
 						else
-						{new Toast(CharacterHomeActivity.this).makeText(CharacterHomeActivity.this, "Couldn't... delete character?", Toast.LENGTH_LONG).show();}
+						{Toast.makeText(CharacterHomeActivity.this, "Couldn't... delete character?", Toast.LENGTH_LONG).show();}
 					}
 				});
 				return true;

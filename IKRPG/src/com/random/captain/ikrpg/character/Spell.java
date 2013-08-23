@@ -1,6 +1,5 @@
 package com.random.captain.ikrpg.character;
 
-import android.os.Parcelable;
 
 public enum Spell
 {

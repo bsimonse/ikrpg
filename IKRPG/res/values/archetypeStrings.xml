@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="gifted_name">Gifted</string>
+	<string name="gifted_longDesc">The Gifted archetype allows your character to use magic, through any of the arcane careers.  Only Gifted characters can take these careers.  The Gifted archetype bonuses also center around strengthening spells and becoming more attuned with magic.</string>
+	<string name="gifted_shortDesc">Able to use magic</string>
+	<string name="gifted_page">115</string>
+	
+	<string name="intellectual_name">Intellectual</string>
+	<string name="intellectual_longDesc">Intellectual characters are valuable additions to any team.  In addition to giving bonuses to teammates within their command range, other archetype bonuses can give additional combat bonuses to the team, or let the character react with great speed and intelligence.</string>
+	<string name="intellectual_shortDesc">+1 atk/dmg bonus in CMD range</string>
+	<string name="intellectual_page">115</string>
+	
+	<string name="mighty_name">Mighty</string>
+	<string name="mighty_longDesc">The Mighty archetype focuses heavily on combat.  All melee damage rolls gain an additional die, and all of the archetype bonuses apply to combat.  A Mighty character can focus on pure damage, or can become very tough to kill, or can control the flow of the battlefield.</string>
+	<string name="mighty_shortDesc">+1 melee damage die</string>
+	<string name="mighty_page">116</string>
+	
+	<string name="skilled_name">Skilled</string>
+	<string name="skilled_longDesc">Skilled characters are very nimble and quick.  A Skilled character gets an extra attack every turn in combat, and the archetype bonuses allow them to gain even more attacks, get extra movement, or become even more agile.</string>
+	<string name="skilled_shortDesc">+1 attack/round</string>
+	<string name="skilled_page">116</string>
+</resources>

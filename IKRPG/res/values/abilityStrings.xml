@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--Abilities-->
-	<string name="jack_marshal_name">:4)</string>
-	<string name="jack_marshal_longDesc">:4)</string>
-	<string name="jack_marshal_shortDesc">:4)</string>
-	<string name="jack_marshal_page">:4)</string>
+	<string name="jack_marshal_name">\'Jack Marshal</string>
+	<string name="jack_marshal_longDesc">This character is skilled at instructing steamjacks to act.  The \'jack marshal must know the cortex\'s native language to instrcut it as well as the \'jack\'s cortex lock codes. Bonded steamjacks cannot be affected by this ability.</string>
+	<string name="jack_marshal_shortDesc">Can control \'jacks</string>
+	<string name="jack_marshal_page">157</string>
 
-	<string name="ace_commander_name">Hello World, MainActivity!</string>
-	<string name="ace_commander_longDesc">Hello World, MainActivity!</string>
-	<string name="ace_commander_shortDesc">Hello World, MainActivity!</string>
-	<string name="ace_commander_page">Hello World, MainActivity!</string>
+	<string name="ace_commander_name">Ace Commander</string>
+	<string name="ace_commander_longDesc">The character gains an extra quick action during each of their turns that can only be used to drive a \'jack</string>
+	<string name="ace_commander_shortDesc">Extra quick action for \'jack drive</string>
+	<string name="ace_commander_page">157</string>
 
-	<string name="acrobatics_name">Hello World, MainActivity!</string>
-	<string name="acrobatics_longDesc">Hello World, MainActivity!</string>
-	<string name="acrobatics_shortDesc">Hello World, MainActivity!</string>
-	<string name="acrobatics_page">Hello World, MainActivity!</string>
+	<string name="acrobatics_name">Acrobatics</string>
+	<string name="acrobatics_longDesc">The character can advance through other characters if they have enough movement to move completely past the other characters\' bases.  The character also gains +3 on Jumping skill rolls.</string>
+	<string name="acrobatics_shortDesc">Can move through others; +3 Jumping</string>
+	<string name="acrobatics_page">157</string>
 
-	<string name="advisor_name">Hello World, MainActivity!</string>
-	<string name="advisor_longDesc">Hello World, MainActivity!</string>
-	<string name="advisor_shortDesc">Hello World, MainActivity!</string>
-	<string name="advisor_page">Hello World, MainActivity!</string>
+	<string name="advisor_name">Advisor</string>
+	<string name="advisor_longDesc">While B2B with this character, friendly characters gain +1 to their command range.</string>
+	<string name="advisor_shortDesc">B2B friends get +1 CMD</string>
+	<string name="advisor_page">157</string>
 
-	<string name="ambush_name">Hello World, MainActivity!</string>
-	<string name="ambush_longDesc">Hello World, MainActivity!</string>
-	<string name="ambush_shortDesc">Hello World, MainActivity!</string>
-	<string name="ambush_page">Hello World, MainActivity!</string>
+	<string name="ambush_name">Ambush</string>
+	<string name="ambush_longDesc">During the first round of an encounter, this character gains boosted attack and damage rolls against enemies that have not yet activated</string>
+	<string name="ambush_shortDesc">Boosted rolls against flat-footed enemies</string>
+	<string name="ambush_page">157</string>
 
-	<string name="anatomical_precision_name">Hello World, MainActivity!</string>
-	<string name="anatomical_precision_longDesc">Hello World, MainActivity!</string>
-	<string name="anatomical_precision_shortDesc">Hello World, MainActivity!</string>
-	<string name="anatomical_precision_page">Hello World, MainActivity!</string>
+	<string name="anatomical_precision_name">Anatomical Precision</string>
+	<string name="anatomical_precision_longDesc">When this character hits a living target with a melee attack but the damage roll fails to exceed the target\'s ARM, the target suffers d3 damage points instead of the damage rolled.</string>
+	<string name="anatomical_precision_shortDesc">If no melee damage, d3 damage</string>
+	<string name="anatomical_precision_page">157</string>
 
-	<string name="appraise_name">Hello World, MainActivity!</string>
-	<string name="appraise_longDesc">Hello World, MainActivity!</string>
-	<string name="appraise_shortDesc">Hello World, MainActivity!</string>
-	<string name="appraise_page">Hello World, MainActivity!</string>
+	<string name="appraise_name">Appraise</string>
+	<string name="appraise_longDesc">This character can judge the value of most fine goods with an inspection.  Truly good fakes might require a Detection + INT roll to spot.</string>
+	<string name="appraise_shortDesc">Can value goods at a glance</string>
+	<string name="appraise_page">157</string>
 
-	<string name="arcane_assassin_name">Hello World, MainActivity!</string>
-	<string name="arcane_assassin_longDesc">Hello World, MainActivity!</string>
-	<string name="arcane_assassin_shortDesc">Hello World, MainActivity!</string>
-	<string name="arcane_assassin_page">Hello World, MainActivity!</string>
+	<string name="arcane_assassin_name">Arcane Assassin</string>
+	<string name="arcane_assassin_longDesc">When making attacks, this character ignores focus points overboosting the target\'s Power Field and spell effects adding to its ARM or DEF.</string>
+	<string name="arcane_assassin_shortDesc">Ignore DEF and ARM spells</string>
+	<string name="arcane_assassin_page">157</string>
 
-	<string name="arcane_defenses_name">Hello World, MainActivity!</string>
-	<string name="arcane_defenses_longDesc">Hello World, MainActivity!</string>
-	<string name="arcane_defenses_shortDesc">Hello World, MainActivity!</string>
-	<string name="arcane_defenses_page">Hello World, MainActivity!</string>
+	<string name="arcane_defenses_name">Arcane Defenses</string>
+	<string name="arcane_defenses_longDesc">This character gains +3 ARM against magic attacks</string>
+	<string name="arcane_defenses_shortDesc">+3 ARM against magic</string>
+	<string name="arcane_defenses_page">157</string>
 
-	<string name="arcane_engineer_name">Hello World, MainActivity!</string>
-	<string name="arcane_engineer_longDesc">Hello World, MainActivity!</string>
-	<string name="arcane_engineer_shortDesc">Hello World, MainActivity!</string>
-	<string name="arcane_engineer_page">Hello World, MainActivity!</string>
+	<string name="arcane_engineer_name">Arcane Engineer</string>
+	<string name="arcane_engineer_longDesc">This character can reroll failed Mechanikal Engineering rolls.  Each failed roll can be rerolled only once as a result of Arcane Engineer.</string>
+	<string name="arcane_engineer_shortDesc">Can reroll Mech. Engineering rolls</string>
+	<string name="arcane_engineer_page">157</string>
 
-	<string name="arcane_precision_name">Hello World, MainActivity!</string>
-	<string name="arcane_precision_longDesc">Hello World, MainActivity!</string>
-	<string name="arcane_precision_shortDesc">Hello World, MainActivity!</string>
-	<string name="arcane_precision_page">Hello World, MainActivity!</string>
+	<string name="arcane_precision_name">Arcane Precision</string>
+	<string name="arcane_precision_longDesc">When this character forfeits their movement to aim with a ranged weapon, they ignore stealth that turn.</string>
+	<string name="arcane_precision_shortDesc">Ignore stealth when aiming</string>
+	<string name="arcane_precision_page">157</string>
 
-	<string name="arcane_scholar_name">Hello World, MainActivity!</string>
-	<string name="arcane_scholar_longDesc">Hello World, MainActivity!</string>
-	<string name="arcane_scholar_shortDesc">Hello World, MainActivity!</string>
-	<string name="arcane_scholar_page">Hello World, MainActivity!</string>
+	<string name="arcane_scholar_name">Arcane Scholar</string>
+	<string name="arcane_scholar_longDesc">This character can have a number of spells equal to INTx3, rather than INTx2</string>
+	<string name="arcane_scholar_shortDesc">Can know INTx3 spells</string>
+	<string name="arcane_scholar_page">157</string>
 
-	<string name="astute_name">Hello World, MainActivity!</string>
-	<string name="astute_longDesc">Hello World, MainActivity!</string>
-	<string name="astute_shortDesc">Hello World, MainActivity!</string>
-	<string name="astute_page">Hello World, MainActivity!</string>
+	<string name="astute_name">Astute</string>
+	<string name="astute_longDesc">This character can reroll failed Detection rols.  Each failed roll can be rerolled only once as a result of Astute.</string>
+	<string name="astute_shortDesc">Can reroll Detection rolls</string>
+	<string name="astute_page">157</string>
 
-	<string name="backstab_name">Hello World, MainActivity!</string>
-	<string name="backstab_longDesc">Hello World, MainActivity!</string>
-	<string name="backstab_shortDesc">Hello World, MainActivity!</string>
-	<string name="backstab_page">Hello World, MainActivity!</string>
+	<string name="backstab_name">Backstab</string>
+	<string name="backstab_longDesc">This character gains an additional die on their back strike damage rolls.</string>
+	<string name="backstab_shortDesc">+1 damage die on back strikes</string>
+	<string name="backstab_page">157</string>
 
-	<string name="battle_commander_name">Hello World, MainActivity!</string>
-	<string name="battle_commander_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_commander_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_commander_page">Hello World, MainActivity!</string>
+	<string name="battle_commander_name">Battle Commander</string>
+	<string name="battle_commander_longDesc">This character can use one battle plan during each turn without spending a feat point.</string>
+	<string name="battle_commander_shortDesc">One free battle plan/turn</string>
+	<string name="battle_commander_page">157</string>
 
-	<string name="battle_plan_call_to_action_name">Hello World, MainActivity!</string>
-	<string name="battle_plan_call_to_action_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_call_to_action_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_call_to_action_page">Hello World, MainActivity!</string>
+	<string name="battle_plan_call_to_action_name">Battle Plan: Call To Action</string>
+	<string name="battle_plan_call_to_action_longDesc">The character can spend one feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character in this character\'s command range who is under their command and is knocked down immediately stands up or goes prone.</string>
+	<string name="battle_plan_call_to_action_shortDesc">Knocked-down allies stand up</string>
+	<string name="battle_plan_call_to_action_page">157</string>
 
-	<string name="battle_plan_coordinated_strike_name">Hello World, MainActivity!</string>
-	<string name="battle_plan_coordinated_strike_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_coordinated_strike_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_coordinated_strike_page">Hello World, MainActivity!</string>
+	<string name="battle_plan_coordinated_strike_name">Battle Plan: Coordinated Strike</string>
+	<string name="battle_plan_coordinated_strike_longDesc">The character can spend one feat point to use this ability during a surprise round.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character in this character\'s command range can immediately make one attack.  After these attacks, the surprise round ends and the characters are detected.</string>
+	<string name="battle_plan_coordinated_strike_shortDesc">Attack as one in surprise round</string>
+	<string name="battle_plan_coordinated_strike_page">157</string>
 
-	<string name="battle_plan_desperate_pace_name">Hello World, MainActivity!</string>
-	<string name="battle_plan_desperate_pace_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_desperate_pace_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_desperate_pace_page">Hello World, MainActivity!</string>
+	<string name="battle_plan_desperate_pace_name">Battle Plan: Desparate Pace</string>
+	<string name="battle_plan_desperate_pace_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, friendly characters gain +2\" movement for the round.</string>
+	<string name="battle_plan_desperate_pace_shortDesc">Allies get +2\" move</string>
+	<string name="battle_plan_desperate_pace_page">158</string>
 
-	<string name="battle_plan_go_to_ground_name">Hello World, MainActivity!</string>
-	<string name="battle_plan_go_to_ground_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_go_to_ground_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_go_to_ground_page">Hello World, MainActivity!</string>
+	<string name="battle_plan_go_to_ground_name">Battle Plan: Go To Ground</string>
+	<string name="battle_plan_go_to_ground_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character gains cover, does not suffer blast damage, and does not block LOS until they move, are placed, or are engaged.</string>
+	<string name="battle_plan_go_to_ground_shortDesc">Allies dig in</string>
+	<string name="battle_plan_go_to_ground_page">158</string>
 
 	<string name="battle_plan_reconnaissance_name">Hello World, MainActivity!</string>
 	<string name="battle_plan_reconnaissance_longDesc">Hello World, MainActivity!</string>
@@ -736,11 +736,7 @@
 	<string name="waylay_shortDesc">Hello World, MainActivity!</string>
 	<string name="waylay_page">Hello World, MainActivity!</string>
 	
-	<string name="mighty_name">Mighty</string>
-	<string name="mighty_longDesc">Long desc here.</string>
-	<string name="mighty_shortDesc">+1 melee damage die</string>
-	<string name="mighty_page">116</string>
-	
+	<!--Archetype abilities-->
 	<string name="feat_invulnerable_name">Feat: Invulnerable</string>
 	<string name="feat_invulnerable_longDesc">Long Desc here</string>
 	<string name="feat_invulnerable_shortDesc">+3 ARM for one round</string>

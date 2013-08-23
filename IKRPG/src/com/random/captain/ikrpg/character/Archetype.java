@@ -1,13 +1,16 @@
 package com.random.captain.ikrpg.character;
 
+import android.content.Context;
 import android.os.Bundle;
+import com.random.captain.ikrpg.IKRPGApp;
+import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.Stat;
 import java.util.Arrays;
 import java.util.Collection;
 
 public enum Archetype implements zzPrereqCheck
 {
-	GIFTED("Gifted",
+	GIFTED(R.string.gifted_name, R.string.gifted_longDesc, R.string.gifted_shortDesc, R.string.gifted_page,
 		new zzCreateCharacterHook[] { 
 			new GiftedArcaneHook()
 		},
@@ -19,7 +22,7 @@ public enum Archetype implements zzPrereqCheck
 		}
 	),
 	
-	INTELLECTUAL("Intellectual",
+	INTELLECTUAL(R.string.intellectual_name, R.string.intellectual_longDesc, R.string.intellectual_shortDesc, R.string.intellectual_page,
 		new zzCreateCharacterHook[] { 
 			new NonGiftedArcaneHook()
 		},
@@ -30,7 +33,7 @@ public enum Archetype implements zzPrereqCheck
 		}
 	),
 	
-	MIGHTY("Mighty",
+	MIGHTY(R.string.mighty_name, R.string.mighty_longDesc, R.string.mighty_shortDesc, R.string.mighty_page,
 		new zzCreateCharacterHook[] { 
 			new NonGiftedArcaneHook()
 		},
@@ -41,7 +44,7 @@ public enum Archetype implements zzPrereqCheck
 		}
 	),
 	
-	SKILLED("Skilled",
+	SKILLED(R.string.skilled_name, R.string.skilled_longDesc, R.string.skilled_shortDesc, R.string.skilled_page,
 		new zzCreateCharacterHook[] { 
 			new NonGiftedArcaneHook()
 		},
@@ -52,14 +55,23 @@ public enum Archetype implements zzPrereqCheck
 		}
 	);
 	
-	private Archetype(String pName, zzCreateCharacterHook[] pHooks, zzPrereqCheck pPrereq)
+	private Archetype(int pName, int pLongDesc, int pShortDesc, int pPage, zzCreateCharacterHook[] pHooks, zzPrereqCheck pPrereq)
 	{
-		name = pName;
+		Context c = IKRPGApp.getContext();
+		name = c.getString(pName);
+		longDesc = c.getString(pLongDesc);
+		shortDesc = c.getString(pShortDesc);
+		page = c.getString(pPage);
+		
 		postCreateHooks = Arrays.asList(pHooks);
 		prereq = pPrereq;
 	}
 	
 	private String name;
+	private String longDesc;
+	private String shortDesc;
+	private String page;
+	
 	private Collection<zzCreateCharacterHook> postCreateHooks;
 	private zzPrereqCheck prereq;
 	

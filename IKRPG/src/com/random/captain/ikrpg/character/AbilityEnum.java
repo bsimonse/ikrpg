@@ -160,6 +160,7 @@ public enum AbilityEnum implements zzPrereqCheck
 	public String shortDescription(){return shortDescription;}
 	public String pageNumbrer(){return pageNumber;}
 	public boolean isQualifiable(){return isQualifiable;}
+	public boolean isFromArchetype(){return fromArchetype;}
 	
 	@Override
 	public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)

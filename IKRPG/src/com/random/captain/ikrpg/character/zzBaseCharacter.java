@@ -1,6 +1,7 @@
 package com.random.captain.ikrpg.character;
 
 import com.google.gson.*;
+
 import java.util.*;
 
 import android.os.Parcel;
@@ -240,8 +241,8 @@ class zzBaseCharacter implements Parcelable
 
 	void setSkillLevels(Collection<Pair<Skill, Integer>> skillPairs)
 	{
-		for(Pair skillPair : skillPairs)
-		{baseSkills.put((Skill)skillPair.first, (Integer)skillPair.second);}
+		for(Pair<Skill, Integer> skillPair : skillPairs)
+		{baseSkills.put(skillPair.first, skillPair.second);}
 		
 		deriveSkillCheckLevels();
 	}
@@ -379,6 +380,7 @@ class zzBaseCharacter implements Parcelable
 	
 	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
 	{
+		@SuppressWarnings("unchecked")
 		@Override
 		public zzBaseCharacter createFromParcel(Parcel in)
 		{
@@ -403,7 +405,7 @@ class zzBaseCharacter implements Parcelable
 			//Abilities
 			Parcelable[] pAbilitiesArray = in.readParcelableArray(Ability.class.getClassLoader());
 			Set<Ability> pAbilities = new HashSet<Ability>();
-			pAbilities.addAll((List<Ability>)Arrays.asList(pAbilitiesArray));
+			pAbilities.addAll((Collection<? extends Ability>) Arrays.asList(pAbilitiesArray));
 			me.abilities = pAbilities;
 			
 			//Spells 
@@ -550,4 +552,158 @@ class zzBaseCharacter implements Parcelable
 		return myChar;
 	}
 }
+	
+class SkillMapSerializer implements JsonSerializer<Map<Skill, Integer>>
+{
+	@Override
+	public JsonElement serialize(Map<Skill, Integer> pSkills, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(Skill skill : pSkills.keySet())
+		{
+			obj = new JsonObject();
+			obj.addProperty("skillOrdinal",skill.skillEnum().ordinal());
+			obj.addProperty("skillQualifier",skill.qualifier());
+			obj.addProperty("level",pSkills.get(skill));
+			array.add(obj);
+		}
+		
+		return array;
+	}
+}
+	
+class SkillMapDeserializer implements JsonDeserializer<Map<Skill,Integer>>
+{
+	@Override
+	public Map<Skill,Integer> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<Skill,Integer> skillMap = new HashMap<Skill,Integer>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonElement skillJsonE : array)
+		{
+			JsonObject skillJson = (JsonObject) skillJsonE;
+			SkillEnum skill = SkillEnum.values()[skillJson.get("skillOrdinal").getAsInt()];
+			skillMap.put(new Skill(skill, skillJson.get("skillQualifier").getAsString()),skillJson.get("level").getAsInt());
+		}
+		
+		return skillMap;
+	}
+}
+	
+class StatMapSerializer implements JsonSerializer<Map<Stat, Integer>>
+{
+	@Override
+	public JsonElement serialize(Map<Stat, Integer> pStats, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(Stat stat : pStats.keySet())
+		{
+			obj = new JsonObject();
+			obj.addProperty("statOrdinal",stat.ordinal());
+			obj.addProperty("level",pStats.get(stat));
+			array.add(obj);
+		}
+		return array;
+	}
+}
 
+class StatMapDeserializer implements JsonDeserializer<Map<Stat,Integer>>
+{
+	@Override
+	public Map<Stat,Integer> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<Stat,Integer> statMap = new HashMap<Stat,Integer>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonElement statJsonE : array)
+		{
+			JsonObject statJson = (JsonObject) statJsonE;
+			statMap.put(Stat.values()[statJson.get("statOrdinal").getAsInt()],statJson.get("level").getAsInt());
+		}
+
+		return statMap;
+	}
+}
+
+class SkillModifierMapSerializer implements JsonSerializer<Map<String, Modifier<Skill>>>
+{
+	@Override
+	public JsonElement serialize(Map<String, Modifier<Skill>> pMods, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(String modName : pMods.keySet())
+		{
+			Modifier<Skill> modifier = pMods.get(modName);
+			obj = new JsonObject();
+			obj.addProperty("modifierName",modName);
+			obj.addProperty("modifierSkillOrdinal",modifier.trait.skillEnum().ordinal());
+			obj.addProperty("modifierSkillQualifier",modifier.trait.qualifier());
+			obj.addProperty("value",modifier.value);
+			array.add(obj);
+		}
+
+		return array;
+	}
+}
+
+class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, Modifier<Skill>>>
+{
+	@Override
+	public Map<String, Modifier<Skill>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<String, Modifier<Skill>> modMap = new HashMap<String, Modifier<Skill>>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonElement modJsonE : array)
+		{
+			JsonObject modJson = (JsonObject) modJsonE;
+			SkillEnum se = SkillEnum.values()[modJson.get("modifierSkillOrdinal").getAsInt()];
+			Skill s = new Skill(se, modJson.get("modifierSkillQualifier").getAsString());
+			Modifier<Skill> myMod = new Modifier<Skill>(s, modJson.get("value").getAsInt());
+			modMap.put(modJson.get("modifierName").getAsString(),myMod);
+		}
+
+		return modMap;
+	}
+}
+	
+class StatModifierMapSerializer implements JsonSerializer<Map<String, Modifier<Stat>>>
+{
+	@Override
+	public JsonElement serialize(Map<String, Modifier<Stat>> pMods, Type pType, JsonSerializationContext pContext)
+	{
+		JsonArray array = new JsonArray();
+		JsonObject obj;
+		for(String modName : pMods.keySet())
+		{
+			Modifier<Stat> modifier = pMods.get(modName);
+			obj = new JsonObject();
+			obj.addProperty("modifierName",modName);
+			obj.addProperty("modifierStatOrdinal",modifier.trait.ordinal());
+			obj.addProperty("value",modifier.value);
+			array.add(obj);
+		}
+
+		return array;
+	}
+}
+
+class StatModifierMapDeserializer implements JsonDeserializer<Map<String, Modifier<Stat>>>
+{
+	@Override
+	public Map<String, Modifier<Stat>> deserialize(JsonElement pJson, Type pType, JsonDeserializationContext pContext)
+	{
+		Map<String, Modifier<Stat>> modMap = new HashMap<String, Modifier<Stat>>();
+		JsonArray array = (JsonArray)pJson;
+		for(JsonElement modJsonE : array)
+		{
+			JsonObject modJson = (JsonObject) modJsonE;
+			Stat stat = Stat.values()[modJson.get("modifierStatOrdinal").getAsInt()];
+			Modifier<Stat> myMod = new Modifier<Stat>(stat, modJson.get("value").getAsInt());
+			modMap.put(modJson.get("modifierName").getAsString(),myMod);
+		}
+
+		return modMap;
+	}
+}

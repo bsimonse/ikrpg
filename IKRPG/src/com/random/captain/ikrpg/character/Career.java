@@ -14,6 +14,7 @@ import com.random.captain.ikrpg.R;
 
 public enum Career implements zzPrereqCheck
 {
+	@SuppressWarnings("unchecked")
 	ALCHEMIST(R.string.alchemist_name,
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(2), //etc...
@@ -24,6 +25,7 @@ public enum Career implements zzPrereqCheck
 				null, null,
 				null, null),
 								
+	@SuppressWarnings("unchecked")
 	ARCANE_MECHANIK(R.string.arcane_mechanik_name,
 				new Pair[] {SkillEnum.CRAFT.pair("gunsmithing", 1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), //etc...
@@ -142,10 +144,9 @@ public enum Career implements zzPrereqCheck
 		@Override public boolean hasUI()
 		{return (myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillBaseLevel(SkillEnum.RIFLE) < 2);}
 					
-	 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate)
+	 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
 	 	{	
-		 	myChar = pChar;
-			delegate = pDelegate;
+	 		super.startHook(pChar, pDelegate, pHook);
 						
 			if(!hasUI())
 			{

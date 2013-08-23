@@ -1,11 +1,12 @@
 package com.random.captain.ikrpg.gear;
 
 import com.random.captain.ikrpg.character.*;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.random.captain.ikrpg.combat.SpecialRule;
 import java.util.ArrayList;
+import com.random.captain.ikrpg.character.Modifier;
+import com.random.captain.ikrpg.character.Stat;
 
 public class zzBaseGear implements Parcelable
 {
@@ -27,6 +28,7 @@ public class zzBaseGear implements Parcelable
 	ArrayList<Modifier<Skill>> skillModifiers;
 	ArrayList<Ability> grantedAbilities;
 	ArrayList<SpecialRule> specialRules;
+	ArrayList<Modifier<Stat>> stats;
 	
 	@Override public void writeToParcel(Parcel out, int flags)
 	{
