@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity
 				public void characterSheetComplete(boolean success)
 				{
 					//Toast!
-					if(success){new Toast(MainActivity.this).makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
+					if(success){Toast.makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
 				}
 			});
     }

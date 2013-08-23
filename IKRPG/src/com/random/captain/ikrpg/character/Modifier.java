@@ -94,8 +94,9 @@ class SkillMapDeserializer implements JsonDeserializer<Map<Skill,Integer>>
 	{
 		Map<Skill,Integer> skillMap = new HashMap<Skill,Integer>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject skillJson : array)
+		for(JsonElement skillJsonE : array)
 		{
+			JsonObject skillJson = (JsonObject) skillJsonE;
 			SkillEnum skill = SkillEnum.values()[skillJson.get("skillOrdinal").getAsInt()];
 			skillMap.put(new Skill(skill, skillJson.get("skillQualifier").getAsString()),skillJson.get("level").getAsInt());
 		}
@@ -122,7 +123,6 @@ class StatMapSerializer implements JsonSerializer<Map<Stat, Integer>>
 		return array;
 	}
 }
-
 class StatMapDeserializer implements JsonDeserializer<Map<Stat,Integer>>
 {
 	@Override
@@ -130,14 +130,16 @@ class StatMapDeserializer implements JsonDeserializer<Map<Stat,Integer>>
 	{
 		Map<Stat,Integer> statMap = new HashMap<Stat,Integer>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject statJson : array)
+		for(JsonElement statJsonE : array)
 		{
+			JsonObject statJson = (JsonObject) statJsonE;
 			statMap.put(Stat.values()[statJson.get("statOrdinal").getAsInt()],statJson.get("level").getAsInt());
 		}
 
 		return statMap;
 	}
 }
+
 
 class SkillModifierMapSerializer implements JsonSerializer<Map<String, Modifier<Skill>>>
 {
@@ -168,8 +170,9 @@ class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, Modif
 	{
 		Map<String, Modifier<Skill>> modMap = new HashMap<String, Modifier<Skill>>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject modJson : array)
+		for(JsonElement modJsonE : array)
 		{
+			JsonObject modJson = (JsonObject) modJsonE;
 			SkillEnum se = SkillEnum.values()[modJson.get("modifierSkillOrdinal").getAsInt()];
 			Skill s = new Skill(se, modJson.get("modifierSkillQualifier").getAsString());
 			Modifier<Skill> myMod = new Modifier<Skill>(s, modJson.get("value").getAsInt());
@@ -208,8 +211,9 @@ class StatModifierMapDeserializer implements JsonDeserializer<Map<String, Modifi
 	{
 		Map<String, Modifier<Stat>> modMap = new HashMap<String, Modifier<Stat>>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject modJson : array)
+		for(JsonElement modJsonE : array)
 		{
+			JsonObject modJson = (JsonObject)modJsonE;
 			Stat stat = Stat.values()[modJson.get("modifierStatOrdinal").getAsInt()];
 			Modifier<Stat> myMod = new Modifier<Stat>(stat, modJson.get("value").getAsInt());
 			modMap.put(modJson.get("modifierName").getAsString(),myMod);

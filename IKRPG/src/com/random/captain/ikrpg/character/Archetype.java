@@ -76,6 +76,10 @@ public enum Archetype implements zzPrereqCheck
 	private zzPrereqCheck prereq;
 	
 	public String displayName(){return name;}
+	public String longDescription(){return longDesc;}
+	public String shortDescription(){return shortDesc;}
+	public String page(){return page;}
+	
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
 	public static class GiftedArcaneHook extends zzCreateCharacterHook {
