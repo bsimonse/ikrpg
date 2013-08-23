@@ -31,7 +31,7 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.act_main);
 		
 		//Cheating!
-		Character Pascal = CharacterSheetService.getPascal();
+		/*Character Pascal = CharacterSheetService.getPascal();
 		CharacterSheetService.drawCharacterSheet(Pascal, new CharacterSheetService.Delegate(){
 				@Override
 				public void characterSheetComplete(boolean success)
@@ -39,7 +39,7 @@ public class MainActivity extends FragmentActivity
 					//Toast!
 					if(success){Toast.makeText(MainActivity.this, "Pascal printed!", Toast.LENGTH_SHORT).show();}
 				}
-			});
+			});*/
     }
 
 	@Override
@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity
 		@Override
 		public void onItemClick(AdapterView<?> adapter, View v, int position, long huh)
 		{
-			Character whichChar = (Character)myListAdapter.getItem(position);
+			Character whichChar = myListAdapter.getItem(position);
 			Intent i = new Intent(MainActivity.this, CharacterHomeActivity.class);
 			i.putExtra(PC_EXTRA,whichChar);
 			startActivity(i);
