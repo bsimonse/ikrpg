@@ -2,6 +2,7 @@ package com.random.captain.ikrpg.character;
 
 import java.util.*;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,7 +12,6 @@ import android.util.Log;
 import android.util.Pair;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
-
 
 public class CharacterCreationServiceActivity extends FragmentActivity
 {
@@ -26,7 +26,6 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	private boolean firstTime = true;
 	
 	private ArrayList<zzCreateCharacterHook> postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
-	private zzCreateCharacterHook.CreateHook lastFinishedHook;
 	private zzBaseCharacter buildingChar;
 	
 	@Override
@@ -90,9 +89,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	}
 	
 	public void nextFrag(zzCreateCharacterHook.CreateHook completedHook)
-	{
-		lastFinishedHook = completedHook;
-		
+	{	
 		final zzCreateCharacterHook nextHook;
 		final zzCreateCharacterHook.CreateHook hookType;
 		final Bundle args = new Bundle();
@@ -128,6 +125,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 					nextHook = null; hookType = null;
 					setResult(RESULT_FIRST_USER);
 					finish();
+					return;
 				}
 
 				//Do postcreatehooks
@@ -276,6 +274,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		return finalHooks;
 	}
 	
+	@SuppressLint("UseValueOf")	//what is this I don't even
 	public void characterComplete()
 	{
 		Intent i = new Intent();

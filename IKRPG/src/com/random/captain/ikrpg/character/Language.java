@@ -29,4 +29,5 @@ public enum Language
 	}
 	
 	private String displayName;
+	public String displayName(){return displayName;}
 }

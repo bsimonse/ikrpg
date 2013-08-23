@@ -1,9 +1,12 @@
 package com.random.captain.ikrpg.gear;
 
+import java.util.ArrayList;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.random.captain.ikrpg.character.Modifier;
-import java.util.ArrayList;
+import com.random.captain.ikrpg.character.Stat;
 
 public class zzBaseGear implements Parcelable
 {
@@ -11,7 +14,7 @@ public class zzBaseGear implements Parcelable
 	int goldCost;
 	
 	//something something stats
-	ArrayList<Modifier> stats;
+	ArrayList<Modifier<Stat>> stats;
 	
 	@Override public void writeToParcel(Parcel out, int flags)
 	{

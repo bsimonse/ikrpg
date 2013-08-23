@@ -21,7 +21,7 @@ public class MainActivity extends FragmentActivity
 {
 	public static final String PC_EXTRA = "IKRPG_PC";
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
-    private ArrayAdapter myListAdapter;
+    private ArrayAdapter<Character> myListAdapter;
 	private Set<Character> myChars = new HashSet<Character>();
 	
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity
 					else
 					{
 						Log.e("IKRPG","Characters failed to load.  Sad.");
-						new Toast(MainActivity.this).makeText(MainActivity.this, "Couldn't load characters!", Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this, "Couldn't load characters!", Toast.LENGTH_SHORT).show();
 					}
 				}
 			});
@@ -136,11 +136,11 @@ public class MainActivity extends FragmentActivity
 						{
 							if(worked)
 							{
-								new Toast(MainActivity.this).makeText(MainActivity.this, "Character saved!", Toast.LENGTH_SHORT).show();
+								Toast.makeText(MainActivity.this, "Character saved!", Toast.LENGTH_SHORT).show();
 								reloadCharacters();
 							}
 							else
-							{new Toast(MainActivity.this).makeText(MainActivity.this, "Character save failed.", Toast.LENGTH_SHORT).show();}
+							{Toast.makeText(MainActivity.this, "Character save failed.", Toast.LENGTH_SHORT).show();}
 						}
 					});
 				}

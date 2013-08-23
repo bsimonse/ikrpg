@@ -1,6 +1,7 @@
 package com.random.captain.ikrpg.character;
 
 import com.google.gson.*;
+
 import java.util.*;
 
 import android.os.Parcel;
@@ -238,8 +239,8 @@ class zzBaseCharacter implements Parcelable
 
 	void setSkillLevels(Collection<Pair<Skill, Integer>> skillPairs)
 	{
-		for(Pair skillPair : skillPairs)
-		{baseSkills.put((Skill)skillPair.first, (Integer)skillPair.second);}
+		for(Pair<Skill, Integer> skillPair : skillPairs)
+		{baseSkills.put(skillPair.first, skillPair.second);}
 		
 		deriveSkillCheckLevels();
 	}
@@ -374,6 +375,7 @@ class zzBaseCharacter implements Parcelable
 	
 	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
 	{
+		@SuppressWarnings("unchecked")
 		@Override
 		public zzBaseCharacter createFromParcel(Parcel in)
 		{
@@ -394,7 +396,7 @@ class zzBaseCharacter implements Parcelable
 			//Abilities
 			Parcelable[] pAbilitiesArray = in.readParcelableArray(Ability.class.getClassLoader());
 			Set<Ability> pAbilities = new HashSet<Ability>();
-			pAbilities.addAll((List<Ability>)Arrays.asList(pAbilitiesArray));
+			pAbilities.addAll((Collection<? extends Ability>) Arrays.asList(pAbilitiesArray));
 			me.abilities = pAbilities;
 			
 			//Spells 
@@ -569,8 +571,9 @@ class SkillMapDeserializer implements JsonDeserializer<Map<Skill,Integer>>
 	{
 		Map<Skill,Integer> skillMap = new HashMap<Skill,Integer>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject skillJson : array)
+		for(JsonElement skillJsonE : array)
 		{
+			JsonObject skillJson = (JsonObject) skillJsonE;
 			SkillEnum skill = SkillEnum.values()[skillJson.get("skillOrdinal").getAsInt()];
 			skillMap.put(new Skill(skill, skillJson.get("skillQualifier").getAsString()),skillJson.get("level").getAsInt());
 		}
@@ -605,8 +608,9 @@ class StatMapDeserializer implements JsonDeserializer<Map<Stat,Integer>>
 	{
 		Map<Stat,Integer> statMap = new HashMap<Stat,Integer>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject statJson : array)
+		for(JsonElement statJsonE : array)
 		{
+			JsonObject statJson = (JsonObject) statJsonE;
 			statMap.put(Stat.values()[statJson.get("statOrdinal").getAsInt()],statJson.get("level").getAsInt());
 		}
 
@@ -643,8 +647,9 @@ class SkillModifierMapDeserializer implements JsonDeserializer<Map<String, Modif
 	{
 		Map<String, Modifier<Skill>> modMap = new HashMap<String, Modifier<Skill>>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject modJson : array)
+		for(JsonElement modJsonE : array)
 		{
+			JsonObject modJson = (JsonObject) modJsonE;
 			SkillEnum se = SkillEnum.values()[modJson.get("modifierSkillOrdinal").getAsInt()];
 			Skill s = new Skill(se, modJson.get("modifierSkillQualifier").getAsString());
 			Modifier<Skill> myMod = new Modifier<Skill>(s, modJson.get("value").getAsInt());
@@ -683,8 +688,9 @@ class StatModifierMapDeserializer implements JsonDeserializer<Map<String, Modifi
 	{
 		Map<String, Modifier<Stat>> modMap = new HashMap<String, Modifier<Stat>>();
 		JsonArray array = (JsonArray)pJson;
-		for(JsonObject modJson : array)
+		for(JsonElement modJsonE : array)
 		{
+			JsonObject modJson = (JsonObject) modJsonE;
 			Stat stat = Stat.values()[modJson.get("modifierStatOrdinal").getAsInt()];
 			Modifier<Stat> myMod = new Modifier<Stat>(stat, modJson.get("value").getAsInt());
 			modMap.put(modJson.get("modifierName").getAsString(),myMod);

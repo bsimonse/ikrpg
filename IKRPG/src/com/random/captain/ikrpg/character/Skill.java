@@ -1,11 +1,8 @@
 package com.random.captain.ikrpg.character;
 
-import com.google.gson.*;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import java.lang.reflect.Type;
 
 public class Skill implements Parcelable
 {

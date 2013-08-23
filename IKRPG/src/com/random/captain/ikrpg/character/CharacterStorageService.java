@@ -58,12 +58,22 @@ public class CharacterStorageService
 	
 	private static String fileNameToCharacterName(String fileName)
 	{
-		return URLDecoder.decode(fileName);
+		try {
+			return URLDecoder.decode(fileName,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// guess we couldn't do it.
+			return fileName;
+		}
 	}
 	
 	private static String characterNameToFileName(String characterName)
 	{
-		return URLEncoder.encode(characterName);
+		try {
+			return URLEncoder.encode(characterName,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// guess we couldn't do it.
+			return characterName;
+		}
 	}
 	
 	private static class LoadCharacterTask<T extends zzBaseCharacter> extends AsyncTask<String, Void, TreeSet<T>>

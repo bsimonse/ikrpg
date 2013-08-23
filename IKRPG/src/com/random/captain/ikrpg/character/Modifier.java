@@ -11,6 +11,7 @@ public class Modifier<S extends Parcelable> implements Parcelable
 	Class<S> genericClass;
 	
 	Modifier (S pTrait){this(pTrait, 0);}	
+	@SuppressWarnings("unchecked")
 	Modifier(S pTrait, int pValue)
 	{
 		trait = pTrait;
@@ -33,14 +34,15 @@ public class Modifier<S extends Parcelable> implements Parcelable
 		toParcel.writeParcelable(trait, 0);
 	}
 
-	public static final Parcelable.Creator<Modifier> CREATOR = new Parcelable.Creator<Modifier>()
+	public static final Parcelable.Creator<Modifier<?>> CREATOR = new Parcelable.Creator<Modifier<?>>()
 	{
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
-		public Modifier createFromParcel(Parcel in)
+		public Modifier<?> createFromParcel(Parcel in)
 		{
 			try
 			{
-				Class which = (Class)in.readSerializable();
+				Class<? extends Parcelable> which = (Class<? extends Parcelable>)in.readSerializable();
 				int value = in.readInt();
 				Parcelable trait = in.readParcelable(which.getClassLoader());
 				return new Modifier(trait, value);
@@ -48,11 +50,11 @@ public class Modifier<S extends Parcelable> implements Parcelable
 			catch(Exception e)
 			{
 				Log.e("IKRPG","Bad news, dude, Modifier didn't Parcel correctly!");
-				return null;//ew zzModifier(null, 0);
+				return null;
 			}
 		}
 
-		@Override public Modifier[] newArray(int size){return new Modifier[size];}
+		@Override public Modifier<?>[] newArray(int size){return new Modifier<?>[size];}
 	};
 
 	@Override public int describeContents() {return 0;}
