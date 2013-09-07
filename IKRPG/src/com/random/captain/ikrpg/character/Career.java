@@ -17,8 +17,9 @@ public enum Career implements zzPrereqCheck
 	@SuppressWarnings("unchecked")
 	ALCHEMIST(R.string.alchemist_name,
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
-				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(2), //etc...
-							SkillEnum.CRAFT.pair(4), SkillEnum.RESEARCH.pair(4)},
+			  	new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(4), SkillEnum.UNARMED.pair(2), 
+							SkillEnum.ALCHEMY.pair(4), SkillEnum.CRAFT.pair(4), SkillEnum.FORGERY.pair(2), SkillEnum.MEDICINE.pair(4),
+							SkillEnum.NEGOTIATION.pair(4), SkillEnum.RESEARCH.pair(4)},
 			  	new Ability[] {AbilityEnum.GRENADIER.make(), AbilityEnum.POISON_RESISTANCE.make()},
 				new Ability[] {AbilityEnum.BOMBER.make(), AbilityEnum.BREW_MASTER.make(), AbilityEnum.FAST_COOK.make(),AbilityEnum.FIELD_ALCHEMIST.make(), AbilityEnum.FIRE_IN_THE_HOLE.make(), AbilityEnum.FREE_STYLE.make(),
 								AbilityEnum.GRENADIER.make(),AbilityEnum.POISON_RESISTANCE.make()},
@@ -28,8 +29,9 @@ public enum Career implements zzPrereqCheck
 	@SuppressWarnings("unchecked")
 	ARCANE_MECHANIK(R.string.arcane_mechanik_name,
 				new Pair[] {SkillEnum.CRAFT.pair("gunsmithing", 1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
-				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), //etc...
-			  				SkillEnum.NEGOTIATION.pair(2), SkillEnum.RESEARCH.pair(3)},
+				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), SkillEnum.RIFLE.pair(2), 
+							SkillEnum.COMMAND.pair(1), SkillEnum.CRAFT.pair(4), SkillEnum.CRYPTOGRAPHY.pair(3), SkillEnum.MECHANIKAL.pair(4),
+							SkillEnum.NEGOTIATION.pair(2), SkillEnum.RESEARCH.pair(3)},
 				new Ability[] {new Ability(AbilityEnum.INSCRIBE_FORMULAE)},
 				new Ability[] {new Ability(AbilityEnum.JACK_MARSHALL), new Ability(AbilityEnum.ACE_COMMANDER), new Ability(AbilityEnum.ARCANE_ENGINEER), new Ability(AbilityEnum.DRIVE_ASSUALT), new Ability(AbilityEnum.DRIVE_PRONTO),
 								   new Ability(AbilityEnum.INSCRIBE_FORMULAE), new Ability(AbilityEnum.RESOURCEFUL), new Ability(AbilityEnum.STEAMO)},
@@ -112,66 +114,15 @@ public enum Career implements zzPrereqCheck
 	
 	/* Hooks! */
 	
-	public static class ArcaneMechanikHook extends zzCreateCharacterHook
+	public static class ArcaneMechanikHook extends zzChooseOneSkillHook
 	{
-		private SkillEnum incrementedSkill;
-		private int incrementedSkillPrevValue;
-					
-		@Override public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+		@Override protected String getTitle() {return "Choose a military skill to boost";}
+		
+		@Override protected List<Skill> getOptions()
 		{
-			LinearLayout root = (LinearLayout)inflater.inflate(R.layout.frag_choice_list, pRoot, false);
-			ListView choiceList = (ListView)root.findViewById(R.id.listChoiceList);
-			final SkillEnum[] choices = new SkillEnum[]{SkillEnum.HAND_WEAPON, SkillEnum.RIFLE};
-			choiceList.setAdapter(new ArrayAdapter<SkillEnum>(inflater.getContext(), android.R.layout.simple_list_item_1, choices));
-			choiceList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-				@Override public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-				{
-					incrementedSkill = choices[which];
-					incrementedSkillPrevValue = myChar.getSkillBaseLevel(new Skill(incrementedSkill));
-					int currentLevel = incrementedSkillPrevValue + 1;
-					if(currentLevel > 2){currentLevel = 2;}
-					myChar.setSkillLevel(new Skill(incrementedSkill), currentLevel);
-					delegate.hookComplete(myChar);
-				}
-			});
-
-			TextView tv = (TextView)root.findViewById(R.id.listChoiceTitle);
-			tv.setText("Choose a military skill to boost");
-
-			return root;
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(new Skill(SkillEnum.RIFLE)); l.add(new Skill(SkillEnum.HAND_WEAPON));
+			return l;
 		}
-					
-		@Override public boolean hasUI()
-		{return (myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) < 2 && myChar.getSkillBaseLevel(SkillEnum.RIFLE) < 2);}
-					
-	 	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
-	 	{	
-	 		super.startHook(pChar, pDelegate, pHook);
-						
-			if(!hasUI())
-			{
-				boolean handWeaponMaxed = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON) == 2;
-				boolean rifleMaxed = myChar.getSkillBaseLevel(SkillEnum.RIFLE) == 2;
-							
-				//auto-bump the appropriate skill
-				if(rifleMaxed && !handWeaponMaxed)
-				{
-					incrementedSkill = SkillEnum.HAND_WEAPON;
-					incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON);
-					myChar.setSkillLevel(new Skill(SkillEnum.HAND_WEAPON), incrementedSkillPrevValue+1);
-				}
-				else if(!rifleMaxed && handWeaponMaxed)
-				{
-					incrementedSkill = SkillEnum.RIFLE;
-					incrementedSkillPrevValue = myChar.getSkillBaseLevel(SkillEnum.RIFLE);
-					myChar.setSkillLevel(new Skill(SkillEnum.RIFLE), incrementedSkillPrevValue+1);
-				}
-			}
-		}
-					
-		@Override public void undoHook()
-		{myChar.setSkillLevel(new Skill(incrementedSkill), incrementedSkillPrevValue);}
-					
-		@Override public int getPriority(){return 50;}
 	}
 }

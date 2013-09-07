@@ -148,8 +148,8 @@
 	<string name="force_hammer_name">Spell</string>
     <string name="force_hammer_desc">Desc</string>
 
-	<string name="force_of_fath_name">Spell</string>
-    <string name="force_of_fath_desc">Desc</string>
+	<string name="force_of_faith_name">Spell</string>
+    <string name="force_of_faith_desc">Desc</string>
 
 	<string name="fortify_name">Spell</string>
     <string name="fortify_desc">Desc</string>
@@ -472,7 +472,7 @@
 	<string name="wind_strike_name">Spell</string>
     <string name="wind_strike_desc">Desc</string>
 	
-	<string name="winds_of_air_name">Spell</string>
+	<string name="wings_of_air_name">Spell</string>
     <string name="wings_of_air_desc">Desc</string>
 	
 	<string name="winter_storm_name">Spell</string>
