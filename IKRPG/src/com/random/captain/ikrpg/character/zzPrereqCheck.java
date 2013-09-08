@@ -12,6 +12,9 @@ class zzPrereqCheckResult
 	boolean isAllowed;
 	Fragment additionalQuestion;
 	
+	zzPrereqCheckResult(boolean pIsAllowed)
+	{this(pIsAllowed, null);}
+	
 	zzPrereqCheckResult(boolean pIsAllowed, Fragment pAdditionalQuestion)
 	{
 		isAllowed = pIsAllowed;

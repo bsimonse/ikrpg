@@ -1,14 +1,9 @@
 package com.random.captain.ikrpg.character;
 
-import android.widget.*;
 import java.util.*;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
 
@@ -41,14 +36,18 @@ public enum Career implements zzPrereqCheck
 							Spell.REDLINE, Spell.TEMPER_METAL, Spell.BROADSIDE, Spell.ELECTRICAL_BLAST, Spell.FAIL_SAFE, Spell.FORCE_FIELD,
 							Spell.FULL_THROTTLE, Spell.GRIND, Spell.GUIDED_FIRE, Spell.IRON_AGGRESSION, Spell.SUPERIORITY, Spell.BLACK_OUT,
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
-				new zzPrereqCheck(){
-					@Override
-					public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
-						if(myChar.archetype == null){return new zzPrereqCheckResult(false, null);}
-						return new zzPrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);
-					}
-			  	},
+				giftedPrereq(),
 				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
+				
+	/*ARCANIST(R.string.arcanist_name,
+				new Pair[] {}.
+				new Pair[] {},
+				new Ability[] {new Ability(AbilityEnum.GR},
+				new Ability[] {},
+				new Spell[] {},
+				new Spell[] {},
+				giftedPrereq(),
+				new zzCreateCharacterHook[] {new ArcanistHook()}),*/
 				
 	DUELIST(R.string.duelist_name,null,null,null,null,null,null,null,null),		  
 	PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
@@ -74,11 +73,7 @@ public enum Career implements zzPrereqCheck
 		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCreateCharacterHook>(10);
 	}
 	
-	@Override
-	public String toString()
-	{
-		return displayName();
-	}
+	@Override public String toString(){return displayName();}
 	
 	private String name;
 	private Collection<Pair<Skill, Integer>> startingSkills;
@@ -112,12 +107,35 @@ public enum Career implements zzPrereqCheck
 		else{return prereqCheck.meetsPrereq(myChar);}
 	}
 	
+	/* Prereqs! */
+	
+	public static zzPrereqCheck giftedPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.archetype == null){return new zzPrereqCheckResult(false, null);}
+				return new zzPrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);
+			}
+		};
+	}
+	
 	/* Hooks! */
 	
 	public static class ArcaneMechanikHook extends zzChooseOneSkillHook
 	{
 		@Override protected String getTitle() {return "Choose a military skill to boost";}
 		
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(new Skill(SkillEnum.RIFLE)); l.add(new Skill(SkillEnum.HAND_WEAPON));
+			return l;
+		}
+	}
+	
+	public static class ArcanistHook extends zzChooseOneSkillHook
+	{
+		@Override protected String getTitle() {return "Choose a military skill to boost";}
+
 		@Override protected List<Skill> getOptions()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
