@@ -144,7 +144,7 @@ public enum AbilityEnum implements zzPrereqCheck
 	BODYGUARD(R.string.bodyguard_name, R.string.bodyguard_longDesc, R.string.bodyguard_shortDesc, R.string.bodyguard_page,
 			false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SHIELD) >= 3 && myChar.hasAbility(Ability.SHIELD_GUARD), null);}
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SHIELD) >= 3 && myChar.hasAbility(AbilityEnum.SHIELD_GUARD), null);}
 	}),
 	
 	BOMBER(R.string.bomber_name, R.string.bomber_longDesc, R.string.bomber_shortDesc, R.string.bomber_page,
@@ -321,16 +321,73 @@ public enum AbilityEnum implements zzPrereqCheck
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 2, null);}
 	}),
 	
+	FELL_CALL_GROUND_SHAKER(R.string.fell_call_ground_shaker_name,  R.string.fell_call_ground_shaker_longDesc, R.string.fell_call_ground_shaker_shortDesc, R.string.fell_call_ground_shaker_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 3, null);}
+	}),
+	
+	FELL_CALL_HEROIC_BALLAD(R.string.fell_call_heroic_ballad_name, R.string.fell_call_heroic_ballad_longDesc, R.string.fell_call_heroic_ballad_shortDesc, R.string.fell_call_heroic_ballad_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 2, null);}
+	}),
+	
+	FELL_CALL_REVERBERATION(R.string.fell_call_reverberation_name, R.string.fell_call_reverberation_longDesc, R.string.fell_call_reverberation_shortDesc, R.string.fell_call_reverberation_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 2, null);}
+	}),
+	
+	FELL_CALL_SIGNAL_CALL(R.string.fell_call_signal_call_name, R.string.fell_call_signal_call_longDesc, R.string.fell_call_signal_call_shortDesc, R.string.fell_call_signal_call_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 1, null);}
+	}),
+	
+	FELL_CALL_SONIC_BLAST(R.string.fell_call_sonic_blast_name, R.string.fell_call_sonic_blast_longDesc, R.string.fell_call_sonic_blast_shortDesc, R.string.fell_call_sonic_blast_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 2, null);}
+	}),
+	
 	FIELD_ALCHEMIST(R.string.field_alchemist_name, R.string.field_alchemist_longDesc, R.string.field_alchemist_shortDesc, R.string.field_alchemist_page,
 					false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.ALCHEMY) >= 2, null);}
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.ALCHEMY) >= 1, null);}
 	}),
+	
+	FIELD_MARSHAL_MAGICAL_ATTACK(R.string.field_marshal_magical_attack_name, R.string.field_marshal_magical_attack_longDesc, R.string.field_marshal_magical_attack_shortDesc, R.string.field_marshal_magical_attack_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.ARCANE) >= 5, null);}
+	}),
+	
+	FIELD_MARSHAL_RELENTLESS_CHARGE(R.string.field_marshal_relentless_charge_name, R.string.field_marshal_relentless_charge_longDesc, R.string.field_marshal_relentless_charge_shortDesc, R.string.field_marshal_relentless_charge_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.ARCANE) >= 5, null);}
+	}),
+	
+	FIELD_MARSHAL_SHIELD_GUARD(R.string.field_marshal_shield_guard_name, R.string.field_marshal_shield_guard_longDesc, R.string.field_marshal_shield_guard_shortDesc, R.string.field_marshal_shield_guard_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.ARCANE) >= 7, null);}
+	}),
+	
+	FIND_COVER(R.string.find_cover_name, R.string.find_cover_longDesc, R.string.find_cover_shortDesc, R.string.find_cover_page,
+			false, false, null),
 	
 	FIRE_IN_THE_HOLE(R.string.fire_in_the_hole_name, R.string.fire_in_the_hole_longDesc, R.string.fire_in_the_hole_shortDesc, R.string.fire_in_the_hole_page,
 					false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.THROWN_WEAPON) >= 1, null);}
+	}),
+	
+	FLEET_FOOT(R.string.fleet_foot_name, R.string.fleet_foot_longDesc, R.string.fleet_foot_shortDesc, R.string.fleet_foot_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.SPEED) >= 7, null);}
 	}),
 	
 	FREE_STYLE(R.string.free_style_name, R.string.free_style_longDesc, R.string.free_style_shortDesc, R.string.free_style_page,
@@ -341,36 +398,258 @@ public enum AbilityEnum implements zzPrereqCheck
 	
 	GANG(R.string.gang_name, R.string.gang_longDesc, R.string.gang_shortDesc, R.string.gang_page,
 		false, false, null),
-		
+	
+	GET_AWAY(R.string.get_away_name, R.string.get_away_longDesc, R.string.get_away_shortDesc, R.string.get_away_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.ESCAPE_ARTIST) >= 3 && myChar.hasAbility(AbilityEnum.DODGER), null);}
+	}),
+	
+	GIRDED(R.string.girded_name, R.string.girded_longDesc, R.string.girded_shortDesc, R.string.girded_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SHIELD) >= 2, null);}
+	}),
+	
+	GOOD_BREEDING(R.string.good_breeding_name, R.string.good_breeding_longDesc, R.string.good_breeding_shortDesc, R.string.good_breeding_page,
+			false, false, null),
+			
+	GREAT_POWER(R.string.great_power_name, R.string.great_power_longDesc, R.string.great_power_shortDesc, R.string.great_power_page,
+			false, false, null),
+			
 	GRENADIER(R.string.grenadier_name, R.string.grenadier_longDesc, R.string.grenadier_shortDesc, R.string.grenadier_page,
 					false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.THROWN_WEAPON) >= 1, null);}
 	}),
 	
+	GUNFIGHTER(R.string.gunfighter_name, R.string.gunfighter_longDesc, R.string.gunfighter_shortDesc, R.string.gunfighter_page,
+			false, false, null),
+		
+	HEADBUTT(R.string.head_butt_name, R.string.head_butt_longDesc, R.string.head_butt_shortDesc, R.string.head_butt_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.UNARMED) >= 2 && myChar.getBaseStat(Stat.STRENGTH) >= 5, null);}
+	}),
+	
+	HIT_THE_DECK(R.string.hit_the_deck_name, R.string.hit_the_deck_longDesc, R.string.hit_the_deck_shortDesc, R.string.hit_the_deck_page,
+			false, false, null),
+			
+	HYPER_AWARENESS(R.string.hyper_awareness_name, R.string.hyper_awareness_longDesc, R.string.hyper_awareness_shortDesc, R.string.hyper_awareness_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.COMMAND) >= 3, null);}
+	}),
+	
+	IMMUNITY_COLD(R.string.immunity_cold_name, R.string.immunity_cold_longDesc, R.string.immunity_cold_shortDesc, R.string.immunity_cold_page,
+			false, false, null),
+			
+	IMMUNITY_CORROSION(R.string.immunity_corrosion_name, R.string.immunity_corrosion_longDesc, R.string.immunity_corrosion_shortDesc, R.string.immunity_corrosion_page,
+				  false, false, null),
+				  
+	IMMUNITY_ELECTRICITY(R.string.immunity_electricity_name, R.string.immunity_electricity_longDesc, R.string.immunity_electricity_shortDesc, R.string.immunity_electricity_page,
+				  false, false, null),
+				  
+	IMMUNITY_FIRE(R.string.immunity_fire_name, R.string.immunity_fire_longDesc, R.string.immunity_fire_shortDesc, R.string.immunity_fire_page,
+				  false, false, null),
+				  
 	INSCRIBE_FORMULAE(R.string.inscribe_formulae_name, R.string.inscribe_formulae_longDesc, R.string.inscribe_formulae_shortDesc, R.string.inscribe_formulae_page,
 					false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.MECHANIKAL) >= 1, null);}
 	}),
 	
+	IRON_SENTINEL(R.string.iron_sentinel_name, R.string.iron_sentinel_longDesc, R.string.iron_sentinel_shortDesc, R.string.iron_sentinel_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.COMMAND) >= 3 && myChar.hasAbility(AbilityEnum.JACK_MARSHALL), null);}
+	}),
+		
+	IRON_WILL(R.string.iron_will_name, R.string.iron_will_longDesc, R.string.iron_will_shortDesc, R.string.iron_will_page,
+			false, false, null),
+	
+	KEEN_EYED(R.string.keen_eyed_name, R.string.keen_eyed_longDesc, R.string.keen_eyed_shortDesc, R.string.keen_eyed_page,
+		false, false, null),
+		
+	LANGUAGE(R.string.language_name, R.string.language_longDesc, R.string.language_shortDesc, R.string.language_page,
+			false, true, null),
+	
+	LEGACY_OF_BRAGG(R.string.legacy_of_bragg_name, R.string.legacy_of_bragg_longDesc, R.string.legacy_of_bragg_shortDesc, R.string.legacy_of_bragg_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.FELL_CALLING) >= 2, null);}
+	}),
+		
+	LIGHT_CAVALRY(R.string.light_cavalry_name, R.string.light_cavalry_longDesc, R.string.light_cavalry_shortDesc, R.string.light_cavalry_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.RIDING) >= 2, null);}
+	}),
+	
+	LOAD_BEARING(R.string.load_bearing_name, R.string.load_bearing_longDesc, R.string.load_bearing_shortDesc, R.string.load_bearing_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.STRENGTH) >= 5, null);}
+	}),
+	
+	MAGE_KILLER(R.string.mage_killer_name, R.string.mage_killer_longDesc, R.string.mage_killer_shortDesc, R.string.mage_killer_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.PERCEPTION) >= 6, null);}
+	}),
+	
+	MARKSMAN(R.string.marksman_name, R.string.marksman_longDesc, R.string.marksman_shortDesc, R.string.marksman_page,
+		false, false, null),
+		
+	NATURAL_LEADER(R.string.natural_leader_name, R.string.natural_leader_longDesc, R.string.natural_leader_shortDesc, R.string.natural_leader_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.COMMAND) >= 1, null);}
+	}),
+	
+	NIGHT_FIGHTER(R.string.night_fighter_name, R.string.night_fighter_longDesc, R.string.night_fighter_shortDesc, R.string.night_fighter_page,
+		false, false, null),
+		
 	PARRY(R.string.parry_name, R.string.parry_longDesc, R.string.parry_shortDesc, R.string.parry_page,
 					  false, false, null),
-					  
+					
+	PATHFINDER(R.string.pathfinder_name, R.string.pathfinder_longDesc, R.string.pathfinder_shortDesc, R.string.pathfinder_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SURVIVAL) >= 1, null);}
+	}),
+	
 	POISON_RESISTANCE(R.string.poison_resistance_name, R.string.poison_resistance_longDesc, R.string.poison_resistance_shortDesc, R.string.poison_resistance_page,
 					false, false, null),
 	
+	PORT_OF_CALL(R.string.port_of_call_name, R.string.port_of_call_longDesc, R.string.port_of_call_shortDesc, R.string.port_of_call_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.NAVIGATION) >= 1, null);}
+	}),
+	
 	PRECISION_STRIKE(R.string.precision_strike_name, R.string.precision_strike_longDesc, R.string.precision_strike_shortDesc, R.string.precision_strike_page,
 					false, false, null),
-					
+		
+	PRESS_THE_ATTACK(R.string.press_the_attack_name, R.string.press_the_attack_longDesc, R.string.press_the_attack_shortDesc, R.string.press_the_attack_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SHIELD) >= 3 && myChar.hasAbility(AbilityEnum.SHIELD_SLAM), null);}
+	}),
+	
+	PRIVILEGE(R.string.privilege_name, R.string.privilege_longDesc, R.string.privilege_shortDesc, R.string.privilege_page,
+		false, false, null),
+		
+	PROWL(R.string.prowl_name, R.string.prowl_longDesc, R.string.prowl_shortDesc, R.string.prowl_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SNEAK) >= 1, null);}
+	}),
+	
+	PURSUIT(R.string.pursuit_name, R.string.pursuit_longDesc, R.string.pursuit_shortDesc, R.string.pursuit_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.TRACKING) >= 3, null);}
+	}),
+	
+	QUICK_WORK(R.string.quick_work_name, R.string.quick_work_longDesc, R.string.quick_work_shortDesc, R.string.quick_work_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.AGILITY) >= 5, null);}
+	}),
+	
+	RALLYING_CRY(R.string.rallying_cry_name, R.string.rallying_cry_longDesc, R.string.rallying_cry_shortDesc, R.string.rallying_cry_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.COMMAND) >= 3, null);}
+	}),
+	
+	RELENTLESS_CHARGE(R.string.relentless_charge_name, R.string.relentless_charge_longDesc, R.string.relentless_charge_shortDesc, R.string.relentless_charge_page,
+		false, false, null),
+		
 	RESOURCEFUL(R.string.resourceful_name, R.string.resourceful_longDesc, R.string.resourceful_shortDesc, R.string.resourceful_page,
 					false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.MECHANIKAL) >= 3, null);}
 	}),
 	
+	RETALIATORY_STRIKE(R.string.retaliatory_strike_name, R.string.retaliatory_strike_longDesc, R.string.retaliatory_strike_shortDesc, R.string.retaliatory_strike_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.PHYSIQUE) >= 7, null);}
+	}),
+	
+	RETURN_FIRE(R.string.return_fire_ability_name, R.string.return_fire_ability_longDesc, R.string.return_fire_ability_shortDesc, R.string.return_fire_ability_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.hasAbility(AbilityEnum.FAST_DRAW), null);}
+	}),
+	
+	RIDE_BY_ATTACK(R.string.ride_by_attack_name, R.string.ride_by_attack_longDesc, R.string.ride_by_attack_shortDesc, R.string.ride_by_attack_page,
+		false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.RIDING) >= 2, null);}
+	}),
+	
 	RIPOSTE(R.string.riposte_name, R.string.riposte_longDesc, R.string.riposte_shortDesc, R.string.riposte_page,
 		  false, false, null),
+	
+	ROCK_SOLID(R.string.rock_solid_name, R.string.rock_solid_longDesc, R.string.rock_solid_shortDesc, R.string.rock_solid_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.PHYSIQUE) >= 8, null);}
+	}),
+	
+	ROLL_WITH_IT(R.string.roll_with_it_name, R.string.roll_with_it_longDesc, R.string.roll_with_it_shortDesc, R.string.roll_with_it_page,
+			false, false, null),
+			
+	SADDLE_SHOT(R.string.saddle_shot_name, R.string.saddle_shot_longDesc, R.string.saddle_shot_shortDesc, R.string.saddle_shot_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.RIDING) >= 1, null);}
+	}),
+	
+	SCROUNGE(R.string.scrounge_name, R.string.scrounge_longDesc, R.string.scrounge_shortDesc, R.string.scrounge_page,
+			false, false, null),
+		
+	SENTRY(R.string.sentry_name, R.string.sentry_longDesc, R.string.sentry_shortDesc, R.string.sentry_page,
+			false, false, null),
+			
+	SET_DEFENSE(R.string.set_defense_name, R.string.set_defense_longDesc, R.string.set_defense_shortDesc, R.string.set_defense_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.GREAT_WEAPON) >= 2, null);}
+	}),
+	
+	SHADOW_MAGIC(R.string.shadow_magic_name, R.string.shadow_magic_longDesc, R.string.shadow_magic_shortDesc, R.string.shadow_magic_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SNEAK) >= 2 && myChar.archetype == Archetype.GIFTED, null);}
+	}),
+	
+	SHIELD_GUARD(R.string.shield_guard_name, R.string.shield_guard_longDesc, R.string.shield_guard_shortDesc, R.string.shield_guard_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SHIELD) >= 1, null);}
+	}),
+	
+	SHIELD_SLAM(R.string.shield_slam_name, R.string.shield_slam_longDesc, R.string.shield_slam_shortDesc, R.string.shield_slam_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.STRENGTH) >= 6, null);}
+	}),
+	
+	SIGNAL_LANGUAGE(R.string.signal_language_name, R.string.signal_language_longDesc, R.string.signal_language_shortDesc, R.string.signal_language_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.CRYPTOGRAPHY) >= 1, null);}
+	}),
+	
+	SNIPER(R.string.sniper_name, R.string.sniper_longDesc, R.string.sniper_shortDesc, R.string.sniper_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.RIFLE) >= 3, null);}
+	}),
 	
 	SPECIALIZATION(R.string.specialization_name, R.string.specialization_longDesc, R.string.specialization_shortDesc, R.string.specialization_page,
 			false, true, null),
@@ -384,7 +663,63 @@ public enum AbilityEnum implements zzPrereqCheck
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.MECHANIKAL) >= 2, null);}
 	}),
 	
-	//For Pascal
+	SUCKER(R.string.sucker_name, R.string.sucker_longDesc, R.string.sucker_shortDesc, R.string.sucker_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.INTIMIDATION) >= 3, null);}
+	}),
+	
+	SWIFT_HUNTER(R.string.swift_hunter_name, R.string.swift_hunter_longDesc, R.string.swift_hunter_shortDesc, R.string.swift_hunter_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.AGILITY) >= 6, null);}
+	}),
+	
+	SWIFT_RIDER(R.string.swift_rider_name, R.string.swift_rider_longDesc, R.string.swift_rider_shortDesc, R.string.swift_rider_page,
+			false, false, null),
+			
+	TAKE_DOWN(R.string.take_down_name, R.string.take_down_longDesc, R.string.take_down_shortDesc, R.string.take_down_page,
+			false, false, null),
+			
+	TARGETEER(R.string.targeteer_name, R.string.targeteer_longDesc, R.string.targeteer_shortDesc, R.string.targeteer_page,
+			false, false, null),
+		
+	TEAM_LEADER(R.string.team_leader_name, R.string.team_leader_longDesc, R.string.team_leader_shortDesc, R.string.team_leader_page,
+			false, false, null),
+			
+	TRACELESS_PATH(R.string.traceless_path_name, R.string.traceless_path_longDesc, R.string.traceless_path_shortDesc, R.string.traceless_path_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.SNEAK) >= 2, null);}
+	}),
+	
+	TRUTH_READER(R.string.truth_reader_name, R.string.truth_reader_longDesc, R.string.truth_reader_shortDesc, R.string.truth_reader_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.DETECTION) >= 3, null);}
+	}),
+	
+	TUNE_UP(R.string.tune_up_name, R.string.tune_up_longDesc, R.string.tune_up_shortDesc, R.string.tune_up_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.MECHANIKAL) >= 3, null);}
+	}),
+	
+	TWO_WEAPON_FIGHTING(R.string.two_weapon_fighting_name, R.string.two_weapon_fighting_longDesc, R.string.two_weapon_fighting_shortDesc, R.string.two_weapon_fighting_page,
+			false, false, new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+			{return new zzPrereqCheckResult(myChar.getBaseStat(Stat.AGILITY) >= 4, null);}
+	}),
+	
+	UNIVERSITY_EDUCATION(R.string.university_education_name, R.string.university_education_longDesc, R.string.university_education_shortDesc, R.string.university_education_page,
+			false, false, null),
+			
+	WAYLAY(R.string.waylay_name, R.string.waylay_longDesc, R.string.waylay_shortDesc, R.string.waylay_page,
+			false, false, null),
+			
+			
+	/* Archetype Abilities */
+	
 	MIGHTY(R.string.mighty_name, R.string.mighty_longDesc, R.string.mighty_shortDesc, R.string.mighty_page,
 		true, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
