@@ -876,10 +876,10 @@
 	<string name="feat_vendetta_shortDesc">Hello World, MainActivity!</string>
 	<string name="feat_vendetta_page">Hello World, MainActivity!</string>
 	
-	<string name="feat_righteous_anger_name">Hello World, MainActivity!</string>
-	<string name="feat_righteous_anger_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_righteous_anger_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_righteous_anger_page">Hello World, MainActivity!</string>
+	<string name="righteous_anger_name">Hello World, MainActivity!</string>
+	<string name="righteous_anger_longDesc">Hello World, MainActivity!</string>
+	<string name="righteous_anger_shortDesc">Hello World, MainActivity!</string>
+	<string name="righteous_anger_page">Hello World, MainActivity!</string>
 	
 	<string name="tough_name">Hello World, MainActivity!</string>
 	<string name="tough_longDesc">Hello World, MainActivity!</string>

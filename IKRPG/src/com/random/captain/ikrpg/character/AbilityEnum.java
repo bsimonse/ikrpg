@@ -720,20 +720,93 @@ public enum AbilityEnum implements zzPrereqCheck
 			
 	/* Archetype Abilities */
 	
-	//COMBAT_CASTER(R.
+	COMBAT_CASTER(R.string.combat_caster_name, R.string.combat_caster_longDesc, R.string.combat_caster_shortDesc, R.string.combat_caster_page,
+			true, false, GIFTED_CHECK()),
+	FAST_CASTER(R.string.fast_caster_name, R.string.fast_caster_longDesc, R.string.fast_caster_shortDesc, R.string.fast_caster_page,
+				  true, false, GIFTED_CHECK()),
+	FEAT_DOMINATOR(R.string.feat_dominator_name, R.string.feat_dominator_longDesc, R.string.feat_dominator_shortDesc, R.string.feat_dominator_page,
+				  true, false, GIFTED_CHECK()),
+	FEAT_POWEFUL_CASTER(R.string.feat_powerful_caster_name, R.string.feat_powerful_caster_longDesc, R.string.feat_powerful_caster_shortDesc, R.string.feat_powerful_caster_page,
+				  true, false, GIFTED_CHECK()),
+	FEAT_QUICK_CAST(R.string.feat_quick_cast_name, R.string.feat_quick_cast_longDesc, R.string.feat_quick_cast_shortDesc, R.string.feat_quick_cast_page,
+				  true, false, GIFTED_CHECK()),
+	FEAT_STRENGTH_OF_WILL(R.string.feat_strength_of_will_name, R.string.feat_strength_of_will_longDesc, R.string.feat_strength_of_will_shortDesc, R.string.feat_strength_of_will_page,
+				  true, false, GIFTED_CHECK()),
+	MAGIC_SENSITIVITY(R.string.magic_sensitivity_name, R.string.magic_sensitivity_longDesc, R.string.magic_sensitivity_shortDesc, R.string.magic_sensitivity_page,
+				  true, false, GIFTED_CHECK()),
+	RUNE_READER(R.string.rune_reader_name, R.string.rune_reader_longDesc, R.string.rune_reader_shortDesc, R.string.rune_reader_page,
+				  true, false, GIFTED_CHECK()),
+	WARDING_CIRCLE(R.string.warding_circle_name, R.string.warding_circle_longDesc, R.string.warding_circle_shortDesc, R.string.warding_circle_page,
+				  true, false, GIFTED_CHECK()),
+				  
+	INTELLECTUAL(R.string.intellectual_name, R.string.intellectual_longDesc, R.string.intellectual_shortDesc, R.string.intellectual_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	BATTLEFIELD_COORDINATION(R.string.battlefield_coordination_name, R.string.battlefield_coordination_longDesc, R.string.battlefield_coordination_shortDesc, R.string.battlefield_coordination_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	FEAT_FLAWLESS_TIMING(R.string.feat_flawless_timing_name, R.string.feat_flawless_timing_longDesc, R.string.feat_flawless_timing_shortDesc, R.string.feat_flawless_timing_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	FEAT_PRESCIENT(R.string.feat_prescient_name, R.string.feat_prescient_longDesc, R.string.feat_prescient_shortDesc, R.string.feat_prescient_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	FEAT_PERFECT_PLOT(R.string.feat_perfect_plot_name, R.string.feat_perfect_plot_longDesc, R.string.feat_perfect_plot_shortDesc, R.string.feat_perfect_plot_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	FEAT_PLAN_OF_ACTION(R.string.feat_plan_of_action_name, R.string.feat_plan_of_action_longDesc, R.string.feat_plan_of_action_shortDesc, R.string.feat_plan_of_action_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	FEAT_QUICK_THINKING(R.string.feat_quick_thinking_name, R.string.feat_quick_thinking_longDesc, R.string.feat_quick_thinking_shortDesc, R.string.feat_quick_thinking_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	FEAT_UNCONVENTIONAL_WARFARE(R.string.feat_unconventional_warfare_name, R.string.feat_unconventional_warfare_longDesc, R.string.feat_unconventional_warfare_shortDesc, R.string.feat_unconventional_warfare_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	GENIUS(R.string.genius_name, R.string.genius_longDesc, R.string.genius_shortDesc, R.string.genius_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	HYPER_PERCEPTION(R.string.hyper_perception_name, R.string.hyper_perception_longDesc, R.string.hyper_perception_shortDesc, R.string.hyper_perception_page,
+				   true, false, INTELLECTUAL_CHECK()),
+	PHOTOGRAPHIC_MEMORY(R.string.photographic_memory_name, R.string.photographic_memory_longDesc, R.string.photographic_memory_shortDesc, R.string.photographic_memory_page,
+				   true, false, INTELLECTUAL_CHECK()),
+				   
 	MIGHTY(R.string.mighty_name, R.string.mighty_longDesc, R.string.mighty_shortDesc, R.string.mighty_page,
-		true, false, new zzPrereqCheck(){
-			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.archetype == Archetype.MIGHTY, null);}
-	}),
-	
+		true, false, MIGHTY_CHECK()),
+	BEAT_BACK(R.string.beat_back_name, R.string.beat_back_longDesc, R.string.beat_back_shortDesc, R.string.beat_back_page,
+		true, false, MIGHTY_CHECK()),
+	FEAT_BACK_SWING(R.string.feat_back_swing_name, R.string.feat_back_swing_longDesc, R.string.feat_back_swing_shortDesc, R.string.feat_back_swing_page,
+		true, false, MIGHTY_CHECK()),
+	FEAT_BOUNDING_LEAP(R.string.feat_bounding_leap_name, R.string.feat_bounding_leap_longDesc, R.string.feat_bounding_leap_shortDesc, R.string.feat_bounding_leap_page,
+		true, false, MIGHTY_CHECK()),
+	FEAT_COUNTER_CHARGE(R.string.feat_counter_charge_name, R.string.feat_counter_charge_longDesc, R.string.feat_counter_charge_shortDesc, R.string.feat_counter_charge_page,
+		true, false, MIGHTY_CHECK()),
 	FEAT_INVULNERABLE(R.string.feat_invulnerable_name, R.string.feat_invulnerable_longDesc, R.string.feat_invulnerable_shortDesc, R.string.feat_invulnerable_page,
-		true, false, new zzPrereqCheck(){
-			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.archetype == Archetype.MIGHTY, null);}
-		});
-	
-	//End for Pascal
+		true, false, MIGHTY_CHECK()),
+	FEAT_REVITALIZE(R.string.feat_revitalize_name, R.string.feat_revitalize_longDesc, R.string.feat_revitalize_shortDesc, R.string.feat_revitalize_page,
+		true, false, MIGHTY_CHECK()),
+	FEAT_SHIELD_BREAKER(R.string.feat_shield_breaker_name, R.string.feat_shield_breaker_longDesc, R.string.feat_shield_breaker_shortDesc, R.string.feat_shield_breaker_page,
+		true, false, MIGHTY_CHECK()),
+	FEAT_VENDETTA(R.string.feat_vendetta_name, R.string.feat_vendetta_longDesc, R.string.feat_vendetta_shortDesc, R.string.feat_vendetta_page,
+		true, false, MIGHTY_CHECK()),
+	RIGHTEOUS_ANGER(R.string.righteous_anger_name, R.string.righteous_anger_longDesc, R.string.righteous_anger_shortDesc, R.string.righteous_anger_page,
+		true, false, MIGHTY_CHECK()),
+	TOUGH(R.string.tough_name, R.string.tough_longDesc, R.string.tough_shortDesc, R.string.tough_page,
+		true, false, MIGHTY_CHECK()),
+
+	SKILLED(R.string.skilled_name, R.string.skilled_longDesc, R.string.skilled_shortDesc, R.string.skilled_page,
+		true, false, SKILLED_CHECK()),
+	AMBIDEXTROUS(R.string.ambidextrous_name, R.string.ambidextrous_longDesc, R.string.ambidextrous_shortDesc, R.string.ambidextrous_page,
+		true, false, SKILLED_CHECK()),
+	CAGEY(R.string.cagey_name, R.string.cagey_longDesc, R.string.cagey_shortDesc, R.string.cagey_page,
+		true, false, SKILLED_CHECK()),
+	DEFT(R.string.deft_name, R.string.deft_longDesc, R.string.deft_shortDesc, R.string.deft_page,
+		true, false, SKILLED_CHECK()),
+	FEAT_DEFENSIVE_STRIKE(R.string.feat_defensive_strike_name, R.string.feat_defensive_strike_longDesc, R.string.feat_defensive_strike_shortDesc, R.string.feat_defensive_strike_page,
+		true, false, SKILLED_CHECK()),
+	FEAT_DISARM(R.string.feat_disarm_name, R.string.feat_disarm_longDesc, R.string.feat_disarm_shortDesc, R.string.feat_disarm_page,
+		true, false, SKILLED_CHECK()),
+	FEAT_SWASHBUCKLER(R.string.feat_swashbuckler_name, R.string.feat_swashbuckler_longDesc, R.string.feat_swashbuckler_shortDesc, R.string.feat_swashbuckler_page,
+		true, false, SKILLED_CHECK()),
+	FEAT_UNTOUCHABLE(R.string.feat_untouchable_name, R.string.feat_untouchable_longDesc, R.string.feat_untouchable_shortDesc, R.string.feat_untouchable_page,
+		true, false, SKILLED_CHECK()),
+	PRETERNATURAL_AWARENESS(R.string.preternatural_awareness_name, R.string.preternatural_awareness_longDesc, R.string.preternatural_awareness_shortDesc, R.string.preternatural_awareness_page,
+		true, false, SKILLED_CHECK()),
+	SIDESTEP(R.string.sidestep_name, R.string.sidestep_longDesc, R.string.sidestep_shortDesc, R.string.sidestep_page,
+		true, false, SKILLED_CHECK()),
+	VIRTUOSO(R.string.virtuoso_name, R.string.virtuoso_longDesc, R.string.virtuoso_shortDesc, R.string.virtuoso_page,
+		true, true, SKILLED_CHECK());
 	
 	private AbilityEnum(int pNameResourceID, int pLongDescResourceID, int pShortDescResourceID, int pPageNumberResourceID, boolean pFromArchetype, boolean pIsQualifiable, zzPrereqCheck pPrereqCheck)
 	{
@@ -771,4 +844,24 @@ public enum AbilityEnum implements zzPrereqCheck
 	
 	public Ability make(){return new Ability(this);}
 	public Ability make(String qualifier){return new Ability(this, qualifier);}
+	
+	private static zzPrereqCheck GIFTED_CHECK(){return new zzPrereqCheck(){
+		@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+		{return new zzPrereqCheckResult(myChar.archetype == Archetype.GIFTED, null);}
+	};}
+	
+	private static zzPrereqCheck INTELLECTUAL_CHECK(){return new zzPrereqCheck(){
+		@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+		{return new zzPrereqCheckResult(myChar.archetype == Archetype.INTELLECTUAL, null);}
+	};}
+	
+	private static zzPrereqCheck MIGHTY_CHECK(){return new zzPrereqCheck(){
+		@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+		{return new zzPrereqCheckResult(myChar.archetype == Archetype.MIGHTY, null);}
+	};}
+	
+	private static zzPrereqCheck SKILLED_CHECK(){return new zzPrereqCheck(){
+		@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
+		{return new zzPrereqCheckResult(myChar.archetype == Archetype.SKILLED, null);}
+	};}
 }
