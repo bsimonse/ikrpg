@@ -737,9 +737,204 @@
 	<string name="waylay_page">Hello World, MainActivity!</string>
 	
 	<!--Archetype abilities-->
+		
+		<!--GIFTED-->
+	<string name="combat_caster_name">Hello World, MainActivity!</string>
+	<string name="combat_caster_longDesc">Hello World, MainActivity!</string>
+	<string name="combat_caster_shortDesc">Hello World, MainActivity!</string>
+	<string name="combat_caster_page">Hello World, MainActivity!</string>
+	
+	<string name="fast_caster_name">Hello World, MainActivity!</string>
+	<string name="fast_caster_longDesc">Hello World, MainActivity!</string>
+	<string name="fast_caster_shortDesc">Hello World, MainActivity!</string>
+	<string name="fast_caster_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_dominator_name">Hello World, MainActivity!</string>
+	<string name="feat_dominator_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_dominator_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_dominator_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_powerful_caster_name">Hello World, MainActivity!</string>
+	<string name="feat_powerful_caster_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_powerful_caster_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_powerful_caster_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_quick_cast_name">Hello World, MainActivity!</string>
+	<string name="feat_quick_cast_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_quick_cast_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_quick_cast_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_strength_of_will_name">Hello World, MainActivity!</string>
+	<string name="feat_strength_of_will_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_strength_of_will_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_strength_of_will_page">Hello World, MainActivity!</string>
+	
+	<string name="magic_sensitivity_name">Hello World, MainActivity!</string>
+	<string name="magic_sensitivity_longDesc">Hello World, MainActivity!</string>
+	<string name="magic_sensitivity_shortDesc">Hello World, MainActivity!</string>
+	<string name="magic_sensitivity_page">Hello World, MainActivity!</string>
+	
+	<string name="rune_reader_name">Hello World, MainActivity!</string>
+	<string name="rune_reader_longDesc">Hello World, MainActivity!</string>
+	<string name="rune_reader_shortDesc">Hello World, MainActivity!</string>
+	<string name="rune_reader_page">Hello World, MainActivity!</string>
+	
+	<string name="warding_circle_name">Hello World, MainActivity!</string>
+	<string name="warding_circle_longDesc">Hello World, MainActivity!</string>
+	<string name="warding_circle_shortDesc">Hello World, MainActivity!</string>
+	<string name="warding_circle_page">Hello World, MainActivity!</string>
+	
+		<!--INTELLECTUAL-->
+	<string name="battlefield_coordination_name">Hello World, MainActivity!</string>
+	<string name="battlefield_coordination_longDesc">Hello World, MainActivity!</string>
+	<string name="battlefield_coordination_shortDesc">Hello World, MainActivity!</string>
+	<string name="battlefield_coordination_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_flawless_timing_name">Hello World, MainActivity!</string>
+	<string name="feat_flawless_timing_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_flawless_timing_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_flawless_timing_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_prescient_name">Hello World, MainActivity!</string>
+	<string name="feat_prescient_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_prescient_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_prescient_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_perfect_plot_name">Hello World, MainActivity!</string>
+	<string name="feat_perfect_plot_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_perfect_plot_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_perfect_plot_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_plan_of_action_name">Hello World, MainActivity!</string>
+	<string name="feat_plan_of_action_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_plan_of_action_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_plan_of_action_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_quick_thinking_name">Hello World, MainActivity!</string>
+	<string name="feat_quick_thinking_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_quick_thinking_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_quick_thinking_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_unconventional_warfare_name">Hello World, MainActivity!</string>
+	<string name="feat_unconventional_warfare_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_unconventional_warfare_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_unconventional_warfare_page">Hello World, MainActivity!</string>
+	
+	<string name="genius_name">Hello World, MainActivity!</string>
+	<string name="genius_longDesc">Hello World, MainActivity!</string>
+	<string name="genius_shortDesc">Hello World, MainActivity!</string>
+	<string name="genius_page">Hello World, MainActivity!</string>
+	
+	<string name="hyper_perception_name">Hello World, MainActivity!</string>
+	<string name="hyper_perception_longDesc">Hello World, MainActivity!</string>
+	<string name="hyper_perception_shortDesc">Hello World, MainActivity!</string>
+	<string name="hyper_perception_page">Hello World, MainActivity!</string>
+	
+	<string name="photographic_memory_name">Hello World, MainActivity!</string>
+	<string name="photographic_memory_longDesc">Hello World, MainActivity!</string>
+	<string name="photographic_memory_shortDesc">Hello World, MainActivity!</string>
+	<string name="photographic_memory_page">Hello World, MainActivity!</string>
+	
+		<!--MIGHTY-->
+	<string name="beat_back_name">Hello World, MainActivity!</string>
+	<string name="beat_back_longDesc">Hello World, MainActivity!</string>
+	<string name="beat_back_shortDesc">Hello World, MainActivity!</string>
+	<string name="beat_back_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_back_swing_name">Hello World, MainActivity!</string>
+	<string name="feat_back_swing_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_back_swing_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_back_swing_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_bounding_leap_name">Hello World, MainActivity!</string>
+	<string name="feat_bounding_leap_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_bounding_leap_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_bounding_leap_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_counter_charge_name">Hello World, MainActivity!</string>
+	<string name="feat_counter_charge_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_counter_charge_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_counter_charge_page">Hello World, MainActivity!</string>
+	
 	<string name="feat_invulnerable_name">Feat: Invulnerable</string>
 	<string name="feat_invulnerable_longDesc">Long Desc here</string>
 	<string name="feat_invulnerable_shortDesc">+3 ARM for one round</string>
 	<string name="feat_invulnerable_page">116</string>
+	
+	<string name="feat_revitalize_name">Hello World, MainActivity!</string>
+	<string name="feat_revitalize_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_revitalize_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_revitalize_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_shield_breaker_name">Hello World, MainActivity!</string>
+	<string name="feat_shield_breaker_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_shield_breaker_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_shield_breaker_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_vendetta_name">Hello World, MainActivity!</string>
+	<string name="feat_vendetta_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_vendetta_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_vendetta_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_righteous_anger_name">Hello World, MainActivity!</string>
+	<string name="feat_righteous_anger_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_righteous_anger_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_righteous_anger_page">Hello World, MainActivity!</string>
+	
+	<string name="tough_name">Hello World, MainActivity!</string>
+	<string name="tough_longDesc">Hello World, MainActivity!</string>
+	<string name="tough_shortDesc">Hello World, MainActivity!</string>
+	<string name="tough_page">Hello World, MainActivity!</string>
+	
+		<!--SKILLED-->
+	<string name="ambidextrous_name">Hello World, MainActivity!</string>
+	<string name="ambidextrous_longDesc">Hello World, MainActivity!</string>
+	<string name="ambidextrous_shortDesc">Hello World, MainActivity!</string>
+	<string name="ambidextrous_page">Hello World, MainActivity!</string>
+	
+	<string name="cagey_name">Hello World, MainActivity!</string>
+	<string name="cagey_longDesc">Hello World, MainActivity!</string>
+	<string name="cagey_shortDesc">Hello World, MainActivity!</string>
+	<string name="cagey_page">Hello World, MainActivity!</string>
+	
+	<string name="deft_name">Hello World, MainActivity!</string>
+	<string name="deft_longDesc">Hello World, MainActivity!</string>
+	<string name="deft_shortDesc">Hello World, MainActivity!</string>
+	<string name="deft_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_defensive_strike_name">Hello World, MainActivity!</string>
+	<string name="feat_defensive_strike_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_defensive_strike_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_defensive_strike_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_disarm_name">Hello World, MainActivity!</string>
+	<string name="feat_disarm_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_disarm_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_disarm_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_swashbuckler_name">Hello World, MainActivity!</string>
+	<string name="feat_swashbuckler_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_swashbuckler_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_swashbuckler_page">Hello World, MainActivity!</string>
+	
+	<string name="feat_untouchable_name">Hello World, MainActivity!</string>
+	<string name="feat_untouchable_longDesc">Hello World, MainActivity!</string>
+	<string name="feat_untouchable_shortDesc">Hello World, MainActivity!</string>
+	<string name="feat_untouchable_page">Hello World, MainActivity!</string>
+	
+	<string name="preternatural_awareness_name">Hello World, MainActivity!</string>
+	<string name="preternatural_awareness_longDesc">Hello World, MainActivity!</string>
+	<string name="preternatural_awareness_shortDesc">Hello World, MainActivity!</string>
+	<string name="preternatural_awareness_page">Hello World, MainActivity!</string>
+	
+	<string name="sidestep_name">Hello World, MainActivity!</string>
+	<string name="sidestep_longDesc">Hello World, MainActivity!</string>
+	<string name="sidestep_shortDesc">Hello World, MainActivity!</string>
+	<string name="sidestep_page">Hello World, MainActivity!</string>
+	
+	<string name="virtuoso_name">Hello World, MainActivity!</string>
+	<string name="virtuoso_longDesc">Hello World, MainActivity!</string>
+	<string name="virtuoso_shortDesc">Hello World, MainActivity!</string>
+	<string name="virtuoso_page">Hello World, MainActivity!</string>
 	
 </resources>

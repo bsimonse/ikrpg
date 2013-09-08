@@ -720,6 +720,7 @@ public enum AbilityEnum implements zzPrereqCheck
 			
 	/* Archetype Abilities */
 	
+	//COMBAT_CASTER(R.
 	MIGHTY(R.string.mighty_name, R.string.mighty_longDesc, R.string.mighty_shortDesc, R.string.mighty_page,
 		true, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)

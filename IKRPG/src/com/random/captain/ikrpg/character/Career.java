@@ -38,11 +38,32 @@ public enum Career implements zzPrereqCheck
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
 				giftedPrereq(),
 				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
-				
+	
+	
+	ARCANIST(R.string.arcanist_name,
+			 new Pair[] {SkillEnum.LORE.pair("Arcane",1), SkillEnum.RESEARCH.pair(1)},
+			 new Pair[] {SkillEnum.CRAFT.pair(2), SkillEnum.ETIQUETTE.pair(2), SkillEnum.NEGOTIATION.pair(2), SkillEnum.ORATORY.pair(2), SkillEnum.RESEARCH.pair(4)},
+			 new Ability[] {AbilityEnum.GREAT_POWER.make()},
+			 new Ability[] {AbilityEnum.ARCANE_DEFENSES.make(), AbilityEnum.ARCANE_SCHOLAR.make(), AbilityEnum.GREAT_POWER.make(), AbilityEnum.UNIVERSITY_EDUCATION.make()},
+			 new Spell[] {Spell.ARCANE_BOLT, Spell.AURA_OF_PROTECTION, Spell.LIGHT_IN_THE_DARKNESS},
+			 new Spell[] {},
+			 giftedPrereq(),
+			 new zzCreateCharacterHook[] {new ArcanistHook()}),
+			 
+	ARISTOCRAT(R.string.arcanist_name,
+			 new Pair[] {},
+			 new Pair[] {},
+			 new Ability[] {},
+			 new Ability[] {},
+			 new Spell[] {},
+			 new Spell[] {},
+			 giftedPrereq(),
+			 new zzCreateCharacterHook[] {new ArcanistHook()}),
+			 
 	/*ARCANIST(R.string.arcanist_name,
-				new Pair[] {}.
 				new Pair[] {},
-				new Ability[] {new Ability(AbilityEnum.GR},
+				new Pair[] {},
+				new Ability[] {},
 				new Ability[] {},
 				new Spell[] {},
 				new Spell[] {},
@@ -132,15 +153,18 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class ArcanistHook extends zzChooseOneSkillHook
+	public static class ArcanistHook extends zzCreateCharacterHook
 	{
-		@Override protected String getTitle() {return "Choose a military skill to boost";}
-
-		@Override protected List<Skill> getOptions()
+		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
 		{
-			List<Skill> l = new ArrayList<Skill>(2);
-			l.add(new Skill(SkillEnum.RIFLE)); l.add(new Skill(SkillEnum.HAND_WEAPON));
-			return l;
+			
+		}
+		
+		@Override public boolean hasUI(){return false;}
+		@Override public int getPriority(){return 0;}
+		@Override public void undoHook()
+		{
+			//myChar.abilities.remove(
 		}
 	}
 }
