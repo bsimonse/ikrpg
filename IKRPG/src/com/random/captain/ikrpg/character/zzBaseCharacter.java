@@ -32,6 +32,7 @@ class zzBaseCharacter implements Parcelable
 	Set<Career> careers;
 	Set<Ability> abilities;
 	Set<Spell> spells;
+	Set<Language> languages;
 	
 	Map<Skill, Integer> baseSkills;
 	transient Map<Skill, Integer> activeSkills;
@@ -54,6 +55,7 @@ class zzBaseCharacter implements Parcelable
 		careers = new HashSet<Career>();
 		abilities = new HashSet<Ability>();
 		spells = new HashSet<Spell>();
+		languages = new HashSet<Language>();
 		baseSkills = new HashMap<Skill, Integer>();
 		activeSkills = new HashMap<Skill, Integer>();
 		skillModifiers = new HashMap<String, Modifier<Skill>>();
@@ -71,6 +73,7 @@ class zzBaseCharacter implements Parcelable
 	public Set<Career> getCareers(){return new HashSet<Career>(careers);}
 	public Set<Ability> getAbilities(){return new HashSet<Ability>(abilities);}
 	public Set<Spell> getSpells(){return new HashSet<Spell>(spells);}
+	public Set<Language> getLanguages(){return new HashSet<Language>(languages);}
 	public int exp(){return exp;}
 	
 	public void gainEXP(int pExpGain)
@@ -336,6 +339,12 @@ class zzBaseCharacter implements Parcelable
 		toParcel.writeInt(spells.size());
 		toParcel.writeIntArray(spellOrdinals);
 		
+		//Languages
+		int[] languageOrdinals = new int[languages.size()];index=0;
+		for(Language s: languages){languageOrdinals[index++]=s.ordinal();}
+		toParcel.writeInt(languages.size());
+		toParcel.writeIntArray(languageOrdinals);
+		
 		//Base Skills
 		toParcel.writeInt(baseSkills.keySet().size());
 		for(Skill skill : baseSkills.keySet())
@@ -420,6 +429,14 @@ class zzBaseCharacter implements Parcelable
 			for(int s:spellOrdinals)
 			{pSpells.add(spells[s]);}
 			me.spells = pSpells;
+			
+			//Languages
+			int languageCount = in.readInt();
+			int[] languageOrdinals = new int[languageCount]; in.readIntArray(languageOrdinals);
+			Set<Language> pLanguages = new HashSet<Language>(); Language[] languages = Language.values();
+			for(int s:languageOrdinals)
+			{pLanguages.add(languages[s]);}
+			me.languages = pLanguages;
 			
 			//Base skills
 			Map<Skill,Integer> pSkills = new HashMap<Skill,Integer>();

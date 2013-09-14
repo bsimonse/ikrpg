@@ -101,7 +101,7 @@ public enum Spell
 	POWER_BOOSTER(R.string.power_booster_name,R.string.power_booster_desc,1,5,0,0,false,false),
 	PRAYER_FOR_GUIDANCE(R.string.prayer_for_guidance_name,R.string.prayer_for_guidance_desc,3,6,0,0,false,false),
 	PROTECTION_FROM_COLD(R.string.protection_from_cold_name,R.string.protection_from_cold_desc,1,6,0,0,true,false),
-	PROTECTION_FROM_CORROSTION(R.string.protection_from_corrosion_name,R.string.protection_from_corrosion_desc,1,6,0,0,true,false),
+	PROTECTION_FROM_CORROSION(R.string.protection_from_corrosion_name,R.string.protection_from_corrosion_desc,1,6,0,0,true,false),
 	PROTECTION_FROM_ELECTRICITY(R.string.protection_from_electricity_name,R.string.protection_from_electricity_desc,1,6,0,0,true,false),
 	PROTECTION_FROM_FIRE(R.string.protection_from_fire_name,R.string.protection_from_fire_desc,1,6,0,0,true,false),
 	PURIFICATION(R.string.purification_name,R.string.purification_desc,3,SpellRange.SELF,SpellRange.CTRL,0,false,false),

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="alchemist_name">Career</string>
+    <string name="alchemist_name">Alchemist</string>
     <string name="alchemist_desc">Desc</string>
 
-    <string name="arcane_mechanik_name">Career</string>
+    <string name="arcane_mechanik_name">Arcane Mechanik</string>
     <string name="arcane_mechanik_desc">Desc</string>
 	
-    <string name="arcanist_name">Career</string>
+    <string name="arcanist_name">Arcanist</string>
     <string name="arcanist_desc">Desc</string>
 
-    <string name="aristocrat_name">Career</string>
+    <string name="aristocrat_name">Aristocrat</string>
     <string name="aristocrat_desc">Desc</string>
 
-    <string name="bounty_hunter_name">Career</string>
+    <string name="bounty_hunter_name">Bounty Hunter</string>
     <string name="bounty_hunter_desc">Desc</string>
 
     <string name="cutthroat_name">Career</string>

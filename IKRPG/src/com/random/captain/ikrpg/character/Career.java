@@ -46,19 +46,26 @@ public enum Career implements zzPrereqCheck
 			 new Ability[] {AbilityEnum.GREAT_POWER.make()},
 			 new Ability[] {AbilityEnum.ARCANE_DEFENSES.make(), AbilityEnum.ARCANE_SCHOLAR.make(), AbilityEnum.GREAT_POWER.make(), AbilityEnum.UNIVERSITY_EDUCATION.make()},
 			 new Spell[] {Spell.ARCANE_BOLT, Spell.AURA_OF_PROTECTION, Spell.LIGHT_IN_THE_DARKNESS},
-			 new Spell[] {},
+			 new Spell[] {Spell.ARCANE_STRIKE, Spell.BLIZZARD, Spell.FIRE_STARTER,Spell.GUIDED_BLADE,Spell.INFLUENCE,Spell.LIGHT_IN_THE_DARKNESS,Spell.PROTECTION_FROM_COLD,
+			 				Spell.PROTECTION_FROM_CORROSION, Spell.PROTECTION_FROM_ELECTRICITY, Spell.PROTECTION_FROM_FIRE, Spell.STORM_TOSSED, Spell.ARCANE_BOLT,
+							Spell.ASHEN_CLOUD,Spell.AURA_OF_PROTECTION,Spell.BANISHING_WARD,Spell.CELERITY,Spell.FOXHOLE,Spell.HAND_OF_FATE,Spell.HOWLING_FLAMES,
+							Spell.ICY_GRIP,Spell.OCCULTATION,Spell.ROCK_WALL,Spell.TELEKINESIS,Spell.TRUE_SIGHT,Spell.VISION,Spell.WIND_BLAST,Spell.FOG_OF_WAR,
+							Spell.FORCE_FIELD,Spell.HEX_BLAST,Spell.INHOSPITABLE_GROUND,Spell.MIRAGE,Spell.RIFT,Spell.ROCK_HAMMER,Spell.ZEPHYR,Spell.FORCE_HAMMER,
+							Spell.OVERMIND,Spell.TEMPEST},
 			 giftedPrereq(),
 			 new zzCreateCharacterHook[] {new ArcanistHook()}),
 			 
-	ARISTOCRAT(R.string.arcanist_name,
-			 new Pair[] {},
-			 new Pair[] {},
+	ARISTOCRAT(R.string.aristocrat_name,
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1),SkillEnum.COMMAND.pair(1),SkillEnum.ETIQUETTE.pair(1)},
+			 new Pair[] {SkillEnum.ARCHERY.pair(2),SkillEnum.HAND_WEAPON.pair(3),SkillEnum.LANCE.pair(3),SkillEnum.PISTOL.pair(2),SkillEnum.RIFLE.pair(3),
+			 				SkillEnum.BRIBERY.pair(4),SkillEnum.COMMAND.pair(4),SkillEnum.CRYPTOGRAPHY.pair(2),SkillEnum.DECEPTION.pair(4),SkillEnum.ETIQUETTE.pair(4),
+							SkillEnum.LAW.pair(4),SkillEnum.NEGOTIATION.pair(4),SkillEnum.ORATORY.pair(4),SkillEnum.SEDUCTION.pair(4)},
 			 new Ability[] {},
 			 new Ability[] {},
 			 new Spell[] {},
 			 new Spell[] {},
 			 giftedPrereq(),
-			 new zzCreateCharacterHook[] {new ArcanistHook()}),
+			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new AristocratLanguageHook()}),
 			 
 	/*ARCANIST(R.string.arcanist_name,
 				new Pair[] {},
@@ -157,14 +164,49 @@ public enum Career implements zzPrereqCheck
 	{
 		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
 		{
-			
+			super.startHook(pChar, pDelegate, pHook);
+			myChar.abilities.add(AbilityEnum.GREAT_POWER.make());
+			pDelegate.hookComplete(myChar);
 		}
-		
 		@Override public boolean hasUI(){return false;}
 		@Override public int getPriority(){return 0;}
 		@Override public void undoHook()
 		{
-			//myChar.abilities.remove(
+			myChar.abilities.remove(AbilityEnum.GREAT_POWER);
 		}
+	}
+	
+	public static class AristocratWeaponHook extends zzChooseOneSkillHook
+	{
+		@Override protected String getTitle() {return "Choose a military skill to boost";}
+
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(3);
+			l.add(new Skill(SkillEnum.ARCHERY)); l.add(new Skill(SkillEnum.PISTOL)); l.add(new Skill(SkillEnum.RIFLE));
+			return l;
+		}
+	}
+	
+	public static class AristocratLanguageHook extends zzChooseOneHook<Language>
+	{
+		private Language chosenLanguage;
+
+		@Override protected String getTitle(){return "Choose a language to learn:";}
+		@Override protected List<Language> getOptions() {return Arrays.asList(Language.values());}
+		
+		@Override protected void itemSelected(int which)
+		{
+			chosenLanguage = getOptions().get(which);
+			myChar.languages.add(chosenLanguage);
+		}
+
+		@Override public boolean hasUI(){return true;}
+
+		@Override protected void doDefaultCase() {//can't get called, since always hasUI.
+		}
+
+		@Override public void undoHook()
+		{myChar.languages.remove(chosenLanguage);}
 	}
 }
