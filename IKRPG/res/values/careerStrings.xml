@@ -15,75 +15,75 @@
     <string name="bounty_hunter_name">Bounty Hunter</string>
     <string name="bounty_hunter_desc">Desc</string>
 
-    <string name="cutthroat_name">Career</string>
+    <string name="cutthroat_name">Cutthroat</string>
     <string name="cutthroat_desc">Desc</string>
 
     <string name="duelist_name">Duelist</string>
     <string name="duelist_desc">Stabbity stab stab</string>
 
-    <string name="explorer_name">Career</string>
+    <string name="explorer_name">Explorer</string>
     <string name="explorer_desc">Desc</string>
 
-    <string name="fell_caller_name">Career</string>
+    <string name="fell_caller_name">Fell Caller</string>
     <string name="fell_caller_desc">Desc</string>
 
-    <string name="field_mechanik_name">Career</string>
+    <string name="field_mechanik_name">Field Mechanik</string>
     <string name="field_mechanik_desc">Desc</string>
 
-    <string name="gun_mage_name">Career</string>
+    <string name="gun_mage_name">Gun Mage</string>
     <string name="gun_mage_desc">Desc</string>
 
-    <string name="highwayman_name">Career</string>
+    <string name="highwayman_name">Highwayman</string>
     <string name="highwayman_desc">Desc</string>
 
-    <string name="investigator_name">Career</string>
+    <string name="investigator_name">Investigator</string>
     <string name="investigator_desc">Desc</string>
 
-    <string name="iron_fang_name">Career</string>
+    <string name="iron_fang_name">Iron Fang</string>
     <string name="iron_fang_desc">Desc</string>
 
-    <string name="knight_name">Career</string>
+    <string name="knight_name">Knight</string>
     <string name="knight_desc">Desc</string>
 
-    <string name="mage_hunter_name">Career</string>
+    <string name="mage_hunter_name">Mage Hunter</string>
     <string name="mage_hunter_desc">Desc</string>
 
-    <string name="man_at_arms_name">Career</string>
+    <string name="man_at_arms_name">Man at Arms</string>
     <string name="man_at_arms_desc">Desc</string>
 
-    <string name="miltary_officer_name">Career</string>
+    <string name="miltary_officer_name">Military Officer</string>
     <string name="miltary_officer_desc">Desc</string>
 
     <string name="pirate_name">Pirate</string>
     <string name="pirate_desc">Arrrrrr</string>
 
-    <string name="priest_of_menoth_name">Career</string>
+    <string name="priest_of_menoth_name">Preist of Menoth</string>
     <string name="priest_of_menoth_desc">Desc</string>
 
-    <string name="priest_of_morrow_name">Career</string>
+    <string name="priest_of_morrow_name">Priest of Morrow</string>
     <string name="priest_of_morrow_desc">Desc</string>
 	
-    <string name="rifleman_name">Career</string>
+    <string name="rifleman_name">Rifleman</string>
     <string name="rifleman_desc">Desc</string>
 
-    <string name="soldier_name">Career</string>
+    <string name="soldier_name">Soldier</string>
     <string name="soldier_desc">Desc</string>
 
-    <string name="sorceror_name">Career</string>
+    <string name="sorceror_name">Sorceror</string>
     <string name="sorceror_desc">Desc</string>
 
-    <string name="spy_name">Career</string>
+    <string name="spy_name">Spy</string>
     <string name="spy_desc">Desc</string>
 
-    <string name="stormblade_name">Career</string>
+    <string name="stormblade_name">Stormblade</string>
     <string name="stormblade_desc">Desc</string>
 
-    <string name="thief_name">Career</string>
+    <string name="thief_name">Thief</string>
     <string name="thief_desc">Desc</string>
 
-    <string name="trencher_name">Career</string>
+    <string name="trencher_name">Trencher</string>
     <string name="trencher_desc">Desc</string>
 
-    <string name="warcaster_name">Career</string>
+    <string name="warcaster_name">Warcaster</string>
     <string name="warcaster_desc">Desc</string>
 </resources>	

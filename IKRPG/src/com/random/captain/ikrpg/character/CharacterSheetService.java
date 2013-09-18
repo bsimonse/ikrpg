@@ -477,8 +477,8 @@ public class CharacterSheetService
 		
 		//Careers
 		Set<Career> careers = new HashSet<Career>(2);
-		careers.add(Career.PIRATE);
-		careers.add(Career.DUELIST);
+		//careers.add(Career.PIRATE);
+		//careers.add(Career.DUELIST);
 		pascal.careers = careers;
 		
 		//Stats

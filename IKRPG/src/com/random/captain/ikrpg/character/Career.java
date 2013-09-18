@@ -10,7 +10,7 @@ import com.random.captain.ikrpg.R;
 public enum Career implements zzPrereqCheck
 {
 	@SuppressWarnings("unchecked")
-	ALCHEMIST(R.string.alchemist_name,
+	ALCHEMIST(R.string.alchemist_name, false,
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
 			  	new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(4), SkillEnum.UNARMED.pair(2), 
 							SkillEnum.ALCHEMY.pair(4), SkillEnum.CRAFT.pair(4), SkillEnum.FORGERY.pair(2), SkillEnum.MEDICINE.pair(4),
@@ -22,7 +22,7 @@ public enum Career implements zzPrereqCheck
 				null, null),
 								
 	@SuppressWarnings("unchecked")
-	ARCANE_MECHANIK(R.string.arcane_mechanik_name,
+	ARCANE_MECHANIK(R.string.arcane_mechanik_name, false,
 				new Pair[] {SkillEnum.CRAFT.pair("gunsmithing", 1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), SkillEnum.RIFLE.pair(2), 
 							SkillEnum.COMMAND.pair(1), SkillEnum.CRAFT.pair(4), SkillEnum.CRYPTOGRAPHY.pair(3), SkillEnum.MECHANIKAL.pair(4),
@@ -40,7 +40,7 @@ public enum Career implements zzPrereqCheck
 				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
 	
 	
-	ARCANIST(R.string.arcanist_name,
+	ARCANIST(R.string.arcanist_name, false,
 			 new Pair[] {SkillEnum.LORE.pair("Arcane",1), SkillEnum.RESEARCH.pair(1)},
 			 new Pair[] {SkillEnum.CRAFT.pair(2), SkillEnum.ETIQUETTE.pair(2), SkillEnum.NEGOTIATION.pair(2), SkillEnum.ORATORY.pair(2), SkillEnum.RESEARCH.pair(4)},
 			 new Ability[] {AbilityEnum.GREAT_POWER.make()},
@@ -55,19 +55,52 @@ public enum Career implements zzPrereqCheck
 			 giftedPrereq(),
 			 new zzCreateCharacterHook[] {new ArcanistHook()}),
 			 
-	ARISTOCRAT(R.string.aristocrat_name,
+	ARISTOCRAT(R.string.aristocrat_name, true,
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1),SkillEnum.COMMAND.pair(1),SkillEnum.ETIQUETTE.pair(1)},
 			 new Pair[] {SkillEnum.ARCHERY.pair(2),SkillEnum.HAND_WEAPON.pair(3),SkillEnum.LANCE.pair(3),SkillEnum.PISTOL.pair(2),SkillEnum.RIFLE.pair(3),
 			 				SkillEnum.BRIBERY.pair(4),SkillEnum.COMMAND.pair(4),SkillEnum.CRYPTOGRAPHY.pair(2),SkillEnum.DECEPTION.pair(4),SkillEnum.ETIQUETTE.pair(4),
 							SkillEnum.LAW.pair(4),SkillEnum.NEGOTIATION.pair(4),SkillEnum.ORATORY.pair(4),SkillEnum.SEDUCTION.pair(4)},
-			 new Ability[] {},
-			 new Ability[] {},
-			 new Spell[] {},
-			 new Spell[] {},
-			 giftedPrereq(),
+			 new Ability[] {AbilityEnum.GOOD_BREEDING.make(), AbilityEnum.PRIVILEGE.make()},
+			 new Ability[] {AbilityEnum.ADVISOR.make(), AbilityEnum.APPRAISE.make(), AbilityEnum.BATTLE_PLAN_CALL_TO_ACTION.make(), AbilityEnum.EXPERT_RIDER.make(),
+			 				AbilityEnum.GOOD_BREEDING.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.POISON_RESISTANCE.make(),
+							AbilityEnum.PRIVILEGE.make(), AbilityEnum.RALLYING_CRY.make(), AbilityEnum.SWIFT_RIDER.make()},
+			 null, null,
+			 humanPrereq(),
 			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new AristocratLanguageHook()}),
+	
+	BOUNTY_HUNTER(R.string.bounty_hunter_name, false,
+			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.ROPE_USE.pair(1), SkillEnum.TRACKING.pair(1)},
+			 new Pair[] {SkillEnum.BRIBERY.pair(2), SkillEnum.DECEPTION.pair(2), SkillEnum.DISGUISE.pair(2), SkillEnum.INTERROGATION.pair(2), SkillEnum.LAW.pair(2),
+			 			SkillEnum.NEGOTIATION.pair(4), SkillEnum.ROPE_USE.pair(4), SkillEnum.SNEAK.pair(3), SkillEnum.STREETWISE.pair(4),
+						SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.RIFLE.pair(3), SkillEnum.UNARMED.pair(4)},
+			 new Ability[] {AbilityEnum.BINDING.make(), AbilityEnum.TAKE_DOWN.make()},
+			 new Ability[] {AbilityEnum.BINDING.make(), AbilityEnum.CROSSBOWMAN.make(), AbilityEnum.HEADBUTT.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.PURSUIT.make(),
+			 				AbilityEnum.ROLL_WITH_IT.make(), AbilityEnum.TAKE_DOWN.make(), AbilityEnum.WAYLAY.make()},
+			 null, null, null,
+			 new zzCreateCharacterHook[] {new BountyHunterHook()}),
+	
+	CUTTHROAT(R.string.cutthroat_name, false,
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.SNEAK.pair(1), SkillEnum.STREETWISE.pair(1)},
+			 new Pair[] {SkillEnum.CROSSBOW.pair(2), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3),
+			 			SkillEnum.INTERROGATION.pair(2), SkillEnum.SNEAK.pair(4), SkillEnum.STREETWISE.pair(4)},
+			 new Ability[] {AbilityEnum.ANATOMICAL_PRECISION.make(), AbilityEnum.BACKSTAB.make(), AbilityEnum.PROWL.make()},
+			 new Ability[] {AbilityEnum.ANATOMICAL_PRECISION.make(), AbilityEnum.BACKSTAB.make(), AbilityEnum.BLOOD_SPILLER.make(), AbilityEnum.CAMOUFLAGE.make(),
+			 				AbilityEnum.CHAIN_ATTACK_BLEED_OUT.make(), AbilityEnum.FAST_DRAW.make(), AbilityEnum.LANGUAGE.make("Five Cant"), AbilityEnum.PROWL.make(),
+							AbilityEnum.SPECIALIZATION.make("Assassin Blade"), AbilityEnum.TWO_WEAPON_FIGHTING.make(), AbilityEnum.WAYLAY.make()},
+			 null, null, null,
+			 new zzCreateCharacterHook[] {new CutthroatHook()}),
+	
+	DUELIST(R.string.duelist_name, false,
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.PISTOL.pair(1), SkillEnum.GAMBLING.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.JUMPING.pair(1)},
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(4), SkillEnum.PISTOL.pair(4), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(2), SkillEnum.ETIQUETTE.pair(2),
+			 			SkillEnum.LAW.pair(2), SkillEnum.ORATORY.pair(2), SkillEnum.SEDUCTION.pair(3), SkillEnum.STREETWISE.pair(2)},
+			 new Ability[] {AbilityEnum.PARRY.make(), AbilityEnum.RIPOSTE.make()},
+			 new Ability[] {AbilityEnum.ACROBATICS.make(), AbilityEnum.FAST_DRAW.make(), AbilityEnum.GUNFIGHTER.make(), AbilityEnum.PARRY.make(),
+			 				AbilityEnum.PRECISION_STRIKE.make(), AbilityEnum.QUICK_WORK.make(), AbilityEnum.RIPOSTE.make(), AbilityEnum.ROLL_WITH_IT.make(),
+							AbilityEnum.TWO_WEAPON_FIGHTING.make()},
+			 null, null, null, null),
 			 
-	/*ARCANIST(R.string.arcanist_name,
+	/*ARCANIST(R.string.arcanist_name, false,
 				new Pair[] {},
 				new Pair[] {},
 				new Ability[] {},
@@ -76,14 +109,13 @@ public enum Career implements zzPrereqCheck
 				new Spell[] {},
 				giftedPrereq(),
 				new zzCreateCharacterHook[] {new ArcanistHook()}),*/
-				
-	DUELIST(R.string.duelist_name,null,null,null,null,null,null,null,null),		  
-	PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
-	WARCASTER(R.string.warcaster_name,null,null,null,null,null,null,null,null);
+					  
+	//PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
+	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null);
 			  
 	
 	//Done!
-	private Career(int pNameResource,
+	private Career(int pNameResource, boolean pStartOnly,
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
@@ -91,6 +123,7 @@ public enum Career implements zzPrereqCheck
 	{
 		Context c = IKRPGApp.getContext();
 		name = c.getString(pNameResource);
+		startOnly = pStartOnly;
 		startingSkills = pStartSkills != null ? Arrays.asList(pStartSkills) : new ArrayList<Pair<Skill, Integer>>(10);
 		careerSkills = pSkills != null ? Arrays.asList(pSkills) : new ArrayList<Pair<Skill, Integer>>(10);
 		startingAbilities = pStartAbilities != null ? Arrays.asList(pStartAbilities) : new ArrayList<Ability>(10);
@@ -104,6 +137,7 @@ public enum Career implements zzPrereqCheck
 	@Override public String toString(){return displayName();}
 	
 	private String name;
+	private boolean startOnly;
 	private Collection<Pair<Skill, Integer>> startingSkills;
 	private Collection<Pair<Skill, Integer>> careerSkills;
 	private Collection<Ability> startingAbilities;
@@ -114,6 +148,7 @@ public enum Career implements zzPrereqCheck
 	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
 	public String displayName(){return name;}
+	public boolean startOnly(){return startOnly;}
 	public Collection<Pair<Skill, Integer>> startingSkills(){return Collections.unmodifiableCollection(startingSkills);}
 	public Collection<Pair<Skill, Integer>> careerSkills(){return Collections.unmodifiableCollection(careerSkills);}
 	public Collection<Ability> startingAbilities(){return Collections.unmodifiableCollection(startingAbilities);}
@@ -146,12 +181,19 @@ public enum Career implements zzPrereqCheck
 		};
 	}
 	
+	public static zzPrereqCheck humanPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.race == null){return new zzPrereqCheckResult(false, null);}
+				return new zzPrereqCheckResult(myChar.race == Race.HUMAN, null);
+			}
+		};
+	}
+	
 	/* Hooks! */
 	
-	public static class ArcaneMechanikHook extends zzChooseOneSkillHook
+	public static class ArcaneMechanikHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected String getTitle() {return "Choose a military skill to boost";}
-		
 		@Override protected List<Skill> getOptions()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
@@ -166,8 +208,8 @@ public enum Career implements zzPrereqCheck
 		{
 			super.startHook(pChar, pDelegate, pHook);
 			myChar.abilities.add(AbilityEnum.GREAT_POWER.make());
-			pDelegate.hookComplete(myChar);
 		}
+		
 		@Override public boolean hasUI(){return false;}
 		@Override public int getPriority(){return 0;}
 		@Override public void undoHook()
@@ -176,10 +218,8 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class AristocratWeaponHook extends zzChooseOneSkillHook
+	public static class AristocratWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected String getTitle() {return "Choose a military skill to boost";}
-
 		@Override protected List<Skill> getOptions()
 		{
 			List<Skill> l = new ArrayList<Skill>(3);
@@ -208,5 +248,23 @@ public enum Career implements zzPrereqCheck
 
 		@Override public void undoHook()
 		{myChar.languages.remove(chosenLanguage);}
+	}
+	
+	//TODO: Finish
+	public static class BountyHunterHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return true;}
+		@Override public void undoHook(){}
+	}
+	
+	public static class CutthroatHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(3);
+			l.add(new Skill(SkillEnum.CROSSBOW)); l.add(new Skill(SkillEnum.THROWN_WEAPON)); l.add(new Skill(SkillEnum.UNARMED));
+			return l;
+		}
 	}
 }

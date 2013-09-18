@@ -5,6 +5,8 @@ public abstract class zzChooseOneSkillHook extends zzChooseOneHook<Skill>
 	private Skill incrementedSkill;
 	private int incrementedSkillPrevValue;
 	
+	@Override protected String getTitle(){return "Choose a skill to boost";}
+	
 	@Override protected void itemSelected(int which)
 	{
 		incrementedSkill = getOptions().get(which);
