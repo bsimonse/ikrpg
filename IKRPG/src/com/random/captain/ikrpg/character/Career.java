@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Pair;
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.gear.Loot;
 
 public enum Career implements zzPrereqCheck
 {
@@ -19,6 +20,8 @@ public enum Career implements zzPrereqCheck
 				new Ability[] {AbilityEnum.BOMBER.make(), AbilityEnum.BREW_MASTER.make(), AbilityEnum.FAST_COOK.make(),AbilityEnum.FIELD_ALCHEMIST.make(), AbilityEnum.FIRE_IN_THE_HOLE.make(), AbilityEnum.FREE_STYLE.make(),
 								AbilityEnum.GRENADIER.make(),AbilityEnum.POISON_RESISTANCE.make()},
 				null, null,
+				null, new Connection[] {Connection.make("alchemical order")},
+				50, new Loot[]{},
 				null, null),
 								
 	@SuppressWarnings("unchecked")
@@ -36,7 +39,9 @@ public enum Career implements zzPrereqCheck
 							Spell.REDLINE, Spell.TEMPER_METAL, Spell.BROADSIDE, Spell.ELECTRICAL_BLAST, Spell.FAIL_SAFE, Spell.FORCE_FIELD,
 							Spell.FULL_THROTTLE, Spell.GRIND, Spell.GUIDED_FIRE, Spell.IRON_AGGRESSION, Spell.SUPERIORITY, Spell.BLACK_OUT,
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
-				giftedPrereq(),
+				null, new Connection[] {Connection.make("mechaniks organization")},
+				50, new Loot[]{},
+				new zzPrereqCheck[]{giftedPrereq()},
 				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
 	
 	
@@ -52,7 +57,9 @@ public enum Career implements zzPrereqCheck
 							Spell.ICY_GRIP,Spell.OCCULTATION,Spell.ROCK_WALL,Spell.TELEKINESIS,Spell.TRUE_SIGHT,Spell.VISION,Spell.WIND_BLAST,Spell.FOG_OF_WAR,
 							Spell.FORCE_FIELD,Spell.HEX_BLAST,Spell.INHOSPITABLE_GROUND,Spell.MIRAGE,Spell.RIFT,Spell.ROCK_HAMMER,Spell.ZEPHYR,Spell.FORCE_HAMMER,
 							Spell.OVERMIND,Spell.TEMPEST},
-			 giftedPrereq(),
+			 null, new Connection[] {Connection.make("magical order")},
+			 75, null,
+			 new zzPrereqCheck[]{giftedPrereq()},
 			 new zzCreateCharacterHook[] {new ArcanistHook()}),
 			 
 	ARISTOCRAT(R.string.aristocrat_name, true,
@@ -65,7 +72,9 @@ public enum Career implements zzPrereqCheck
 			 				AbilityEnum.GOOD_BREEDING.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.POISON_RESISTANCE.make(),
 							AbilityEnum.PRIVILEGE.make(), AbilityEnum.RALLYING_CRY.make(), AbilityEnum.SWIFT_RIDER.make()},
 			 null, null,
-			 humanPrereq(),
+			 new Connection[] {Connection.make("nobility")}, new Connection[] {Connection.make("any...?")},
+			 200, null,
+			 new zzPrereqCheck[]{humanPrereq()},
 			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new AristocratLanguageHook()}),
 	
 	BOUNTY_HUNTER(R.string.bounty_hunter_name, false,
@@ -76,7 +85,10 @@ public enum Career implements zzPrereqCheck
 			 new Ability[] {AbilityEnum.BINDING.make(), AbilityEnum.TAKE_DOWN.make()},
 			 new Ability[] {AbilityEnum.BINDING.make(), AbilityEnum.CROSSBOWMAN.make(), AbilityEnum.HEADBUTT.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.PURSUIT.make(),
 			 				AbilityEnum.ROLL_WITH_IT.make(), AbilityEnum.TAKE_DOWN.make(), AbilityEnum.WAYLAY.make()},
-			 null, null, null,
+			 null, null,
+			 null, new Connection[]{Connection.make("any...?")},
+			 75, null,
+			 null,
 			 new zzCreateCharacterHook[] {new BountyHunterHook()}),
 	
 	CUTTHROAT(R.string.cutthroat_name, false,
@@ -87,7 +99,10 @@ public enum Career implements zzPrereqCheck
 			 new Ability[] {AbilityEnum.ANATOMICAL_PRECISION.make(), AbilityEnum.BACKSTAB.make(), AbilityEnum.BLOOD_SPILLER.make(), AbilityEnum.CAMOUFLAGE.make(),
 			 				AbilityEnum.CHAIN_ATTACK_BLEED_OUT.make(), AbilityEnum.FAST_DRAW.make(), AbilityEnum.LANGUAGE.make("Five Cant"), AbilityEnum.PROWL.make(),
 							AbilityEnum.SPECIALIZATION.make("Assassin Blade"), AbilityEnum.TWO_WEAPON_FIGHTING.make(), AbilityEnum.WAYLAY.make()},
-			 null, null, null,
+			 null, null, 
+			 null, new Connection[]{Connection.make("criminal")},
+			 75, null,
+			 null,
 			 new zzCreateCharacterHook[] {new CutthroatHook()}),
 	
 	DUELIST(R.string.duelist_name, false,
@@ -98,7 +113,10 @@ public enum Career implements zzPrereqCheck
 			 new Ability[] {AbilityEnum.ACROBATICS.make(), AbilityEnum.FAST_DRAW.make(), AbilityEnum.GUNFIGHTER.make(), AbilityEnum.PARRY.make(),
 			 				AbilityEnum.PRECISION_STRIKE.make(), AbilityEnum.QUICK_WORK.make(), AbilityEnum.RIPOSTE.make(), AbilityEnum.ROLL_WITH_IT.make(),
 							AbilityEnum.TWO_WEAPON_FIGHTING.make()},
-			 null, null, null, null),
+			 null, null, 
+			 null, null,
+			 75, null,
+			 null, null),
 			 
 	/*ARCANIST(R.string.arcanist_name, false,
 				new Pair[] {},
@@ -111,7 +129,7 @@ public enum Career implements zzPrereqCheck
 				new zzCreateCharacterHook[] {new ArcanistHook()}),*/
 					  
 	//PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
-	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null);
+	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null);
 			  
 	
 	//Done!
@@ -119,7 +137,9 @@ public enum Career implements zzPrereqCheck
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
-					zzPrereqCheck pPrereqCheck, zzCreateCharacterHook[] pPostCreateHook)
+					Connection[] pStartConnections, Connection[] pConnections,
+					int pGold, Loot[] pLoot,
+					zzPrereqCheck[] pPrereqChecks, zzCreateCharacterHook[] pPostCreateHook)
 	{
 		Context c = IKRPGApp.getContext();
 		name = c.getString(pNameResource);
@@ -130,7 +150,11 @@ public enum Career implements zzPrereqCheck
 		careerAbilities = pAbilities != null ? Arrays.asList(pAbilities) : new ArrayList<Ability>(10);
 		startingSpells = pStartSpells != null ? Arrays.asList(pStartSpells) : new ArrayList<Spell>(10);
 		careerSpells = pSpells != null ? Arrays.asList(pSpells) : new ArrayList<Spell>(10);
-		prereqCheck = pPrereqCheck;
+		startingConnections = pStartConnections != null ? Arrays.asList(pStartConnections) : new ArrayList<Connection>(5);
+		careerConnections = pConnections != null ? Arrays.asList(pConnections) : new ArrayList<Connection>(5);
+		startGold = pGold;
+		startLoot = pLoot != null ? Arrays.asList(pLoot) : new ArrayList<Loot>(5);
+		prereqChecks = pPrereqChecks != null ? Arrays.asList(pPrereqChecks) : new ArrayList<zzPrereqCheck>(5);
 		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCreateCharacterHook>(10);
 	}
 	
@@ -144,7 +168,11 @@ public enum Career implements zzPrereqCheck
 	private Collection<Ability> careerAbilities;
 	private Collection<Spell> startingSpells;
 	private Collection<Spell> careerSpells;
-	private zzPrereqCheck prereqCheck;
+	private Collection<Connection> startingConnections;
+	private Collection<Connection> careerConnections;
+	private int startGold;
+	private Collection<Loot> startLoot;
+	private Collection<zzPrereqCheck> prereqChecks;
 	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
 	public String displayName(){return name;}
@@ -155,6 +183,10 @@ public enum Career implements zzPrereqCheck
 	public Collection<Ability> careerAbilities(){return Collections.unmodifiableCollection(careerAbilities);}
 	public Collection<Spell> startingSpells(){return Collections.unmodifiableCollection(startingSpells);}
 	public Collection<Spell> careerSpells(){return Collections.unmodifiableCollection(careerSpells);}
+	public Collection<Connection> startingConnections(){return Collections.unmodifiableCollection(startingConnections);}
+	public Collection<Connection> careerConnections(){return Collections.unmodifiableCollection(careerConnections);}
+	public int startGold(){return startGold;}
+	public Collection<Loot> startLoot(){return startLoot;}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
 	@Override
@@ -166,8 +198,15 @@ public enum Career implements zzPrereqCheck
 		if(careers != null && careers.contains(this)){return new zzPrereqCheckResult(false, null);}
 		
 		//no prereq means allowed
-		if(prereqCheck == null){return new zzPrereqCheckResult(true, null);}
-		else{return prereqCheck.meetsPrereq(myChar);}
+		if(prereqChecks == null || prereqChecks.size() == 0){return new zzPrereqCheckResult(true, null);}
+		else
+		{
+			for(zzPrereqCheck check : prereqChecks)
+			{
+				if(!check.meetsPrereq(myChar).isAllowed){return new zzPrereqCheckResult(false, null);}
+			}
+			return new zzPrereqCheckResult(true, null);
+		}
 	}
 	
 	/* Prereqs! */
@@ -208,6 +247,7 @@ public enum Career implements zzPrereqCheck
 		{
 			super.startHook(pChar, pDelegate, pHook);
 			myChar.abilities.add(AbilityEnum.GREAT_POWER.make());
+			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
 		}
 		
 		@Override public boolean hasUI(){return false;}
@@ -215,6 +255,7 @@ public enum Career implements zzPrereqCheck
 		@Override public void undoHook()
 		{
 			myChar.abilities.remove(AbilityEnum.GREAT_POWER);
+			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
 		}
 	}
 	
@@ -232,6 +273,7 @@ public enum Career implements zzPrereqCheck
 	{
 		private Language chosenLanguage;
 
+		@Override public int getPriority(){return 80;}
 		@Override protected String getTitle(){return "Choose a language to learn:";}
 		@Override protected List<Language> getOptions() {return Arrays.asList(Language.values());}
 		

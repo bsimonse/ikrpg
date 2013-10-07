@@ -21,7 +21,7 @@ public class Character extends zzBaseCharacter
 		baseStats=base.baseStats;
 		maxStats=base.maxStats;
 		statModifiers=base.statModifiers;
-		gear=base.gear;
+		lootPack=base.lootPack;
 		
 		exp=base.exp;
 		level=zzLevel.getLevelForEXP(exp);

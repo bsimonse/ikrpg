@@ -1,6 +1,6 @@
 package com.random.captain.ikrpg.gear;
 
-public class Armor extends zzBaseGear
+public class Armor extends Loot
 {
 	
 }

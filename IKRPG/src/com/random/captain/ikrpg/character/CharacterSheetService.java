@@ -153,8 +153,8 @@ public class CharacterSheetService
 		@Override protected void onPostExecute(Boolean success)
 		{
 			if(delegate != null){delegate.characterSheetComplete(success);}
-			NotificationManager man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-			man.cancel(notificationId);
+			//NotificationManager man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+			//man.cancel(notificationId);
 		}
 	
 		private String fileNameSafeString(String toConvert)

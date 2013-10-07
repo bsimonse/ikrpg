@@ -12,6 +12,8 @@ import android.util.Log;
 import android.util.Pair;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.gear.Loot;
+import com.random.captain.ikrpg.gear.LootPack;
 import com.random.captain.ikrpg.util.Utilities;
 
 public class CharacterCreationServiceActivity extends FragmentActivity
@@ -253,16 +255,22 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 			buildingChar.setBaseSkills(buildingChar.careers);
 			buildingChar.deriveSkillCheckLevels();
 			
-			//Careers; Abilities, spells, and post hooks
+			//Careers; Abilities, spells, loot, and post hooks
+			int startGold = 0;
+			Collection<Loot> startLoot = new ArrayList<Loot>();
 			for(Career career : buildingChar.careers)
 			{
 				buildingChar.abilities.addAll(career.startingAbilities());
 				buildingChar.spells.addAll(career.startingSpells());
+				buildingChar.connections.addAll(career.startingConnections());
 				hookStore = career.postCreateHooks();
 				if(hookStore!=null){finalHooks.addAll(hookStore);}
+				startGold += career.startGold();
+				startLoot.addAll(career.startLoot());
 			}
+			buildingChar.lootPack = new LootPack(startGold, startLoot);
 		}
-		
+
 		//advancement point hook
 		finalHooks.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
 		

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import com.random.captain.ikrpg.character.Modifier;
 import com.random.captain.ikrpg.character.Stat;
 
-public class zzBaseGear implements Parcelable
+public class Loot implements Parcelable
 {
 	public enum EquipmentSlots
 	{
@@ -35,16 +35,16 @@ public class zzBaseGear implements Parcelable
 		//TODO
 	}
 
-	public static final Parcelable.Creator<zzBaseGear> CREATOR = new Parcelable.Creator<zzBaseGear>()
+	public static final Parcelable.Creator<Loot> CREATOR = new Parcelable.Creator<Loot>()
 	{
 		@Override
-		public zzBaseGear createFromParcel(Parcel in)
+		public Loot createFromParcel(Parcel in)
 		{
 			//TODO
-			return new zzBaseGear();
+			return new Loot();
 		}
 
-		@Override public zzBaseGear[] newArray(int size) {return new zzBaseGear[size];}
+		@Override public Loot[] newArray(int size) {return new Loot[size];}
 	};
 
 	@Override public int describeContents(){return 0;}

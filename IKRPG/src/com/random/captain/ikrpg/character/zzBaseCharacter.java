@@ -1,22 +1,16 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
-
 import com.google.gag.annotation.disclaimer.HandsOff;
 import com.google.gag.enumeration.Consequence;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.random.captain.ikrpg.gear.GearPack;
+import com.random.captain.ikrpg.gear.LootPack;
 
 class zzBaseCharacter implements Parcelable
 {
@@ -32,6 +26,7 @@ class zzBaseCharacter implements Parcelable
 	Set<Career> careers;
 	Set<Ability> abilities;
 	Set<Spell> spells;
+	Set<Connection> connections;
 	Set<Language> languages;
 	
 	Map<Skill, Integer> baseSkills;
@@ -44,7 +39,7 @@ class zzBaseCharacter implements Parcelable
 	Map<String, Modifier<Stat>> statModifiers;
 	
 	/*Gear*/
-	GearPack gear;
+	LootPack lootPack;
 	
 	zzLevel level;
 	int exp;
@@ -55,6 +50,7 @@ class zzBaseCharacter implements Parcelable
 		careers = new HashSet<Career>();
 		abilities = new HashSet<Ability>();
 		spells = new HashSet<Spell>();
+		connections = new HashSet<Connection>();
 		languages = new HashSet<Language>();
 		baseSkills = new HashMap<Skill, Integer>();
 		activeSkills = new HashMap<Skill, Integer>();
@@ -63,7 +59,7 @@ class zzBaseCharacter implements Parcelable
 		baseStats = new HashMap<Stat, Integer>();
 		maxStats = new HashMap<Stat, Integer>();
 		statModifiers = new HashMap<String, Modifier<Stat>>();
-		gear = new GearPack();
+		lootPack = new LootPack();
 	}
 	
 	public Fluff fluff(){return fluff;} //It's editable on purpose... fluff can't affect anything.  Might change later just in case.
@@ -73,6 +69,7 @@ class zzBaseCharacter implements Parcelable
 	public Set<Career> getCareers(){return new HashSet<Career>(careers);}
 	public Set<Ability> getAbilities(){return new HashSet<Ability>(abilities);}
 	public Set<Spell> getSpells(){return new HashSet<Spell>(spells);}
+	public Set<Connection> getConnections(){return new HashSet<Connection>(connections);}
 	public Set<Language> getLanguages(){return new HashSet<Language>(languages);}
 	public int exp(){return exp;}
 	
@@ -339,6 +336,9 @@ class zzBaseCharacter implements Parcelable
 		toParcel.writeInt(spells.size());
 		toParcel.writeIntArray(spellOrdinals);
 		
+		//Connections
+		toParcel.writeParcelableArray(connections.toArray(new Connection[0]),0);
+		
 		//Languages
 		int[] languageOrdinals = new int[languages.size()];index=0;
 		for(Language s: languages){languageOrdinals[index++]=s.ordinal();}
@@ -389,7 +389,7 @@ class zzBaseCharacter implements Parcelable
 		toParcel.writeInt(exp);
 		
 		//Gear
-		toParcel.writeParcelable(gear,0);
+		toParcel.writeParcelable(lootPack,0);
 	}
 	
 	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
@@ -429,6 +429,12 @@ class zzBaseCharacter implements Parcelable
 			for(int s:spellOrdinals)
 			{pSpells.add(spells[s]);}
 			me.spells = pSpells;
+			
+			//Connections
+			Parcelable[] pConnectionsArray = in.readParcelableArray(Connection.class.getClassLoader());
+			Set<Connection> pConnections = new HashSet<Connection>();
+			pConnections.addAll((Collection<? extends Connection>) Arrays.asList(pConnectionsArray));
+			me.connections = pConnections;
 			
 			//Languages
 			int languageCount = in.readInt();
@@ -498,7 +504,7 @@ class zzBaseCharacter implements Parcelable
 			me.level = zzLevel.getLevelForEXP(me.exp);
 			
 			//Gear
-			me.gear = in.readParcelable(GearPack.class.getClassLoader());
+			me.lootPack = in.readParcelable(LootPack.class.getClassLoader());
 			return me;
 		}
 
