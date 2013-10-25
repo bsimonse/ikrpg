@@ -151,6 +151,23 @@ public enum Career implements zzPrereqCheck
 			 75, null, null,
 			 new zzPrereqCheck[] {trollkinPrereq()},
 			 new zzCreateCharacterHook[] {new FellCallerHook()}),
+	
+	FIELD_MECHANIK(R.string.field_mechanik_name, false,
+			 new Pair[] {SkillEnum.COMMAND.pair(1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.COMMAND.pair(3), SkillEnum.CRAFT.pair(4),
+			 			SkillEnum.MECHANIKAL.pair(4), SkillEnum.NEGOTIATION.pair(3)},
+			 new Ability[] {AbilityEnum.JACK_MARSHALL.make(), AbilityEnum.BODGE.make(), AbilityEnum.HIT_THE_DECK.make()},
+			 new Ability[] {AbilityEnum.JACK_MARSHALL.make(), AbilityEnum.ACE_COMMANDER.make(), AbilityEnum.BODGE.make(), AbilityEnum.DODGER.make(),
+			 				AbilityEnum.DRIVE_ANCILLARY_ATTACK.make(), AbilityEnum.DRIVE_ASSUALT.make(), AbilityEnum.DRIVE_OFF_ROAD.make(), AbilityEnum.DRIVE_PRONTO.make(),
+							AbilityEnum.IRON_SENTINEL.make(), AbilityEnum.SCROUNGE.make(), AbilityEnum.STEAMO.make(), AbilityEnum.TUNE_UP.make()},
+			 null, null,
+			 null,
+			 new Connection[] {Connection.make("mechaniks organization")},
+			 25,
+			 new Loot[] {},
+			 null,
+			 null,
+			 new zzCreateCharacterHook[] {new FieldMechanikMilitarySkillHook(), new FieldMechanikJackHook()}),
 			 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -347,7 +364,7 @@ public enum Career implements zzPrereqCheck
 	public static class BountyHunterHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return true;}
+		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
 	}
 	
@@ -379,5 +396,22 @@ public enum Career implements zzPrereqCheck
 			l.add(SkillEnum.GREAT_WEAPON.make()); l.add(SkillEnum.HAND_WEAPON.make());
 			return l;
 		}
+	}
+	
+	public static class FieldMechanikMilitarySkillHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
+			return l;
+		}
+	}
+	
+	public static class FieldMechanikJackHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
 	}
 }
