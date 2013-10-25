@@ -119,6 +119,7 @@ public enum Race
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
 	}
 	
 	public static class trollkinHook extends zzCreateCharacterHook
@@ -126,5 +127,6 @@ public enum Race
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
 	}
 }

@@ -85,9 +85,8 @@ public enum Archetype implements zzPrereqCheck
 	public static class GiftedArcaneHook extends zzCreateCharacterHook {
 		private final String PREV_BASE_ARCANE_STAT = "thisWasThePreviousArcaneStat";
 				
-		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
+		@Override public void doDefaultCase()
 		{
-			super.startHook(pChar, pDelegate, hook);
 			if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
 			else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
 			
@@ -97,6 +96,7 @@ public enum Archetype implements zzPrereqCheck
 			if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.setBaseStat(Stat.ARCANE, 3);}
 			else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.setBaseStat(Stat.ARCANE, 2);}
 		}
+		
 		@Override public void undoHook(){myChar.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
 		@Override public int getPriority(){return 0;} //no choice necessary
 		@Override public boolean hasUI(){return false;}
@@ -104,9 +104,8 @@ public enum Archetype implements zzPrereqCheck
 	
 	public static class NonGiftedArcaneHook extends zzCreateCharacterHook
 	{
-		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
+		@Override public void doDefaultCase()
 		{
-			super.startHook(pChar, pDelegate, hook);
 			myChar.setBaseStat(Stat.ARCANE,0);
 			myChar.setMaxStat(Stat.ARCANE,0);
 		}

@@ -37,13 +37,5 @@ public abstract class zzChooseOneHook<T> extends zzCreateCharacterHook
 		return root;
 	}
 
-	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
-	{	
-		super.startHook(pChar, pDelegate, pHook);
-
-		if(!hasUI())
-		{doDefaultCase();}
-	}
-
 	@Override public int getPriority(){return 50;}
 }

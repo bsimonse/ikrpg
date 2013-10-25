@@ -18,7 +18,7 @@ abstract class zzCreateCharacterHook extends Fragment
 	protected zzCreateCharacterHookDelegate delegate;
 	protected CreateHook hook;
 	
-	void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
+	public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
 	{
 		myChar = pChar;
 		hook = pHook;
@@ -27,9 +27,13 @@ abstract class zzCreateCharacterHook extends Fragment
 		Bundle args = getArguments();
 		args.putParcelable(CHARACTER,myChar);
 		args.putSerializable(HOOK,hook);
+		
+		if(!hasUI())
+		{doDefaultCase();}
 	}
 	
 	//doesn't do anything; just a clearer name
+	//only done for hooks with a UI
 	void restartHook(zzCreateCharacterHookDelegate pDelegate)
 	{
 		Bundle stuff = getArguments();
@@ -51,8 +55,10 @@ abstract class zzCreateCharacterHook extends Fragment
 	}
 	
 	abstract boolean hasUI();
+	abstract void doDefaultCase();
 	abstract void undoHook();
-	public CreateHook getHook(){return hook;}
+	
+	public final CreateHook getHook(){return hook;}
 	
 	//Priority Guidlines
 	//(this is is no way official)

@@ -51,6 +51,7 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 	}
 
 	@Override public boolean hasUI(){return true;}
+	@Override public void doDefaultCase(){}	//nothing since always has UI
 	@Override public void undoHook(){myChar.race = null;}
 	@Override public int getPriority(){return -1;}
 }
@@ -103,6 +104,7 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 	}
 
 	@Override public boolean hasUI(){return true;}
+	@Override public void doDefaultCase(){}	//nothing since always has UI
 	@Override public void undoHook(){myChar.archetype = null;}
 	@Override public int getPriority(){return -1;}
 }
@@ -166,6 +168,7 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 	}
 
 	@Override public boolean hasUI(){return true;}
+	@Override public void doDefaultCase(){}	//nothing because always has UI
 	@Override public void undoHook()
 	{
 		Career chosenCareer = (Career)getArguments().getSerializable(CHOSEN_CAREER);
@@ -205,8 +208,8 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	}
 
 	@Override boolean hasUI(){return true;}
-
-	@Override void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
+	@Override void doDefaultCase(){}	//nothing since always has UI
+	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
 	{
 		super.startHook(pChar, pDelegate, hook);
 		oldBaseStats = new HashMap<Stat, Integer>();
@@ -374,6 +377,7 @@ public static class ChooseFluffFragment extends zzCreateCharacterHook
 	}
 
 	@Override public boolean hasUI(){return true;}
+	@Override public void doDefaultCase(){}	//nothing since always has UI
 	@Override public void undoHook(){myChar.fluff = null;}
 	@Override public int getPriority(){return -1;}
 }

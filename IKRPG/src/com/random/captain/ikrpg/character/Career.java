@@ -208,6 +208,22 @@ public enum Career implements zzPrereqCheck
 			 new Loot[] {},
 			 null, null,
 			 new zzCreateCharacterHook[] {new HighwaymanHook()}),
+	
+	INVESTIGATOR(R.string.investigator_name, false,
+			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.FORENSIC_SCIENCE.pair(1), SkillEnum.INTERROGATION.pair(1), SkillEnum.LAW.pair(1),
+			 			SkillEnum.MEDICINE.pair(1), SkillEnum.SNEAK.pair(1)},
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.UNARMED.pair(2), SkillEnum.CRYPTOGRAPHY.pair(4),
+			 			SkillEnum.DECEPTION.pair(4), SkillEnum.ETIQUETTE.pair(2), SkillEnum.FORENSIC_SCIENCE.pair(4), SkillEnum.INTERROGATION.pair(4),
+						SkillEnum.LAW.pair(4), SkillEnum.MEDICINE.pair(2), SkillEnum.NEGOTIATION.pair(3), SkillEnum.RESEARCH.pair(4),
+						SkillEnum.SNEAK.pair(4), SkillEnum.STREETWISE.pair(4)},
+			 new Ability[] {AbilityEnum.ASTUTE.make()},
+			 new Ability[] {AbilityEnum.ANATOMICAL_PRECISION.make(), AbilityEnum.ASTUTE.make(), AbilityEnum.IRON_WILL.make(), AbilityEnum.LANGUAGE.make(),
+			 				AbilityEnum.PROWL.make(), AbilityEnum.SIGNAL_LANGUAGE.make(), AbilityEnum.TRUTH_READER.make()},
+			 null, null,
+			 null,
+			 new Connection[] {Connection.make("any")},
+			 100,null,null,null,
+			 new zzCreateCharacterHook[] {new LanguageHook(), new InvestigatorMilitarySkillHook(), new InvestigatorHyperPerceptionHook()}),
 			 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -225,8 +241,7 @@ public enum Career implements zzPrereqCheck
 	 new zzCreateCharacterHook[] {new ArcanistHook()}),*/
 					  
 	//PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
-	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null,null);
-			  
+	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null,null);			  
 	
 	//Done!
 	private Career(int pNameResource, boolean pStartOnly,
@@ -351,9 +366,8 @@ public enum Career implements zzPrereqCheck
 	
 	public static class ArcanistHook extends zzCreateCharacterHook
 	{
-		@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook pHook)
+		@Override public void doDefaultCase()
 		{
-			super.startHook(pChar, pDelegate, pHook);
 			myChar.abilities.add(AbilityEnum.GREAT_POWER.make());
 			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
 		}
@@ -362,6 +376,7 @@ public enum Career implements zzPrereqCheck
 		@Override public int getPriority(){return 0;}
 		@Override public void undoHook()
 		{
+			//TODO: latent error needs to be fixed
 			myChar.abilities.remove(AbilityEnum.GREAT_POWER);
 			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
 		}
@@ -406,6 +421,7 @@ public enum Career implements zzPrereqCheck
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
 	}
 	
 	public static class CutthroatHook extends zzChooseOneMilitarySkillHook
@@ -453,6 +469,7 @@ public enum Career implements zzPrereqCheck
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
 	}
 	
 	public static class GunMageMilitarySkillHook extends zzChooseOneMilitarySkillHook
@@ -470,6 +487,7 @@ public enum Career implements zzPrereqCheck
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
 	}
 	
 	public static class HighwaymanHook extends zzChooseOneMilitarySkillHook
@@ -479,6 +497,37 @@ public enum Career implements zzPrereqCheck
 			List<Skill> l = new ArrayList<Skill>(3);
 			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make()); l.add(SkillEnum.PISTOL.make());
 			return l;
+		}
+	}
+	
+	public static class InvestigatorMilitarySkillHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
+			return l;
+		}
+	}
+	
+	public static class InvestigatorHyperPerceptionHook extends zzCreateCharacterHook
+	{
+		private static final String THE_KEY = "WhatAWonderKeyThisCouldBe";
+		
+		@Override public int getPriority(){return 0;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void doDefaultCase()
+		{
+			boolean additionNeeded = myChar.abilities.contains(AbilityEnum.HYPER_PERCEPTION.make());
+			getArguments().putBoolean(THE_KEY, additionNeeded);
+			if(additionNeeded)
+			{myChar.abilities.add(AbilityEnum.HYPER_PERCEPTION.make());}
+		}
+		
+		@Override public void undoHook()
+		{
+			boolean additionWasNeeded = getArguments().getBoolean(THE_KEY);
+			if(additionWasNeeded){myChar.abilities.remove(AbilityEnum.HYPER_PERCEPTION.make());}
 		}
 	}
 }
