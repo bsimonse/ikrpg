@@ -136,6 +136,21 @@ public enum Career implements zzPrereqCheck
 			 new String[] {"A character who chooses Explorer as a starting career gains 25 gc each month from their patron for as long as they continue to explore new regions, report back regularly, and bring his patron occasional gifts from exotic places."},
 			 null,
 			 new zzCreateCharacterHook[] {new ExplorerMilitarySkillHook(), new LanguageHook()}),
+	
+	FELL_CALLER(R.string.fell_caller_name, false,
+			 new Pair[] {SkillEnum.COMMAND.pair(1), SkillEnum.FELL_CALLING.pair(2), SkillEnum.LORE.pair("Trollkin", 1), SkillEnum.ORATORY.pair(1)},
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(4),
+			 			SkillEnum.FELL_CALLING.pair(4), SkillEnum.ORATORY.pair(4), SkillEnum.SEDUCTION.pair(2)},
+			 new Ability[] {AbilityEnum.FELL_CALL_SIGNAL_CALL.make(), AbilityEnum.FELL_CALL_SONIC_BLAST.make()},
+			 new Ability[] {AbilityEnum.BATTLE_PLAN_CALL_TO_ACTION.make(), AbilityEnum.FELL_CALL_CACOPHONY.make(), AbilityEnum.FELL_CALL_CALL_OF_DEFIANCE.make(),
+			 				AbilityEnum.FELL_CALL_GROUND_SHAKER.make(), AbilityEnum.FELL_CALL_HEROIC_BALLAD.make(), AbilityEnum.FELL_CALL_REVERBERATION.make(),
+							AbilityEnum.LEGACY_OF_BRAGG.make(), AbilityEnum.NATURAL_LEADER.make()},
+			 null, null,
+			 null,
+			 new Connection[] {Connection.make("kriel")},
+			 75, null, null,
+			 new zzPrereqCheck[] {trollkinPrereq()},
+			 new zzCreateCharacterHook[] {new FellCallerHook()}),
 			 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -256,6 +271,15 @@ public enum Career implements zzPrereqCheck
 		};
 	}
 	
+	public static zzPrereqCheck trollkinPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.race == null){return new zzPrereqCheckResult(false, null);}
+				return new zzPrereqCheckResult(myChar.race == Race.TROLLKIN, null);
+			}
+		};
+	}
+	
 	/* Hooks! */
 	
 	public static class ArcaneMechanikHook extends zzChooseOneMilitarySkillHook
@@ -343,6 +367,16 @@ public enum Career implements zzPrereqCheck
 		{
 			List<Skill> l = new ArrayList<Skill>(4);
 			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.RIFLE.make());
+			return l;
+		}
+	}
+	
+	public static class FellCallerHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.GREAT_WEAPON.make()); l.add(SkillEnum.HAND_WEAPON.make());
 			return l;
 		}
 	}

@@ -26,8 +26,28 @@ public enum Race
 		  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 7),
 		  Pair.create(Stat.INTELLECT, 7), Pair.create(Stat.ARCANE, 8), Pair.create(Stat.PERCEPTION, 7) },
 		  
-		  null
-		);
+		new zzCreateCharacterHook[] {new humanHook()}
+		),
+	
+	TROLLKIN(R.string.trollkin_name,
+		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 5),
+			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 2),
+			Pair.create(Stat.INTELLECT,3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3)},
+		
+		new Pair[] { Pair.create(Stat.PHYSIQUE, 8), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 7),
+			Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 5), Pair.create(Stat.POISE, 4),
+			Pair.create(Stat.INTELLECT,4), Pair.create(Stat.ARCANE, 4), Pair.create(Stat.PERCEPTION, 4)},
+		
+		new Pair[] { Pair.create(Stat.PHYSIQUE, 9), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 8),
+			Pair.create(Stat.AGILITY, 6), Pair.create(Stat.PROWESS, 6), Pair.create(Stat.POISE, 5),
+			Pair.create(Stat.INTELLECT,5), Pair.create(Stat.ARCANE, 6), Pair.create(Stat.PERCEPTION, 5)},
+		
+		new Pair[] { Pair.create(Stat.PHYSIQUE, 10), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 9),
+			Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 6),
+			Pair.create(Stat.INTELLECT,6), Pair.create(Stat.ARCANE, 7), Pair.create(Stat.PERCEPTION, 6)},
+		
+		new zzCreateCharacterHook[] {new trollkinHook()}
+	);
 	
 	private Race(int pNameResourceID, Pair<Stat, Integer>[] pStartStats,
 							Pair<Stat, Integer>[] pHeroStats,
@@ -91,4 +111,20 @@ public enum Race
 	Collection<Pair<Stat, Integer>> vetStats(){return Collections.unmodifiableCollection(vetStats);}
 	Collection<Pair<Stat, Integer>> epicStats(){return Collections.unmodifiableCollection(epicStats);}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	
+	/* Hooks! */
+	
+	public static class humanHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+	}
+	
+	public static class trollkinHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+	}
 }
