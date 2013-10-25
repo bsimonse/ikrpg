@@ -168,6 +168,27 @@ public enum Career implements zzPrereqCheck
 			 null,
 			 null,
 			 new zzCreateCharacterHook[] {new FieldMechanikMilitarySkillHook(), new FieldMechanikJackHook()}),
+	
+	GUN_MAGE(R.string.gun_mage_name, false,
+			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1)},
+			 new Pair[] {SkillEnum.PISTOL.pair(4), SkillEnum.RIFLE.pair(4), SkillEnum.SEDUCTION.pair(2)},
+			 new Ability[] {AbilityEnum.CRAFT_RUNE_SHOT.make(), AbilityEnum.FAST_RELOAD.make()},
+			 new Ability[] {AbilityEnum.ARCANE_PRECISION.make(), AbilityEnum.CRAFT_RUNE_SHOT.make(), AbilityEnum.FAST_DRAW.make(), AbilityEnum.FAST_RELOAD.make(),
+			 				AbilityEnum.GUNFIGHTER.make(), AbilityEnum.KEEN_EYED.make()},
+			 new Spell[] {Spell.RUNE_SHOT_ACCURACY, Spell.RUNE_SHOT_BRUTAL, Spell.RUNE_SHOT_THUNDERBOLT},
+			 new Spell[] {Spell.RETURN_FIRE, Spell.RUNE_SHOT_ACCURACY, Spell.RUNE_SHOT_BLACK_PENNY, Spell.RUNE_SHOT_BRUTAL, Spell.RUNE_SHOT_IRON_ROT,
+			 				Spell.RUNE_SHOT_MOLTEN_SHOT, Spell.RUNE_SHOT_SILENCER, Spell.RUNE_SHOT_SPONTANEOUS_COMBUSTION, Spell.RUNE_SHOT_THUNDERBOLT,
+							Spell.FIRE_GROUP, Spell.HEIGHTENED_REFLEXES, Spell.REFUGE, Spell.RUNE_SHOT_FIRE_BEACON, Spell.RUNE_SHOT_SHADOW_FIRE,
+							Spell.RUNE_SHOT_TRICK_SHOT, Spell.SNIPE, Spell.TRUE_SIGHT, Spell.GUIDED_FIRE, Spell.RUNE_SHOT_DETONATOR, Spell.RUNE_SHOT_EARTH_SHAKER,
+							Spell.RUNE_SHOT_PHANTOM_SEEKER, Spell.RUNE_SHOT_SPELL_CRACKER, Spell.RUNE_SHOT_FREEZE_FIRE, Spell.RUNE_SHOT_HEART_STOPPER,
+							Spell.RUNE_SHOT_MOMENTUM},
+			 null,
+			 new Connection[] {Connection.make("gun mage order")},
+			 25,
+			 new Loot[] {},
+			 null,
+			 new zzPrereqCheck[] {giftedPrereq()},
+			 new zzCreateCharacterHook[] {new GunMageMilitarySkillHook(), new GunMageMagelockWeaponHook()}),
 			 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -409,6 +430,23 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	public static class FieldMechanikJackHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+	}
+	
+	public static class GunMageMilitarySkillHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.RIFLE.make());
+			return l;
+		}
+	}
+	
+	public static class GunMageMagelockWeaponHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
