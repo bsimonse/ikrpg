@@ -189,6 +189,25 @@ public enum Career implements zzPrereqCheck
 			 null,
 			 new zzPrereqCheck[] {giftedPrereq()},
 			 new zzCreateCharacterHook[] {new GunMageMilitarySkillHook(), new GunMageMagelockWeaponHook()}),
+	
+	HIGHWAYMAN(R.string.highwayman_name, false,
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1)},
+			 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3),
+			 			SkillEnum.UNARMED.pair(3), SkillEnum.BRIBERY.pair(2), SkillEnum.DECEPTION.pair(3), SkillEnum.DISGUISE.pair(3),
+						SkillEnum.INTERROGATION.pair(2), SkillEnum.NEGOTIATION.pair(4), SkillEnum.ROPE_USE.pair(4), SkillEnum.SEDUCTION.pair(4),
+						SkillEnum.SNEAK.pair(4), SkillEnum.SURVIVAL.pair(2)},
+			 new Ability[] {AbilityEnum.AMBUSH.make(), AbilityEnum.SADDLE_SHOT.make()},
+			 new Ability[] {AbilityEnum.AMBUSH.make(), AbilityEnum.APPRAISE.make(), AbilityEnum.BINDING.make(), AbilityEnum.EXPERT_RIDER.make(),
+			 				AbilityEnum.FAST_DRAW.make(), AbilityEnum.FAST_RELOAD.make(), AbilityEnum.LIGHT_CAVALRY.make(), AbilityEnum.PROWL.make(),
+							AbilityEnum.RIDE_BY_ATTACK.make(), AbilityEnum.SADDLE_SHOT.make(), AbilityEnum.SWIFT_HUNTER.make(), AbilityEnum.SWIFT_RIDER.make(),
+							AbilityEnum.TRACELESS_PATH.make(), AbilityEnum.TWO_WEAPON_FIGHTING.make(), AbilityEnum.WAYLAY.make()},
+			 null, null,
+			 null,
+			 new Connection[] {Connection.make("criminal")},
+			 75,
+			 new Loot[] {},
+			 null, null,
+			 new zzCreateCharacterHook[] {new HighwaymanHook()}),
 			 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -451,5 +470,15 @@ public enum Career implements zzPrereqCheck
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
 		@Override public void undoHook(){}
+	}
+	
+	public static class HighwaymanHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(3);
+			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make()); l.add(SkillEnum.PISTOL.make());
+			return l;
+		}
 	}
 }
