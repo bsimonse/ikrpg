@@ -21,7 +21,7 @@ public enum Career implements zzPrereqCheck
 								AbilityEnum.GRENADIER.make(),AbilityEnum.POISON_RESISTANCE.make()},
 				null, null,
 				null, new Connection[] {Connection.make("alchemical order")},
-				50, new Loot[]{},
+				50, new Loot[]{}, null,
 				null, null),
 								
 	@SuppressWarnings("unchecked")
@@ -40,7 +40,7 @@ public enum Career implements zzPrereqCheck
 							Spell.FULL_THROTTLE, Spell.GRIND, Spell.GUIDED_FIRE, Spell.IRON_AGGRESSION, Spell.SUPERIORITY, Spell.BLACK_OUT,
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
 				null, new Connection[] {Connection.make("mechaniks organization")},
-				50, new Loot[]{},
+				50, new Loot[]{}, null,
 				new zzPrereqCheck[]{giftedPrereq()},
 				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
 	
@@ -58,7 +58,7 @@ public enum Career implements zzPrereqCheck
 							Spell.FORCE_FIELD,Spell.HEX_BLAST,Spell.INHOSPITABLE_GROUND,Spell.MIRAGE,Spell.RIFT,Spell.ROCK_HAMMER,Spell.ZEPHYR,Spell.FORCE_HAMMER,
 							Spell.OVERMIND,Spell.TEMPEST},
 			 null, new Connection[] {Connection.make("magical order")},
-			 75, null,
+			 75, null, null,
 			 new zzPrereqCheck[]{giftedPrereq()},
 			 new zzCreateCharacterHook[] {new ArcanistHook()}),
 			 
@@ -73,9 +73,9 @@ public enum Career implements zzPrereqCheck
 							AbilityEnum.PRIVILEGE.make(), AbilityEnum.RALLYING_CRY.make(), AbilityEnum.SWIFT_RIDER.make()},
 			 null, null,
 			 new Connection[] {Connection.make("nobility")}, new Connection[] {Connection.make("any...?")},
-			 200, null,
+			 200, null, null,
 			 new zzPrereqCheck[]{humanPrereq()},
-			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new AristocratLanguageHook()}),
+			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new LanguageHook()}),
 	
 	BOUNTY_HUNTER(R.string.bounty_hunter_name, false,
 			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.ROPE_USE.pair(1), SkillEnum.TRACKING.pair(1)},
@@ -87,7 +87,7 @@ public enum Career implements zzPrereqCheck
 			 				AbilityEnum.ROLL_WITH_IT.make(), AbilityEnum.TAKE_DOWN.make(), AbilityEnum.WAYLAY.make()},
 			 null, null,
 			 null, new Connection[]{Connection.make("any...?")},
-			 75, null,
+			 75, null, null,
 			 null,
 			 new zzCreateCharacterHook[] {new BountyHunterHook()}),
 	
@@ -101,7 +101,7 @@ public enum Career implements zzPrereqCheck
 							AbilityEnum.SPECIALIZATION.make("Assassin Blade"), AbilityEnum.TWO_WEAPON_FIGHTING.make(), AbilityEnum.WAYLAY.make()},
 			 null, null, 
 			 null, new Connection[]{Connection.make("criminal")},
-			 75, null,
+			 75, null, null,
 			 null,
 			 new zzCreateCharacterHook[] {new CutthroatHook()}),
 	
@@ -115,21 +115,45 @@ public enum Career implements zzPrereqCheck
 							AbilityEnum.TWO_WEAPON_FIGHTING.make()},
 			 null, null, 
 			 null, null,
-			 75, null,
+			 75, null, null,
 			 null, null),
+	
+	EXPLORER(R.string.explorer_name, false,
+			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.MEDICINE.pair(1), SkillEnum.NAVIGATION.pair(1), SkillEnum.SURVIVAL.pair(1)},
+			 new Pair[] {SkillEnum.ARCHERY.pair(2), SkillEnum.CROSSBOW.pair(2), SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.RIFLE.pair(3),
+			 			SkillEnum.THROWN_WEAPON.pair(2), SkillEnum.UNARMED.pair(2), SkillEnum.COMMAND.pair(4), SkillEnum.CRAFT.pair(2), SkillEnum.CRYPTOGRAPHY.pair(2),
+						SkillEnum.ETIQUETTE.pair(2), SkillEnum.MEDICINE.pair(2), SkillEnum.NAVIGATION.pair(4), SkillEnum.NEGOTIATION.pair(4), SkillEnum.ROPE_USE.pair(4),
+						SkillEnum.SURVIVAL.pair(4)},
+			 new Ability[] {AbilityEnum.BIG_GAME_HUNTER.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.PORT_OF_CALL.make()},
+			 new Ability[] {AbilityEnum.BATTLE_PLAN_RECONNAISSANCE.make(), AbilityEnum.BIG_GAME_HUNTER.make(), AbilityEnum.DISEASE_RESISTANCE.make(),
+			 				AbilityEnum.EXPERT_RIDER.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.POISON_RESISTANCE.make(),
+							AbilityEnum.PORT_OF_CALL.make(), AbilityEnum.SIGNAL_LANGUAGE.make(), AbilityEnum.SWIFT_RIDER.make()},
+			 null, null,
+			 new Connection[] {Connection.make("wealthy patron")},
+			 new Connection[] {Connection.make("wealthy patron"), Connection.make("isolated tribe/people")},
+			 150,
+			 new Loot[] {},
+			 new String[] {"A character who chooses Explorer as a starting career gains 25 gc each month from their patron for as long as they continue to explore new regions, report back regularly, and bring his patron occasional gifts from exotic places."},
+			 null,
+			 new zzCreateCharacterHook[] {new ExplorerMilitarySkillHook(), new LanguageHook()}),
 			 
-	/*ARCANIST(R.string.arcanist_name, false,
-				new Pair[] {},
-				new Pair[] {},
-				new Ability[] {},
-				new Ability[] {},
-				new Spell[] {},
-				new Spell[] {},
-				giftedPrereq(),
-				new zzCreateCharacterHook[] {new ArcanistHook()}),*/
+	/*TEMPLATE(R.string.arcanist_name, false,
+	 new Pair[] {},
+	 new Pair[] {},
+	 new Ability[] {},
+	 new Ability[] {},
+	 new Spell[] {},
+	 new Spell[] {},
+	 new Connection[] {},
+	 new Connection[] {},
+	 0,
+	 new Loot[] {},
+	 new String[] {},
+	 new zzPrereqCheck[] {giftedPrereq()},
+	 new zzCreateCharacterHook[] {new ArcanistHook()}),*/
 					  
 	//PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
-	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null);
+	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null,null);
 			  
 	
 	//Done!
@@ -138,7 +162,7 @@ public enum Career implements zzPrereqCheck
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
 					Connection[] pStartConnections, Connection[] pConnections,
-					int pGold, Loot[] pLoot,
+					int pGold, Loot[] pLoot, String[] pSpecialRules,
 					zzPrereqCheck[] pPrereqChecks, zzCreateCharacterHook[] pPostCreateHook)
 	{
 		Context c = IKRPGApp.getContext();
@@ -154,6 +178,7 @@ public enum Career implements zzPrereqCheck
 		careerConnections = pConnections != null ? Arrays.asList(pConnections) : new ArrayList<Connection>(5);
 		startGold = pGold;
 		startLoot = pLoot != null ? Arrays.asList(pLoot) : new ArrayList<Loot>(5);
+		specialRules = pSpecialRules != null ? Arrays.asList(pSpecialRules) : new ArrayList<String>(5);
 		prereqChecks = pPrereqChecks != null ? Arrays.asList(pPrereqChecks) : new ArrayList<zzPrereqCheck>(5);
 		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCreateCharacterHook>(10);
 	}
@@ -172,6 +197,7 @@ public enum Career implements zzPrereqCheck
 	private Collection<Connection> careerConnections;
 	private int startGold;
 	private Collection<Loot> startLoot;
+	private List<String> specialRules;
 	private Collection<zzPrereqCheck> prereqChecks;
 	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
@@ -187,6 +213,7 @@ public enum Career implements zzPrereqCheck
 	public Collection<Connection> careerConnections(){return Collections.unmodifiableCollection(careerConnections);}
 	public int startGold(){return startGold;}
 	public Collection<Loot> startLoot(){return startLoot;}
+	public List<String> specialRules(){return specialRules;}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
 	@Override
@@ -269,7 +296,7 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class AristocratLanguageHook extends zzChooseOneHook<Language>
+	public static class LanguageHook extends zzChooseOneHook<Language>
 	{
 		private Language chosenLanguage;
 
@@ -306,6 +333,16 @@ public enum Career implements zzPrereqCheck
 		{
 			List<Skill> l = new ArrayList<Skill>(3);
 			l.add(new Skill(SkillEnum.CROSSBOW)); l.add(new Skill(SkillEnum.THROWN_WEAPON)); l.add(new Skill(SkillEnum.UNARMED));
+			return l;
+		}
+	}
+	
+	public static class ExplorerMilitarySkillHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(4);
+			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.RIFLE.make());
 			return l;
 		}
 	}

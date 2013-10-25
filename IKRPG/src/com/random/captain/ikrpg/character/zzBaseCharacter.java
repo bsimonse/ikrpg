@@ -17,32 +17,33 @@ class zzBaseCharacter implements Parcelable
 	int index;
 	
 	/*Fluff*/
-	Fluff fluff;
+	Fluff fluff;	//character fluff
 	
 	/*Crunch*/
-	Race race;
-	Archetype archetype;
-	GiftedTradition tradition;
-	Set<Career> careers;
-	Set<Ability> abilities;
-	Set<Spell> spells;
-	Set<Connection> connections;
-	Set<Language> languages;
+	Race race;						//race
+	Archetype archetype;			//archetype
+	GiftedTradition tradition;		//spellcasting tradition
+	Set<Career> careers;			//all active careers
+	Set<Ability> abilities;			//all known abilities
+	Set<Spell> spells;				//all known spells
+	Set<Connection> connections;	//all held connections
+	Set<Language> languages;		//all known languages
+	List<String> specials;			//miscellaneous special rules
 	
-	Map<Skill, Integer> baseSkills;
-	transient Map<Skill, Integer> activeSkills;
-	Map<String, Modifier<Skill>> skillModifiers;
+	Map<Skill, Integer> baseSkills;					//base level of skills
+	transient Map<Skill, Integer> activeSkills;		//active level of skills after adding modifiers
+	Map<String, Modifier<Skill>> skillModifiers;	//active modifiers on skills
 	
-	transient Map<Stat, Integer> activeStats;
-	Map<Stat, Integer> baseStats;
-	Map<Stat, Integer> maxStats;
-	Map<String, Modifier<Stat>> statModifiers;
+	transient Map<Stat, Integer> activeStats;		//active level of stats after adding modifiers
+	Map<Stat, Integer> baseStats;					//base level of stats
+	Map<Stat, Integer> maxStats;					//max level of stats
+	Map<String, Modifier<Stat>> statModifiers;		//active modifiers on stats
 	
 	/*Gear*/
-	LootPack lootPack;
+	LootPack lootPack;	//all held loot
 	
-	zzLevel level;
-	int exp;
+	zzTier tier;		//current character tier
+	int exp;			//current character exp
 	
 	zzBaseCharacter()
 	{
@@ -501,7 +502,7 @@ class zzBaseCharacter implements Parcelable
 			
 			//EXP
 			me.exp = in.readInt();
-			me.level = zzLevel.getLevelForEXP(me.exp);
+			me.tier = zzTier.getLevelForEXP(me.exp);
 			
 			//Gear
 			me.lootPack = in.readParcelable(LootPack.class.getClassLoader());
@@ -575,7 +576,7 @@ class zzBaseCharacter implements Parcelable
 		//rederive
 		myChar.deriveStats();
 		myChar.deriveSkillCheckLevels();
-		myChar.level = zzLevel.getLevelForEXP(myChar.exp);
+		myChar.tier = zzTier.getLevelForEXP(myChar.exp);
 		
 		return myChar;
 	}

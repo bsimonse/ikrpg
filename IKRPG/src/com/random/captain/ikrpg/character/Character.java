@@ -24,7 +24,7 @@ public class Character extends zzBaseCharacter
 		lootPack=base.lootPack;
 		
 		exp=base.exp;
-		level=zzLevel.getLevelForEXP(exp);
+		tier=zzTier.getLevelForEXP(exp);
 		deriveStats();
 		deriveSkillCheckLevels();
 	}

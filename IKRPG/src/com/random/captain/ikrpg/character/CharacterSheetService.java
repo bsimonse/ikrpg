@@ -242,7 +242,7 @@ public class CharacterSheetService
 			canvas.drawText(c.fluff.height.toUpperCase(), 1056,174,blackFluffLeft);
 			
 			canvas.drawText(""+c.exp, 1279,174,blackFluffCenter);
-			canvas.drawText(c.level.toString().toUpperCase(), 1279,130,blackFluffCenter);
+			canvas.drawText(c.tier.toString().toUpperCase(), 1279,130,blackFluffCenter);
 		}
 		
 		protected void writeStats(Character c)
@@ -456,6 +456,7 @@ public class CharacterSheetService
 	//Cheating!
 	public static Character getPascal()
 	{
+		//At 24 EXP
 		zzBaseCharacter pascal = new zzBaseCharacter();
 		
 		//Fluff
@@ -482,7 +483,7 @@ public class CharacterSheetService
 		pascal.careers = careers;
 		
 		//Stats
-		pascal.setBaseStat(Stat.PHYSIQUE, 6);
+		pascal.setBaseStat(Stat.PHYSIQUE, 7);
 		pascal.setMaxStat(Stat.PHYSIQUE, 7);
 		pascal.setBaseStat(Stat.SPEED, 7);
 		pascal.setMaxStat(Stat.SPEED, 7);
@@ -517,6 +518,7 @@ public class CharacterSheetService
 		skills.put(SkillEnum.LAW.make(), 1);
 		skills.put(SkillEnum.NEGOTIATION.make(), 1);
 		skills.put(SkillEnum.DECEPTION.make(),1);
+		skills.put(SkillEnum.UNARMED.make(), 1);
 		pascal.setBaseSkills(skills);
 		
 		//Abilities
@@ -529,6 +531,7 @@ public class CharacterSheetService
 		abilities.add(AbilityEnum.SPECIALIZATION.make("Cutlass"));
 		abilities.add(AbilityEnum.PARRY.make());
 		abilities.add(AbilityEnum.RIPOSTE.make());
+		abilities.add(AbilityEnum.FAST_DRAW.make());
 		pascal.abilities = abilities;
 		
 		return new Character(pascal);
