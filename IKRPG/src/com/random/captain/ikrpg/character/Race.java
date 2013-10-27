@@ -29,6 +29,26 @@ public enum Race
 		new zzCreateCharacterHook[] {new humanHook()}
 		),
 	
+	IOSAN(R.string.iosan_name,
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
+			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
+			  Pair.create(Stat.INTELLECT, 4), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 5),
+			  Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 5), Pair.create(Stat.POISE, 5),
+			  Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 4), Pair.create(Stat.PERCEPTION, 5) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 6),
+			  Pair.create(Stat.AGILITY, 6), Pair.create(Stat.PROWESS, 6), Pair.create(Stat.POISE, 6),
+			  Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 6), Pair.create(Stat.PERCEPTION, 6) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 7),
+			  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 7),
+			  Pair.create(Stat.INTELLECT, 7), Pair.create(Stat.ARCANE, 8), Pair.create(Stat.PERCEPTION, 7) },
+
+		  new zzCreateCharacterHook[] {new iosanHook()}
+		  ),
+		  
 	TROLLKIN(R.string.trollkin_name,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 5),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 2),
@@ -115,6 +135,13 @@ public enum Race
 	/* Hooks! */
 	
 	public static class humanHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	public static class iosanHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}

@@ -224,6 +224,73 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("any")},
 			 100,null,null,null,
 			 new zzCreateCharacterHook[] {new LanguageHook(), new InvestigatorMilitarySkillHook(), new InvestigatorHyperPerceptionHook()}),
+	
+	IRON_FANG(R.string.iron_fang_name, true,
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.SHIELD.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.SURVIVAL.pair(1)},
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.LANCE.pair(4), SkillEnum.SHIELD.pair(4), SkillEnum.UNARMED.pair(3),
+			 			SkillEnum.COMMAND.pair(4), SkillEnum.SURVIVAL.pair(2)},
+			 new Ability[] {AbilityEnum.FAST_REARM.make("blasting pike"), AbilityEnum.SPECIALIZATION.make("blasting pike")},
+			 new Ability[] {AbilityEnum.DEFENSIVE_LINE.make(), AbilityEnum.FAST_REARM.make("blasting pike"), AbilityEnum.HYPER_AWARENESS.make(),
+			 				AbilityEnum.LOAD_BEARING.make(), AbilityEnum.PRECISION_STRIKE.make(), AbilityEnum.RELENTLESS_CHARGE.make(),
+							AbilityEnum.ROCK_SOLID.make(), AbilityEnum.SPECIALIZATION.make("blasting pike"), AbilityEnum.SWIFT_RIDER.make()},
+			 null,null,
+			 new Connection[] {Connection.make("Khadoran military")},
+			 new Connection[] {Connection.make("Khadoran military")},
+			 25,
+			 new Loot[] {},
+			 null,
+			 new zzPrereqCheck[] {humanPrereq(), ironFangPrereq()},
+			 null),
+	
+	KNIGHT(R.string.knight_name, false,
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.HAND_WEAPON.pair(1), SkillEnum.SHIELD.pair(1), SkillEnum.COMMAND.pair(1),
+			 			SkillEnum.ETIQUETTE.pair(1), SkillEnum.LORE.pair("knightly order", 1)},
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.LANCE.pair(4), SkillEnum.SHIELD.pair(4),
+			 			SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(4), SkillEnum.ETIQUETTE.pair(2), SkillEnum.LAW.pair(2)},
+			 new Ability[] {AbilityEnum.CLEAVE.make(), AbilityEnum.DEFENDER.make()},
+			 new Ability[] {AbilityEnum.CAVALRY_CHARGE.make(), AbilityEnum.CLEAVE.make(), AbilityEnum.COMBAT_RIDER.make(), AbilityEnum.DEFENDER.make(),
+			 				AbilityEnum.DEFENSIVE_LINE.make(), AbilityEnum.EXPERT_RIDER.make(), AbilityEnum.IRON_WILL.make(), AbilityEnum.LOAD_BEARING.make(),
+							AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.PRECISION_STRIKE.make(), AbilityEnum.PRESS_THE_ATTACK.make(),
+							AbilityEnum.RELENTLESS_CHARGE.make(), AbilityEnum.RIDE_BY_ATTACK.make(), AbilityEnum.SHIELD_SLAM.make()},
+			 null, null,
+			 new Connection[] {Connection.make("knightly order")},
+			 new Connection[] {Connection.make("knightly order")},
+			 100, null, null,
+			 new zzPrereqCheck[] {humanOrIosanPrereq()},
+			 null),
+	
+	MAGE_HUNTER(R.string.mage_hunter_name, false,
+			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.CLIMBING.pair(1), SkillEnum.JUMPING.pair(1), SkillEnum.SNEAK.pair(1),
+			 			SkillEnum.TRACKING.pair(1)},
+			 new Pair[] {SkillEnum.ARCHERY.pair(4), SkillEnum.CROSSBOW.pair(4), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.THROWN_WEAPON.pair(2),
+			 			SkillEnum.DECEPTION.pair(2), SkillEnum.DISGUISE.pair(2), SkillEnum.ROPE_USE.pair(3), SkillEnum.SNEAK.pair(4),
+						SkillEnum.SURVIVAL.pair(2), SkillEnum.TRACKING.pair(4)},
+			 new Ability[] {AbilityEnum.ARCANE_ASSASSIN.make(), AbilityEnum.IRON_WILL.make()},
+			 new Ability[] {AbilityEnum.ARCANE_ASSASSIN.make(), AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.CRACKSHOT.make(), AbilityEnum.CROSSBOWMAN.make(),
+			 				AbilityEnum.FAST_DRAW.make(), AbilityEnum.FAST_RELOAD.make(), AbilityEnum.IRON_WILL.make(), AbilityEnum.MAGE_KILLER.make(),
+							AbilityEnum.PARRY.make(), AbilityEnum.QUICK_WORK.make(), AbilityEnum.SHADOW_MAGIC.make(), AbilityEnum.TRACELESS_PATH.make()},
+			 null, null,
+			 new Connection[] {Connection.make("Retribution of Scyrah")},
+			 new Connection[] {Connection.make("Retribution of Scyrah")},
+			 75, null, null,
+			 new zzPrereqCheck[] {iosanPrereq()},
+			 new zzCreateCharacterHook[] {new MageHunterHook()}),
+	
+	MAN_AT_ARMS(R.string.man_at_arms_name, false,
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.SHIELD.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.DETECTION.pair(1)},
+			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.SHIELD.pair(40),
+			 			SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(3), SkillEnum.CRAFT.pair("Metalworking", 2)},
+			 new Ability[] {AbilityEnum.DEFENSIVE_LINE.make(), AbilityEnum.SHIELD_GUARD.make()},
+			 new Ability[] {AbilityEnum.BODYGUARD.make(), AbilityEnum.CLEAVE.make(), AbilityEnum.DEFENSIVE_LINE.make(), AbilityEnum.GIRDED.make(),
+			 				AbilityEnum.IRON_WILL.make(), AbilityEnum.LOAD_BEARING.make(), AbilityEnum.RETALIATORY_STRIKE.make(),
+							AbilityEnum.SET_DEFENSE.make(), AbilityEnum.SHIELD_GUARD.make(), AbilityEnum.SPECIALIZATION.make("halberd"),
+							AbilityEnum.SPECIALIZATION.make("spear")},
+			 null, null,
+			 null,
+			 new Connection[] {Connection.make("employer")},
+			 100, null, null,
+			 null,
+			 new zzCreateCharacterHook[] {new ManAtArmsHook()}),
 			 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -240,7 +307,6 @@ public enum Career implements zzPrereqCheck
 	 new zzPrereqCheck[] {giftedPrereq()},
 	 new zzCreateCharacterHook[] {new ArcanistHook()}),*/
 					  
-	//PIRATE(R.string.pirate_name,null,null,null,null,null,null,null,null),
 	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null,null);			  
 	
 	//Done!
@@ -343,11 +409,42 @@ public enum Career implements zzPrereqCheck
 		};
 	}
 	
+	public static zzPrereqCheck iosanPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.race == null){return new zzPrereqCheckResult(false, null);}
+				return new zzPrereqCheckResult(myChar.race == Race.IOSAN, null);
+			}
+		};
+	}
+	
 	public static zzPrereqCheck trollkinPrereq(){
 		return new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
 				if(myChar.race == null){return new zzPrereqCheckResult(false, null);}
 				return new zzPrereqCheckResult(myChar.race == Race.TROLLKIN, null);
+			}
+		};
+	}
+	
+	public static zzPrereqCheck ironFangPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
+				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
+				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
+				if(allowedCareers.containsAll(myChar.careers)){return new zzPrereqCheckResult(true, null);}
+				//else
+				return new zzPrereqCheckResult(false, null);
+			}
+		};
+	}
+	
+	public static zzPrereqCheck humanOrIosanPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.race == null){return new zzPrereqCheckResult(false, null);}
+				return new zzPrereqCheckResult(myChar.race == Race.HUMAN || myChar.race == Race.IOSAN, null);
 			}
 		};
 	}
@@ -528,6 +625,26 @@ public enum Career implements zzPrereqCheck
 		{
 			boolean additionWasNeeded = getArguments().getBoolean(THE_KEY);
 			if(additionWasNeeded){myChar.abilities.remove(AbilityEnum.HYPER_PERCEPTION.make());}
+		}
+	}
+	
+	public static class MageHunterHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(3);
+			l.add(new Skill(SkillEnum.CROSSBOW)); l.add(new Skill(SkillEnum.ARCHERY));
+			return l;
+		}
+	}
+	
+	public static class ManAtArmsHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
+			return l;
 		}
 	}
 }
