@@ -17,9 +17,9 @@ public class Modifier<S extends Parcelable> implements Parcelable
 	S trait;
 	Class<S> genericClass;
 	
-	Modifier (S pTrait){this(pTrait, 0);}	
+	public Modifier (S pTrait){this(pTrait, 0);}	
 	@SuppressWarnings("unchecked")
-	Modifier(S pTrait, int pValue)
+	public Modifier(S pTrait, int pValue)
 	{
 		trait = pTrait;
 		value = pValue;

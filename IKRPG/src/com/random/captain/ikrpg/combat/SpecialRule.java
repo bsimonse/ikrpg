@@ -8,7 +8,7 @@ public class SpecialRule implements Parcelable
 {
 	public enum SpecialRuleTrigger
 	{
-		ON_ATTACK, ON_HIT, ON_CRIT, ON_DAMAGE
+		ON_ATTACK, ON_HIT, ON_CRIT, ON_DAMAGE, CONSTANT
 	}
 	
 	private SpecialRuleTrigger trigger;

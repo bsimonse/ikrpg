@@ -1,12 +1,12 @@
 package com.random.captain.ikrpg.gear;
 
 import com.random.captain.ikrpg.character.*;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.random.captain.ikrpg.combat.SpecialRule;
 import java.util.ArrayList;
-import com.random.captain.ikrpg.character.Modifier;
-import com.random.captain.ikrpg.character.Stat;
+import java.util.List;
 
 public class Loot implements Parcelable
 {
@@ -19,16 +19,37 @@ public class Loot implements Parcelable
 	}
 
 	String name;
+	String description;
 	int goldCost;
+
+	List<Modifier<Stat>> statModifiers;
+	List<Modifier<Skill>> skillModifiers;
+	List<Ability> grantedAbilities;
+	List<SpecialRule> specialRules;
+	List<EquipmentSlots> slots;
 	
 	CharacterBond bond;
 	
-	//something something stats
-	ArrayList<Modifier<Stat>> statModifiers;
-	ArrayList<Modifier<Skill>> skillModifiers;
-	ArrayList<Ability> grantedAbilities;
-	ArrayList<SpecialRule> specialRules;
-	ArrayList<Modifier<Stat>> stats;
+	Loot()
+	{
+		this("","",0,null,null,null,null,null,null);
+	}
+	
+	public Loot(String pName, String pDesc, int pCost, List<Modifier<Stat>> pStats, List<Modifier<Skill>> pSkills, List<Ability> pAbilities,
+						List<SpecialRule> pRules, List<EquipmentSlots> pSlots, CharacterBond pBond)
+	{
+		name = pName;
+		description = pDesc;
+		goldCost = pCost;
+		statModifiers = pStats != null ? pStats : new ArrayList<Modifier<Stat>>();
+		skillModifiers = pSkills != null ? pSkills : new ArrayList<Modifier<Skill>>();
+		grantedAbilities = pAbilities != null ? pAbilities : new ArrayList<Ability>();
+		specialRules = pRules != null ? pRules : new ArrayList<SpecialRule>();
+		slots = pSlots != null ? pSlots : new ArrayList<EquipmentSlots>();
+		bond = pBond;
+	}
+	
+	//Parcelling
 	
 	@Override public void writeToParcel(Parcel out, int flags)
 	{
