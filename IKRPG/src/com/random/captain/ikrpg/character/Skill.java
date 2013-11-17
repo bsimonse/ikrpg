@@ -30,6 +30,7 @@ public class Skill implements Parcelable
 	@Override
 	public boolean equals(Object other)
 	{
+		//lazy man's type check
 		try
 		{
 			Skill p = (Skill)other;

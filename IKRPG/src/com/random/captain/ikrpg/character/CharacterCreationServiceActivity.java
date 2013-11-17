@@ -295,10 +295,97 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		finish();
 	}
 	
-	public int makeIndex(zzBaseCharacter guy)
+	static int makeIndex(zzBaseCharacter guy)
 	{
 		//simple hash based on character name and app random ID
 		String toHash = guy.fluff.name + Utilities.getAppID();
 		return Utilities.hashToInt(toHash);
+	}
+	
+	//Cheating!
+	public static Character getPascal()
+	{
+		//At 24 EXP
+		zzBaseCharacter pascal = new zzBaseCharacter();
+
+		//Fluff
+		Fluff fluff = new Fluff();
+		fluff.name = "Pascal Bateu";
+		fluff.sex = "Male";
+		fluff.weight = "170 lbs";
+		fluff.faith = "Morrowan";
+		fluff.owningPlayer = "Ben";
+		fluff.height = "5' 11\"";
+		fluff.characteristics = "";
+		pascal.fluff = fluff;
+
+		//Race
+		pascal.race = Race.HUMAN;
+
+		//Archetype
+		pascal.archetype = Archetype.MIGHTY;
+
+		//Careers
+		Set<Career> careers = new HashSet<Career>(2);
+		//careers.add(Career.PIRATE);
+		//careers.add(Career.DUELIST);
+		pascal.careers = careers;
+
+		//Stats
+		pascal.setBaseStat(Stat.PHYSIQUE, 7);
+		pascal.setMaxStat(Stat.PHYSIQUE, 7);
+		pascal.setBaseStat(Stat.SPEED, 7);
+		pascal.setMaxStat(Stat.SPEED, 7);
+		pascal.setBaseStat(Stat.STRENGTH, 5);
+		pascal.setMaxStat(Stat.STRENGTH, 6);
+		pascal.setBaseStat(Stat.AGILITY, 5);
+		pascal.setMaxStat(Stat.AGILITY, 5);
+		pascal.setBaseStat(Stat.PROWESS, 4);
+		pascal.setMaxStat(Stat.PROWESS, 5);
+		pascal.setBaseStat(Stat.POISE, 4);
+		pascal.setMaxStat(Stat.POISE, 5);
+		pascal.setBaseStat(Stat.INTELLECT, 3);
+		pascal.setMaxStat(Stat.INTELLECT, 5);
+		pascal.setBaseStat(Stat.PERCEPTION, 4);
+		pascal.setMaxStat(Stat.PERCEPTION, 5);
+
+		//Armor modifiers!
+		pascal.addStatModifier(new Modifier<Stat>(Stat.ARMOR, 7), "ARMOR_BONUS");
+		pascal.addStatModifier(new Modifier<Stat>(Stat.DEFENSE, -2), "DEF_PENALTY");
+
+		//Skills
+		Map<Skill, Integer> skills = new HashMap<Skill,Integer>(20);
+		skills.put(SkillEnum.HAND_WEAPON.make(), 2);
+		skills.put(SkillEnum.PISTOL.make(), 2);
+		skills.put(SkillEnum.CLIMBING.make(), 2);
+		skills.put(SkillEnum.INTIMIDATION.make(), 2);
+		skills.put(SkillEnum.SWIMMING.make(), 1);
+		skills.put(SkillEnum.SAILING.make(), 1);
+		skills.put(SkillEnum.GAMBLING.make(), 1);
+		skills.put(SkillEnum.JUMPING.make(), 1);
+		skills.put(SkillEnum.STREETWISE.make(), 1);
+		skills.put(SkillEnum.LAW.make(), 1);
+		skills.put(SkillEnum.NEGOTIATION.make(), 1);
+		skills.put(SkillEnum.DECEPTION.make(),1);
+		skills.put(SkillEnum.UNARMED.make(), 1);
+		pascal.setBaseSkills(skills);
+
+		//Abilities
+		Set<Ability> abilities = new HashSet<Ability>();
+		abilities.add(AbilityEnum.PRECISION_STRIKE.make());
+		abilities.add(AbilityEnum.MIGHTY.make());
+		abilities.add(AbilityEnum.FEAT_INVULNERABLE.make());
+		abilities.add(AbilityEnum.GANG.make());
+		abilities.add(AbilityEnum.STEADY.make());
+		abilities.add(AbilityEnum.SPECIALIZATION.make("Cutlass"));
+		abilities.add(AbilityEnum.PARRY.make());
+		abilities.add(AbilityEnum.RIPOSTE.make());
+		abilities.add(AbilityEnum.FAST_DRAW.make());
+		pascal.abilities = abilities;
+
+		//id
+		pascal.index = makeIndex(pascal);
+
+		return new Character(pascal);
 	}
 }

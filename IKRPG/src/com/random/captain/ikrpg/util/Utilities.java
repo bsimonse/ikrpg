@@ -1,9 +1,15 @@
 package com.random.captain.ikrpg.util;
 
+import com.random.captain.ikrpg.character.*;
+
 import android.content.SharedPreferences;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.random.captain.ikrpg.IKRPGApp;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Map;
 
 public class Utilities
 {
@@ -55,5 +61,27 @@ public class Utilities
 		{
 			return -1;
 		}
+	}
+	
+	public static <T> String toJson(T thing)
+	{
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new Modifier.SkillMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new Modifier.StatMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new Modifier.SkillModifierMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new Modifier.StatModifierMapSerializer());
+		Gson gson = builder.create();
+		return gson.toJson(thing);
+	}
+
+	public static <T> T fromJson(String jsonString, Class<T> pClass)
+	{
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new Modifier.SkillMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new Modifier.StatMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new Modifier.SkillModifierMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new Modifier.StatModifierMapDeserializer());
+		Gson gson = builder.create();
+		return gson.fromJson(jsonString, pClass);
 	}
 }

@@ -20,6 +20,18 @@ public class CharacterBond implements Parcelable
 	public int getCharIndex(){return charIndex;}
 	public String getCharName(){return charName;}
 	
+	@Override
+	public boolean equals(Object other)
+	{
+		try
+		{
+			CharacterBond b = (CharacterBond)other;
+			return charIndex == b.charIndex && charName.equals(b.charName);
+		}
+		catch(Exception e)
+		{return false;}
+	}
+	
 	/* Parceling */
 
 	private CharacterBond(int pIndex, String pName)

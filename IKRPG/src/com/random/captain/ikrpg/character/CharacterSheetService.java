@@ -1,33 +1,21 @@
 package com.random.captain.ikrpg.character;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.graphics.*;
+import java.util.*;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
-
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class CharacterSheetService
 {
@@ -451,89 +439,5 @@ public class CharacterSheetService
 			
 		}
 		
-	}
-
-	//Cheating!
-	public static Character getPascal()
-	{
-		//At 24 EXP
-		zzBaseCharacter pascal = new zzBaseCharacter();
-		
-		//Fluff
-		Fluff fluff = new Fluff();
-		fluff.name = "Pascal Bateu";
-		fluff.sex = "Male";
-		fluff.weight = "170 lbs";
-		fluff.faith = "Morrowan";
-		fluff.owningPlayer = "Ben";
-		fluff.height = "5' 11\"";
-		fluff.characteristics = "";
-		pascal.fluff = fluff;
-		
-		//Race
-		pascal.race = Race.HUMAN;
-		
-		//Archetype
-		pascal.archetype = Archetype.MIGHTY;
-		
-		//Careers
-		Set<Career> careers = new HashSet<Career>(2);
-		//careers.add(Career.PIRATE);
-		//careers.add(Career.DUELIST);
-		pascal.careers = careers;
-		
-		//Stats
-		pascal.setBaseStat(Stat.PHYSIQUE, 7);
-		pascal.setMaxStat(Stat.PHYSIQUE, 7);
-		pascal.setBaseStat(Stat.SPEED, 7);
-		pascal.setMaxStat(Stat.SPEED, 7);
-		pascal.setBaseStat(Stat.STRENGTH, 5);
-		pascal.setMaxStat(Stat.STRENGTH, 6);
-		pascal.setBaseStat(Stat.AGILITY, 5);
-		pascal.setMaxStat(Stat.AGILITY, 5);
-		pascal.setBaseStat(Stat.PROWESS, 4);
-		pascal.setMaxStat(Stat.PROWESS, 5);
-		pascal.setBaseStat(Stat.POISE, 4);
-		pascal.setMaxStat(Stat.POISE, 5);
-		pascal.setBaseStat(Stat.INTELLECT, 3);
-		pascal.setMaxStat(Stat.INTELLECT, 5);
-		pascal.setBaseStat(Stat.PERCEPTION, 4);
-		pascal.setMaxStat(Stat.PERCEPTION, 5);
-		
-		//Armor modifiers!
-		pascal.addStatModifier(new Modifier<Stat>(Stat.ARMOR, 7), "ARMOR_BONUS");
-		pascal.addStatModifier(new Modifier<Stat>(Stat.DEFENSE, -2), "DEF_PENALTY");
-		
-		//Skills
-		Map<Skill, Integer> skills = new HashMap<Skill,Integer>(20);
-		skills.put(SkillEnum.HAND_WEAPON.make(), 2);
-		skills.put(SkillEnum.PISTOL.make(), 2);
-		skills.put(SkillEnum.CLIMBING.make(), 2);
-		skills.put(SkillEnum.INTIMIDATION.make(), 2);
-		skills.put(SkillEnum.SWIMMING.make(), 1);
-		skills.put(SkillEnum.SAILING.make(), 1);
-		skills.put(SkillEnum.GAMBLING.make(), 1);
-		skills.put(SkillEnum.JUMPING.make(), 1);
-		skills.put(SkillEnum.STREETWISE.make(), 1);
-		skills.put(SkillEnum.LAW.make(), 1);
-		skills.put(SkillEnum.NEGOTIATION.make(), 1);
-		skills.put(SkillEnum.DECEPTION.make(),1);
-		skills.put(SkillEnum.UNARMED.make(), 1);
-		pascal.setBaseSkills(skills);
-		
-		//Abilities
-		Set<Ability> abilities = new HashSet<Ability>();
-		abilities.add(AbilityEnum.PRECISION_STRIKE.make());
-		abilities.add(AbilityEnum.MIGHTY.make());
-		abilities.add(AbilityEnum.FEAT_INVULNERABLE.make());
-		abilities.add(AbilityEnum.GANG.make());
-		abilities.add(AbilityEnum.STEADY.make());
-		abilities.add(AbilityEnum.SPECIALIZATION.make("Cutlass"));
-		abilities.add(AbilityEnum.PARRY.make());
-		abilities.add(AbilityEnum.RIPOSTE.make());
-		abilities.add(AbilityEnum.FAST_DRAW.make());
-		pascal.abilities = abilities;
-		
-		return new Character(pascal);
 	}
 }

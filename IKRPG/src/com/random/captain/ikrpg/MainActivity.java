@@ -14,7 +14,7 @@ import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.Character;
 import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
 import com.random.captain.ikrpg.character.CharacterStorageService;
-import com.random.captain.ikrpg.gear.LootJSONMaker;
+import com.random.captain.ikrpg.test.TestSuite;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +33,9 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.act_main);
 		
 		//LootJSONMaker.getSomeJSON();
+		
+		Log.i("IKRPG","Running tests!");
+		TestSuite.runSuite();
 		
 		//Cheating!
 		/*Character Pascal = CharacterSheetService.getPascal();

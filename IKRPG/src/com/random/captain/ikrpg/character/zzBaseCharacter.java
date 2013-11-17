@@ -10,6 +10,7 @@ import com.google.gag.enumeration.Consequence;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.random.captain.ikrpg.character.Modifier;
 import com.random.captain.ikrpg.gear.LootPack;
 
 class zzBaseCharacter implements Parcelable
@@ -555,10 +556,10 @@ class zzBaseCharacter implements Parcelable
 	public String toJson()
 	{
 		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new SkillMapSerializer());
-		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new StatMapSerializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new SkillModifierMapSerializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new StatModifierMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new Modifier.SkillMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new Modifier.StatMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new Modifier.SkillModifierMapSerializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new Modifier.StatModifierMapSerializer());
 		Gson gson = builder.create();
 		return gson.toJson(this);
 	}
@@ -566,10 +567,10 @@ class zzBaseCharacter implements Parcelable
 	public static zzBaseCharacter fromJson(String jsonString)
 	{
 		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new SkillMapDeserializer());
-		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new StatMapDeserializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new SkillModifierMapDeserializer());
-		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new StatModifierMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Skill,Integer>>(){}.getType(), new Modifier.SkillMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<Stat,Integer>>(){}.getType(), new Modifier.StatMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Skill>>>(){}.getType(), new Modifier.SkillModifierMapDeserializer());
+		builder.registerTypeAdapter(new TypeToken<Map<String, Modifier<Stat>>>(){}.getType(), new Modifier.StatModifierMapDeserializer());
 		Gson gson = builder.create();
 		zzBaseCharacter myChar = gson.fromJson(jsonString, zzBaseCharacter.class);
 		
