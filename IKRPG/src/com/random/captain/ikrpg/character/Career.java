@@ -7,6 +7,7 @@ import android.util.Pair;
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.gear.Loot;
+import android.telephony.SignalStrength;
 
 public enum Career implements zzPrereqCheck
 {
@@ -291,7 +292,311 @@ public enum Career implements zzPrereqCheck
 			 100, null, null,
 			 null,
 			 new zzCreateCharacterHook[] {new ManAtArmsHook()}),
-			 
+	
+	MILITARY_OFFICER(R.string.military_officer_name, false,
+	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.MEDICINE.pair(1), SkillEnum.NAVIGATION.pair(1)},
+	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.PISTOL.pair(4), SkillEnum.COMMAND.pair(4),
+	 				SkillEnum.CRYPTOGRAPHY.pair(4), SkillEnum.ETIQUETTE.pair(4), SkillEnum.INTERROGATION.pair(4), SkillEnum.LAW.pair(4),
+					SkillEnum.MEDICINE.pair(4), SkillEnum.NAVIGATION.pair(4), SkillEnum.ORATORY.pair(4)},
+	 new Ability[] {AbilityEnum.BATTLE_PLAN_CALL_TO_ACTION.make(), AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.TEAM_LEADER.make()},
+	 new Ability[] {AbilityEnum.JACK_MARSHALL.make(), AbilityEnum.ACE_COMMANDER.make(), AbilityEnum.BATTLE_COMMANDER.make(),
+	 				AbilityEnum.BATTLE_PLAN_CALL_TO_ACTION.make(), AbilityEnum.BATTLE_PLAN_COORDINATED_STRIKE.make(), AbilityEnum.BATTLE_PLAN_DESPERATE_PACE.make(),
+					AbilityEnum.BATTLE_PLAN_GO_TO_GROUND.make(), AbilityEnum.CAVALRY_CHARGE.make(), AbilityEnum.DEFENDER.make(), AbilityEnum.DRIVE_ASSUALT.make(),
+					AbilityEnum.DRIVE_PRONTO.make(), AbilityEnum.EXPERT_RIDER.make(), AbilityEnum.GOOD_BREEDING.make(), AbilityEnum.NATURAL_LEADER.make(),
+					AbilityEnum.PORT_OF_CALL.make(), AbilityEnum.RIDE_BY_ATTACK.make(), AbilityEnum.SADDLE_SHOT.make(), AbilityEnum.SIGNAL_LANGUAGE.make(),
+					AbilityEnum.TEAM_LEADER.make()},
+	 null, null, null,
+	 new Connection[] {Connection.make("mercenary company"), Connection.make("kingdom's military")},
+	 100,
+	 new Loot[] {},
+	 null,null,
+	 new zzCreateCharacterHook[] {new MilitaryOfficerWeaponHook()}),
+	
+	PIRATE(R.string.pirate_name, false,
+	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.CLIMBING.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.SAILING.pair(1),
+	 				SkillEnum.SWIMMING.pair(1)},
+	 new Pair[] {SkillEnum.HAND_WEAPON.pair(3), SkillEnum.LIGHT_ARTILLERY.pair(2), SkillEnum.PISTOL.pair(3), SkillEnum.RIFLE.pair(2),
+	 				SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(2), SkillEnum.DECEPTION.pair(3),
+					SkillEnum.NAVIGATION.pair(4), SkillEnum.NEGOTIATION.pair(2), SkillEnum.ROPE_USE.pair(4), SkillEnum.SAILING.pair(4)},
+	 new Ability[] {AbilityEnum.GANG.make(), AbilityEnum.STEADY.make(), AbilityEnum.SPECIALIZATION.make("Cutlass")},
+	 new Ability[] {AbilityEnum.BINDING.make(), AbilityEnum.DISEASE_RESISTANCE.make(), AbilityEnum.GANG.make(), AbilityEnum.GUNFIGHTER.make(),
+	 				AbilityEnum.HEADBUTT.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.PORT_OF_CALL.make(), AbilityEnum.QUICK_WORK.make(),
+					AbilityEnum.SPECIALIZATION.make("Cutlass"), AbilityEnum.STEADY.make(), AbilityEnum.SUCKER.make(), AbilityEnum.WAYLAY.make()},
+	 null, null, null,
+	 new Connection[] {Connection.make("pirate crew")},
+	 75,
+	 null, null, null,
+	 new zzCreateCharacterHook[] {new PirateHook()}),
+	
+	PISTOLEER(R.string.pistoleer_name, false,
+	 new Pair[] {SkillEnum.PISTOL.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.SNEAK.pair(1)},
+	 new Pair[] {SkillEnum.PISTOL.pair(4), SkillEnum.CRAFT.pair("gunsmithing", 4), SkillEnum.SNEAK.pair(3)},
+	 new Ability[] {AbilityEnum.FAST_DRAW.make(), AbilityEnum.GUNFIGHTER.make(), AbilityEnum.RETURN_FIRE.make()},
+	 new Ability[] {AbilityEnum.CHAIN_ATTACK_PIN_DOWN.make(), AbilityEnum.DODGER.make(), AbilityEnum.FAST_DRAW.make(), AbilityEnum.FAST_RELOAD.make(),
+	 				AbilityEnum.GUNFIGHTER.make(), AbilityEnum.RETURN_FIRE.make(), AbilityEnum.SWIFT_HUNTER.make(), AbilityEnum.TARGETEER.make(),
+					AbilityEnum.TWO_WEAPON_FIGHTING.make()},
+	 null, null, null, null,
+	 50,
+	 new Loot[] {},
+	 null, null,
+	 new zzCreateCharacterHook[] {new PistoleerHook()}),
+	
+	 PRIEST_OF_MENOTH(R.string.priest_of_menoth_name, false,
+	 new Pair[] {SkillEnum.LORE.pair("Menite faith", 1), SkillEnum.ORATORY.pair(1)},
+	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.SHIELD.pair(2), SkillEnum.COMMAND.pair(2),
+	 				SkillEnum.CRYPTOGRAPHY.pair(2), SkillEnum.ETIQUETTE.pair(4), SkillEnum.LAW.pair(4), SkillEnum.MEDICINE.pair(4),
+					SkillEnum.NEGOTIATION.pair(4), SkillEnum.ORATORY.pair(4), SkillEnum.RESEARCH.pair(4)},
+	 new Ability[] {AbilityEnum.DISPEL.make()},
+	 new Ability[] {AbilityEnum.CHOIR.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.RALLYING_CRY.make(),
+	 				AbilityEnum.UNIVERSITY_EDUCATION.make()},
+	 new Spell[] {Spell.GUIDED_BLADE, Spell.IGNITE, Spell.IMMOLATION},
+	 new Spell[] {Spell.FLAMES_OF_WRATH, Spell.GUIDED_BLADE, Spell.INFLUENCE, Spell.PROTECTION_FROM_FIRE, Spell.ASHEN_CLOUD,
+	 				Spell.BANISHING_WARD, Spell.HYMN_OF_BATTLE, Spell.HYMN_OF_PASSAGE, Spell.IGNITE, Spell.IMMOLATION,
+					Spell.RIGHTEOUS_FLAMES, Spell.VISION, Spell.WALL_OF_FIRE, Spell.CLEANSING_FIRE, Spell.CREVASSE,
+					Spell.CRUSADERS_CALL, Spell.HEX_BLAST, Spell.LAMENTATION, Spell.PURIFICATION, Spell.TRUE_PATH,
+					Spell.ASHES_TO_ASHES, Spell.BLAZING_EFFIGY, Spell.HYMN_OF_SHIELDING},
+	 new Connection[] {Connection.make("Menite temple")},
+	 new Connection[] {Connection.make("church")},
+	 75,
+	 null, null,
+	 new zzPrereqCheck[] {giftedPrereq(), humanPrereq()},
+	 new zzCreateCharacterHook[] {new PriestWeaponHook()}),
+	 
+	PRIEST_OF_MORROW(R.string.priest_of_morrow_name, false,
+	new Pair[] {SkillEnum.LORE.pair("Morrowan faith", 1), SkillEnum.MEDICINE.pair(1)},
+	new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.SHIELD.pair(2), SkillEnum.COMMAND.pair(2),
+		SkillEnum.CRYPTOGRAPHY.pair(2), SkillEnum.ETIQUETTE.pair(4), SkillEnum.LAW.pair(4), SkillEnum.MEDICINE.pair(4),
+		SkillEnum.NEGOTIATION.pair(4), SkillEnum.ORATORY.pair(4), SkillEnum.RESEARCH.pair(4)},
+	new Ability[] {AbilityEnum.EMPOWER.make()},
+	new Ability[] {AbilityEnum.CHOIR.make(), AbilityEnum.LANGUAGE.make(), AbilityEnum.NATURAL_LEADER.make(), AbilityEnum.RALLYING_CRY.make(),
+					 AbilityEnum.UNIVERSITY_EDUCATION.make()},
+	new Spell[] {Spell.BLADE_OF_RADIANCE, Spell.SOLOVINS_BOON, Spell.TRUE_SIGHT},
+	new Spell[] {Spell.BLESSING_OF_HEALTH, Spell.GUIDED_BLADE, Spell.LIGHT_IN_THE_DARKNESS, Spell.SOLOVINS_BOON,
+					Spell.AURA_OF_PROTECTION, Spell.BANISHING_WARD, Spell.BLADE_OF_RADIANCE, Spell.BLESSINGS_OF_WAR,
+					Spell.EYES_OF_TRUTH, Spell.HAND_OF_FATE, Spell.SHIELD_OF_FAITH, Spell.TRIAGE, Spell.TRUE_SIGHT,
+					Spell.BLESSING_OF_MORROW, Spell.CRUSADERS_CALL, Spell.DAYLIGHT, Spell.PRAYER_FOR_GUIDANCE,
+					Spell.SANGUINE_BLESSING, Spell.SUNBURST, Spell.TRUE_PATH, Spell.FORCE_OF_FAITH, Spell.HEAL,
+					Spell.STAR_FIRE},
+	new Connection[] {Connection.make("Morrowan church")},
+	new Connection[] {Connection.make("church")},
+	75,
+	null, null,
+	new zzPrereqCheck[] {giftedPrereq(), humanPrereq()},
+	new zzCreateCharacterHook[] {new PriestWeaponHook()}),
+
+	RANGER(R.string.ranger_name, false,
+	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.SNEAK.pair(1), SkillEnum.SURVIVAL.pair(1),
+	 				SkillEnum.TRACKING.pair(1)},
+	 new Pair[] {SkillEnum.ARCHERY.pair(4), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2),
+	 				SkillEnum.RIFLE.pair(4), SkillEnum.THROWN_WEAPON.pair(4), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(3),
+					SkillEnum.CRAFT.pair(2), SkillEnum.CRYPTOGRAPHY.pair(1), SkillEnum.MEDICINE.pair(3), SkillEnum.NAVIGATION.pair(4),
+					SkillEnum.ROPE_USE.pair(4), SkillEnum.SNEAK.pair(4), SkillEnum.SURVIVAL.pair(4), SkillEnum.TRACKING.pair(4)},
+	 new Ability[] {AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.PATHFINDER.make()},
+	 new Ability[] {AbilityEnum.BATTLE_PLAN_GO_TO_GROUND.make(), AbilityEnum.BATTLE_PLAN_RECONNAISSANCE.make(), AbilityEnum.BATTLE_PLAN_SHADOW.make(),
+	 				AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.DISEASE_RESISTANCE.make(), AbilityEnum.FAST_RELOAD.make(),
+					AbilityEnum.LIGHT_CAVALRY.make(), AbilityEnum.NIGHT_FIGHTER.make(), AbilityEnum.PATHFINDER.make(),
+					AbilityEnum.PROWL.make(), AbilityEnum.SADDLE_SHOT.make(), AbilityEnum.SIGNAL_LANGUAGE.make(),
+					AbilityEnum.SWIFT_HUNTER.make(), AbilityEnum.SWIFT_RIDER.make(), AbilityEnum.TRACELESS_PATH.make()},
+	 null, null, null, null,
+	 75,
+	 null, null, null,
+	 new zzCreateCharacterHook[] {new RangerWeaponHook()}),
+	
+	RIFLEMAN(R.string.rifleman_name, false,
+	 new Pair[] {SkillEnum.RIFLE.pair(1), SkillEnum.CLIMBING.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
+	 new Pair[] {SkillEnum.RIFLE.pair(4), SkillEnum.CRAFT.pair("gunsmithing",4), SkillEnum.SURVIVAL.pair(3)},
+	 new Ability[] {AbilityEnum.CRACKSHOT.make(), AbilityEnum.DUAL_SHOT.make(), AbilityEnum.MARKSMAN.make()},
+	 new Ability[] {AbilityEnum.CRACKSHOT.make(), AbilityEnum.DUAL_SHOT.make(), AbilityEnum.FAST_RELOAD.make(), AbilityEnum.MARKSMAN.make(),
+	 				AbilityEnum.NIGHT_FIGHTER.make(), AbilityEnum.RETURN_FIRE.make(), AbilityEnum.SADDLE_SHOT.make(),
+					AbilityEnum.SNIPER.make(), AbilityEnum.SWIFT_HUNTER.make(), AbilityEnum.TARGETEER.make()},
+	 null, null, null, null,
+	 50,
+	 new Loot[] {},
+	 null, null, null),
+	 
+	SOLDIER(R.string.soldier_name, false,
+	new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.DRIVING.pair(1), SkillEnum.MEDICINE.pair(1), SkillEnum.SURVIVAL.pair(1)},
+	new Pair[] {SkillEnum.CROSSBOW.pair(3), SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.LIGHT_ARTILLERY.pair(3),
+		SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.RIFLE.pair(4), SkillEnum.SHIELD.pair(2),
+		SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(3), SkillEnum.MEDICINE.pair(3),
+		SkillEnum.NAVIGATION.pair(2), SkillEnum.SNEAK.pair(2), SkillEnum.SURVIVAL.pair(3)},
+	new Ability[] {AbilityEnum.FIND_COVER.make(), AbilityEnum.SENTRY.make()},
+	new Ability[] {AbilityEnum.JACK_MARSHALL.make(), AbilityEnum.CAUTIOUS_ADVANCE.make(), AbilityEnum.CAVALRY_CHARGE.make(),
+					AbilityEnum.DISEASE_RESISTANCE.make(), AbilityEnum.FAST_RELOAD.make(), AbilityEnum.FIND_COVER.make(),
+					AbilityEnum.GRENADIER.make(), AbilityEnum.HIT_THE_DECK.make(), AbilityEnum.LANGUAGE.make(),
+					AbilityEnum.RIDE_BY_ATTACK.make(), AbilityEnum.ROLL_WITH_IT.make(), AbilityEnum.SADDLE_SHOT.make(),
+					AbilityEnum.SENTRY.make()},
+	null, null, null,
+	new Connection[] {Connection.make("kingdom military"), Connection.make("mercenary company")},
+	100,
+	null, null, null,
+	new zzCreateCharacterHook[] {new SoldierWeaponHook()}),
+	
+	FIRE_SORCERER(R.string.fire_sorcerer_name, true,
+	new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
+	new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
+				SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
+	new Ability[] {AbilityEnum.IMMUNITY_FIRE.make()},
+	new Ability[] {AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.DODGER.make(), AbilityEnum.ELEMENTAL_MASTERY.make(),
+					AbilityEnum.TRACELESS_PATH.make()},
+	new Spell[] {Spell.FIRE_STARTER, Spell.HOWLING_FLAMES, Spell.WALL_OF_FIRE},
+	new Spell[] {Spell.FIRE_STARTER, Spell.FLAMES_OF_WRATH, Spell.PROTECTION_FROM_FIRE, Spell.ASHEN_CLOUD, Spell.EXTINGUISHER,
+				Spell.HOWLING_FLAMES, Spell.IGNITE, Spell.IMMOLATION, Spell.WALL_OF_FIRE, Spell.BARRIER_OF_FLAMES,
+				Spell.CLEANSING_FIRE, Spell.FLARE, Spell.FUEL_THE_FLAMES, Spell.INFERNO, Spell.ASHES_TO_ASHES,
+				Spell.BLAZING_EFFIGY, Spell.SEA_OF_FIRE},
+	null, null,
+	75,
+	null, null,
+	new zzPrereqCheck[] {giftedPrereq()},
+	new zzCreateCharacterHook[] {new SorcererWeaponHook()}),
+	
+	ICE_SORCERER(R.string.ice_sorcerer_name, true,
+	 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
+	 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
+	 SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
+	 new Ability[] {AbilityEnum.IMMUNITY_COLD.make()},
+	 new Ability[] {AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.DODGER.make(), AbilityEnum.ELEMENTAL_MASTERY.make(),
+	 AbilityEnum.TRACELESS_PATH.make()},
+	 new Spell[] {Spell.BLIZZARD, Spell.CHILLER, Spell.ICE_BOLT},
+	 new Spell[] {Spell.BLIZZARD, Spell.ICE_SHIELD, Spell.PROTECTION_FROM_COLD, Spell.CHILLER, Spell.FROSTBITE, Spell.ICE_BOLT,
+	 				Spell.ICY_GRIP, Spell.SHATTER_STORM, Spell.STAYING_WINTERS_HAND, Spell.BRITTLE_FROST, Spell.DEEP_FREEZE,
+					Spell.FROZEN_GROUND, Spell.HOARFROST, Spell.WINTER_STORM, Spell.FREEZING_GRIP, Spell.FREEZING_MIST,
+					Spell.WHITE_OUT},
+	 null, null,
+	 75,
+	 null, null,
+	 new zzPrereqCheck[] {giftedPrereq()},
+	 new zzCreateCharacterHook[] {new SorcererWeaponHook()}),
+	 
+	STONE_SORCERER(R.string.stone_sorcerer_name, true,
+	 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
+	 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
+	 SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
+	 new Ability[] {},
+	 new Ability[] {AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.DODGER.make(), AbilityEnum.ELEMENTAL_MASTERY.make(),
+	 AbilityEnum.TRACELESS_PATH.make()},
+	 new Spell[] {Spell.BATTERING_RAM, Spell.SOLID_GROUND, Spell.STONE_STANCE},
+	 new Spell[] {Spell.EARTHS_CRADLE, Spell.ENTANGLE, Spell.STONE_STANCE, Spell.BATTERING_RAM, Spell.FORTIFY, Spell.FOXHOLE,
+	 				Spell.ROCK_WALL, Spell.SOLID_GROUND, Spell.STONE_STRENGTH, Spell.CREVASSE, Spell.EARTHQUAKE,
+					Spell.INHOSPITABLE_GROUND, Spell.RIFT, Spell.ROCK_HAMMER, Spell.EARTHSPLITTER, Spell.OBLITERATION,
+					Spell.SHOCK_WAVE},
+	 null, null,
+	 75,
+	 null, null,
+	 new zzPrereqCheck[] {giftedPrereq()},
+	 new zzCreateCharacterHook[] {new SorcererWeaponHook(), new StoneSorcererHook()}),
+	 
+	STORM_SORCERER(R.string.storm_sorcerer_name, true,
+	 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
+	 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
+	 SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
+	 new Ability[] {},
+	 new Ability[] {AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.DODGER.make(), AbilityEnum.ELEMENTAL_MASTERY.make(),
+	 AbilityEnum.TRACELESS_PATH.make()},
+	 new Spell[] {Spell.RAZOR_WIND, Spell.STORM_TOSSED, Spell.WIND_BLAST},
+	 new Spell[] {Spell.FAIR_WINDS, Spell.STORM_TOSSED, Spell.WIND_STRIKE, Spell.BOUNDLESS_CHARGE, Spell.CELERITY,
+	 				Spell.RAZOR_WIND, Spell.TELEKINESIS, Spell.WIND_BLAST, Spell.WINGS_OF_AIR, Spell.CHAIN_LIGHTNING,
+					Spell.DECELERATION, Spell.FOG_OF_WAR, Spell.LIGHTNING_TENDRILS, Spell.ZEPHYR, Spell.RAGING_WINDS,
+					Spell.TEMPEST, Spell.TORNADO},
+	 null, null,
+	 75,
+	 null, null,
+	 new zzPrereqCheck[] {giftedPrereq()},
+	 new zzCreateCharacterHook[] {new SorcererWeaponHook(), new StormSorcererHook()}),
+	 
+	SPY(R.string.spy_name, false,
+	new Pair[] {SkillEnum.COMMAND.pair(1), SkillEnum.DECEPTION.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.DISGUISE.pair(1),
+				SkillEnum.SNEAK.pair(1)},
+	new Pair[] {SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3),
+				SkillEnum.BRIBERY.pair(4), SkillEnum.COMMAND.pair(3), SkillEnum.CRYPTOGRAPHY.pair(4), SkillEnum.DECEPTION.pair(4),
+				SkillEnum.DISGUISE.pair(4), SkillEnum.ESCAPE_ARTIST.pair(4), SkillEnum.ETIQUETTE.pair(4), SkillEnum.FORGERY.pair(4),
+				SkillEnum.INTERROGATION.pair(4), SkillEnum.LAW.pair(4), SkillEnum.LOCK_PICKING.pair(2), SkillEnum.NEGOTIATION.pair(4),
+				SkillEnum.SEDUCTION.pair(4), SkillEnum.SNEAK.pair(4), SkillEnum.STREETWISE.pair(4)},
+	new Ability[] {AbilityEnum.BATTLE_PLAN_SHADOW.make(), AbilityEnum.COVER_IDENTITY.make()},
+	new Ability[] {AbilityEnum.BATTLE_PLAN_SHADOW.make(), AbilityEnum.COVER_IDENTITY.make(), AbilityEnum.IRON_WILL.make(),
+					AbilityEnum.LANGUAGE.make(), AbilityEnum.POISON_RESISTANCE.make(), AbilityEnum.PROWL.make(),
+					AbilityEnum.SIGNAL_LANGUAGE.make(), AbilityEnum.TRUTH_READER.make(), AbilityEnum.WAYLAY.make()},
+	null, null,
+	new Connection[] {Connection.make("intelligence network")},
+	new Connection[] {Connection.make("any")},
+	100,
+	new Loot[] {},
+	null, null,
+	new zzCreateCharacterHook[] {new SpyWeaponHook(), new LanguageHook()}),
+	
+	STORMBLADE(R.string.stormblade_name, true,
+	new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.ETIQUETTE.pair(1)},
+	new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.COMMAND.pair(4), SkillEnum.ETIQUETTE.pair(2), SkillEnum.MEDICINE.pair(2)},
+	new Ability[] {AbilityEnum.BLASTER.make(), AbilityEnum.SPECIALIZATION.make("Storm Glaive")},
+	new Ability[] {AbilityEnum.JACK_MARSHALL.make(), AbilityEnum.BLASTER.make(), AbilityEnum.GUNFIGHTER.make(),
+					AbilityEnum.LOAD_BEARING.make(), AbilityEnum.QUICK_WORK.make(), AbilityEnum.RELENTLESS_CHARGE.make(),
+					AbilityEnum.SPECIALIZATION.make("Storm Glaive")},
+	null, null,
+	new Connection[] {Connection.make("Cygnaran military")},
+	new Connection[] {Connection.make("Cygnaran military")},
+	0,
+	new Loot[] {},
+	null,
+	new zzPrereqCheck[] {stormbladePrereq()},
+	null),
+	
+	THIEF(R.string.thief_name, false,
+	 new Pair[] {SkillEnum.BRIBERY.pair(1), SkillEnum.DECEPTION.pair(1), SkillEnum.ESCAPE_ARTIST.pair(1), SkillEnum.LOCK_PICKING.pair(2),
+	 				SkillEnum.PICKPOCKET.pair(2), SkillEnum.SNEAK.pair(1), SkillEnum.STREETWISE.pair(1)},
+	 new Pair[] {SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(2), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(2),
+	 				SkillEnum.BRIBERY.pair(4), SkillEnum.CRAFT.pair(2), SkillEnum.DECEPTION.pair(4), SkillEnum.DISGUISE.pair(4),
+					SkillEnum.ESCAPE_ARTIST.pair(4), SkillEnum.ETIQUETTE.pair(1), SkillEnum.FORGERY.pair(4), SkillEnum.LAW.pair(2),
+					SkillEnum.LOCK_PICKING.pair(4), SkillEnum.NEGOTIATION.pair(4), SkillEnum.PICKPOCKET.pair(4), SkillEnum.SNEAK.pair(4),
+					SkillEnum.STREETWISE.pair(4)},
+	 new Ability[] {AbilityEnum.CONNIVER.make(), AbilityEnum.DODGER.make()},
+	 new Ability[] {AbilityEnum.APPRAISE.make(), AbilityEnum.CAMOUFLAGE.make(), AbilityEnum.CARD_SHARP.make(), AbilityEnum.CONNIVER.make(),
+	 				AbilityEnum.DODGER.make(), AbilityEnum.FLEET_FOOT.make(), AbilityEnum.GET_AWAY.make(), AbilityEnum.LANGUAGE.make("Five Cant")},
+	 null, null, null,
+	 new Connection[] {Connection.make("criminal")},
+	 75,
+	 new Loot[] {},
+	 null, null,
+	 new zzCreateCharacterHook[] {new ThiefWeaponHook()}),
+	
+	TRENCHER(R.string.trencher_name, true,
+	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.RIFLE.pair(1), SkillEnum.THROWN_WEAPON.pair(1)},
+	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.LIGHT_ARTILLERY.pair(4), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3),
+	 				SkillEnum.RIFLE.pair(4), SkillEnum.THROWN_WEAPON.pair(4), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(3),
+					SkillEnum.INTERROGATION.pair(3), SkillEnum.MEDICINE.pair(3), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
+	 new Ability[] {AbilityEnum.BAYONET_CHARGE.make(), AbilityEnum.DIG_IN.make()},
+	 new Ability[] {AbilityEnum.JACK_MARSHALL.make(), AbilityEnum.ANATOMICAL_PRECISION.make(), AbilityEnum.BAYONET_CHARGE.make(),
+	 				AbilityEnum.BOMBER.make(), AbilityEnum.DIG_IN.make(), AbilityEnum.FIRE_IN_THE_HOLE.make(), AbilityEnum.GRENADIER.make(),
+					AbilityEnum.HIT_THE_DECK.make(), AbilityEnum.RELENTLESS_CHARGE.make(), AbilityEnum.SPECIALIZATION.make("bayonet")},
+	 null, null,
+	 new Connection[] {Connection.make("Cygnaran military")},
+	 new Connection[] {Connection.make("Cygnaran military")},
+	 25,
+	 new Loot[] {},
+	 null,
+	 new zzPrereqCheck[] {trencherPrereq()},
+	 null),
+	
+	WARCASTER(R.string.warcaster_name, true,
+	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.PISTOL.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.DETECTION.pair(1)},
+	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.UNARMED.pair(2),
+	 				SkillEnum.COMMAND.pair(4)},
+	 new Ability[] {AbilityEnum.BOND.make()},
+	 new Ability[] {AbilityEnum.BOND.make(), AbilityEnum.FIELD_MARSHAL_MAGICAL_ATTACK.make(), AbilityEnum.FIELD_MARSHAL_RELENTLESS_CHARGE.make(),
+	 				AbilityEnum.FIELD_MARSHAL_SHIELD_GUARD.make(), AbilityEnum.NATURAL_LEADER.make()},
+	 new Spell[] {Spell.BOUNDLESS_CHARGE, Spell.CONVECTION},
+	 new Spell[] {Spell.ARCANE_STRIKE, Spell.JUMP_START, Spell.RETURN_FIRE, Spell.ARCANE_BOLT, Spell.AURA_OF_PROTECTION,
+	 				Spell.BATTERING_RAM, Spell.BOUNDLESS_CHARGE, Spell.CONVECTION, Spell.FORTIFY, Spell.FOXHOLE,
+					Spell.REDLINE, Spell.REFUGE, Spell.SNIPE, Spell.TEMPER_METAL, Spell.TRANSFERENCE, Spell.AWARENESS,
+					Spell.BATTEN_DOWN_THE_HATCHES, Spell.ELIMINATOR, Spell.FAIL_SAFE, Spell.GRIND, Spell.GUIDED_FIRE,
+					Spell.IRON_AGGRESSION, Spell.RIFT, Spell.SUPERIORITY},
+	 null,
+	 new Connection[] {Connection.make("kingdom"), Connection.make("mercenary company")},
+	 0,
+	 new Loot[] {},
+	 new String[] {"A warcaster can boost with mechanikal weapons they have bonded to"},
+	 new zzPrereqCheck[] {giftedPrereq()},
+	 new zzCreateCharacterHook[] {new WarcasterEquipmentHook()});
+	 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
 	 new Pair[] {},
@@ -305,9 +610,7 @@ public enum Career implements zzPrereqCheck
 	 new Loot[] {},
 	 new String[] {},
 	 new zzPrereqCheck[] {giftedPrereq()},
-	 new zzCreateCharacterHook[] {new ArcanistHook()}),*/
-					  
-	WARCASTER(R.string.warcaster_name,false,null,null,null,null,null,null,null,null,0,null,null,null,null);			  
+	 new zzCreateCharacterHook[] {new ArcanistHook()}),*/		  
 	
 	//Done!
 	private Career(int pNameResource, boolean pStartOnly,
@@ -430,6 +733,36 @@ public enum Career implements zzPrereqCheck
 	public static zzPrereqCheck ironFangPrereq(){
 		return new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
+				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
+				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
+				if(allowedCareers.containsAll(myChar.careers)){return new zzPrereqCheckResult(true, null);}
+				//else
+				return new zzPrereqCheckResult(false, null);
+			}
+		};
+	}
+	
+	public static zzPrereqCheck stormbladePrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
+				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
+				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
+				if(allowedCareers.containsAll(myChar.careers)){return new zzPrereqCheckResult(true, null);}
+				//else
+				return new zzPrereqCheckResult(false, null);
+			}
+		};
+	}
+	
+	public static zzPrereqCheck trencherPrereq(){
+		return new zzPrereqCheck(){
+			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
+				//geez, PP... restrictive enough?
+				if(myChar.race == null || (myChar.race != Race.HUMAN && myChar.race != Race.OGRUN
+					&& myChar.race != Race.TROLLKIN) ){return new zzPrereqCheckResult(false, null);}
+				
 				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
 				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
 				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
@@ -646,5 +979,121 @@ public enum Career implements zzPrereqCheck
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
 			return l;
 		}
+	}
+	
+	public static class MilitaryOfficerWeaponHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.GREAT_WEAPON.make());
+			return l;
+		}
+	}
+	
+	public static class PirateHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.THROWN_WEAPON.make());
+			return l;
+		}
+	}
+	
+	//TODO: Finish
+	public static class PistoleerHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	public static class PriestWeaponHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.GREAT_WEAPON.make());
+			return l;
+		}
+	}
+	
+	public static class RangerWeaponHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make()); l.add(SkillEnum.RIFLE.make());
+			l.add(SkillEnum.PISTOL.make());
+			return l;
+		}
+	}
+	
+	//TODO: Finish
+	public static class SoldierWeaponHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	public static class SorcererWeaponHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make());
+			return l;
+		}
+	}
+	
+	//TODO: Finish
+	public static class StoneSorcererHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	//TODO: Finish
+	public static class StormSorcererHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	public static class SpyWeaponHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.THROWN_WEAPON.make());
+			return l;
+		}
+	}
+	
+	public static class ThiefWeaponHook extends zzChooseOneMilitarySkillHook
+	{
+		@Override protected List<Skill> getOptions()
+		{
+			List<Skill> l = new ArrayList<Skill>(2);
+			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.THROWN_WEAPON.make());
+			return l;
+		}
+	}
+	
+	//TODO: Finish
+	public static class WarcasterEquipmentHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
 	}
 }

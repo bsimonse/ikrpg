@@ -51,17 +51,23 @@
     <string name="man_at_arms_name">Man at Arms</string>
     <string name="man_at_arms_desc">Desc</string>
 
-    <string name="miltary_officer_name">Military Officer</string>
-    <string name="miltary_officer_desc">Desc</string>
+    <string name="military_officer_name">Military Officer</string>
+    <string name="military_officer_desc">Desc</string>
 
     <string name="pirate_name">Pirate</string>
     <string name="pirate_desc">Arrrrrr</string>
 
+	<string name="pistoleer_name">Pistoleer</string>
+    <string name="pistoleer_desc">Bangbang</string>
+	
     <string name="priest_of_menoth_name">Preist of Menoth</string>
     <string name="priest_of_menoth_desc">Desc</string>
 
     <string name="priest_of_morrow_name">Priest of Morrow</string>
     <string name="priest_of_morrow_desc">Desc</string>
+	
+	<string name="ranger_name">Ranger</string>
+    <string name="ranger_desc">Desc</string>
 	
     <string name="rifleman_name">Rifleman</string>
     <string name="rifleman_desc">Desc</string>
@@ -69,9 +75,18 @@
     <string name="soldier_name">Soldier</string>
     <string name="soldier_desc">Desc</string>
 
-    <string name="sorceror_name">Sorceror</string>
-    <string name="sorceror_desc">Desc</string>
+    <string name="fire_sorcerer_name">Fire Sorceror</string>
+    <string name="fire_sorcerer_desc">Desc</string>	
 
+	<string name="ice_sorcerer_name">Ice Sorceror</string>
+    <string name="ice_sorcerer_desc">Desc</string>
+	
+	<string name="storm_sorcerer_name">Storm Sorceror</string>
+    <string name="storm_sorcerer_desc">Desc</string>
+	
+	<string name="stone_sorcerer_name">Stone Sorceror</string>
+    <string name="stone_sorcerer_desc">Desc</string>
+	
     <string name="spy_name">Spy</string>
     <string name="spy_desc">Desc</string>
 

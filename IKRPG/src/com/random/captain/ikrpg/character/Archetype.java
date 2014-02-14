@@ -15,44 +15,28 @@ public enum Archetype implements zzPrereqCheck
 			new GiftedArcaneHook()
 		},
 	
-		new zzPrereqCheck(){
-			@Override
-			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null);}
-		}
+		null
 	),
-	
+
 	INTELLECTUAL(R.string.intellectual_name, R.string.intellectual_longDesc, R.string.intellectual_shortDesc, R.string.intellectual_page,
 		new zzCreateCharacterHook[] { 
 			new NonGiftedArcaneHook()
 		},
-		new zzPrereqCheck(){
-			@Override
-			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null); }
-		}
+		null
 	),
 	
 	MIGHTY(R.string.mighty_name, R.string.mighty_longDesc, R.string.mighty_shortDesc, R.string.mighty_page,
 		new zzCreateCharacterHook[] { 
 			new NonGiftedArcaneHook()
 		},
-		new zzPrereqCheck(){
-			@Override
-			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null);}
-		}
+		null
 	),
 	
 	SKILLED(R.string.skilled_name, R.string.skilled_longDesc, R.string.skilled_shortDesc, R.string.skilled_page,
 		new zzCreateCharacterHook[] { 
 			new NonGiftedArcaneHook()
 		},
-		new zzPrereqCheck(){
-			@Override
-			public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
-			{return new zzPrereqCheckResult(myChar.race() == Race.HUMAN, null);}
-		}
+		null
 	);
 	
 	private Archetype(int pName, int pLongDesc, int pShortDesc, int pPage, zzCreateCharacterHook[] pHooks, zzPrereqCheck pPrereq)
@@ -120,7 +104,10 @@ public enum Archetype implements zzPrereqCheck
 	@Override public String toString(){return displayName();}
 	@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 	{
-		if(prereq == null){return new zzPrereqCheckResult(true, null);}
-		return prereq.meetsPrereq(myChar);
+		boolean inRace = myChar.race().archetypes().contains(this);
+		if(prereq == null){return new zzPrereqCheckResult(inRace, null);}
+		zzPrereqCheckResult result = prereq.meetsPrereq(myChar);
+		result.isAllowed = result.isAllowed && inRace;
+		return result;
 	}
 }

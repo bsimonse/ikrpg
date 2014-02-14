@@ -26,9 +26,55 @@ public enum Race
 		  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 7),
 		  Pair.create(Stat.INTELLECT, 7), Pair.create(Stat.ARCANE, 8), Pair.create(Stat.PERCEPTION, 7) },
 		  
+		new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
+		
 		new zzCreateCharacterHook[] {new humanHook()}
 		),
 	
+	DWARF(R.string.dwarf_name,
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 4), Pair.create(Stat.STRENGTH, 5),
+			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
+			  Pair.create(Stat.INTELLECT, 4), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 6),
+			  Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 5), Pair.create(Stat.POISE, 4),
+			  Pair.create(Stat.INTELLECT, 5), Pair.create(Stat.ARCANE, 4), Pair.create(Stat.PERCEPTION, 4) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 7),
+			  Pair.create(Stat.AGILITY, 6), Pair.create(Stat.PROWESS, 6), Pair.create(Stat.POISE, 5),
+			  Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 6), Pair.create(Stat.PERCEPTION, 6) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 8), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 8),
+			  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 6),
+			  Pair.create(Stat.INTELLECT, 7), Pair.create(Stat.ARCANE, 7), Pair.create(Stat.PERCEPTION, 7) },
+
+		  new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
+		  
+		  new zzCreateCharacterHook[] {new dwarfHook()}
+		  ),
+	
+	GOBBER(R.string.gobber_name,
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 4), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 3),
+			  Pair.create(Stat.AGILITY, 4), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
+			  Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 4),
+			  Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 5), Pair.create(Stat.POISE, 5),
+			  Pair.create(Stat.INTELLECT, 4), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 4) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 5),
+			  Pair.create(Stat.AGILITY, 6), Pair.create(Stat.PROWESS, 6), Pair.create(Stat.POISE, 6),
+			  Pair.create(Stat.INTELLECT, 5), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 4) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 6),
+			  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 7),
+			  Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 5) },
+
+		  new Archetype[] {Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
+		   
+		  new zzCreateCharacterHook[] {new gobberHook()}
+		  ),
+		  
 	IOSAN(R.string.iosan_name,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
@@ -46,9 +92,55 @@ public enum Race
 			  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 7),
 			  Pair.create(Stat.INTELLECT, 7), Pair.create(Stat.ARCANE, 8), Pair.create(Stat.PERCEPTION, 7) },
 
+		  new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
+		  
 		  new zzCreateCharacterHook[] {new iosanHook()}
 		  ),
+	
+	NYSS(R.string.nyss_name,
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
+			  Pair.create(Stat.AGILITY, 4), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
+			  Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 6),
+			  Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 5), Pair.create(Stat.POISE, 5),
+			  Pair.create(Stat.INTELLECT, 5), Pair.create(Stat.ARCANE, 4), Pair.create(Stat.PERCEPTION, 5) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 7),
+			  Pair.create(Stat.AGILITY, 6), Pair.create(Stat.PROWESS, 6), Pair.create(Stat.POISE, 6),
+			  Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 6), Pair.create(Stat.PERCEPTION, 6) },
+
+		  new Pair[] { Pair.create(Stat.PHYSIQUE, 8), Pair.create(Stat.SPEED, 7), Pair.create(Stat.STRENGTH, 8),
+			  Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 7),
+			  Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 7), Pair.create(Stat.PERCEPTION, 6) },
+
+		 new Archetype[] {Archetype.GIFTED, Archetype.MIGHTY, Archetype.SKILLED},
+		 
+		  new zzCreateCharacterHook[] {new nyssHook()}
+		  ),
+	
+	OGRUN(R.string.ogrun_name,
+		 new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 6),
+			 Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
+			 Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 2) },
+
+		 new Pair[] { Pair.create(Stat.PHYSIQUE, 7), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 8),
+			 Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 5), Pair.create(Stat.POISE, 4),
+			 Pair.create(Stat.INTELLECT, 5), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 4) },
+
+		 new Pair[] { Pair.create(Stat.PHYSIQUE, 8), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 9),
+			 Pair.create(Stat.AGILITY, 5), Pair.create(Stat.PROWESS, 6), Pair.create(Stat.POISE, 5),
+			 Pair.create(Stat.INTELLECT, 5), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 5) },
+
+		 new Pair[] { Pair.create(Stat.PHYSIQUE, 9), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 10),
+			 Pair.create(Stat.AGILITY, 6), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 6),
+			 Pair.create(Stat.INTELLECT, 6), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 6) },
+
+		 new Archetype[] {Archetype.MIGHTY, Archetype.SKILLED},
 		  
+		 new zzCreateCharacterHook[] {new ogrunHook()}
+		 ),
+		 
 	TROLLKIN(R.string.trollkin_name,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 5),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 2),
@@ -66,6 +158,8 @@ public enum Race
 			Pair.create(Stat.AGILITY, 7), Pair.create(Stat.PROWESS, 7), Pair.create(Stat.POISE, 6),
 			Pair.create(Stat.INTELLECT,6), Pair.create(Stat.ARCANE, 7), Pair.create(Stat.PERCEPTION, 6)},
 		
+		new Archetype[] {Archetype.GIFTED, Archetype.MIGHTY, Archetype.SKILLED},
+			 
 		new zzCreateCharacterHook[] {new trollkinHook()}
 	);
 	
@@ -73,6 +167,7 @@ public enum Race
 							Pair<Stat, Integer>[] pHeroStats,
 							Pair<Stat, Integer>[] pVetStats,
 							Pair<Stat, Integer>[] pEpicStats,
+							Archetype[] pArchetypes,
 							zzCreateCharacterHook[] pPostCreateHooks)
 	{
 		name = IKRPGApp.getContext().getString(pNameResourceID);
@@ -80,6 +175,7 @@ public enum Race
 		heroStats = Arrays.asList(pHeroStats);
 		vetStats = Arrays.asList(pVetStats);
 		epicStats = Arrays.asList(pEpicStats);
+		archetypes = Arrays.asList(pArchetypes);
 		postCreateHooks = pPostCreateHooks != null ? Arrays.asList(pPostCreateHooks) : new ArrayList<zzCreateCharacterHook>(10);
 	}
 	
@@ -88,6 +184,7 @@ public enum Race
 	private Collection<Pair<Stat, Integer>> heroStats;
 	private Collection<Pair<Stat, Integer>> vetStats;
 	private Collection<Pair<Stat, Integer>> epicStats;
+	private Collection<Archetype> archetypes;
 	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
 	@Override
@@ -131,6 +228,7 @@ public enum Race
 	Collection<Pair<Stat, Integer>> vetStats(){return Collections.unmodifiableCollection(vetStats);}
 	Collection<Pair<Stat, Integer>> epicStats(){return Collections.unmodifiableCollection(epicStats);}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	Collection<Archetype> archetypes(){return archetypes;}
 	
 	/* Hooks! */
 	
@@ -141,7 +239,40 @@ public enum Race
 		@Override public void undoHook(){}
 		@Override public void doDefaultCase(){}
 	}
+	
+	public static class dwarfHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	public static class gobberHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
 	public static class iosanHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	public static class nyssHook extends zzCreateCharacterHook
+	{
+		@Override public int getPriority(){return 49;}
+		@Override public boolean hasUI(){return false;}
+		@Override public void undoHook(){}
+		@Override public void doDefaultCase(){}
+	}
+	
+	public static class ogrunHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
 		@Override public boolean hasUI(){return false;}
