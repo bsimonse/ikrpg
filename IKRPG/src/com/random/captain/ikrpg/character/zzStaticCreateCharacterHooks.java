@@ -137,6 +137,14 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 		for(Career career : Career.values())
 		{
 			zzPrereqCheckResult result = career.meetsPrereq(myChar);
+			if(isSecondCareer)
+			{
+				//gotta make sure original career "approves"
+				Career firstCareer = myChar.careers.toArray(new Career[1])[0];
+				Log.i("IKRPG","First career?"+firstCareer.displayName());
+				if(firstCareer!=null && !firstCareer.agreesWithDuringCreation(career))
+				{continue;}
+			}
 
 			//TODO:
 			//Additional questions ARE displayed, with stars!

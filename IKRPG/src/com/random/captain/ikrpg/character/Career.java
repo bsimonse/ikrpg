@@ -22,7 +22,7 @@ public enum Career implements zzPrereqCheck
 								AbilityEnum.GRENADIER.make(),AbilityEnum.POISON_RESISTANCE.make()},
 				null, null,
 				null, new Connection[] {Connection.make("alchemical order")},
-				50, new Loot[]{}, null,
+				50, new Loot[]{}, null, null,
 				null, null),
 								
 	@SuppressWarnings("unchecked")
@@ -41,7 +41,7 @@ public enum Career implements zzPrereqCheck
 							Spell.FULL_THROTTLE, Spell.GRIND, Spell.GUIDED_FIRE, Spell.IRON_AGGRESSION, Spell.SUPERIORITY, Spell.BLACK_OUT,
 							Spell.TIDE_OF_STEEL, Spell.VOLTAIC_LOCK},
 				null, new Connection[] {Connection.make("mechaniks organization")},
-				50, new Loot[]{}, null,
+				50, new Loot[]{}, null, null,
 				new zzPrereqCheck[]{giftedPrereq()},
 				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
 	
@@ -59,7 +59,7 @@ public enum Career implements zzPrereqCheck
 							Spell.FORCE_FIELD,Spell.HEX_BLAST,Spell.INHOSPITABLE_GROUND,Spell.MIRAGE,Spell.RIFT,Spell.ROCK_HAMMER,Spell.ZEPHYR,Spell.FORCE_HAMMER,
 							Spell.OVERMIND,Spell.TEMPEST},
 			 null, new Connection[] {Connection.make("magical order")},
-			 75, null, null,
+			 75, null, null, null,
 			 new zzPrereqCheck[]{giftedPrereq()},
 			 new zzCreateCharacterHook[] {new ArcanistHook()}),
 			 
@@ -74,7 +74,7 @@ public enum Career implements zzPrereqCheck
 							AbilityEnum.PRIVILEGE.make(), AbilityEnum.RALLYING_CRY.make(), AbilityEnum.SWIFT_RIDER.make()},
 			 null, null,
 			 new Connection[] {Connection.make("nobility")}, new Connection[] {Connection.make("any...?")},
-			 200, null, null,
+			 200, null, null, null,
 			 new zzPrereqCheck[]{humanPrereq()},
 			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new LanguageHook()}),
 	
@@ -88,7 +88,7 @@ public enum Career implements zzPrereqCheck
 			 				AbilityEnum.ROLL_WITH_IT.make(), AbilityEnum.TAKE_DOWN.make(), AbilityEnum.WAYLAY.make()},
 			 null, null,
 			 null, new Connection[]{Connection.make("any...?")},
-			 75, null, null,
+			 75, null, null, null,
 			 null,
 			 new zzCreateCharacterHook[] {new BountyHunterHook()}),
 	
@@ -102,7 +102,7 @@ public enum Career implements zzPrereqCheck
 							AbilityEnum.SPECIALIZATION.make("Assassin Blade"), AbilityEnum.TWO_WEAPON_FIGHTING.make(), AbilityEnum.WAYLAY.make()},
 			 null, null, 
 			 null, new Connection[]{Connection.make("criminal")},
-			 75, null, null,
+			 75, null, null, null,
 			 null,
 			 new zzCreateCharacterHook[] {new CutthroatHook()}),
 	
@@ -116,7 +116,7 @@ public enum Career implements zzPrereqCheck
 							AbilityEnum.TWO_WEAPON_FIGHTING.make()},
 			 null, null, 
 			 null, null,
-			 75, null, null,
+			 75, null, null, null,
 			 null, null),
 	
 	EXPLORER(R.string.explorer_name, false,
@@ -135,7 +135,7 @@ public enum Career implements zzPrereqCheck
 			 150,
 			 new Loot[] {},
 			 new String[] {"A character who chooses Explorer as a starting career gains 25 gc each month from their patron for as long as they continue to explore new regions, report back regularly, and bring his patron occasional gifts from exotic places."},
-			 null,
+			 null, null,
 			 new zzCreateCharacterHook[] {new ExplorerMilitarySkillHook(), new LanguageHook()}),
 	
 	FELL_CALLER(R.string.fell_caller_name, false,
@@ -149,7 +149,7 @@ public enum Career implements zzPrereqCheck
 			 null, null,
 			 null,
 			 new Connection[] {Connection.make("kriel")},
-			 75, null, null,
+			 75, null, null, null,
 			 new zzPrereqCheck[] {trollkinPrereq()},
 			 new zzCreateCharacterHook[] {new FellCallerHook()}),
 	
@@ -167,7 +167,7 @@ public enum Career implements zzPrereqCheck
 			 25,
 			 new Loot[] {},
 			 null,
-			 null,
+			 null, null,
 			 new zzCreateCharacterHook[] {new FieldMechanikMilitarySkillHook(), new FieldMechanikJackHook()}),
 	
 	GUN_MAGE(R.string.gun_mage_name, false,
@@ -187,7 +187,7 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("gun mage order")},
 			 25,
 			 new Loot[] {},
-			 null,
+			 null, null,
 			 new zzPrereqCheck[] {giftedPrereq()},
 			 new zzCreateCharacterHook[] {new GunMageMilitarySkillHook(), new GunMageMagelockWeaponHook()}),
 	
@@ -207,7 +207,7 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("criminal")},
 			 75,
 			 new Loot[] {},
-			 null, null,
+			 null, null, null,
 			 new zzCreateCharacterHook[] {new HighwaymanHook()}),
 	
 	INVESTIGATOR(R.string.investigator_name, false,
@@ -223,7 +223,7 @@ public enum Career implements zzPrereqCheck
 			 null, null,
 			 null,
 			 new Connection[] {Connection.make("any")},
-			 100,null,null,null,
+			 100,null,null,null, null,
 			 new zzCreateCharacterHook[] {new LanguageHook(), new InvestigatorMilitarySkillHook(), new InvestigatorHyperPerceptionHook()}),
 	
 	IRON_FANG(R.string.iron_fang_name, true,
@@ -239,8 +239,13 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("Khadoran military")},
 			 25,
 			 new Loot[] {},
-			 null,
-			 new zzPrereqCheck[] {humanPrereq(), ironFangPrereq()},
+			 null, new HolyCrapWhatIsWrongWithMe(){
+				 @Override
+				 public Collection<Career> 	getEmLater(){
+					 return ironFangCareers();
+				 } 
+			 },
+			 new zzPrereqCheck[] {humanPrereq()},
 			 null),
 	
 	KNIGHT(R.string.knight_name, false,
@@ -256,7 +261,7 @@ public enum Career implements zzPrereqCheck
 			 null, null,
 			 new Connection[] {Connection.make("knightly order")},
 			 new Connection[] {Connection.make("knightly order")},
-			 100, null, null,
+			 100, null, null, null,
 			 new zzPrereqCheck[] {humanOrIosanPrereq()},
 			 null),
 	
@@ -273,7 +278,7 @@ public enum Career implements zzPrereqCheck
 			 null, null,
 			 new Connection[] {Connection.make("Retribution of Scyrah")},
 			 new Connection[] {Connection.make("Retribution of Scyrah")},
-			 75, null, null,
+			 75, null, null, null,
 			 new zzPrereqCheck[] {iosanPrereq()},
 			 new zzCreateCharacterHook[] {new MageHunterHook()}),
 	
@@ -290,7 +295,7 @@ public enum Career implements zzPrereqCheck
 			 null,
 			 new Connection[] {Connection.make("employer")},
 			 100, null, null,
-			 null,
+			 null, null,
 			 new zzCreateCharacterHook[] {new ManAtArmsHook()}),
 	
 	MILITARY_OFFICER(R.string.military_officer_name, false,
@@ -309,7 +314,7 @@ public enum Career implements zzPrereqCheck
 	 new Connection[] {Connection.make("mercenary company"), Connection.make("kingdom's military")},
 	 100,
 	 new Loot[] {},
-	 null,null,
+	 null,null, null,
 	 new zzCreateCharacterHook[] {new MilitaryOfficerWeaponHook()}),
 	
 	PIRATE(R.string.pirate_name, false,
@@ -325,7 +330,7 @@ public enum Career implements zzPrereqCheck
 	 null, null, null,
 	 new Connection[] {Connection.make("pirate crew")},
 	 75,
-	 null, null, null,
+	 null, null, null, null,
 	 new zzCreateCharacterHook[] {new PirateHook()}),
 	
 	PISTOLEER(R.string.pistoleer_name, false,
@@ -338,7 +343,7 @@ public enum Career implements zzPrereqCheck
 	 null, null, null, null,
 	 50,
 	 new Loot[] {},
-	 null, null,
+	 null, null, null,
 	 new zzCreateCharacterHook[] {new PistoleerHook()}),
 	
 	 PRIEST_OF_MENOTH(R.string.priest_of_menoth_name, false,
@@ -358,7 +363,7 @@ public enum Career implements zzPrereqCheck
 	 new Connection[] {Connection.make("Menite temple")},
 	 new Connection[] {Connection.make("church")},
 	 75,
-	 null, null,
+	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq(), humanPrereq()},
 	 new zzCreateCharacterHook[] {new PriestWeaponHook()}),
 	 
@@ -380,7 +385,7 @@ public enum Career implements zzPrereqCheck
 	new Connection[] {Connection.make("Morrowan church")},
 	new Connection[] {Connection.make("church")},
 	75,
-	null, null,
+	null, null, null,
 	new zzPrereqCheck[] {giftedPrereq(), humanPrereq()},
 	new zzCreateCharacterHook[] {new PriestWeaponHook()}),
 
@@ -399,7 +404,7 @@ public enum Career implements zzPrereqCheck
 					AbilityEnum.SWIFT_HUNTER.make(), AbilityEnum.SWIFT_RIDER.make(), AbilityEnum.TRACELESS_PATH.make()},
 	 null, null, null, null,
 	 75,
-	 null, null, null,
+	 null, null, null, null,
 	 new zzCreateCharacterHook[] {new RangerWeaponHook()}),
 	
 	RIFLEMAN(R.string.rifleman_name, false,
@@ -411,7 +416,7 @@ public enum Career implements zzPrereqCheck
 					AbilityEnum.SNIPER.make(), AbilityEnum.SWIFT_HUNTER.make(), AbilityEnum.TARGETEER.make()},
 	 null, null, null, null,
 	 50,
-	 new Loot[] {},
+	 new Loot[] {}, null,
 	 null, null, null),
 	 
 	SOLDIER(R.string.soldier_name, false,
@@ -429,7 +434,7 @@ public enum Career implements zzPrereqCheck
 	null, null, null,
 	new Connection[] {Connection.make("kingdom military"), Connection.make("mercenary company")},
 	100,
-	null, null, null,
+	null, null, null, null,
 	new zzCreateCharacterHook[] {new SoldierWeaponHook()}),
 	
 	FIRE_SORCERER(R.string.fire_sorcerer_name, true,
@@ -446,7 +451,7 @@ public enum Career implements zzPrereqCheck
 				Spell.BLAZING_EFFIGY, Spell.SEA_OF_FIRE},
 	null, null,
 	75,
-	null, null,
+	null, null, null,
 	new zzPrereqCheck[] {giftedPrereq()},
 	new zzCreateCharacterHook[] {new SorcererWeaponHook()}),
 	
@@ -464,7 +469,7 @@ public enum Career implements zzPrereqCheck
 					Spell.WHITE_OUT},
 	 null, null,
 	 75,
-	 null, null,
+	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq()},
 	 new zzCreateCharacterHook[] {new SorcererWeaponHook()}),
 	 
@@ -482,7 +487,7 @@ public enum Career implements zzPrereqCheck
 					Spell.SHOCK_WAVE},
 	 null, null,
 	 75,
-	 null, null,
+	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq()},
 	 new zzCreateCharacterHook[] {new SorcererWeaponHook(), new StoneSorcererHook()}),
 	 
@@ -500,7 +505,7 @@ public enum Career implements zzPrereqCheck
 					Spell.TEMPEST, Spell.TORNADO},
 	 null, null,
 	 75,
-	 null, null,
+	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq()},
 	 new zzCreateCharacterHook[] {new SorcererWeaponHook(), new StormSorcererHook()}),
 	 
@@ -521,7 +526,7 @@ public enum Career implements zzPrereqCheck
 	new Connection[] {Connection.make("any")},
 	100,
 	new Loot[] {},
-	null, null,
+	null, null, null,
 	new zzCreateCharacterHook[] {new SpyWeaponHook(), new LanguageHook()}),
 	
 	STORMBLADE(R.string.stormblade_name, true,
@@ -536,8 +541,13 @@ public enum Career implements zzPrereqCheck
 	new Connection[] {Connection.make("Cygnaran military")},
 	0,
 	new Loot[] {},
-	null,
-	new zzPrereqCheck[] {stormbladePrereq()},
+		null, new HolyCrapWhatIsWrongWithMe(){
+			@Override
+			public Collection<Career> getEmLater(){
+				return stormbladeCareers();
+			} 
+		},
+	new zzPrereqCheck[] {humanPrereq()},
 	null),
 	
 	THIEF(R.string.thief_name, false,
@@ -555,7 +565,7 @@ public enum Career implements zzPrereqCheck
 	 new Connection[] {Connection.make("criminal")},
 	 75,
 	 new Loot[] {},
-	 null, null,
+	 null, null, null,
 	 new zzCreateCharacterHook[] {new ThiefWeaponHook()}),
 	
 	TRENCHER(R.string.trencher_name, true,
@@ -572,7 +582,12 @@ public enum Career implements zzPrereqCheck
 	 new Connection[] {Connection.make("Cygnaran military")},
 	 25,
 	 new Loot[] {},
-	 null,
+		null, new HolyCrapWhatIsWrongWithMe(){
+			@Override
+			public Collection<Career> getEmLater(){
+				return trencherCareers();
+			} 
+		},
 	 new zzPrereqCheck[] {trencherPrereq()},
 	 null),
 	
@@ -594,6 +609,7 @@ public enum Career implements zzPrereqCheck
 	 0,
 	 new Loot[] {},
 	 new String[] {"A warcaster can boost with mechanikal weapons they have bonded to"},
+	 null,
 	 new zzPrereqCheck[] {giftedPrereq()},
 	 new zzCreateCharacterHook[] {new WarcasterEquipmentHook()});
 	 
@@ -618,7 +634,7 @@ public enum Career implements zzPrereqCheck
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
 					Connection[] pStartConnections, Connection[] pConnections,
-					int pGold, Loot[] pLoot, String[] pSpecialRules,
+					int pGold, Loot[] pLoot, String[] pSpecialRules,HolyCrapWhatIsWrongWithMe pAllowedCareers,
 					zzPrereqCheck[] pPrereqChecks, zzCreateCharacterHook[] pPostCreateHook)
 	{
 		Context c = IKRPGApp.getContext();
@@ -636,10 +652,17 @@ public enum Career implements zzPrereqCheck
 		startLoot = pLoot != null ? Arrays.asList(pLoot) : new ArrayList<Loot>(5);
 		specialRules = pSpecialRules != null ? Arrays.asList(pSpecialRules) : new ArrayList<String>(5);
 		prereqChecks = pPrereqChecks != null ? Arrays.asList(pPrereqChecks) : new ArrayList<zzPrereqCheck>(5);
+		allowedCareerGetter = pAllowedCareers;
+		
 		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCreateCharacterHook>(10);
 	}
 	
 	@Override public String toString(){return displayName();}
+	
+	interface HolyCrapWhatIsWrongWithMe
+	{
+		Collection<Career> getEmLater();
+	}
 	
 	private String name;
 	private boolean startOnly;
@@ -654,6 +677,7 @@ public enum Career implements zzPrereqCheck
 	private int startGold;
 	private Collection<Loot> startLoot;
 	private List<String> specialRules;
+	private HolyCrapWhatIsWrongWithMe allowedCareerGetter;
 	private Collection<zzPrereqCheck> prereqChecks;
 	private Collection<zzCreateCharacterHook> postCreateHooks;
 	
@@ -670,7 +694,25 @@ public enum Career implements zzPrereqCheck
 	public int startGold(){return startGold;}
 	public Collection<Loot> startLoot(){return startLoot;}
 	public List<String> specialRules(){return specialRules;}
+	public Collection<Career> allowedStartCareers(){if(allowedCareerGetter!=null){return allowedCareerGetter.getEmLater();}return new ArrayList<Career>(5);}
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	
+	public boolean agreesWithDuringCreation(Career firstCareer)
+	{
+		Collection<Career> atRunTime = allowedStartCareers();
+		Collection<Career> firstAtRunTime = firstCareer.allowedStartCareers();
+		
+		//Check to see if I'm happy with other career.
+		if(atRunTime.size() > 0 && !atRunTime.contains(firstCareer))
+		{return false;}
+		
+		//Check to see if other career is happy with me
+		if(firstAtRunTime.size() > 0 && !firstAtRunTime.contains(this))
+		{return false;}
+		
+		//looks like both are fine with it!
+		return true;
+	}
 	
 	@Override
 	public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
@@ -730,45 +772,12 @@ public enum Career implements zzPrereqCheck
 		};
 	}
 	
-	public static zzPrereqCheck ironFangPrereq(){
-		return new zzPrereqCheck(){
-			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
-				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
-				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
-				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
-				if(allowedCareers.containsAll(myChar.careers)){return new zzPrereqCheckResult(true, null);}
-				//else
-				return new zzPrereqCheckResult(false, null);
-			}
-		};
-	}
-	
-	public static zzPrereqCheck stormbladePrereq(){
-		return new zzPrereqCheck(){
-			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
-				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
-				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
-				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
-				if(allowedCareers.containsAll(myChar.careers)){return new zzPrereqCheckResult(true, null);}
-				//else
-				return new zzPrereqCheckResult(false, null);
-			}
-		};
-	}
-	
 	public static zzPrereqCheck trencherPrereq(){
 		return new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar){
-				//geez, PP... restrictive enough?
 				if(myChar.race == null || (myChar.race != Race.HUMAN && myChar.race != Race.OGRUN
 					&& myChar.race != Race.TROLLKIN) ){return new zzPrereqCheckResult(false, null);}
-				
-				if(myChar.careers.size() == 0){return new zzPrereqCheckResult(true, null);}
-				ArrayList<Career> allowedCareers = new ArrayList<Career>(4);
-				allowedCareers.addAll(Arrays.asList(new Career[]{Career.ARISTOCRAT /*TODO: ADD OTHERS*/}));
-				if(allowedCareers.containsAll(myChar.careers)){return new zzPrereqCheckResult(true, null);}
-				//else
-				return new zzPrereqCheckResult(false, null);
+				return new zzPrereqCheckResult(true, null);
 			}
 		};
 	}
@@ -780,6 +789,26 @@ public enum Career implements zzPrereqCheck
 				return new zzPrereqCheckResult(myChar.race == Race.HUMAN || myChar.race == Race.IOSAN, null);
 			}
 		};
+	}
+	
+	public static Collection<Career> ironFangCareers(){
+		Collection<Career> careers = new ArrayList<Career>(5);
+		careers.add(ARISTOCRAT); careers.add(MILITARY_OFFICER); careers.add(SOLDIER); careers.add(WARCASTER);
+		return careers;
+	}
+	
+	public static Collection<Career> stormbladeCareers(){
+		Collection<Career> careers = new ArrayList<Career>(6);
+		careers.add(ARISTOCRAT); careers.add(KNIGHT); careers.add(MAN_AT_ARMS);
+		careers.add(MILITARY_OFFICER); careers.add(SOLDIER); careers.add(WARCASTER);
+		return careers;
+	}
+	
+	public static Collection<Career> trencherCareers(){
+		Collection<Career> careers = new ArrayList<Career>(6);
+		careers.add(MILITARY_OFFICER); careers.add(RANGER); careers.add(RIFLEMAN); 
+		careers.add(SOLDIER); careers.add(WARCASTER);
+		return careers;
 	}
 	
 	/* Hooks! */
