@@ -38,7 +38,7 @@
 
 	<string name="arcane_assassin_name">Arcane Assassin</string>
 	<string name="arcane_assassin_longDesc">When making attacks, this character ignores focus points overboosting the target\'s Power Field and spell effects adding to its ARM or DEF.</string>
-	<string name="arcane_assassin_shortDesc">Ignore DEF and ARM spells</string>
+	<string name="arcane_assassin_shortDesc">Ignore DEF and ARM boosting spells</string>
 	<string name="arcane_assassin_page">157</string>
 
 	<string name="arcane_defenses_name">Arcane Defenses</string>
@@ -78,218 +78,218 @@
 
 	<string name="battle_plan_call_to_action_name">Battle Plan: Call To Action</string>
 	<string name="battle_plan_call_to_action_longDesc">The character can spend one feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character in this character\'s command range who is under their command and is knocked down immediately stands up or goes prone.</string>
-	<string name="battle_plan_call_to_action_shortDesc">Knocked-down allies stand up</string>
+	<string name="battle_plan_call_to_action_shortDesc">Feat: Knocked-down allies stand up</string>
 	<string name="battle_plan_call_to_action_page">157</string>
 
 	<string name="battle_plan_coordinated_strike_name">Battle Plan: Coordinated Strike</string>
 	<string name="battle_plan_coordinated_strike_longDesc">The character can spend one feat point to use this ability during a surprise round.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character in this character\'s command range can immediately make one attack.  After these attacks, the surprise round ends and the characters are detected.</string>
-	<string name="battle_plan_coordinated_strike_shortDesc">Attack as one in surprise round</string>
+	<string name="battle_plan_coordinated_strike_shortDesc">Feat: Attack as one in surprise round</string>
 	<string name="battle_plan_coordinated_strike_page">157</string>
 
 	<string name="battle_plan_desperate_pace_name">Battle Plan: Desparate Pace</string>
 	<string name="battle_plan_desperate_pace_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, friendly characters gain +2\" movement for the round.</string>
-	<string name="battle_plan_desperate_pace_shortDesc">Allies get +2\" move</string>
+	<string name="battle_plan_desperate_pace_shortDesc">Feat: Allies get +2\" move</string>
 	<string name="battle_plan_desperate_pace_page">158</string>
 
 	<string name="battle_plan_go_to_ground_name">Battle Plan: Go To Ground</string>
 	<string name="battle_plan_go_to_ground_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character gains cover, does not suffer blast damage, and does not block LOS until they move, are placed, or are engaged.</string>
-	<string name="battle_plan_go_to_ground_shortDesc">Allies dig in</string>
+	<string name="battle_plan_go_to_ground_shortDesc">Feat: Allies dig in</string>
 	<string name="battle_plan_go_to_ground_page">158</string>
 
-	<string name="battle_plan_reconnaissance_name">Hello World, MainActivity!</string>
-	<string name="battle_plan_reconnaissance_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_reconnaissance_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_reconnaissance_page">Hello World, MainActivity!</string>
+	<string name="battle_plan_reconnaissance_name">Battle Plan: Reconnaissance</string>
+	<string name="battle_plan_reconnaissance_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, the character and friendly characters in this command range gain Pathfinder for one round.</string>
+	<string name="battle_plan_reconnaissance_shortDesc">Feat: Allies get Pathfinder</string>
+	<string name="battle_plan_reconnaissance_page">158</string>
 
-	<string name="battle_plan_shadow_name">Hello World, MainActivity!</string>
-	<string name="battle_plan_shadow_longDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_shadow_shortDesc">Hello World, MainActivity!</string>
-	<string name="battle_plan_shadow_page">Hello World, MainActivity!</string>
+	<string name="battle_plan_shadow_name">Battle Plan: Shadow</string>
+	<string name="battle_plan_shadow_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, each friendly character gains Prowl (p.165) for one round.</string>
+	<string name="battle_plan_shadow_shortDesc">Feat: Allies get Prowl</string>
+	<string name="battle_plan_shadow_page">158</string>
 
-	<string name="bayonet_charge_name">Hello World, MainActivity!</string>
-	<string name="bayonet_charge_longDesc">Hello World, MainActivity!</string>
-	<string name="bayonet_charge_shortDesc">Hello World, MainActivity!</string>
-	<string name="bayonet_charge_page">Hello World, MainActivity!</string>
+	<string name="bayonet_charge_name">Bayonet Charge</string>
+	<string name="bayonet_charge_longDesc">When this character charges with a ranged weapon that has a bayonet, after moving but before making the charge attack, they can make one ranged attack targeting the charge target (unless already in melee with the target at turn start).  When resolving the ranged attack, the target-in-melee attack roll penalty does not apply.  If the target is not in melee range after movement, the charater may make the ranged attack before their turn ends.  The charge attack for a Bayonet Charge must be made with a bayonet.</string>
+	<string name="bayonet_charge_shortDesc">Extra ranged attack on charge w/ bayonet</string>
+	<string name="bayonet_charge_page">158</string>
 
-	<string name="big_game_hunter_name">Hello World, MainActivity!</string>
-	<string name="big_game_hunter_longDesc">Hello World, MainActivity!</string>
-	<string name="big_game_hunter_shortDesc">Hello World, MainActivity!</string>
-	<string name="big_game_hunter_page">Hello World, MainActivity!</string>
+	<string name="big_game_hunter_name">Big Game Hunter</string>
+	<string name="big_game_hunter_longDesc">When a character with Big Game Hunter makes a melee or ranged attack against a natural animal or beast native to the wilds of Immoren, they gain a bonus on attack rolls equal to their Survival skill.</string>
+	<string name="big_game_hunter_shortDesc">+Survival to attack rolls on beasts</string>
+	<string name="big_game_hunter_page">158</string>
 
-	<string name="binding_name">Hello World, MainActivity!</string>
-	<string name="binding_longDesc">Hello World, MainActivity!</string>
-	<string name="binding_shortDesc">Hello World, MainActivity!</string>
-	<string name="binding_page">Hello World, MainActivity!</string>
+	<string name="binding_name">Binding</string>
+	<string name="binding_longDesc">When a character ties up, manacles, or otherwise restrains another character, add +3 to the skill roll difficulty for the bound character to escape.</string>
+	<string name="binding_shortDesc">+3 to escape your bindings</string>
+	<string name="binding_page">158</string>
 
-	<string name="blaster_name">Hello World, MainActivity!</string>
-	<string name="blaster_longDesc">Hello World, MainActivity!</string>
-	<string name="blaster_shortDesc">Hello World, MainActivity!</string>
-	<string name="blaster_page">Hello World, MainActivity!</string>
+	<string name="blaster_name">Blaster</string>
+	<string name="blaster_longDesc">This character gains +2 to hit with electrical ranged attacks</string>
+	<string name="blaster_shortDesc">+2 to electric ranged attacks</string>
+	<string name="blaster_page">158</string>
 
-	<string name="blood_spiller_name">Hello World, MainActivity!</string>
-	<string name="blood_spiller_longDesc">Hello World, MainActivity!</string>
-	<string name="blood_spiller_shortDesc">Hello World, MainActivity!</string>
-	<string name="blood_spiller_page">Hello World, MainActivity!</string>
+	<string name="blood_spiller_name">Blood Spiller</string>
+	<string name="blood_spiller_longDesc">The character gains +2 on damage rolls against living characters</string>
+	<string name="blood_spiller_shortDesc">+2 damage against living</string>
+	<string name="blood_spiller_page">158</string>
 
-	<string name="bodge_name">Hello World, MainActivity!</string>
-	<string name="bodge_longDesc">Hello World, MainActivity!</string>
-	<string name="bodge_shortDesc">Hello World, MainActivity!</string>
-	<string name="bodge_page">Hello World, MainActivity!</string>
+	<string name="bodge_name">Bodge</string>
+	<string name="bodge_longDesc">The character can make temporary repairs to a steamjack in combat.  Bodging is a full action.  The mechanik makes an INT+Mechanikal Engineering roll against target number 14.  If the roll suceeds, the steamjack regains 1 damage box in each of its crippled systems.  If the roll fails, the character may try again next round.</string>
+	<string name="bodge_shortDesc">Repair crippled \'jack systems (14)</string>
+	<string name="bodge_page">319</string>
 
-	<string name="bodyguard_name">Hello World, MainActivity!</string>
-	<string name="bodyguard_longDesc">Hello World, MainActivity!</string>
-	<string name="bodyguard_shortDesc">Hello World, MainActivity!</string>
-	<string name="bodyguard_page">Hello World, MainActivity!</string>
+	<string name="bodyguard_name">Bodyguard</string>
+	<string name="bodyguard_longDesc">This character is not limited in the number of times they can use Shield Guard each round.</string>
+	<string name="bodyguard_shortDesc">Unlimited Shield Guards</string>
+	<string name="bodyguard_page">158</string>
 
-	<string name="bomber_name">Hello World, MainActivity!</string>
-	<string name="bomber_longDesc">Hello World, MainActivity!</string>
-	<string name="bomber_shortDesc">Hello World, MainActivity!</string>
-	<string name="bomber_page">Hello World, MainActivity!</string>
+	<string name="bomber_name">Bomber</string>
+	<string name="bomber_longDesc">When this character\'s grenade ranged attack deviates, you may reroll the direction and/or distance of deviation.  A roll can only be rerolled once as a result of Bomber.</string>
+	<string name="bomber_shortDesc">May reroll grenade deviations</string>
+	<string name="bomber_page">158</string>
 
-	<string name="bond_name">Hello World, MainActivity!</string>
-	<string name="bond_longDesc">Hello World, MainActivity!</string>
-	<string name="bond_shortDesc">Hello World, MainActivity!</string>
-	<string name="bond_page">Hello World, MainActivity!</string>
+	<string name="bond_name">Bond</string>
+	<string name="bond_longDesc">This ability may be taken more than once.  Each time a character takes this ability they gain a bonding slot that can be bonded with a steamjack to make it part of their battlegroup, warcaster armor to gain the benefits of the power field and overboosting, or a mechanika weapon to spend focus points to boost attack and damage rolls and make additional attacks with it.  To form a bond, a character must spend a full action touching the object they intend to bond to.  Forming a bond with a steamjack requires the warcaster to know its cortex\'s native language and the pass codes to any locks on its cortex.  A character can break a bond at will and recover the used slot.  A character cannot bond with an object bonded to another character.  Bonded steamjacks are not affected by marshalling.</string>
+	<string name="bond_shortDesc">Bond with Mechanika</string>
+	<string name="bond_page">158</string>
 
-	<string name="brew_master_name">Hello World, MainActivity!</string>
-	<string name="brew_master_longDesc">Hello World, MainActivity!</string>
-	<string name="brew_master_shortDesc">Hello World, MainActivity!</string>
-	<string name="brew_master_page">Hello World, MainActivity!</string>
+	<string name="brew_master_name">Brew Master</string>
+	<string name="brew_master_longDesc">This character can reroll failed Alchemy rolls.  Each failed roll can only be rerolled once from Brew Master.</string>
+	<string name="brew_master_shortDesc">Reroll Alchemy rolls</string>
+	<string name="brew_master_page">159</string>
 
-	<string name="camouflage_name">Hello World, MainActivity!</string>
-	<string name="camouflage_longDesc">Hello World, MainActivity!</string>
-	<string name="camouflage_shortDesc">Hello World, MainActivity!</string>
-	<string name="camouflage_page">Hello World, MainActivity!</string>
+	<string name="camouflage_name">Camouflage</string>
+	<string name="camouflage_longDesc">This character gains an additional +2 DEF when benefitting from concealment or cover.</string>
+	<string name="camouflage_shortDesc">+2 DEF when concealed</string>
+	<string name="camouflage_page">159</string>
 
-	<string name="card_sharp_name">Hello World, MainActivity!</string>
-	<string name="card_sharp_longDesc">Hello World, MainActivity!</string>
-	<string name="card_sharp_shortDesc">Hello World, MainActivity!</string>
-	<string name="card_sharp_page">Hello World, MainActivity!</string>
+	<string name="card_sharp_name">Card Sharp</string>
+	<string name="card_sharp_longDesc">This character can cheat.  When a character uses this ability, they add an extra die to Gambling skill rolls and drop the lowest result.  Anyone watching the character play can make a Detection skill roll to catch the cheater.  The skill roll target number is equal to the cheater\'s INT + AGL + Gambling skill.</string>
+	<string name="card_sharp_shortDesc">Cheat when gambling</string>
+	<string name="card_sharp_page">159</string>
 
-	<string name="cautious_advance_name">Hello World, MainActivity!</string>
-	<string name="cautious_advance_longDesc">Hello World, MainActivity!</string>
-	<string name="cautious_advance_shortDesc">Hello World, MainActivity!</string>
-	<string name="cautious_advance_page">Hello World, MainActivity!</string>
+	<string name="cautious_advance_name">Cautious Advance</string>
+	<string name="cautious_advance_longDesc">This character gains one extra quick action each turn that can be used only to take cover.</string>
+	<string name="cautious_advance_shortDesc">Free quick action to take cover</string>
+	<string name="cautious_advance_page">159</string>
 
-	<string name="cavalry_charge_name">Hello World, MainActivity!</string>
-	<string name="cavalry_charge_longDesc">Hello World, MainActivity!</string>
-	<string name="cavalry_charge_shortDesc">Hello World, MainActivity!</string>
-	<string name="cavalry_charge_page">Hello World, MainActivity!</string>
+	<string name="cavalry_charge_name">Cavalry Charge</string>
+	<string name="cavalry_charge_longDesc">This character can make a cavalry charge (p. 214) while riding a mount designated as a warhorse.</string>
+	<string name="cavalry_charge_shortDesc">Can make cavalry charges</string>
+	<string name="cavalry_charge_page">159</string>
 
-	<string name="chain_attack_bleed_out_name">Hello World, MainActivity!</string>
-	<string name="chain_attack_bleed_out_longDesc">Hello World, MainActivity!</string>
-	<string name="chain_attack_bleed_out_shortDesc">Hello World, MainActivity!</string>
-	<string name="chain_attack_bleed_out_page">Hello World, MainActivity!</string>
+	<string name="chain_attack_bleed_out_name">Chain Attack: Bleed Out</string>
+	<string name="chain_attack_bleed_out_longDesc">If this character fights with two melee hand weapons and hits the same living target with both initial attacks, after resolving the attacks they can immediately make one additional melee attack against the target.  If it hits, it does not inflict damage but the target must forfeit either its movement or action on its next Activation Phase.</string>
+	<string name="chain_attack_bleed_out_shortDesc">Chain: forfeit move/action</string>
+	<string name="chain_attack_bleed_out_page">159</string>
 
-	<string name="chain_attack_pin_down_name">Hello World, MainActivity!</string>
-	<string name="chain_attack_pin_down_longDesc">Hello World, MainActivity!</string>
-	<string name="chain_attack_pin_down_shortDesc">Hello World, MainActivity!</string>
-	<string name="chain_attack_pin_down_page">Hello World, MainActivity!</string>
+	<string name="chain_attack_pin_down_name">Chain Attack: Pin Down</string>
+	<string name="chain_attack_pin_down_longDesc">If this character hits the same living target with initial attacks from two pistols, after resolving the attacks they can immediately make one additional ranged attack against the target, ignoring ROF.  If it hits, it does not inflict damage.  Instead, the target hit can advance up to 2\", and then it is knocked down.</string>
+	<string name="chain_attack_pin_down_shortDesc">Chain: advance and knockdown</string>
+	<string name="chain_attack_pin_down_page">159</string>
 
-	<string name="choir_name">Hello World, MainActivity!</string>
-	<string name="choir_longDesc">Hello World, MainActivity!</string>
-	<string name="choir_shortDesc">Hello World, MainActivity!</string>
-	<string name="choir_page">Hello World, MainActivity!</string>
+	<string name="choir_name">Choir</string>
+	<string name="choir_longDesc">A character gains a cumulative +1 on magic attack rolls for each other friendly character of their faith with this ability within 1\" of them.</string>
+	<string name="choir_shortDesc">+1 Magic attack rolls / Choir w/i 1\"</string>
+	<string name="choir_page">159</string>
 
-	<string name="cleave_name">Hello World, MainActivity!</string>
-	<string name="cleave_longDesc">Hello World, MainActivity!</string>
-	<string name="cleave_shortDesc">Hello World, MainActivity!</string>
-	<string name="cleave_page">Hello World, MainActivity!</string>
+	<string name="cleave_name">Cleave</string>
+	<string name="cleave_longDesc">When this character incapacitates one or more enemies with a melee attack made with a great weapon during his turn, the character can make one additional melee attack immediately after the attack is resolved.  A character can only gain one additional attack from Cleave each turn.</string>
+	<string name="cleave_shortDesc">Extra attack each turn upon kill</string>
+	<string name="cleave_page">159</string>
 
-	<string name="combat_rider_name">Hello World, MainActivity!</string>
-	<string name="combat_rider_longDesc">Hello World, MainActivity!</string>
-	<string name="combat_rider_shortDesc">Hello World, MainActivity!</string>
-	<string name="combat_rider_page">Hello World, MainActivity!</string>
+	<string name="combat_rider_name">Combat Rider</string>
+	<string name="combat_rider_longDesc">While this character is riding a mount designated as a warhorse, the mount can make one impact attack against a target in its melee range if the mount and rider did not charge this turn.</string>
+	<string name="combat_rider_shortDesc">Warhorse makes impact attacks</string>
+	<string name="combat_rider_page">159</string>
 
-	<string name="conniver_name">Hello World, MainActivity!</string>
-	<string name="conniver_longDesc">Hello World, MainActivity!</string>
-	<string name="conniver_shortDesc">Hello World, MainActivity!</string>
-	<string name="conniver_page">Hello World, MainActivity!</string>
+	<string name="conniver_name">Conniver</string>
+	<string name="conniver_longDesc">The character can reroll failed Bribery and Deception-based social skill rolls.  Each roll can be rerolled only once as a result of Conniver.</string>
+	<string name="conniver_shortDesc">May reroll Bribery, Deception</string>
+	<string name="conniver_page">159</string>
 
-	<string name="cover_identity_name">Hello World, MainActivity!</string>
-	<string name="cover_identity_longDesc">Hello World, MainActivity!</string>
-	<string name="cover_identity_shortDesc">Hello World, MainActivity!</string>
-	<string name="cover_identity_page">Hello World, MainActivity!</string>
+	<string name="cover_identity_name">Cover Identity</string>
+	<string name="cover_identity_longDesc">The character has an established cover identity with its own history, contacts, and crimial record (or lack of one).  The character\'s Disguise rolls while using the cover identity are automatically boosted.  Choose a career for the cover identity.  The character gains one occupational skill at level 1 from the cover identity\'s career.  The cover identity must be reasonably believable.  This ability can be taken multiple times, each with a different cover identity.</string>
+	<string name="cover_identity_shortDesc">Gain a cover identity</string>
+	<string name="cover_identity_page">159</string>
 
-	<string name="crackshot_name">Hello World, MainActivity!</string>
-	<string name="crackshot_longDesc">Hello World, MainActivity!</string>
-	<string name="crackshot_shortDesc">Hello World, MainActivity!</string>
-	<string name="crackshot_page">Hello World, MainActivity!</string>
+	<string name="crackshot_name">Crackshot</string>
+	<string name="crackshot_longDesc">When making a ranged or magic attack against a target with concealment, cover, or elevation, this character gains +2 on the attack roll.</string>
+	<string name="crackshot_shortDesc">+2 to attack against conceal/cover/elevation</string>
+	<string name="crackshot_page">159</string>
 
-	<string name="craft_rune_shot_name">Hello World, MainActivity!</string>
-	<string name="craft_rune_shot_longDesc">Hello World, MainActivity!</string>
-	<string name="craft_rune_shot_shortDesc">Hello World, MainActivity!</string>
-	<string name="craft_rune_shot_page">Hello World, MainActivity!</string>
+	<string name="craft_rune_shot_name">Craft Rune Shot</string>
+	<string name="craft_rune_shot_longDesc">The character can craft run shot ammunition.  A character with this ability and a rune shot casting kit pays 1 gc for materials to make one round of rune shot ammo.  The character must inscribe the round by hand.  A character can craft up to five rune shot cartridges in an hour.</string>
+	<string name="craft_rune_shot_shortDesc">Craft tune shot ammo</string>
+	<string name="craft_rune_shot_page">160</string>
 
-	<string name="crossbowman_name">Hello World, MainActivity!</string>
-	<string name="crossbowman_longDesc">Hello World, MainActivity!</string>
-	<string name="crossbowman_shortDesc">Hello World, MainActivity!</string>
-	<string name="crossbowman_page">Hello World, MainActivity!</string>
+	<string name="crossbowman_name">Crossbowman</string>
+	<string name="crossbowman_longDesc">The character can reload a crossbow as a quick action instead of a full action.</string>
+	<string name="crossbowman_shortDesc">Reload crossbow as quick action</string>
+	<string name="crossbowman_page">160</string>
 
-	<string name="defender_name">Hello World, MainActivity!</string>
-	<string name="defender_longDesc">Hello World, MainActivity!</string>
-	<string name="defender_shortDesc">Hello World, MainActivity!</string>
-	<string name="defender_page">Hello World, MainActivity!</string>
+	<string name="defender_name">Defender</string>
+	<string name="defender_longDesc">Once per round, when a friendly character within this character\'s command range is hit with an enemy attack, immediately after the attack has been resolved this character can advance toward the enemy character, up to 2\", and make one melee attack.</string>
+	<string name="defender_shortDesc">On friendly hit, move+attack</string>
+	<string name="defender_page">160</string>
 
-	<string name="defensive_line_name">Hello World, MainActivity!</string>
-	<string name="defensive_line_longDesc">Hello World, MainActivity!</string>
-	<string name="defensive_line_shortDesc">Hello World, MainActivity!</string>
-	<string name="defensive_line_page">Hello World, MainActivity!</string>
+	<string name="defensive_line_name">Defensive Line</string>
+	<string name="defensive_line_longDesc">While this character is B2B with one or more friendly characters, it gains +1 ARM.  If any of the friendly characters also have this ability, the bonus increases to +2 ARM</string>
+	<string name="defensive_line_shortDesc">+1/+2 ARM while B2B w/ friendly</string>
+	<string name="defensive_line_page">160</string>
 
-	<string name="dig_in_name">Hello World, MainActivity!</string>
-	<string name="dig_in_longDesc">Hello World, MainActivity!</string>
-	<string name="dig_in_shortDesc">Hello World, MainActivity!</string>
-	<string name="dig_in_page">Hello World, MainActivity!</string>
+	<string name="dig_in_name">Dig In</string>
+	<string name="dig_in_longDesc">While they have a spade in hand, this character can make a quick action to dig a fox hole.  Until they move, are placed, go prone, or are engaged, the character gains cover, does not suffer blast damage, and does not block line of sight.  This ability cannot be used during a turn where the character ran.</string>
+	<string name="dig_in_shortDesc">Cover, immune to blast, not block LOS</string>
+	<string name="dig_in_page">160</string>
 
-	<string name="disease_resistance_name">Hello World, MainActivity!</string>
-	<string name="disease_resistance_longDesc">Hello World, MainActivity!</string>
-	<string name="disease_resistance_shortDesc">Hello World, MainActivity!</string>
-	<string name="disease_resistance_page">Hello World, MainActivity!</string>
+	<string name="disease_resistance_name">Disease Resistance</string>
+	<string name="disease_resistance_longDesc">The character makes boosted rolls to resist disease and infection.</string>
+	<string name="disease_resistance_shortDesc">Boosted rolls against disease</string>
+	<string name="disease_resistance_page">160</string>
 
-	<string name="dispel_name">:4)</string>
-	<string name="dispel_longDesc">:4)</string>
-	<string name="dispel_shortDesc">:4)</string>
-	<string name="dispel_page">:4)</string>
+	<string name="dispel_name">Dispel</string>
+	<string name="dispel_longDesc">When this character hits an enemy with a melee attack, they can spend 1 feat point to cause any upkeep spells on that enemy to expire immediately.</string>
+	<string name="dispel_shortDesc">Feat: remove enemy upkeeps</string>
+	<string name="dispel_page">160</string>
 
-	<string name="dodger_name">Hello World, MainActivity!</string>
-	<string name="dodger_longDesc">Hello World, MainActivity!</string>
-	<string name="dodger_shortDesc">Hello World, MainActivity!</string>
-	<string name="dodger_page">Hello World, MainActivity!</string>
+	<string name="dodger_name">Dodger</string>
+	<string name="dodger_longDesc">When the character is missed by enemy attacks except during an advance, they can immediately advance up to 2\" after the attack is resolved.  They cannot be targeted by free strikes during the movement.</string>
+	<string name="dodger_shortDesc">Move 2\" when missed</string>
+	<string name="dodger_page">161</string>
 
-	<string name="drive_ancillary_attack_name">Hello World, MainActivity!</string>
-	<string name="drive_ancillary_attack_longDesc">Hello World, MainActivity!</string>
-	<string name="drive_ancillary_attack_shortDesc">Hello World, MainActivity!</string>
-	<string name="drive_ancillary_attack_page">Hello World, MainActivity!</string>
+	<string name="drive_ancillary_attack_name">Drive: Ancillary Attack</string>
+	<string name="drive_ancillary_attack_longDesc">This ability uses a quick action.  A controlled steamjack immediately makes one normal melee or ranged attack.</string>
+	<string name="drive_ancillary_attack_shortDesc">Drive: immediate attack</string>
+	<string name="drive_ancillary_attack_page">161</string>
 
-	<string name="drive_assault_name">Hello World, MainActivity!</string>
-	<string name="drive_assault_longDesc">Hello World, MainActivity!</string>
-	<string name="drive_assault_shortDesc">Hello World, MainActivity!</string>
-	<string name="drive_assault_page">Hello World, MainActivity!</string>
+	<string name="drive_assault_name">Drive: Assault</string>
+	<string name="drive_assault_longDesc">This ability uses a quick action.  The steamjack charges during its turn this round without spending focus or being forced.  As part of that charge, after moving but before making its charge attack, the steamjack can make one ranged attack targeting its charge target unless it was in melee with its charge target at the start of the turn.  When resolving the ranged attack, the steamjack does not suffer the target-in-melee penalty.  If the target is not in melee range after charge movement, the steamjack can make the ranged attack before its turn ends.</string>
+	<string name="drive_assault_shortDesc">Drive: ranged attack on charge</string>
+	<string name="drive_assault_page">161</string>
 
-	<string name="drive_off_road_name">Hello World, MainActivity!</string>
-	<string name="drive_off_road_longDesc">Hello World, MainActivity!</string>
-	<string name="drive_off_road_shortDesc">Hello World, MainActivity!</string>
-	<string name="drive_off_road_page">Hello World, MainActivity!</string>
+	<string name="drive_off_road_name">Drive: Off Road</string>
+	<string name="drive_off_road_longDesc">This ability uses a quick action.  The steamjack gains the Pathfinder ability during its turn this round and must use its normal movement and combat action to charge or slam.</string>
+	<string name="drive_off_road_shortDesc">Drive: Pathfinder on charge/slam</string>
+	<string name="drive_off_road_page">161</string>
 
-	<string name="drive_pronto_name">Hello World, MainActivity!</string>
-	<string name="drive_pronto_longDesc">Hello World, MainActivity!</string>
-	<string name="drive_pronto_shortDesc">Hello World, MainActivity!</string>
-	<string name="drive_pronto_page">Hello World, MainActivity!</string>
+	<string name="drive_pronto_name">Drive: Pronto</string>
+	<string name="drive_pronto_longDesc">This ability uses a quick action.  The steamjack makes a full advance.</string>
+	<string name="drive_pronto_shortDesc">Drive: Full advance</string>
+	<string name="drive_pronto_page">161</string>
 
-	<string name="dual_shot_name">Hello World, MainActivity!</string>
-	<string name="dual_shot_longDesc">Hello World, MainActivity!</string>
-	<string name="dual_shot_shortDesc">Hello World, MainActivity!</string>
-	<string name="dual_shot_page">Hello World, MainActivity!</string>
+	<string name="dual_shot_name">Dual Shot</string>
+	<string name="dual_shot_longDesc">The character can forfeit their movement during their turn to make one additional ranged attack with a pistol or rifle.</string>
+	<string name="dual_shot_shortDesc">Forfeit move for +1 ranged attack</string>
+	<string name="dual_shot_page">161</string>
 
-	<string name="elemental_mastery_name">Hello World, MainActivity!</string>
-	<string name="elemental_mastery_longDesc">Hello World, MainActivity!</string>
-	<string name="elemental_mastery_shortDesc">Hello World, MainActivity!</string>
-	<string name="elemental_mastery_page">Hello World, MainActivity!</string>
+	<string name="elemental_mastery_name">Elemental Mastery</string>
+	<string name="elemental_mastery_longDesc">This character gains +1 on attack and damage rolls when casting an offensive spell from their sorcerer elemental spell list.</string>
+	<string name="elemental_mastery_shortDesc">+1 attack/damage on sorc. spells</string>
+	<string name="elemental_mastery_page">161</string>
 
-	<string name="empower_name">Hello World, MainActivity!</string>
-	<string name="empower_longDesc">Hello World, MainActivity!</string>
-	<string name="empower_shortDesc">Hello World, MainActivity!</string>
-	<string name="empower_page">Hello World, MainActivity!</string>
+	<string name="empower_name">Empower</string>
+	<string name="empower_longDesc">During this character\'s turn, while B2B with a non-incapacitated friendly character, this character can spend 1 feat point to cause the friendly character to regain d3+1 vitality points.</string>
+	<string name="empower_shortDesc">Feat: B2B ally gets d3+1 vitality</string>
+	<string name="empower_page">161</string>
 
 	<string name="expert_rider_name">Hello World, MainActivity!</string>
 	<string name="expert_rider_longDesc">Hello World, MainActivity!</string>
