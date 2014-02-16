@@ -291,283 +291,283 @@
 	<string name="empower_shortDesc">Feat: B2B ally gets d3+1 vitality</string>
 	<string name="empower_page">161</string>
 
-	<string name="expert_rider_name">Hello World, MainActivity!</string>
-	<string name="expert_rider_longDesc">Hello World, MainActivity!</string>
-	<string name="expert_rider_shortDesc">Hello World, MainActivity!</string>
-	<string name="expert_rider_page">Hello World, MainActivity!</string>
+	<string name="expert_rider_name">Expert Rider</string>
+	<string name="expert_rider_longDesc">The character can reroll failed Riding rolls.  Each roll can only be rerolled once due to Expert Rider.  Additionally, this character and their mount cannot be knocked down while the character is mounted and the mount is not knocked out.</string>
+	<string name="expert_rider_shortDesc">Reroll Riding, no mounted knockdown</string>
+	<string name="expert_rider_page">161</string>
 
-	<string name="fast_cook_name">Hello World, MainActivity!</string>
-	<string name="fast_cook_longDesc">Hello World, MainActivity!</string>
-	<string name="fast_cook_shortDesc">Hello World, MainActivity!</string>
-	<string name="fast_cook_page">Hello World, MainActivity!</string>
+	<string name="fast_cook_name">Fast Cook</string>
+	<string name="fast_cook_longDesc">The character can create alchemical items in half the normal time.</string>
+	<string name="fast_cook_shortDesc">Create Alchemy in 1/2 time</string>
+	<string name="fast_cook_page">161</string>
 
-	<string name="fast_draw_name">Hello World, MainActivity!</string>
-	<string name="fast_draw_longDesc">Hello World, MainActivity!</string>
-	<string name="fast_draw_shortDesc">Hello World, MainActivity!</string>
-	<string name="fast_draw_page">Hello World, MainActivity!</string>
+	<string name="fast_draw_name">Fast Draw</string>
+	<string name="fast_draw_longDesc">A character with this skill gains +2 on initiative rolls.  They also gain an additional quick action during the first turn of combat each encounter that can only be used to draw a weapon.</string>
+	<string name="fast_draw_shortDesc">+2 Init., free weapon draw</string>
+	<string name="fast_draw_page">161</string>
 
-	<string name="fast_rearm_name">Hello World, MainActivity!</string>
-	<string name="fast_rearm_longDesc">Hello World, MainActivity!</string>
-	<string name="fast_rearm_shortDesc">Hello World, MainActivity!</string>
-	<string name="fast_rearm_page">Hello World, MainActivity!</string>
+	<string name="fast_rearm_name">Fast Rearm</string>
+	<string name="fast_rearm_longDesc">The character gains one extra quick action each turn that can only be used to rearm a weapon of the type noted.  A character can have this ability several times, each with a different weapon.</string>
+	<string name="fast_rearm_shortDesc">Free quick action to reload</string>
+	<string name="fast_rearm_page">161</string>
 
-	<string name="fast_reload_name">Hello World, MainActivity!</string>
-	<string name="fast_reload_longDesc">Hello World, MainActivity!</string>
-	<string name="fast_reload_shortDesc">Hello World, MainActivity!</string>
-	<string name="fast_reload_page">Hello World, MainActivity!</string>
+	<string name="fast_reload_name">Fast Reload</string>
+	<string name="fast_reload_longDesc">The character gains one extra quick action each turn that can be used only to reload a ranged weapon.</string>
+	<string name="fast_reload_shortDesc">Free quick action to reload</string>
+	<string name="fast_reload_page">161</string>
 
-	<string name="fell_call_cacophony_name">Hello World, MainActivity!</string>
-	<string name="fell_call_cacophony_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_cacophony_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_cacophony_page">Hello World, MainActivity!</string>
+	<string name="fell_call_cacophony_name">Fell Call: Cacophony</string>
+	<string name="fell_call_cacophony_longDesc">The character can use this call as a quick action.  For one round, enemies cannot cast spells, use battle plans, or use drives while in this character\'s command range.</string>
+	<string name="fell_call_cacophony_shortDesc">Call: no enemy spells/drives/orders</string>
+	<string name="fell_call_cacophony_page">161</string>
 
-	<string name="fell_call_call_of_defiance_name">Hello World, MainActivity!</string>
-	<string name="fell_call_call_of_defiance_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_call_of_defiance_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_call_of_defiance_page">Hello World, MainActivity!</string>
+	<string name="fell_call_call_of_defiance_name">Fell Call: Call of Defiance</string>
+	<string name="fell_call_call_of_defiance_longDesc">The character can use this call as a quick action.  For one round, when a friendly Trollkin character makes a Tough roll while in this character\'s command range, the roll succeeds on a 4, 5, or 6.</string>
+	<string name="fell_call_call_of_defiance_shortDesc">Call: Trollkin tough on 4/5/6</string>
+	<string name="fell_call_call_of_defiance_page">161</string>
 
-	<string name="fell_call_ground_shaker_name">Hello World, MainActivity!</string>
-	<string name="fell_call_ground_shaker_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_ground_shaker_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_ground_shaker_page">Hello World, MainActivity!</string>
+	<string name="fell_call_ground_shaker_name">Fell Call: Ground Shaker</string>
+	<string name="fell_call_ground_shaker_longDesc">Once per turn, the character can use this call instead of attacking.  The character makes a RNG 10, AOE 5 fell call ranged attack that causes no damage.  Targets hit are knocked down.</string>
+	<string name="fell_call_ground_shaker_shortDesc">Call: RNG 10/AOE 5/POW 0/Knockdown</string>
+	<string name="fell_call_ground_shaker_page">162</string>
 
-	<string name="fell_call_heroic_ballad_name">Hello World, MainActivity!</string>
-	<string name="fell_call_heroic_ballad_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_heroic_ballad_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_heroic_ballad_page">Hello World, MainActivity!</string>
+	<string name="fell_call_heroic_ballad_name">Fell Call: Heroic Ballad</string>
+	<string name="fell_call_heroic_ballad_longDesc">The character can use this call as a quick action.  For one round, while in the Fell Caller\'s command range, friendly trollkin are fearless and gain +2 to melee attack rolls.</string>
+	<string name="fell_call_heroic_ballad_shortDesc">Call: Trollkin +2 MAT</string>
+	<string name="fell_call_heroic_ballad_page">162</string>
 
-	<string name="fell_call_reverberation_name">Hello World, MainActivity!</string>
-	<string name="fell_call_reverberation_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_reverberation_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_reverberation_page">Hello World, MainActivity!</string>
+	<string name="fell_call_reverberation_name">Fell Call: Reverberation</string>
+	<string name="fell_call_reverberation_longDesc">The character can use this call as a quick action.  The character makes a RNG SP 6 ranged attack that causes no damage.  The character uses his POI+Fell Calling skill for his attack rolls.  Enemies hit are pushed d3\" directly away from this character.  Move the enemy who was farthest away first.</string>
+	<string name="fell_call_reverberation_shortDesc">Call: SP6/d3\" push</string>
+	<string name="fell_call_reverberation_page">162</string>
 
-	<string name="fell_call_signal_call_name">Hello World, MainActivity!</string>
-	<string name="fell_call_signal_call_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_signal_call_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_signal_call_page">Hello World, MainActivity!</string>
+	<string name="fell_call_signal_call_name">Fell Call: Signal Call</string>
+	<string name="fell_call_signal_call_longDesc">The character can use this call as a quick action.  The character can unleash a call that can be heard for a number of miles equal to his Fell Caller skill.</string>
+	<string name="fell_call_signal_call_shortDesc">Call: Sound for miles</string>
+	<string name="fell_call_signal_call_page">162</string>
 
-	<string name="fell_call_sonic_blast_name">Hello World, MainActivity!</string>
-	<string name="fell_call_sonic_blast_longDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_sonic_blast_shortDesc">Hello World, MainActivity!</string>
-	<string name="fell_call_sonic_blast_page">Hello World, MainActivity!</string>
+	<string name="fell_call_sonic_blast_name">Fell Call: Sonic Blast</string>
+	<string name="fell_call_sonic_blast_longDesc">Once per turn, the character can use this call instead of attacking.  The character then makes a RNG SP 8 POW 12 ranged attack.  The character uses his POI+Fell Calling skill for his attack rolls.</string>
+	<string name="fell_call_sonic_blast_shortDesc">Call: SP 8 POW 12</string>
+	<string name="fell_call_sonic_blast_page">162</string>
 
-	<string name="field_alchemist_name">Hello World, MainActivity!</string>
-	<string name="field_alchemist_longDesc">Hello World, MainActivity!</string>
-	<string name="field_alchemist_shortDesc">Hello World, MainActivity!</string>
-	<string name="field_alchemist_page">Hello World, MainActivity!</string>
+	<string name="field_alchemist_name">Field Alchemist</string>
+	<string name="field_alchemist_longDesc">The character gains an additional quick action each turn that can only be used to create a field alchemy quick effect.</string>
+	<string name="field_alchemist_shortDesc">Field alchemy quick action</string>
+	<string name="field_alchemist_page">162</string>
 
-	<string name="field_marshal_magical_attack_name">Hello World, MainActivity!</string>
-	<string name="field_marshal_magical_attack_longDesc">Hello World, MainActivity!</string>
-	<string name="field_marshal_magical_attack_shortDesc">Hello World, MainActivity!</string>
-	<string name="field_marshal_magical_attack_page">Hello World, MainActivity!</string>
+	<string name="field_marshal_magical_attack_name">Field Marshall: Magical Attack</string>
+	<string name="field_marshal_magical_attack_longDesc">The warcaster can spend a focus point during his turn to use this ability.  For one round, the weapons of characters in their battlegroup become magical weapons while in the warcaster\'s control area.</string>
+	<string name="field_marshal_magical_attack_shortDesc">Focus: B.Group magic weapons</string>
+	<string name="field_marshal_magical_attack_page">162</string>
 
-	<string name="field_marshal_relentless_charge_name">Hello World, MainActivity!</string>
-	<string name="field_marshal_relentless_charge_longDesc">Hello World, MainActivity!</string>
-	<string name="field_marshal_relentless_charge_shortDesc">Hello World, MainActivity!</string>
-	<string name="field_marshal_relentless_charge_page">Hello World, MainActivity!</string>
+	<string name="field_marshal_relentless_charge_name">Field Marshall: Relentless Charge</string>
+	<string name="field_marshal_relentless_charge_longDesc">The warcaster can spend a focus point during his turn to use this ability.  For one round, when a character in the warcaster\'s battlegroup begins a charge while in their control area, that character gains Relentless Charge for their turn.  </string>
+	<string name="field_marshal_relentless_charge_shortDesc">Focus: B.Group Relentless Charge</string>
+	<string name="field_marshal_relentless_charge_page">162</string>
 
-	<string name="field_marshal_shield_guard_name">Hello World, MainActivity!</string>
-	<string name="field_marshal_shield_guard_longDesc">Hello World, MainActivity!</string>
-	<string name="field_marshal_shield_guard_shortDesc">Hello World, MainActivity!</string>
-	<string name="field_marshal_shield_guard_page">Hello World, MainActivity!</string>
+	<string name="field_marshal_shield_guard_name">Field Marshall: Shield Guard</string>
+	<string name="field_marshal_shield_guard_longDesc">The warcaster can spend a focus point during their turn to use this ability.  For one round, characters in their battlegroup gain the Shield Guard ability while in the warcaster\'s control area.</string>
+	<string name="field_marshal_shield_guard_shortDesc">Focus: B.Group Shield Guard</string>
+	<string name="field_marshal_shield_guard_page">162</string>
 
-	<string name="find_cover_name">Hello World, MainActivity!</string>
-	<string name="find_cover_longDesc">Hello World, MainActivity!</string>
-	<string name="find_cover_shortDesc">Hello World, MainActivity!</string>
-	<string name="find_cover_page">Hello World, MainActivity!</string>
+	<string name="find_cover_name">Find Cover</string>
+	<string name="find_cover_longDesc">At the start of combat before initiative is rolled, this character can immediately advance up to 2\" and perform a quick action to take cover or go prone.</string>
+	<string name="find_cover_shortDesc">Before Init.: 2\" move, cover</string>
+	<string name="find_cover_page">162</string>
 
-	<string name="fire_in_the_hole_name">Hello World, MainActivity!</string>
-	<string name="fire_in_the_hole_longDesc">Hello World, MainActivity!</string>
-	<string name="fire_in_the_hole_shortDesc">Hello World, MainActivity!</string>
-	<string name="fire_in_the_hole_page">Hello World, MainActivity!</string>
+	<string name="fire_in_the_hole_name">Fire in the Hole!</string>
+	<string name="fire_in_the_hole_longDesc">This character can make a grenade attack at the start of the Action Phase of their turn before moving or making normal attacks.  A character using this ability must use their movement to run or make a full advance.</string>
+	<string name="fire_in_the_hole_shortDesc">Grenade attack before turn</string>
+	<string name="fire_in_the_hole_page">163</string>
 
-	<string name="fleet_foot_name">Hello World, MainActivity!</string>
-	<string name="fleet_foot_longDesc">Hello World, MainActivity!</string>
-	<string name="fleet_foot_shortDesc">Hello World, MainActivity!</string>
-	<string name="fleet_foot_page">Hello World, MainActivity!</string>
+	<string name="fleet_foot_name">Fleet Foot</string>
+	<string name="fleet_foot_longDesc">When the character runs, they move at SPDx3</string>
+	<string name="fleet_foot_shortDesc">Run at SPDx3</string>
+	<string name="fleet_foot_page">163</string>
 
-	<string name="free_style_name">Hello World, MainActivity!</string>
-	<string name="free_style_longDesc">Hello World, MainActivity!</string>
-	<string name="free_style_shortDesc">Hello World, MainActivity!</string>
-	<string name="free_style_page">Hello World, MainActivity!</string>
+	<string name="free_style_name">Free Style</string>
+	<string name="free_style_longDesc">The character can improvise the ingredients in their alchemical compounds.  This allows the character to attempt to make do without a specific ingredient.  This requires an Alchemy skill roll with a target number equal to 10 plus the gc value of the ingredient.  This ability also reduces the cost of alchemical compounds by 1 gc each (to a minimum of 1 gc).</string>
+	<string name="free_style_shortDesc">Improv alchemical formulae</string>
+	<string name="free_style_page">163</string>
 
 	<string name="gang_name">Gang</string>
-	<string name="gang_longDesc">Long Desc here</string>
+	<string name="gang_longDesc">When making a melee attack that targets an enemy in melee range of another friendly character, this character gains +1 to melee attacks and melee damage rolls.  If the other friendly character also has Gang, the bonuses increase to +2.</string>
 	<string name="gang_shortDesc">+1 attack/damage with ally in melee</string>
 	<string name="gang_page">163</string>
 
-	<string name="get_away_name">Hello World, MainActivity!</string>
-	<string name="get_away_longDesc">Hello World, MainActivity!</string>
-	<string name="get_away_shortDesc">Hello World, MainActivity!</string>
-	<string name="get_away_page">Hello World, MainActivity!</string>
+	<string name="get_away_name">Get Away</string>
+	<string name="get_away_longDesc">When the character is missed by an enemy attack at any time other than while advancing, instead of using any other ability, the character can immediately make a full advance.</string>
+	<string name="get_away_shortDesc">Make full advance when missed</string>
+	<string name="get_away_page">163</string>
 
-	<string name="girded_name">Hello World, MainActivity!</string>
-	<string name="girded_longDesc">Hello World, MainActivity!</string>
-	<string name="girded_shortDesc">Hello World, MainActivity!</string>
-	<string name="girded_page">Hello World, MainActivity!</string>
+	<string name="girded_name">Girded</string>
+	<string name="girded_longDesc">While armed with a shield, this character does not suffer blast damage.  Friendly characters B2B with this character do not suffer blast damage either.</string>
+	<string name="girded_shortDesc">You and B2B allies immune to blast damage</string>
+	<string name="girded_page">163</string>
 
-	<string name="good_breeding_name">Hello World, MainActivity!</string>
-	<string name="good_breeding_longDesc">Hello World, MainActivity!</string>
-	<string name="good_breeding_shortDesc">Hello World, MainActivity!</string>
-	<string name="good_breeding_page">Hello World, MainActivity!</string>
+	<string name="good_breeding_name">Good Breeding</string>
+	<string name="good_breeding_longDesc">The character was raised in high society and can reroll failed Etiquette rolls.  Each roll can only be rerolled once as a result of Good Breeding.</string>
+	<string name="good_breeding_shortDesc">Reroll Etiquette rolls</string>
+	<string name="good_breeding_page">163</string>
 
-	<string name="great_power_name">Hello World, MainActivity!</string>
-	<string name="great_power_longDesc">Hello World, MainActivity!</string>
-	<string name="great_power_shortDesc">Hello World, MainActivity!</string>
-	<string name="great_power_page">Hello World, MainActivity!</string>
+	<string name="great_power_name">Great Power</string>
+	<string name="great_power_longDesc">This character can upkeep one spell each turn without spending a focus point or gaining a fatigue point.</string>
+	<string name="great_power_shortDesc">One free upkeep</string>
+	<string name="great_power_page">163</string>
 
-	<string name="grenadier_name">Hello World, MainActivity!</string>
-	<string name="grenadier_longDesc">Hello World, MainActivity!</string>
-	<string name="grenadier_shortDesc">Hello World, MainActivity!</string>
-	<string name="grenadier_page">Hello World, MainActivity!</string>
+	<string name="grenadier_name">Grenadier</string>
+	<string name="grenadier_longDesc">The character gains an additional quick action each turn that can be used only to pull the pin on a grenade.</string>
+	<string name="grenadier_shortDesc">Free quick action to pull pin</string>
+	<string name="grenadier_page">163</string>
 
-	<string name="gunfighter_name">Hello World, MainActivity!</string>
-	<string name="gunfighter_longDesc">Hello World, MainActivity!</string>
-	<string name="gunfighter_shortDesc">Hello World, MainActivity!</string>
-	<string name="gunfighter_page">Hello World, MainActivity!</string>
+	<string name="gunfighter_name">Gunfighter</string>
+	<string name="gunfighter_longDesc">The character does not suffer a -4 penalty on ranged attack rolls with pistols or carbines while engaged.</string>
+	<string name="gunfighter_shortDesc">No -4 ranged penalty when engaged</string>
+	<string name="gunfighter_page">163</string>
 
-	<string name="head_butt_name">Hello World, MainActivity!</string>
-	<string name="head_butt_longDesc">Hello World, MainActivity!</string>
-	<string name="head_butt_shortDesc">Hello World, MainActivity!</string>
-	<string name="head_butt_page">Hello World, MainActivity!</string>
+	<string name="head_butt_name">Head-Butt</string>
+	<string name="head_butt_longDesc">Instead of making a normal Unarmed Combat attack, this character can spend a feat point to make a head-butt attack.  The character makes an unarmed melee attack roll against his target.  If the attack hits, the target is knocked down and suffers a damage roll with a POW equal to the character\'s current STR.  A character cannot head-butt a target with a larger base.</string>
+	<string name="head_butt_shortDesc">Feat: unarmed attack to knockdown</string>
+	<string name="head_butt_page">164</string>
 
-	<string name="hit_the_deck_name">Hello World, MainActivity!</string>
-	<string name="hit_the_deck_longDesc">Hello World, MainActivity!</string>
-	<string name="hit_the_deck_shortDesc">Hello World, MainActivity!</string>
-	<string name="hit_the_deck_page">Hello World, MainActivity!</string>
+	<string name="hit_the_deck_name">Hit the Deck!</string>
+	<string name="hit_the_deck_longDesc">The character has developed the uncanny ability to hit the ground the second before being affected by a blast.  While prone, the character does not suffer damage from AOEs unless directly hit.  If the character would take blast damage from an AOE, they go prone but do not suffer damage.</string>
+	<string name="hit_the_deck_shortDesc">Immune to blast damage when prone</string>
+	<string name="hit_the_deck_page">164</string>
 
-	<string name="hyper_awareness_name">Hello World, MainActivity!</string>
-	<string name="hyper_awareness_longDesc">Hello World, MainActivity!</string>
-	<string name="hyper_awareness_shortDesc">Hello World, MainActivity!</string>
-	<string name="hyper_awareness_page">Hello World, MainActivity!</string>
+	<string name="hyper_awareness_name">Hyper Awareness</string>
+	<string name="hyper_awareness_longDesc">While in this character\'s command range, friendly characters gain Circular Vision.</string>
+	<string name="hyper_awareness_shortDesc">Friendlies gain Circular Vision</string>
+	<string name="hyper_awareness_page">164</string>
 
-	<string name="immunity_cold_name">Hello World, MainActivity!</string>
-	<string name="immunity_cold_longDesc">Hello World, MainActivity!</string>
-	<string name="immunity_cold_shortDesc">Hello World, MainActivity!</string>
-	<string name="immunity_cold_page">Hello World, MainActivity!</string>
+	<string name="immunity_cold_name">Immunity: Cold</string>
+	<string name="immunity_cold_longDesc">The character is immune to cold damage.</string>
+	<string name="immunity_cold_shortDesc">Immune to cold damage</string>
+	<string name="immunity_cold_page">164</string>
 
-	<string name="immunity_corrosion_name">Hello World, MainActivity!</string>
-	<string name="immunity_corrosion_longDesc">Hello World, MainActivity!</string>
-	<string name="immunity_corrosion_shortDesc">Hello World, MainActivity!</string>
-	<string name="immunity_corrosion_page">Hello World, MainActivity!</string>
+	<string name="immunity_corrosion_name">Immunity: Corrosion</string>
+	<string name="immunity_corrosion_longDesc">The character is immune to corrosion damage.</string>
+	<string name="immunity_corrosion_shortDesc">Immune to corrosion damage</string>
+	<string name="immunity_corrosion_page">164</string>
 
-	<string name="immunity_electricity_name">Hello World, MainActivity!</string>
-	<string name="immunity_electricity_longDesc">Hello World, MainActivity!</string>
-	<string name="immunity_electricity_shortDesc">Hello World, MainActivity!</string>
-	<string name="immunity_electricity_page">Hello World, MainActivity!</string>
+	<string name="immunity_electricity_name">Immunity: Electricity</string>
+	<string name="immunity_electricity_longDesc">The character is immune to electrical damage.</string>
+	<string name="immunity_electricity_shortDesc">Immune to electrical damage</string>
+	<string name="immunity_electricity_page">164</string>
 
-	<string name="immunity_fire_name">Hello World, MainActivity!</string>
-	<string name="immunity_fire_longDesc">Hello World, MainActivity!</string>
-	<string name="immunity_fire_shortDesc">Hello World, MainActivity!</string>
-	<string name="immunity_fire_page">Hello World, MainActivity!</string>
+	<string name="immunity_fire_name">Immunity: Fire</string>
+	<string name="immunity_fire_longDesc">The character is immune to fire damage.</string>
+	<string name="immunity_fire_shortDesc">Immune to fire damage</string>
+	<string name="immunity_fire_page">164</string>
 
-	<string name="inscribe_formulae_name">Hello World, MainActivity!</string>
-	<string name="inscribe_formulae_longDesc">Hello World, MainActivity!</string>
-	<string name="inscribe_formulae_shortDesc">Hello World, MainActivity!</string>
-	<string name="inscribe_formulae_page">Hello World, MainActivity!</string>
+	<string name="inscribe_formulae_name">Inscribe Formulae</string>
+	<string name="inscribe_formulae_longDesc">The character can inscribe runeplates; see p. 284</string>
+	<string name="inscribe_formulae_shortDesc">Can inscribe runeplates</string>
+	<string name="inscribe_formulae_page">284</string>
 
-	<string name="iron_sentinel_name">Hello World, MainActivity!</string>
-	<string name="iron_sentinel_longDesc">Hello World, MainActivity!</string>
-	<string name="iron_sentinel_shortDesc">Hello World, MainActivity!</string>
-	<string name="iron_sentinel_page">Hello World, MainActivity!</string>
+	<string name="iron_sentinel_name">Iron Sentinel</string>
+	<string name="iron_sentinel_longDesc">While B2B with one or more steamjacks they command, this character gains +2 ARM and cannot be knocked down.</string>
+	<string name="iron_sentinel_shortDesc">B2B with \'jack: +2 ARM, no knockdown</string>
+	<string name="iron_sentinel_page">164</string>
 
-	<string name="iron_will_name">Hello World, MainActivity!</string>
-	<string name="iron_will_longDesc">Hello World, MainActivity!</string>
-	<string name="iron_will_shortDesc">Hello World, MainActivity!</string>
-	<string name="iron_will_page">Hello World, MainActivity!</string>
+	<string name="iron_will_name">Iron Will</string>
+	<string name="iron_will_longDesc">The character can reroll failed Willpower rolls.  Each roll can only be rerolled once due to Iron Will.</string>
+	<string name="iron_will_shortDesc">Reroll Willpower</string>
+	<string name="iron_will_page">164</string>
 
-	<string name="keen_eyed_name">Hello World, MainActivity!</string>
-	<string name="keen_eyed_longDesc">Hello World, MainActivity!</string>
-	<string name="keen_eyed_shortDesc">Hello World, MainActivity!</string>
-	<string name="keen_eyed_page">Hello World, MainActivity!</string>
+	<string name="keen_eyed_name">Keen Eyed</string>
+	<string name="keen_eyed_longDesc">The character can increase his effective range with a bow or rifle by 2\" and his extreme range by 10\".</string>
+	<string name="keen_eyed_shortDesc">+2\" range with bow/rifle</string>
+	<string name="keen_eyed_page">164</string>
 
-	<string name="language_name">Hello World, MainActivity!</string>
-	<string name="language_longDesc">Hello World, MainActivity!</string>
-	<string name="language_shortDesc">Hello World, MainActivity!</string>
-	<string name="language_page">Hello World, MainActivity!</string>
+	<string name="language_name">Language</string>
+	<string name="language_longDesc">This ability can be taken multiple times; each time a character takes this ability, they learn how to speak, read, and write a new language.</string>
+	<string name="language_shortDesc">Learn new language</string>
+	<string name="language_page">164</string>
 
-	<string name="legacy_of_bragg_name">Hello World, MainActivity!</string>
-	<string name="legacy_of_bragg_longDesc">Hello World, MainActivity!</string>
-	<string name="legacy_of_bragg_shortDesc">Hello World, MainActivity!</string>
-	<string name="legacy_of_bragg_page">Hello World, MainActivity!</string>
+	<string name="legacy_of_bragg_name">Legacy of Bragg</string>
+	<string name="legacy_of_bragg_longDesc">The character gains an additional quick action each turn that can only be used to make fell calls.</string>
+	<string name="legacy_of_bragg_shortDesc">Free quick action for fell calls</string>
+	<string name="legacy_of_bragg_page">164</string>
 
-	<string name="light_cavalry_name">:4)</string>
-	<string name="light_cavalry_longDesc">:4)</string>
-	<string name="light_cavalry_shortDesc">:4)</string>
-	<string name="light_cavalry_page">:4)</string>
+	<string name="light_cavalry_name">Light Cavalry</string>
+	<string name="light_cavalry_longDesc">If this character is riding a mount not designated as a warhorse, at the end of their turn they can advance up to 5\".</string>
+	<string name="light_cavalry_shortDesc">5\" reserve move on light mount</string>
+	<string name="light_cavalry_page">164</string>
 
-	<string name="load_bearing_name">Hello World, MainActivity!</string>
-	<string name="load_bearing_longDesc">Hello World, MainActivity!</string>
-	<string name="load_bearing_shortDesc">Hello World, MainActivity!</string>
-	<string name="load_bearing_page">Hello World, MainActivity!</string>
+	<string name="load_bearing_name">Load Bearing</string>
+	<string name="load_bearing_longDesc">Reduce the SPD and DEF penalties from the armor the character wears each by 1.</string>
+	<string name="load_bearing_shortDesc">Armor SPD and DEF penalties -1</string>
+	<string name="load_bearing_page">164</string>
 
-	<string name="mage_killer_name">Hello World, MainActivity!</string>
-	<string name="mage_killer_longDesc">Hello World, MainActivity!</string>
-	<string name="mage_killer_shortDesc">Hello World, MainActivity!</string>
-	<string name="mage_killer_page">Hello World, MainActivity!</string>
+	<string name="mage_killer_name">Mage Killer</string>
+	<string name="mage_killer_longDesc">This character gains an additional die on damage rolls against characters that can cast spells.</string>
+	<string name="mage_killer_shortDesc">Extra damage die against spellcasters</string>
+	<string name="mage_killer_page">164</string>
 
-	<string name="marksman_name">Hello World, MainActivity!</string>
-	<string name="marksman_longDesc">Hello World, MainActivity!</string>
-	<string name="marksman_shortDesc">Hello World, MainActivity!</string>
-	<string name="marksman_page">Hello World, MainActivity!</string>
+	<string name="marksman_name">Marksman</string>
+	<string name="marksman_longDesc">The character can use quick actions and aim in the same round, as long as they forfeit their movement to gain the aiming bonus.</string>
+	<string name="marksman_shortDesc">Can use quick actions and Aim</string>
+	<string name="marksman_page">165</string>
 
-	<string name="natural_leader_name">Hello World, MainActivity!</string>
-	<string name="natural_leader_longDesc">Hello World, MainActivity!</string>
-	<string name="natural_leader_shortDesc">Hello World, MainActivity!</string>
-	<string name="natural_leader_page">Hello World, MainActivity!</string>
+	<string name="natural_leader_name">Natural Leader</string>
+	<string name="natural_leader_longDesc">A character with this ability increases their command range by 2\".</string>
+	<string name="natural_leader_shortDesc">Command range +2\"</string>
+	<string name="natural_leader_page">165</string>
 
-	<string name="night_fighter_name">Hello World, MainActivity!</string>
-	<string name="night_fighter_longDesc">Hello World, MainActivity!</string>
-	<string name="night_fighter_shortDesc">Hello World, MainActivity!</string>
-	<string name="night_fighter_page">Hello World, MainActivity!</string>
+	<string name="night_fighter_name">Night Fighter</string>
+	<string name="night_fighter_longDesc">When making a ranged or magic attack against a character with Stealth or Prowl, the attack only automatically misses from 8\" away, rather than 5\".</string>
+	<string name="night_fighter_shortDesc">Hit Stealth from 8\" away</string>
+	<string name="night_fighter_page">165</string>
 
 	<string name="parry_name">Parry</string>
-	<string name="parry_longDesc">Long desc here</string>
+	<string name="parry_longDesc">While armed with a hand weapon, the character cannot be targeted by free strikes.</string>
 	<string name="parry_shortDesc">Immune to free strikes</string>
 	<string name="parry_page">165</string>
 
-	<string name="pathfinder_name">Hello World, MainActivity!</string>
-	<string name="pathfinder_longDesc">Hello World, MainActivity!</string>
-	<string name="pathfinder_shortDesc">Hello World, MainActivity!</string>
-	<string name="pathfinder_page">Hello World, MainActivity!</string>
+	<string name="pathfinder_name">Pathfinder</string>
+	<string name="pathfinder_longDesc">The character can move over rough terrain without penalty.</string>
+	<string name="pathfinder_shortDesc">Move freely over rough terrain</string>
+	<string name="pathfinder_page">165</string>
 
-	<string name="poison_resistance_name">Hello World, MainActivity!</string>
-	<string name="poison_resistance_longDesc">Hello World, MainActivity!</string>
-	<string name="poison_resistance_shortDesc">Hello World, MainActivity!</string>
-	<string name="poison_resistance_page">Hello World, MainActivity!</string>
+	<string name="poison_resistance_name">Poison Resistance</string>
+	<string name="poison_resistance_longDesc">The character gains boosted rolls to resist poisons and toxins</string>
+	<string name="poison_resistance_shortDesc">Boosted rolls against poison,toxins</string>
+	<string name="poison_resistance_page">165</string>
 
-	<string name="port_of_call_name">Hello World, MainActivity!</string>
-	<string name="port_of_call_longDesc">Hello World, MainActivity!</string>
-	<string name="port_of_call_shortDesc">Hello World, MainActivity!</string>
-	<string name="port_of_call_page">Hello World, MainActivity!</string>
+	<string name="port_of_call_name">Port of Call</string>
+	<string name="port_of_call_longDesc">A character with Port of Call can always find their way home again.  For each level of Navigation, a character can nominate one location they\'ve visited more than once as a Port of Call.  When travelling to such a destination and using Navigation, treat any results worse than \"Arrive as planned\" as \"Arrive as planned\".</string>
+	<string name="port_of_call_shortDesc">Navigate successfully to home Ports</string>
+	<string name="port_of_call_page">165</string>
 
 	<string name="precision_strike_name">Precision Strike</string>
-	<string name="precision_strike_longDesc">Long desc here</string>
+	<string name="precision_strike_longDesc">When the character hits with a melee attack, they choose the branch of the target\'s life spiral or the column of the target\'s damage grid that is hit, if applicable.</string>
 	<string name="precision_strike_shortDesc">Choose which damage column is hit</string>
 	<string name="precision_strike_page">165</string>
 
-	<string name="press_the_attack_name">Hello World, MainActivity!</string>
-	<string name="press_the_attack_longDesc">Hello World, MainActivity!</string>
-	<string name="press_the_attack_shortDesc">Hello World, MainActivity!</string>
-	<string name="press_the_attack_page">Hello World, MainActivity!</string>
+	<string name="press_the_attack_name">Press the Attack</string>
+	<string name="press_the_attack_longDesc">When this character slams an enemy, immediately after the slam is resolved this character can advance directly toward the slammed enemy up to the distance the slammed enemy was moved and then make a melee attack against that enemy.</string>
+	<string name="press_the_attack_shortDesc">On slam, follow and attack</string>
+	<string name="press_the_attack_page">165</string>
 
-	<string name="privilege_name">Hello World, MainActivity!</string>
-	<string name="privilege_longDesc">Hello World, MainActivity!</string>
-	<string name="privilege_shortDesc">Hello World, MainActivity!</string>
-	<string name="privilege_page">Hello World, MainActivity!</string>
+	<string name="privilege_name">Privilege</string>
+	<string name="privilege_longDesc">This character is afforeded the rights of a noble.  They are immune to persecution for petty crimes and can be tried only by a court of peers.  Should they be found guilty of a high crime, they have the right to be executed in a style befitting a noble.  Each kingdom has distinct benefits and obligations for those born of privilege.  With a successful Etiquette skill roll, this character can demand hospitality and request aid from other nobles not at war with their kingdom.  Additionally, the character gains +2 of social skill rolls when dealing with those beneath their station who recognize their status and respect the nobility.</string>
+	<string name="privilege_shortDesc">Treated as a noble</string>
+	<string name="privilege_page">165</string>
 
-	<string name="prowl_name">Hello World, MainActivity!</string>
-	<string name="prowl_longDesc">Hello World, MainActivity!</string>
-	<string name="prowl_shortDesc">Hello World, MainActivity!</string>
-	<string name="prowl_page">Hello World, MainActivity!</string>
+	<string name="prowl_name">Prowl</string>
+	<string name="prowl_longDesc">The character gains Stealth while within terrain that provides concealment, the AOE of a spell that gives concealment, or the AOE of a cloud effect.</string>
+	<string name="prowl_shortDesc">Gain Stealth when concealed</string>
+	<string name="prowl_page">165</string>
 
-	<string name="pursuit_name">Hello World, MainActivity!</string>
-	<string name="pursuit_longDesc">Hello World, MainActivity!</string>
-	<string name="pursuit_shortDesc">Hello World, MainActivity!</string>
-	<string name="pursuit_page">Hello World, MainActivity!</string>
+	<string name="pursuit_name">Pursuit</string>
+	<string name="pursuit_longDesc">The character can spend 1 feat point during their turn to use Pursuit.  When this ability is used, the character designates one enemy.  For the rest of the encounter, when that enemy moves during their turn, immediately after the enemy ends their movement this character can make a full advance.  A character can use this benefit only once per encounter unless the original subject of this ability is destroyed, at which point the character can spend a feat point to use this benefit on a new enemy.</string>
+	<string name="pursuit_shortDesc">Feat: advance when enemy moves</string>
+	<string name="pursuit_page">165</string>
 
-	<string name="quick_work_name">Hello World, MainActivity!</string>
-	<string name="quick_work_longDesc">Hello World, MainActivity!</string>
+	<string name="quick_work_name">Quick Work</string>
+	<string name="quick_work_longDesc">When this character kills one or more enemies</string>
 	<string name="quick_work_shortDesc">Hello World, MainActivity!</string>
 	<string name="quick_work_page">Hello World, MainActivity!</string>
 
