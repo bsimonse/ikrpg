@@ -567,342 +567,347 @@
 	<string name="pursuit_page">165</string>
 
 	<string name="quick_work_name">Quick Work</string>
-	<string name="quick_work_longDesc">When this character kills one or more enemies</string>
-	<string name="quick_work_shortDesc">Hello World, MainActivity!</string>
-	<string name="quick_work_page">Hello World, MainActivity!</string>
+	<string name="quick_work_longDesc">When this character kills one or more enemies with a melee attack during their combat action, immediately after that attack is resolved this character can make one ranged attack, if a ranged weapon is held and loaded.</string>
+	<string name="quick_work_shortDesc">Free ranged attack after melee kill</string>
+	<string name="quick_work_page">166</string>
 
-	<string name="rallying_cry_name">Hello World, MainActivity!</string>
-	<string name="rallying_cry_longDesc">Hello World, MainActivity!</string>
-	<string name="rallying_cry_shortDesc">Hello World, MainActivity!</string>
-	<string name="rallying_cry_page">Hello World, MainActivity!</string>
+	<string name="rallying_cry_name">Rallying Cry</string>
+	<string name="rallying_cry_longDesc">This character can spend a feat point to use this ability.  For one round, this character\'s command range is doubled and friendly characters in their command range become fearless.</string>
+	<string name="rallying_cry_shortDesc">Feat: 2x CMD + Fearless</string>
+	<string name="rallying_cry_page">166</string>
 
-	<string name="relentless_charge_name">Hello World, MainActivity!</string>
-	<string name="relentless_charge_longDesc">Hello World, MainActivity!</string>
-	<string name="relentless_charge_shortDesc">Hello World, MainActivity!</string>
-	<string name="relentless_charge_page">Hello World, MainActivity!</string>
+	<string name="relentless_charge_name">Relentless Charge</string>
+	<string name="relentless_charge_longDesc">This character ignores penalties for rough terrain while charging.</string>
+	<string name="relentless_charge_shortDesc">Ignore rough terrain on charge</string>
+	<string name="relentless_charge_page">166</string>
 
-	<string name="resourceful_name">Hello World, MainActivity!</string>
-	<string name="resourceful_longDesc">Hello World, MainActivity!</string>
-	<string name="resourceful_shortDesc">Hello World, MainActivity!</string>
-	<string name="resourceful_page">Hello World, MainActivity!</string>
+	<string name="resourceful_name">Resourceful</string>
+	<string name="resourceful_longDesc">This character can upkeep spells on steamjacks they control without spending focus or gaining fatigue points.</string>
+	<string name="resourceful_shortDesc">Free \'jack spell upkeep</string>
+	<string name="resourceful_page">166</string>
 
-	<string name="retaliatory_strike_name">Hello World, MainActivity!</string>
-	<string name="retaliatory_strike_longDesc">Hello World, MainActivity!</string>
-	<string name="retaliatory_strike_shortDesc">Hello World, MainActivity!</string>
-	<string name="retaliatory_strike_page">Hello World, MainActivity!</string>
+	<string name="retaliatory_strike_name">Retaliatory Strike</string>
+	<string name="retaliatory_strike_longDesc">When this character is hit by an enemy\'s melee attack outside of their turn, after the attack is resolved they can spend one feat point to immediately make one normal melee attack against the enemy that hit him.</string>
+	<string name="retaliatory_strike_shortDesc">Feat: melee attack when hit</string>
+	<string name="retaliatory_strike_page">166</string>
 
-	<string name="return_fire_ability_name">Hello World, MainActivity!</string>
-	<string name="return_fire_ability_longDesc">Hello World, MainActivity!</string>
-	<string name="return_fire_ability_shortDesc">Hello World, MainActivity!</string>
-	<string name="return_fire_ability_page">Hello World, MainActivity!</string>
+	<string name="return_fire_ability_name">Return Fire</string>
+	<string name="return_fire_ability_longDesc">Once per round when this character is missed by an enemy\'s ranged attack, immediately after the attack is resolved they can make one normal attack against the attacking enemy if a ranged weapon is held and loaded.</string>
+	<string name="return_fire_ability_shortDesc">Free ranged attack when missed</string>
+	<string name="return_fire_ability_page">166</string>
 
-	<string name="ride_by_attack_name">Hello World, MainActivity!</string>
-	<string name="ride_by_attack_longDesc">Hello World, MainActivity!</string>
-	<string name="ride_by_attack_shortDesc">Hello World, MainActivity!</string>
-	<string name="ride_by_attack_page">Hello World, MainActivity!</string>
+	<string name="ride_by_attack_name">Ride-By Attack</string>
+	<string name="ride_by_attack_longDesc">While mounted, this character can combine their movement and action during their turn to make a Ride-By Attack.  The character declares a Ride-By Attack at the start of their Activation Phase.  They make a full advance and can halt movement at any point to make attacks, and resume movement afterwards.</string>
+	<string name="ride_by_attack_shortDesc">Mounted: attack during move</string>
+	<string name="ride_by_attack_page">166</string>
 
 	<string name="riposte_name">Riposte</string>
-	<string name="riposte_longDesc">Long desc here</string>
-	<string name="riposte_shortDesc">Once/round, free melee attack when missed</string>
+	<string name="riposte_longDesc">Once per round when this character is missed by an enemy\'s melee attack, immediately after the attack is resolved they can make one normal attack against the attacking character.  To make a ranged attack, the character must be holding a loaded ranged weapon.</string>
+	<string name="riposte_shortDesc">Once/round, free attack when missed</string>
 	<string name="riposte_page">166</string>
 
-	<string name="rock_solid_name">Hello World, MainActivity!</string>
-	<string name="rock_solid_longDesc">Hello World, MainActivity!</string>
-	<string name="rock_solid_shortDesc">Hello World, MainActivity!</string>
-	<string name="rock_solid_page">Hello World, MainActivity!</string>
+	<string name="rock_solid_name">Rock Solid</string>
+	<string name="rock_solid_longDesc">This character and characters B2B with them cannot be knocked down.  This ability is lost when the character is mounted.</string>
+	<string name="rock_solid_shortDesc">You+B2B immune to knockdown</string>
+	<string name="rock_solid_page">166</string>
 
-	<string name="roll_with_it_name">Hello World, MainActivity!</string>
-	<string name="roll_with_it_longDesc">Hello World, MainActivity!</string>
-	<string name="roll_with_it_shortDesc">Hello World, MainActivity!</string>
-	<string name="roll_with_it_page">Hello World, MainActivity!</string>
+	<string name="roll_with_it_name">Roll With It</string>
+	<string name="roll_with_it_longDesc">When the character would ordinarily be knocked down, they go prone instead.  This ability is lost when the character is mounted.</string>
+	<string name="roll_with_it_shortDesc">Prone instead of knockdown</string>
+	<string name="roll_with_it_page">166</string>
 
-	<string name="saddle_shot_name">Hello World, MainActivity!</string>
-	<string name="saddle_shot_longDesc">Hello World, MainActivity!</string>
-	<string name="saddle_shot_shortDesc">Hello World, MainActivity!</string>
-	<string name="saddle_shot_page">Hello World, MainActivity!</string>
+	<string name="saddle_shot_name">Saddle Shot</string>
+	<string name="saddle_shot_longDesc">This character does not suffer the firing-from-horseback penalty when making ranged attacks while mounted.</string>
+	<string name="saddle_shot_shortDesc">No firing-from-horseback penalty</string>
+	<string name="saddle_shot_page">166</string>
 
-	<string name="scrounge_name">Hello World, MainActivity!</string>
-	<string name="scrounge_longDesc">Hello World, MainActivity!</string>
-	<string name="scrounge_shortDesc">Hello World, MainActivity!</string>
-	<string name="scrounge_page">Hello World, MainActivity!</string>
+	<string name="scrounge_name">Scrounge</string>
+	<string name="scrounge_longDesc">The character is adept at finding hard-to-acquire or expensive replacement parts to repair steamjacks.  Given a day to find the parts in a town or industrialized settlement, the character can find any part needed (or something close enough he can bodge it together).  The character can purchase steamjack parts, weapons, and gear for half the normal price.</string>
+	<string name="scrounge_shortDesc">Always find \'jack parts, 1/2 price</string>
+	<string name="scrounge_page">167</string>
 
-	<string name="sentry_name">Hello World, MainActivity!</string>
-	<string name="sentry_longDesc">Hello World, MainActivity!</string>
-	<string name="sentry_shortDesc">Hello World, MainActivity!</string>
-	<string name="sentry_page">Hello World, MainActivity!</string>
+	<string name="sentry_name">Sentry</string>
+	<string name="sentry_longDesc">Once per round, when an enemy is placed in or moves into the line of sight of this character, this character can immediately make one attack, targeting that enemy.</string>
+	<string name="sentry_shortDesc">Ask your GM</string>
+	<string name="sentry_page">167</string>
 
-	<string name="set_defense_name">Hello World, MainActivity!</string>
-	<string name="set_defense_longDesc">Hello World, MainActivity!</string>
-	<string name="set_defense_shortDesc">Hello World, MainActivity!</string>
-	<string name="set_defense_page">Hello World, MainActivity!</string>
+	<string name="set_defense_name">Set Defense</string>
+	<string name="set_defense_longDesc">While this character is armed with a weapon that has reach, an enemy in this character\'s front arc suffers -2 on charge, slam, power attack, and impact attack rolls against them.</string>
+	<string name="set_defense_shortDesc">Reach: -2 on enemy power attack rolls</string>
+	<string name="set_defense_page">167</string>
 
-	<string name="shadow_magic_name">Hello World, MainActivity!</string>
-	<string name="shadow_magic_longDesc">Hello World, MainActivity!</string>
-	<string name="shadow_magic_shortDesc">Hello World, MainActivity!</string>
-	<string name="shadow_magic_page">Hello World, MainActivity!</string>
+	<string name="shadow_magic_name">Shadow Magic</string>
+	<string name="shadow_magic_longDesc">When this character casts a spell, no spell runes appear and magically sensitive characters cannot sense the character\'s magic.  A focuser with this ability cannot be detected by another focuser with the Magic Sensitivity archetype benefit.</string>
+	<string name="shadow_magic_shortDesc">Magic ability undetectable</string>
+	<string name="shadow_magic_page">167</string>
 
-	<string name="shield_guard_name">Hello World, MainActivity!</string>
-	<string name="shield_guard_longDesc">Hello World, MainActivity!</string>
-	<string name="shield_guard_shortDesc">Hello World, MainActivity!</string>
-	<string name="shield_guard_page">Hello World, MainActivity!</string>
+	<string name="shield_guard_name">Shield Guard</string>
+	<string name="shield_guard_longDesc">Once per turn, when a friendly character is directly hit by an attack while within 2\" of this character, this character can choose to be directly hit instead.  This character cannot use this ability while incorporeal, knocked down, prone, or stationary.</string>
+	<string name="shield_guard_shortDesc">Take hit for friend</string>
+	<string name="shield_guard_page">167</string>
 
-	<string name="shield_slam_name">Hello World, MainActivity!</string>
-	<string name="shield_slam_longDesc">Hello World, MainActivity!</string>
-	<string name="shield_slam_shortDesc">Hello World, MainActivity!</string>
-	<string name="shield_slam_page">Hello World, MainActivity!</string>
+	<string name="shield_slam_name">Shield Slam</string>
+	<string name="shield_slam_longDesc">When this character charges while armed with a shield, instead of making a charge attack, they can spend a feat point to slam their targets making an attack roll with their shield.  A character who slams another character with a larger base suffers a -2 to this attack roll.  The POW of the slam damage roll is equal to the STR of the attacking character plus the POW of the shield.  The POW of collateral damage is equal to the STR of the attacking character.</string>
+	<string name="shield_slam_shortDesc">Feat: slam attack with shield</string>
+	<string name="shield_slam_page">167</string>
 
-	<string name="signal_language_name">Hello World, MainActivity!</string>
-	<string name="signal_language_longDesc">Hello World, MainActivity!</string>
-	<string name="signal_language_shortDesc">Hello World, MainActivity!</string>
-	<string name="signal_language_page">Hello World, MainActivity!</string>
+	<string name="signal_language_name">Signal Language</string>
+	<string name="signal_language_longDesc">The character can spend time developing a coded signal language for use with the part using the same rules as creatiang a code.  The language can convey simple messages or commands and has a Cryptography target number based on the target number used during the code\'s creation.  The signal language can be taught to any character that has Intellect 3 or greater.</string>
+	<string name="signal_language_shortDesc">Can make signal language</string>
+	<string name="signal_language_page">167</string>
 
-	<string name="sniper_name">Hello World, MainActivity!</string>
-	<string name="sniper_longDesc">Hello World, MainActivity!</string>
-	<string name="sniper_shortDesc">Hello World, MainActivity!</string>
+	<string name="sniper_name">Sniper</string>
+	<string name="sniper_longDesc">When this character forfeits their movement to aim during their turn, the character\'s first ranged attack that turn gains boosted damage.</string>
+	<string name="sniper_shortDesc">Aim: first attack boosted damage</string>
 	<string name="sniper_page">Hello World, MainActivity!</string>
 
 	<string name="specialization_name">Specialization</string>
-	<string name="specialization_longDesc">Long desc here</string>
+	<string name="specialization_longDesc">The character does not suffer the weapon\'s attack roll penalties when attacking with a weapon of the type chosen.  A character can have this ability several times, each time choosing a different weapon.</string>
 	<string name="specialization_shortDesc">No attack penalty from weapon</string>
 	<string name="specialization_page">167</string>
 
 	<string name="steady_name">Steady</string>
-	<string name="steady_longDesc">Long Desc here</string>
-	<string name="steady_shortDesc">Can\'t be knocked down</string>
+	<string name="steady_longDesc">This character cannot be knocked down.  This ability does not apply while mounted.</string>
+	<string name="steady_shortDesc">Immune to knockdown</string>
 	<string name="steady_page">167</string>
 
-	<string name="steamo_name">Hello World, MainActivity!</string>
-	<string name="steamo_longDesc">Hello World, MainActivity!</string>
-	<string name="steamo_shortDesc">Hello World, MainActivity!</string>
-	<string name="steamo_page">Hello World, MainActivity!</string>
+	<string name="steamo_name">Steamo</string>
+	<string name="steamo_longDesc">The character can reroll failed Mechanikal Engineering rolls to repair or dismantle steamjacks.  Each roll can be rerolled only once as a result of Steamo.</string>
+	<string name="steamo_shortDesc">Reroll Mech. Engineering rolls</string>
+	<string name="steamo_page">167</string>
 
-	<string name="sucker_name">Hello World, MainActivity!</string>
-	<string name="sucker_longDesc">Hello World, MainActivity!</string>
-	<string name="sucker_shortDesc">Hello World, MainActivity!</string>
-	<string name="sucker_page">Hello World, MainActivity!</string>
+	<string name="sucker_name">Sucker!</string>
+	<string name="sucker_longDesc">If this character is directly hit by an enemy ranged attack, they can choose a friendly, living, non-incorporeal character within 2\" to be hit instead.  That character is automatically hit and suffers all damage and effects.</string>
+	<string name="sucker_shortDesc">Pass hits to friends</string>
+	<string name="sucker_page">167</string>
 
-	<string name="swift_hunter_name">Hello World, MainActivity!</string>
-	<string name="swift_hunter_longDesc">Hello World, MainActivity!</string>
-	<string name="swift_hunter_shortDesc">Hello World, MainActivity!</string>
-	<string name="swift_hunter_page">Hello World, MainActivity!</string>
+	<string name="swift_hunter_name">Swift Hunter</string>
+	<string name="swift_hunter_longDesc">When this character incapacitates an enemy by using a normal ranged attack, immediately after the attack is resolved they can advance up to 2\".</string>
+	<string name="swift_hunter_shortDesc">Ranged kill: move 2\"</string>
+	<string name="swift_hunter_page">167</string>
 
-	<string name="swift_rider_name">Hello World, MainActivity!</string>
-	<string name="swift_rider_longDesc">Hello World, MainActivity!</string>
-	<string name="swift_rider_shortDesc">Hello World, MainActivity!</string>
-	<string name="swift_rider_page">Hello World, MainActivity!</string>
+	<string name="swift_rider_name">Swfit Rider</string>
+	<string name="swift_rider_longDesc">While riding a mount, the character can move over rough terrian without penalty.</string>
+	<string name="swift_rider_shortDesc">Mounted: no rough terrain penalty</string>
+	<string name="swift_rider_page">167</string>
 
-	<string name="take_down_name">Hello World, MainActivity!</string>
-	<string name="take_down_longDesc">Hello World, MainActivity!</string>
-	<string name="take_down_shortDesc">Hello World, MainActivity!</string>
-	<string name="take_down_page">Hello World, MainActivity!</string>
+	<string name="take_down_name">Take Down</string>
+	<string name="take_down_longDesc">This character can use this ability anytime they incapacitate another character with an attack if the incapacitated character is in this character\'s melee range.  The incapacitated character regains 1 vitality point and is no longer incapacitated but is considered to be manacled, tied up, unconscious, or otherwise out of action for the rest of the encounter.  Once the combat portion of the encounter has ended, the subject of the take down is at the mercy of the victors to be questioned or worse.</string>
+	<string name="take_down_shortDesc">Keep enemies alive after kill</string>
+	<string name="take_down_page">167</string>
 
-	<string name="targeteer_name">Hello World, MainActivity!</string>
-	<string name="targeteer_longDesc">Hello World, MainActivity!</string>
-	<string name="targeteer_shortDesc">Hello World, MainActivity!</string>
-	<string name="targeteer_page">Hello World, MainActivity!</string>
+	<string name="targeteer_name">Targeteer</string>
+	<string name="targeteer_longDesc">When the character hits with a ranged attack, they choose the branch of the target\'s life spiral or the column of the target\'s damage grid that is hit, if applicable.</string>
+	<string name="targeteer_shortDesc">Ranged: choose spiral to damage</string>
+	<string name="targeteer_page">168</string>
 
-	<string name="team_leader_name">Hello World, MainActivity!</string>
-	<string name="team_leader_longDesc">Hello World, MainActivity!</string>
-	<string name="team_leader_shortDesc">Hello World, MainActivity!</string>
-	<string name="team_leader_page">Hello World, MainActivity!</string>
+	<string name="team_leader_name">Team Leader</string>
+	<string name="team_leader_longDesc">When this character gains a feat point, instead of keeping it they can give it to another character currently in their command range.</string>
+	<string name="team_leader_shortDesc">Can give feats to friends</string>
+	<string name="team_leader_page">168</string>
 
-	<string name="traceless_path_name">Hello World, MainActivity!</string>
-	<string name="traceless_path_longDesc">Hello World, MainActivity!</string>
-	<string name="traceless_path_shortDesc">Hello World, MainActivity!</string>
-	<string name="traceless_path_page">Hello World, MainActivity!</string>
+	<string name="traceless_path_name">Traceless Path</string>
+	<string name="traceless_path_longDesc">The character knows how to conceal their trail when moving over land.  Though they can easily move at only half their usual rate of speed while using this ability, either on foot or horseback, anyone attempting to follow their trail has +3 added to the skill roll target number.</string>
+	<string name="traceless_path_shortDesc">No trail at 1/2 speed</string>
+	<string name="traceless_path_page">168</string>
 
-	<string name="truth_reader_name">Hello World, MainActivity!</string>
-	<string name="truth_reader_longDesc">Hello World, MainActivity!</string>
-	<string name="truth_reader_shortDesc">Hello World, MainActivity!</string>
-	<string name="truth_reader_page">Hello World, MainActivity!</string>
+	<string name="truth_reader_name">Truth Reader</string>
+	<string name="truth_reader_longDesc">The character automatically knows when someone is lying to them.  Keep in mind that knowing someone is lying is different than discerning the truth.</string>
+	<string name="truth_reader_shortDesc">Automatically detect lies</string>
+	<string name="truth_reader_page">168</string>
 
-	<string name="tune_up_name">Hello World, MainActivity!</string>
-	<string name="tune_up_longDesc">Hello World, MainActivity!</string>
-	<string name="tune_up_shortDesc">Hello World, MainActivity!</string>
-	<string name="tune_up_page">Hello World, MainActivity!</string>
+	<string name="tune_up_name">Tune Up</string>
+	<string name="tune_up_longDesc">While B2B with a steamjack they control, this character can spend a quick action to use this ability.  During its turn this round, the steamjack gains either boosted attack or damage rolls.</string>
+	<string name="tune_up_shortDesc">Quick action: B2B \'jack gets boosted rolls</string>
+	<string name="tune_up_page">168</string>
 
-	<string name="two_weapon_fighting_name">Hello World, MainActivity!</string>
-	<string name="two_weapon_fighting_longDesc">Hello World, MainActivity!</string>
-	<string name="two_weapon_fighting_shortDesc">Hello World, MainActivity!</string>
-	<string name="two_weapon_fighting_page">Hello World, MainActivity!</string>
+	<string name="two_weapon_fighting_name">Two-Weapon Fighting</string>
+	<string name="two_weapon_fighting_longDesc">While fighting with a one-handed weapon or pistol in each hand, the character gains an additional attack for the second weapon.  They suffer -2 on attack rolls with the second weapon while doing so.</string>
+	<string name="two_weapon_fighting_shortDesc">Extra attack with off-hand</string>
+	<string name="two_weapon_fighting_page">168</string>
 
-	<string name="university_education_name">Hello World, MainActivity!</string>
-	<string name="university_education_longDesc">Hello World, MainActivity!</string>
-	<string name="university_education_shortDesc">Hello World, MainActivity!</string>
-	<string name="university_education_page">Hello World, MainActivity!</string>
+	<string name="university_education_name">University Education</string>
+	<string name="university_education_longDesc">The character can reroll failed Lore and Research skill rolls.  Each roll can be rerolled only once as a result of University Education.</string>
+	<string name="university_education_shortDesc">Reroll Lore/Research rolls</string>
+	<string name="university_education_page">168</string>
 
-	<string name="waylay_name">Hello World, MainActivity!</string>
-	<string name="waylay_longDesc">Hello World, MainActivity!</string>
-	<string name="waylay_shortDesc">Hello World, MainActivity!</string>
-	<string name="waylay_page">Hello World, MainActivity!</string>
+	<string name="waylay_name">Waylay</string>
+	<string name="waylay_longDesc">When an attack made by this character has the chance to knock out a target, increase the target number for the Willpower roll to resist the knockout by 2</string>
+	<string name="waylay_shortDesc">Knockouts need +2 Willpower</string>
+	<string name="waylay_page">168</string>
 	
 	<!--Archetype abilities-->
 		
 		<!--GIFTED-->
-	<string name="combat_caster_name">Hello World, MainActivity!</string>
-	<string name="combat_caster_longDesc">Hello World, MainActivity!</string>
-	<string name="combat_caster_shortDesc">Hello World, MainActivity!</string>
-	<string name="combat_caster_page">Hello World, MainActivity!</string>
+	<string name="additional_study_name">Additional Study</string>
+	<string name="additional_study_longDesc">This character delves further into the mysteries of the arcane and is rewarded with a spell from one of their career spell lists.  The benefit can be taken multiple times, but a character cannot exceed their known spell limit.</string>
+	<string name="additional_study_shortDesc">Learn additional spell</string>
+	<string name="additional_study_page">115</string>
 	
-	<string name="fast_caster_name">Hello World, MainActivity!</string>
-	<string name="fast_caster_longDesc">Hello World, MainActivity!</string>
-	<string name="fast_caster_shortDesc">Hello World, MainActivity!</string>
-	<string name="fast_caster_page">Hello World, MainActivity!</string>
+	<string name="combat_caster_name">Combat Caster</string>
+	<string name="combat_caster_longDesc">When this character makes a magic attack roll, they gain an additional die.  Discard the lowest die of each roll.</string>
+	<string name="combat_caster_shortDesc">+1 die on magic attacks, discard lowest</string>
+	<string name="combat_caster_page">115</string>
 	
-	<string name="feat_dominator_name">Hello World, MainActivity!</string>
-	<string name="feat_dominator_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_dominator_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_dominator_page">Hello World, MainActivity!</string>
+	<string name="fast_caster_name">Fast Caster</string>
+	<string name="fast_caster_longDesc">The character gains one extra quick action each activation that can be used only to cast a spell.</string>
+	<string name="fast_caster_shortDesc">Free quick action to cast spells</string>
+	<string name="fast_caster_page">115</string>
 	
-	<string name="feat_powerful_caster_name">Hello World, MainActivity!</string>
-	<string name="feat_powerful_caster_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_powerful_caster_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_powerful_caster_page">Hello World, MainActivity!</string>
+	<string name="feat_dominator_name">Feat: Dominator</string>
+	<string name="feat_dominator_longDesc">The character can spend 1 feat point during their turn to double their control area for one round.</string>
+	<string name="feat_dominator_shortDesc">Feat: 2x control range</string>
+	<string name="feat_dominator_page">115</string>
 	
-	<string name="feat_quick_cast_name">Hello World, MainActivity!</string>
-	<string name="feat_quick_cast_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_quick_cast_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_quick_cast_page">Hello World, MainActivity!</string>
+	<string name="feat_powerful_caster_name">Feat: Powerful Caster</string>
+	<string name="feat_powerful_caster_longDesc">The character can spend 1 feat point when they cast a spell to increase the RNG of the spell by 2\".  Spells with a range of CTRL or SP are not affected.</string>
+	<string name="feat_powerful_caster_shortDesc">Feat: spell RNG +2\"</string>
+	<string name="feat_powerful_caster_page">115</string>
 	
-	<string name="feat_strength_of_will_name">Hello World, MainActivity!</string>
-	<string name="feat_strength_of_will_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_strength_of_will_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_strength_of_will_page">Hello World, MainActivity!</string>
+	<string name="feat_quick_cast_name">Feat: Quick Cast</string>
+	<string name="feat_quick_cast_longDesc">The character can spend 1 feat point to immediately cast one upkeep spell at the start of combat.  When casting a spell as a result of this benefit, the character is not required to pay the COST of the spell.</string>
+	<string name="feat_quick_cast_shortDesc">Feat: gain upkeep before battle</string>
+	<string name="feat_quick_cast_page">115</string>
 	
-	<string name="magic_sensitivity_name">Hello World, MainActivity!</string>
-	<string name="magic_sensitivity_longDesc">Hello World, MainActivity!</string>
-	<string name="magic_sensitivity_shortDesc">Hello World, MainActivity!</string>
-	<string name="magic_sensitivity_page">Hello World, MainActivity!</string>
+	<string name="feat_strength_of_will_name">Feat: Strength of Will</string>
+	<string name="feat_strength_of_will_longDesc">After failing a fatigue roll, the character can spend 1 feat point to instead automatically succeed on the roll.  This benefit can only be taken by Will Weavers.</string>
+	<string name="feat_strength_of_will_shortDesc">Feat: pass a failed fatigue roll</string>
+	<string name="feat_strength_of_will_page">115</string>
 	
-	<string name="rune_reader_name">Hello World, MainActivity!</string>
-	<string name="rune_reader_longDesc">Hello World, MainActivity!</string>
-	<string name="rune_reader_shortDesc">Hello World, MainActivity!</string>
-	<string name="rune_reader_page">Hello World, MainActivity!</string>
+	<string name="magic_sensitivity_name">Magic Sensitivity</string>
+	<string name="magic_sensitivity_longDesc">The character can automatically sense when another character casts a spell within fifty feet for each point of their ARC stat.  Such characters can tune out this detection as background noise but are aware of particularly powerful magic.  Additionally, a character with the focuser tradition can sense other focusers within their detection range.</string>
+	<string name="magic_sensitivity_shortDesc">Detect magic users</string>
+	<string name="magic_sensitivity_page">115</string>
 	
-	<string name="warding_circle_name">Hello World, MainActivity!</string>
-	<string name="warding_circle_longDesc">Hello World, MainActivity!</string>
-	<string name="warding_circle_shortDesc">Hello World, MainActivity!</string>
-	<string name="warding_circle_page">Hello World, MainActivity!</string>
+	<string name="rune_reader_name">Rune Reader</string>
+	<string name="rune_reader_longDesc">The character can identify any spell cast in their line of sight by reading the accompanying spell runes.  They can also learn the spell list the spell came from, and the tradition of the caster.</string>
+	<string name="rune_reader_shortDesc">Identify cast magic</string>
+	<string name="rune_reader_page">115</string>
+	
+	<string name="warding_circle_name">Warding Circle</string>
+	<string name="warding_circle_longDesc">The character can spend 15 minutes to create a circle of warding runes around a small room or campsite.  The names of the character they intend to keep safe within the circle are incorporated into the runes.  When any other character enters the circle, all named characters are alerted.  While in the circle, non-named characters lose incorporeal, and non-named undead and infernal characters suffer -2 on attack rolls.</string>
+	<string name="warding_circle_shortDesc">Create warding circle</string>
+	<string name="warding_circle_page">115</string>
 	
 		<!--INTELLECTUAL-->
-	<string name="battlefield_coordination_name">Hello World, MainActivity!</string>
-	<string name="battlefield_coordination_longDesc">Hello World, MainActivity!</string>
-	<string name="battlefield_coordination_shortDesc">Hello World, MainActivity!</string>
-	<string name="battlefield_coordination_page">Hello World, MainActivity!</string>
+	<string name="battlefield_coordination_name">Battlefield Coordination</string>
+	<string name="battlefield_coordination_longDesc">While in this character\'s command range, friendly characters do not suffer the firing into melee penalty and do not have a chance to hit friendly characters when they miss with attacks while firing into melee.</string>
+	<string name="battlefield_coordination_shortDesc">Prevent firing-into-melee penalty</string>
+	<string name="battlefield_coordination_page">115</string>
 	
-	<string name="feat_flawless_timing_name">Hello World, MainActivity!</string>
-	<string name="feat_flawless_timing_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_flawless_timing_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_flawless_timing_page">Hello World, MainActivity!</string>
+	<string name="feat_flawless_timing_name">Feat: Flawless Timing</string>
+	<string name="feat_flawless_timing_longDesc">The character can spend 1 feat point to use this benefit during their turn.  When they use Flawless Timing, the character names an enemy.  The next time that enemy directly hits them with an attack that encounter, the attack misses instead.</string>
+	<string name="feat_flawless_timing_shortDesc">Feat: force enemy to miss</string>
+	<string name="feat_flawless_timing_page">115</string>
 	
-	<string name="feat_prescient_name">Hello World, MainActivity!</string>
-	<string name="feat_prescient_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_prescient_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_prescient_page">Hello World, MainActivity!</string>
+	<string name="feat_prescient_name">Feat: Prescient</string>
+	<string name="feat_prescient_longDesc">The character can spend 1 feat point to win initiative automatically.  If two or more characters use this ability, they make initiative rolls to determine which of them goes first.</string>
+	<string name="feat_prescient_shortDesc">Feat: Win initiative</string>
+	<string name="feat_prescient_page">116</string>
 	
-	<string name="feat_perfect_plot_name">Hello World, MainActivity!</string>
-	<string name="feat_perfect_plot_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_perfect_plot_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_perfect_plot_page">Hello World, MainActivity!</string>
+	<string name="feat_perfect_plot_name">Feat: Perfect Plot</string>
+	<string name="feat_perfect_plot_longDesc">The character is a flawless planner and allows nothing to escape their attention.  Assuming they are able to oversee all aspects of the plan, scout out the related sites, and do research in great detail, they are sure to succeed.  A character must spend 1 feat point to use this ability.  A character following this character\'s plans gains an additional die on non-combat related rolls during the day in which the plan was enacted.</string>
+	<string name="feat_perfect_plot_shortDesc">Feat: plan, get boosted skill rolls</string>
+	<string name="feat_perfect_plot_page">116</string>
 	
-	<string name="feat_plan_of_action_name">Hello World, MainActivity!</string>
-	<string name="feat_plan_of_action_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_plan_of_action_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_plan_of_action_page">Hello World, MainActivity!</string>
+	<string name="feat_plan_of_action_name">Feat: Plan of Action</string>
+	<string name="feat_plan_of_action_longDesc">At the start of combat, the character can spend 1 feat point to use this benefit.  During that combat, all characters who follow the plan gain +2 to their initiative rolls and +2 to their attack rolls during the first round of combat.</string>
+	<string name="feat_plan_of_action_shortDesc">Feat: +2 Init., +2 attack firt round</string>
+	<string name="feat_plan_of_action_page">116</string>
 	
-	<string name="feat_quick_thinking_name">Hello World, MainActivity!</string>
-	<string name="feat_quick_thinking_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_quick_thinking_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_quick_thinking_page">Hello World, MainActivity!</string>
+	<string name="feat_quick_thinking_name">Feat: Quick Thinking</string>
+	<string name="feat_quick_thinking_longDesc">Once per round, the character can spend 1 feat point to make one attack or quick action at the start of another character\'s turn.</string>
+	<string name="feat_quick_thinking_shortDesc">Feat: Attack or quick action on other\'s turn</string>
+	<string name="feat_quick_thinking_page">116!</string>
 	
-	<string name="feat_unconventional_warfare_name">Hello World, MainActivity!</string>
-	<string name="feat_unconventional_warfare_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_unconventional_warfare_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_unconventional_warfare_page">Hello World, MainActivity!</string>
+	<string name="feat_unconventional_warfare_name">Feat: Unconventional Warfare</string>
+	<string name="feat_unconventional_warfare_longDesc">The character can spend 1 feat point to assess the situation and gain a benefit in combat.  The player must explain to the GM how they are turning the environment against their enemy.  The GM then determines the likely effect of the character\'s action or attack.  Outcomes include a boosted damage roll, knockdown, push, slam, or a fall from a height.</string>
+	<string name="feat_unconventional_warfare_shortDesc">Feat: use environment in battle</string>
+	<string name="feat_unconventional_warfare_page">116</string>
 	
-	<string name="genius_name">Hello World, MainActivity!</string>
-	<string name="genius_longDesc">Hello World, MainActivity!</string>
-	<string name="genius_shortDesc">Hello World, MainActivity!</string>
-	<string name="genius_page">Hello World, MainActivity!</string>
+	<string name="genius_name">Genius</string>
+	<string name="genius_longDesc">The character\'s INT rolls are boosted.</string>
+	<string name="genius_shortDesc">Boosted INT rolls</string>
+	<string name="genius_page">116</string>
 	
-	<string name="hyper_perception_name">Hello World, MainActivity!</string>
-	<string name="hyper_perception_longDesc">Hello World, MainActivity!</string>
-	<string name="hyper_perception_shortDesc">Hello World, MainActivity!</string>
-	<string name="hyper_perception_page">Hello World, MainActivity!</string>
+	<string name="hyper_perception_name">Hyper Perception</string>
+	<string name="hyper_perception_longDesc">The character\'s PER rolls are boosted.</string>
+	<string name="hyper_perception_shortDesc">Boosted PER rolls</string>
+	<string name="hyper_perception_page">116</string>
 	
-	<string name="photographic_memory_name">Hello World, MainActivity!</string>
-	<string name="photographic_memory_longDesc">Hello World, MainActivity!</string>
-	<string name="photographic_memory_shortDesc">Hello World, MainActivity!</string>
-	<string name="photographic_memory_page">Hello World, MainActivity!</string>
+	<string name="photographic_memory_name">Photographic Memory</string>
+	<string name="photographic_memory_longDesc">The character can recall every event in perfect detail.  During play they can call upon their memory to ask the GM questions pertaining to anything they have seen or experienced.</string>
+	<string name="photographic_memory_shortDesc">Ask GM for old details</string>
+	<string name="photographic_memory_page">116</string>
 	
 		<!--MIGHTY-->
-	<string name="beat_back_name">Hello World, MainActivity!</string>
-	<string name="beat_back_longDesc">Hello World, MainActivity!</string>
-	<string name="beat_back_shortDesc">Hello World, MainActivity!</string>
-	<string name="beat_back_page">Hello World, MainActivity!</string>
+	<string name="beat_back_name">Beat Back</string>
+	<string name="beat_back_longDesc">When this character hits a target with a melee attack, they can immediately push their target 1\" directly away.  After the target is pushed, this character can advance up to 1\".</string>
+	<string name="beat_back_shortDesc">1\" push and move up</string>
+	<string name="beat_back_page">116</string>
 	
-	<string name="feat_back_swing_name">Hello World, MainActivity!</string>
-	<string name="feat_back_swing_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_back_swing_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_back_swing_page">Hello World, MainActivity!</string>
+	<string name="feat_back_swing_name">Feat: Back Swing</string>
+	<string name="feat_back_swing_longDesc">Once per turn, this character can spend 1 feat point to gain one additional melee attack.</string>
+	<string name="feat_back_swing_shortDesc">Feat: extra melee attack</string>
+	<string name="feat_back_swing_page">116</string>
 	
-	<string name="feat_bounding_leap_name">Hello World, MainActivity!</string>
-	<string name="feat_bounding_leap_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_bounding_leap_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_bounding_leap_page">Hello World, MainActivity!</string>
+	<string name="feat_bounding_leap_name">Feat: Bounding Leap</string>
+	<string name="feat_bounding_leap_longDesc">Once per turn, if the character does not run or charge, they can spend 1 feat point to place themself anywhere within 5\" of their current location.</string>
+	<string name="feat_bounding_leap_shortDesc">Feat: 5\" place</string>
+	<string name="feat_bounding_leap_page">116</string>
 	
-	<string name="feat_counter_charge_name">Hello World, MainActivity!</string>
-	<string name="feat_counter_charge_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_counter_charge_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_counter_charge_page">Hello World, MainActivity!</string>
+	<string name="feat_counter_charge_name">Feat: Counter Charge</string>
+	<string name="feat_counter_charge_longDesc">When an enemy advances and ends its movement within 6\" of this character and in their line of sight, this character can immeidately spend 1 feat point to charge the enemy.  The character cannot make a counter charge while engaged.</string>
+	<string name="feat_counter_charge_shortDesc">Feat: charge enemy stopping within 6\"</string>
+	<string name="feat_counter_charge_page">116</string>
 	
 	<string name="feat_invulnerable_name">Feat: Invulnerable</string>
-	<string name="feat_invulnerable_longDesc">Long Desc here</string>
+	<string name="feat_invulnerable_longDesc">The character can spend 1 feat point during their turn to gain +3 ARM for one round.</string>
 	<string name="feat_invulnerable_shortDesc">+3 ARM for one round</string>
 	<string name="feat_invulnerable_page">116</string>
 	
-	<string name="feat_revitalize_name">Hello World, MainActivity!</string>
-	<string name="feat_revitalize_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_revitalize_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_revitalize_page">Hello World, MainActivity!</string>
+	<string name="feat_revitalize_name">Feat: Revitalize</string>
+	<string name="feat_revitalize_longDesc">The character can spend 1 feat point during their turn to immediately regain a number of vitality points equal to their PHY stat.  An incapacitated character cannot use Revitalize.</string>
+	<string name="feat_revitalize_shortDesc">Feat: recover PHY points of vitality</string>
+	<string name="feat_revitalize_page">116</string>
 	
-	<string name="feat_shield_breaker_name">Hello World, MainActivity!</string>
-	<string name="feat_shield_breaker_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_shield_breaker_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_shield_breaker_page">Hello World, MainActivity!</string>
+	<string name="feat_shield_breaker_name">Feat: Shield Breaker</string>
+	<string name="feat_shield_breaker_longDesc">When this character hits with a melee attack against a target that has a shield, the character can spend 1 feat point to completely destory the other character\'s shield after the damage has been dealt.</string>
+	<string name="feat_shield_breaker_shortDesc">Feat: destroy enemy shield</string>
+	<string name="feat_shield_breaker_page">116</string>
 	
-	<string name="feat_vendetta_name">Hello World, MainActivity!</string>
-	<string name="feat_vendetta_longDesc">Hello World, MainActivity!</string>
-	<string name="feat_vendetta_shortDesc">Hello World, MainActivity!</string>
-	<string name="feat_vendetta_page">Hello World, MainActivity!</string>
+	<string name="feat_vendetta_name">Feat: Vendetta</string>
+	<string name="feat_vendetta_longDesc">The character can spend 1 feat point during their turn to use this benefit.  When used, the character names one enemy.  For the rest of the encounter, this character gains boosted attack rolls against that enemy.  A character can use this benefit only once per encounter unless the original subject of the vendetta is destroyed, at which point the character can spend a feat point to use this benefit again.</string>
+	<string name="feat_vendetta_shortDesc">Feat: boost attacks against chosen enemy</string>
+	<string name="feat_vendetta_page">116</string>
 	
-	<string name="righteous_anger_name">Hello World, MainActivity!</string>
-	<string name="righteous_anger_longDesc">Hello World, MainActivity!</string>
-	<string name="righteous_anger_shortDesc">Hello World, MainActivity!</string>
-	<string name="righteous_anger_page">Hello World, MainActivity!</string>
+	<string name="righteous_anger_name">Righteous Anger</string>
+	<string name="righteous_anger_longDesc">When one or more friendly characters are damaged by an enemy attack while in this character\'s command range, this character gains +2 STR and ARM for one round.</string>
+	<string name="righteous_anger_shortDesc">+2 STR, ARM when friend hurt</string>
+	<string name="righteous_anger_page">116</string>
 	
-	<string name="tough_name">Hello World, MainActivity!</string>
-	<string name="tough_longDesc">Hello World, MainActivity!</string>
-	<string name="tough_shortDesc">Hello World, MainActivity!</string>
-	<string name="tough_page">Hello World, MainActivity!</string>
+	<string name="tough_name">Tough</string>
+	<string name="tough_longDesc">When this character is disabled, roll a d6.  On a 5 or 6, the character heals 1 vitality point, is no longer disabled, and is knocked down.</string>
+	<string name="tough_shortDesc">Recover on 5/6 when disabled</string>
+	<string name="tough_page">116</string>
 	
 		<!--SKILLED-->
-	<string name="ambidextrous_name">Hello World, MainActivity!</string>
-	<string name="ambidextrous_longDesc">Hello World, MainActivity!</string>
-	<string name="ambidextrous_shortDesc">Hello World, MainActivity!</string>
-	<string name="ambidextrous_page">Hello World, MainActivity!</string>
+	<string name="ambidextrous_name">Ambidextrous</string>
+	<string name="ambidextrous_longDesc">The character does not suffer the attack roll penalty for the second weapon when using the Two-Weapon Fighting ability.</string>
+	<string name="ambidextrous_shortDesc">No penalty when Two-Weapon Fighting</string>
+	<string name="ambidextrous_page">117</string>
 	
-	<string name="cagey_name">Hello World, MainActivity!</string>
-	<string name="cagey_longDesc">Hello World, MainActivity!</string>
-	<string name="cagey_shortDesc">Hello World, MainActivity!</string>
-	<string name="cagey_page">Hello World, MainActivity!</string>
+	<string name="cagey_name">Cagey</string>
+	<string name="cagey_longDesc">When this character is knocked down, they can immediately move up to 2\" and cannot be targeted by free strikes.  While knocked down, this character is not automatically hit by melee attacks and their DEF is not reduced.  The character can stand up during their turn without forfeiting their movement or action.  This benefit does not apply while mounted.</string>
+	<string name="cagey_shortDesc">No penalties from knockdown</string>
+	<string name="cagey_page">117</string>
 	
-	<string name="deft_name">Hello World, MainActivity!</string>
-	<string name="deft_longDesc">Hello World, MainActivity!</string>
+	<string name="deft_name">Deft</string>
+	<string name="deft_longDesc">This character gains boosted AGL rolls</string>
 	<string name="deft_shortDesc">Hello World, MainActivity!</string>
 	<string name="deft_page">Hello World, MainActivity!</string>
 	
-	<string name="feat_defensive_strike_name">Hello World, MainActivity!</string>
+	<string name="feat_defensive_strike_name">Hello World, MainActivity</string>
 	<string name="feat_defensive_strike_longDesc">Hello World, MainActivity!</string>
 	<string name="feat_defensive_strike_shortDesc">Hello World, MainActivity!</string>
 	<string name="feat_defensive_strike_page">Hello World, MainActivity!</string>

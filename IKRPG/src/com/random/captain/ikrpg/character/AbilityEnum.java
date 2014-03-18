@@ -719,7 +719,10 @@ public enum AbilityEnum implements zzPrereqCheck
 			
 			
 	/* Archetype Abilities */
-	
+	GIFTED(R.string.gifted_name, R.string.gifted_longDesc, R.string.gifted_shortDesc, R.string.gifted_page,
+				  true, false, GIFTED_CHECK()),
+	ADDITIONAL_STUDY(R.string.additional_study_name, R.string.additional_study_longDesc, R.string.additional_study_shortDesc, R.string.additional_study_page,
+				  true, false, GIFTED_CHECK()),
 	COMBAT_CASTER(R.string.combat_caster_name, R.string.combat_caster_longDesc, R.string.combat_caster_shortDesc, R.string.combat_caster_page,
 			true, false, GIFTED_CHECK()),
 	FAST_CASTER(R.string.fast_caster_name, R.string.fast_caster_longDesc, R.string.fast_caster_shortDesc, R.string.fast_caster_page,

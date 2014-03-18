@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<RelativeLayout
+		android:id="@+id/totalEXP"
+		android:layout_width="match_parent"
+		android:layout_height="76dp"
+		android:layout_centerHorizontal="true">
+
+		<TextView
+			android:id="@+id/totalEXPLabel"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="100"
+			android:layout_centerHorizontal="true"
+			android:textSize="42sp"
+			android:layout_alignParentBottom="true"/>
+
+		<TextView
+			android:layout_height="20dp"
+			android:layout_width="wrap_content"
+			android:text="exp"
+			android:layout_toRightOf="@id/totalEXPLabel"
+			android:layout_alignParentBottom="true"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/totalEXP"
+		android:layout_centerHorizontal="true"
+		android:paddingTop="10dp"
+		android:id="@+id/expButtons">
+
+		<Button
+			android:id="@+id/loseEXP"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="-"/>
+
+		<Button
+			android:id="@+id/gainEXP"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="+"
+			android:layout_toRightOf="@id/loseEXP"/>
+
+	</RelativeLayout>
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_below="@id/expButtons"
+		android:paddingTop="10dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:id="@+id/expGainsText"
+		android:layout_centerHorizontal="true"/>
+
+	<Button
+		android:id="@+id/commitEXPGainButton"
+		android:layout_height="wrap_content"
+		android:text="Commit"
+		android:layout_width="wrap_content"
+		android:layout_below="@id/expGainsText"
+		android:layout_centerHorizontal="true"
+		android:onClick="getBenefits"/>
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_below="@id/commitEXPGainButton"
+		android:paddingTop="10dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:id="@+id/statGainsText"/>
+
+</RelativeLayout>
+

@@ -28,8 +28,10 @@
         </activity>
 		
 		<activity android:name=".CharacterHomeActivity" />
+		<activity android:name=".CharacterAdvancementPointGain"/>
+		<activity android:name=".character.CharacterAdvancementServiceActivity"/>
 		<activity android:name=".character.CharacterCreationServiceActivity"/>
-		
+			
     </application>
 
 </manifest>

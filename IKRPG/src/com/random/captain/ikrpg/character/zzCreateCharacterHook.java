@@ -1,3 +1,4 @@
+
 package com.random.captain.ikrpg.character;
 
 import android.os.Bundle;
