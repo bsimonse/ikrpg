@@ -3,6 +3,7 @@ package com.random.captain.ikrpg.character;
 import java.util.*;
 
 import android.util.Pair;
+
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
 
@@ -31,6 +32,7 @@ public enum Race
 		new zzCreateCharacterHook[] {new humanHook()}
 		),
 	
+	@SuppressWarnings("unchecked")
 	DWARF(R.string.dwarf_name,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 4), Pair.create(Stat.STRENGTH, 5),
 			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
@@ -53,6 +55,7 @@ public enum Race
 		  new zzCreateCharacterHook[] {new dwarfHook()}
 		  ),
 	
+	@SuppressWarnings("unchecked")
 	GOBBER(R.string.gobber_name,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 4), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 3),
 			  Pair.create(Stat.AGILITY, 4), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
@@ -75,6 +78,7 @@ public enum Race
 		  new zzCreateCharacterHook[] {new gobberHook()}
 		  ),
 		  
+	@SuppressWarnings("unchecked")
 	IOSAN(R.string.iosan_name,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
@@ -97,6 +101,7 @@ public enum Race
 		  new zzCreateCharacterHook[] {new iosanHook()}
 		  ),
 	
+	@SuppressWarnings("unchecked")
 	NYSS(R.string.nyss_name,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			  Pair.create(Stat.AGILITY, 4), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
@@ -119,6 +124,7 @@ public enum Race
 		  new zzCreateCharacterHook[] {new nyssHook()}
 		  ),
 	
+	@SuppressWarnings("unchecked")
 	OGRUN(R.string.ogrun_name,
 		 new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 6),
 			 Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
@@ -141,6 +147,7 @@ public enum Race
 		 new zzCreateCharacterHook[] {new ogrunHook()}
 		 ),
 		 
+	@SuppressWarnings("unchecked")
 	TROLLKIN(R.string.trollkin_name,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 5),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 2),

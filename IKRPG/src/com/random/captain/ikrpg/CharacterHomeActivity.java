@@ -1,15 +1,16 @@
 package com.random.captain.ikrpg;
 import android.view.*;
 import android.widget.*;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView.OnItemClickListener;
+
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.Character;
 import com.random.captain.ikrpg.character.CharacterSheetService;
 import com.random.captain.ikrpg.character.CharacterStorageService;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 public class CharacterHomeActivity extends Activity
 {
@@ -34,7 +35,7 @@ public class CharacterHomeActivity extends Activity
         super.onCreate(b);
         setContentView(R.layout.act_character_home);
 		
-		mainChar = (Character)getIntent().getExtras().get(MainActivity.PC_EXTRA);
+		mainChar = (Character)getIntent().getExtras().get(BundleConstants.CHARACTER);
 		if(mainChar == null){setResult(RESULT_FIRST_USER); finish(); return;}
 		
 		myList = (ListView)findViewById(R.id.char_home_actions);
@@ -54,7 +55,7 @@ public class CharacterHomeActivity extends Activity
 			{
 				case GAIN_EXP:
 					Intent i = new Intent(CharacterHomeActivity.this, CharacterAdvancementPointGain.class);
-					i.putExtra(MainActivity.PC_EXTRA, mainChar);
+					i.putExtra(BundleConstants.CHARACTER, mainChar);
 					startActivity(i);
 					return;
 				case GEAR:

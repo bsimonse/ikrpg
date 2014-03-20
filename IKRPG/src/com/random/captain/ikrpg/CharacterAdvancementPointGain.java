@@ -3,11 +3,15 @@ package com.random.captain.ikrpg;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.random.captain.ikrpg.character.Character;
 import com.random.captain.ikrpg.character.CharacterAdvancementServiceActivity;
+import com.random.captain.ikrpg.character.SkillEnum;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 public class CharacterAdvancementPointGain extends Activity
 {
@@ -24,7 +28,7 @@ public class CharacterAdvancementPointGain extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_character_advance_point_gain);
 		
-		mainChar = (Character)getIntent().getExtras().get(MainActivity.PC_EXTRA);
+		mainChar = (Character)getIntent().getExtras().get(BundleConstants.CHARACTER);
 		baseEXP = mainChar.exp();
 		
 		//setup EXP
@@ -76,9 +80,20 @@ public class CharacterAdvancementPointGain extends Activity
 	public void getBenefits(View v)
 	{
 		Intent i = new Intent(this, CharacterAdvancementServiceActivity.class);
-		i.putExtra(CharacterAdvancementServiceActivity.THE_CHAR, mainChar);
-		i.putExtra(CharacterAdvancementServiceActivity.START_EXP, baseEXP);
-		i.putExtra(CharacterAdvancementServiceActivity.END_EXP, currentEXP);
-		startActivity(i);
+		i.putExtra(BundleConstants.CHARACTER, mainChar.toJson());
+		i.putExtra(BundleConstants.START_EXP, baseEXP);
+		i.putExtra(BundleConstants.END_EXP, currentEXP);
+		Log.i("IKRPG", "Hand weapon before: "+mainChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON));
+		startActivityForResult(i,5);
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if(requestCode == 5 && resultCode == RESULT_OK)
+		{
+			Log.i("IKRPG","Good, it thinks things went okay.");
+			Character c = Character.fromJson(data.getExtras().getString(BundleConstants.CHARACTER));
+			Log.i("IKRPG", "Hand weapon after: "+c.getSkillBaseLevel(SkillEnum.HAND_WEAPON));
+		}
 	}
 }

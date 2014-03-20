@@ -1,6 +1,8 @@
 
 package com.random.captain.ikrpg.character;
 
+import com.random.captain.ikrpg.util.BundleConstants;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -11,9 +13,6 @@ abstract class zzCreateCharacterHook extends Fragment
 	{
 		START,RACE,ARCHETYPE,CAREER1,CAREER2,POSTCREATE_HOOK,FLUFF,DONE;
 	}
-	
-	private static final String CHARACTER = "thisStringHasNothingToDoWithItsName";
-	private static final String HOOK = "neitherDoesThisOne";
 	
 	protected zzBaseCharacter myChar;
 	protected zzCreateCharacterHookDelegate delegate;
@@ -26,8 +25,8 @@ abstract class zzCreateCharacterHook extends Fragment
 		delegate = pDelegate;
 
 		Bundle args = getArguments();
-		args.putParcelable(CHARACTER,myChar);
-		args.putSerializable(HOOK,hook);
+		args.putParcelable(BundleConstants.CHARACTER,myChar);
+		args.putSerializable(BundleConstants.HOOK,hook);
 		
 		if(!hasUI())
 		{doDefaultCase();}
@@ -38,8 +37,8 @@ abstract class zzCreateCharacterHook extends Fragment
 	void restartHook(zzCreateCharacterHookDelegate pDelegate)
 	{
 		Bundle stuff = getArguments();
-		myChar = stuff.getParcelable(CHARACTER);
-		hook = (CreateHook)stuff.getSerializable(HOOK);
+		myChar = stuff.getParcelable(BundleConstants.CHARACTER);
+		hook = (CreateHook)stuff.getSerializable(BundleConstants.HOOK);
 		delegate = pDelegate;
 	}
 	
@@ -49,10 +48,10 @@ abstract class zzCreateCharacterHook extends Fragment
 		Bundle stuff = getArguments();
 		
 		if(myChar==null)
-		{myChar = stuff.getParcelable(CHARACTER);}
+		{myChar = stuff.getParcelable(BundleConstants.CHARACTER);}
 		
 		if(hook==null)
-		{hook = (CreateHook)stuff.getSerializable(HOOK);}
+		{hook = (CreateHook)stuff.getSerializable(BundleConstants.HOOK);}
 	}
 	
 	abstract boolean hasUI();

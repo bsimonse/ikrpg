@@ -2,12 +2,12 @@ package com.random.captain.ikrpg;
 
 import android.view.*;
 import android.widget.*;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.AdapterView.OnItemClickListener;
+
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.MainActivity;
 import com.random.captain.ikrpg.R;
@@ -15,13 +15,14 @@ import com.random.captain.ikrpg.character.Character;
 import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
 import com.random.captain.ikrpg.character.CharacterStorageService;
 import com.random.captain.ikrpg.test.TestSuite;
+import com.random.captain.ikrpg.util.BundleConstants;
+
 import java.util.HashSet;
 import java.util.Set;
 
 
 public class MainActivity extends FragmentActivity
 {
-	public static final String PC_EXTRA = "IKRPG_PC";
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
     private ArrayAdapter<Character> myListAdapter;
 	private Set<Character> myChars = new HashSet<Character>();
@@ -93,7 +94,7 @@ public class MainActivity extends FragmentActivity
 		{
 			Character whichChar = myListAdapter.getItem(position);
 			Intent i = new Intent(MainActivity.this, CharacterHomeActivity.class);
-			i.putExtra(PC_EXTRA,whichChar);
+			i.putExtra(BundleConstants.CHARACTER,whichChar);
 			startActivity(i);
 		}
 	};
@@ -130,7 +131,7 @@ public class MainActivity extends FragmentActivity
 		{
 			if(resultCode == RESULT_OK)
 			{
-				final Character myChar = i.getExtras().getParcelable(CharacterCreationServiceActivity.NEW_CHARACTER);
+				final Character myChar = i.getExtras().getParcelable(BundleConstants.CHARACTER);
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");

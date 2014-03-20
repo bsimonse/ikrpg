@@ -1,11 +1,11 @@
 package com.random.captain.ikrpg.test;
 
 import android.util.Log;
-import com.random.captain.ikrpg.character.Ability;
+
+import com.random.captain.ikrpg.character.Character;
 import com.random.captain.ikrpg.character.CharacterBond;
 import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
 import com.random.captain.ikrpg.util.Utilities;
-import com.random.captain.ikrpg.character.Character;
 
 public class CharacterBondTest
 {

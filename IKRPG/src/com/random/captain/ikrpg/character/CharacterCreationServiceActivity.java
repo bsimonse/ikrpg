@@ -1,6 +1,13 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,20 +17,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.Pair;
-import com.google.gag.annotation.remark.ShoutOutTo;
+
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.gear.Loot;
 import com.random.captain.ikrpg.gear.LootPack;
+import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.Utilities;
 
 public class CharacterCreationServiceActivity extends FragmentActivity
 {
-	public static String SAVED_CHARACTER = "whatDoYouDoWithADrunkenSailor";
-	@ShoutOutTo("CalvinAndHobbes")
-	public static String FIRST_TIME = "howManyBoardsWouldTheMongolsHoardIfTheMongolHordesGotBored";
-	public static String NAME_INDEX = "IEvenLikeTheWordTeam";
-	public static String NEW_CHARACTER = "thisIsABrandNewCharacter";
-	public static String POST_HOOK_INDEX = "onMyGodDeaconStopIt";
+
 	private int nameIndex=0;
 	private int postHookIndex=0;
 	private boolean firstTime = true;
@@ -35,24 +38,24 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 	public void onSaveInstanceState(Bundle b)
 	{
 		super.onSaveInstanceState(b);
-		b.putParcelable(SAVED_CHARACTER, buildingChar);
-		b.putBoolean(FIRST_TIME, firstTime);
-		b.putInt(NAME_INDEX, nameIndex);
-		b.putInt(POST_HOOK_INDEX, postHookIndex);
+		b.putParcelable(BundleConstants.CHARACTER, buildingChar);
+		b.putBoolean("l", firstTime);
+		b.putInt("n", nameIndex);
+		b.putInt("P", postHookIndex);
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_new_character);
+        setContentView(R.layout.act_flow_navigator);
 		
 		if(savedInstanceState != null)
 		{
-			buildingChar = savedInstanceState.getParcelable(SAVED_CHARACTER);
-			firstTime = savedInstanceState.getBoolean(FIRST_TIME, true);
-			nameIndex = savedInstanceState.getInt(NAME_INDEX, 0);
-			postHookIndex = savedInstanceState.getInt(POST_HOOK_INDEX, -1);
+			buildingChar = savedInstanceState.getParcelable(BundleConstants.CHARACTER);
+			firstTime = savedInstanceState.getBoolean("l", true);
+			nameIndex = savedInstanceState.getInt("n", 0);
+			postHookIndex = savedInstanceState.getInt("p", -1);
 		}
 	}
 	
@@ -198,7 +201,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		{
 			firstTime = true;
 			Intent i = new Intent();
-			i.putExtra(NEW_CHARACTER, (zzBaseCharacter)null);
+			i.putExtra(BundleConstants.CHARACTER, (zzBaseCharacter)null);
 			setResult(RESULT_OK, i);
 			finish();
 			return;
@@ -290,7 +293,7 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		buildingChar.index = makeIndex(buildingChar);
 		
 		Intent i = new Intent();
-		i.putExtra(NEW_CHARACTER, new Character(buildingChar));
+		i.putExtra(BundleConstants.CHARACTER, new Character(buildingChar));
 		setResult(RESULT_OK, i);
 		finish();
 	}

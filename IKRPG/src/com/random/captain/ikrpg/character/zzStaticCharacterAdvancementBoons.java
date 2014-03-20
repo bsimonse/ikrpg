@@ -1,13 +1,15 @@
 package com.random.captain.ikrpg.character;
 
 import android.widget.*;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.util.BundleConstants;
+
 import java.util.ArrayList;
 
 public class zzStaticCharacterAdvancementBoons
@@ -39,24 +41,19 @@ public class zzStaticCharacterAdvancementBoons
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 					{
-						skillSelected(potentialSkills.get(which));
+						SkillEnum chosen = potentialSkills.get(which);
+						Log.i("IKRPG","Alright, selected "+chosen);
+						//increment
+						//In future, don't modify myChar to help back button work right
+						myChar.setSkillLevel(chosen.make(), myChar.getSkillBaseLevel(chosen)+1);
+						Bundle b = new Bundle();
+						b.putString(BundleConstants.CHARACTER, myChar.toJson());
+						delegate.hookComplete(b);
 					}
 				});
 
 			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 			tv.setText("Choose your skills");
 		}
-
-		private void skillSelected(SkillEnum skill)
-		{
-			//myChar.race = race;
-			Log.i("IKRPG","Alright, selected "+skill);
-			delegate.hookComplete(myChar);
-		}
-
-		@Override public boolean hasUI(){return true;}
-		@Override public void doDefaultCase(){}	//nothing since always has UI
-		@Override public void undoHook(){myChar.race = null;}
-		@Override public int getPriority(){return -1;}
 	}
 }
