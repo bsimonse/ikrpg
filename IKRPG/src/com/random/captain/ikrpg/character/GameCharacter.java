@@ -3,10 +3,10 @@ package com.random.captain.ikrpg.character;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Character extends zzBaseCharacter
+public class GameCharacter extends zzBaseCharacter
 {
 	//conversion constructor
-	Character(zzBaseCharacter base)
+	GameCharacter(zzBaseCharacter base)
 	{
 		super();
 		fluff=base.fluff;
@@ -29,20 +29,20 @@ public class Character extends zzBaseCharacter
 		deriveSkillCheckLevels();
 	}
 	
-	public static final Parcelable.Creator<Character> CREATOR = new Parcelable.Creator<Character>()
+	public static final Parcelable.Creator<GameCharacter> CREATOR = new Parcelable.Creator<GameCharacter>()
 	{
 		@Override
-		public Character createFromParcel(Parcel in)
+		public GameCharacter createFromParcel(Parcel in)
 		{
-			return new Character(zzBaseCharacter.CREATOR.createFromParcel(in));
+			return new GameCharacter(zzBaseCharacter.CREATOR.createFromParcel(in));
 		}
 
-		@Override public Character[] newArray(int size) {return new Character[size];}
+		@Override public GameCharacter[] newArray(int size) {return new GameCharacter[size];}
 	};
 	
 	public String toJson()
 	{return super.toJson();}
 
-	public static Character fromJson(String json)
-	{return new Character(zzBaseCharacter.fromJson(json));}
+	public static GameCharacter fromJson(String json)
+	{return new GameCharacter(zzBaseCharacter.fromJson(json));}
 }

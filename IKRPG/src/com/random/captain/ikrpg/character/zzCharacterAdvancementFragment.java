@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.FlowFragment;
 
-public abstract class zzCharacterAdvancementBoon extends FlowFragment
+public abstract class zzCharacterAdvancementFragment extends FlowFragment
 {
 	protected zzBaseCharacter myChar;
 

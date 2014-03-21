@@ -12,7 +12,7 @@ import com.random.captain.ikrpg.R;
 
 public abstract class FlowNavigator extends FragmentActivity {
 	
-	protected abstract ArrayList<FlowFragment> generateFrags();
+	protected abstract ArrayList<? extends FlowFragment> generateFrags();
 	protected abstract void hookComplete(Bundle b);
 	protected abstract Bundle prepBundle();
 	protected abstract void setResult();
@@ -34,7 +34,7 @@ public abstract class FlowNavigator extends FragmentActivity {
 		if(savedInstanceState != null)
 		{
 			flowIndex = savedInstanceState.getInt(BundleConstants.FLOW_INDEX, -1);
-			frags = (ArrayList<FlowFragment>)savedInstanceState.getSerializable(BundleConstants.FLOW_FRAGS);
+			frags = (ArrayList<? extends FlowFragment>)savedInstanceState.getSerializable(BundleConstants.FLOW_FRAGS);
 		}
 	}
 
@@ -71,6 +71,7 @@ public abstract class FlowNavigator extends FragmentActivity {
 
 		if(manager.getBackStackEntryCount() <= 1)
 		{
+			setResult(RESULT_CANCELED);
 			finish();
 			return;
 		}
@@ -83,7 +84,7 @@ public abstract class FlowNavigator extends FragmentActivity {
 		manager.popBackStackImmediate();
 	}
 	
-	private ArrayList<FlowFragment> frags;
+	private ArrayList<? extends FlowFragment> frags;
 	private int flowIndex;
 	
 	private void advanceFlow()

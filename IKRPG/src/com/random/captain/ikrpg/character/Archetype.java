@@ -1,12 +1,14 @@
 package com.random.captain.ikrpg.character;
 
-import android.content.Context;
-import android.os.Bundle;
-import com.random.captain.ikrpg.IKRPGApp;
-import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.Stat;
 import java.util.Arrays;
 import java.util.Collection;
+
+import android.content.Context;
+import android.os.Bundle;
+
+import com.random.captain.ikrpg.IKRPGApp;
+import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 public enum Archetype implements zzPrereqCheck
 {
@@ -67,38 +69,42 @@ public enum Archetype implements zzPrereqCheck
 	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
 	
 	public static class GiftedArcaneHook extends zzCreateCharacterHook {
-		private final String PREV_BASE_ARCANE_STAT = "thisWasThePreviousArcaneStat";
-				
-		@Override public void doDefaultCase()
+		
+		@Override
+		public void startFlowFragment(FlowFragmentDelegate pDelegate)
 		{
+			super.startFlowFragment(pDelegate);
+			
 			if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
 			else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
-			
-			Bundle args = getArguments();
-			int value = myChar.getBaseStat(Stat.ARCANE);
-			args.putInt(PREV_BASE_ARCANE_STAT, value);
+
 			if(myChar.tradition==GiftedTradition.WILL_WEAVER){myChar.setBaseStat(Stat.ARCANE, 3);}
 			else if(myChar.tradition==GiftedTradition.FOCUSER){myChar.setBaseStat(Stat.ARCANE, 2);}
+			
+			Bundle b = new Bundle();
+			b.putString(BundleConstants.CHARACTER, myChar.toJson());
+			pDelegate.hookComplete(b);
 		}
 		
-		@Override public void undoHook(){myChar.setBaseStat(Stat.ARCANE, getArguments().getInt(PREV_BASE_ARCANE_STAT));}
 		@Override public int getPriority(){return 0;} //no choice necessary
-		@Override public boolean hasUI(){return false;}
 	}
 	
 	public static class NonGiftedArcaneHook extends zzCreateCharacterHook
 	{
-		@Override public void doDefaultCase()
+		@Override
+		public void startFlowFragment(FlowFragmentDelegate pDelegate)
 		{
+			super.startFlowFragment(pDelegate);
+			
 			myChar.setBaseStat(Stat.ARCANE,0);
 			myChar.setMaxStat(Stat.ARCANE,0);
+			
+			Bundle b = new Bundle();
+			b.putString(BundleConstants.CHARACTER, myChar.toJson());
+			pDelegate.hookComplete(b);
 		}
-		@Override public void undoHook()
-		{
-			myChar.setMaxStat(Stat.ARCANE, myChar.race.getHeroStatCap(Stat.ARCANE));
-		}
+		
 		@Override public int getPriority(){return 0;} //no choice necessary
-		@Override public boolean hasUI(){return false;}
 	}
 	
 	@Override public String toString(){return displayName();}

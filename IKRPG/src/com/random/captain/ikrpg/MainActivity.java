@@ -11,7 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.google.gag.annotation.remark.ShoutOutTo;
 import com.random.captain.ikrpg.MainActivity;
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.Character;
+import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
 import com.random.captain.ikrpg.character.CharacterStorageService;
 import com.random.captain.ikrpg.test.TestSuite;
@@ -24,8 +24,8 @@ import java.util.Set;
 public class MainActivity extends FragmentActivity
 {
 	private static final int NEW_CHARACTER_ACTIVITY_RESULT = 1;
-    private ArrayAdapter<Character> myListAdapter;
-	private Set<Character> myChars = new HashSet<Character>();
+    private ArrayAdapter<GameCharacter> myListAdapter;
+	private Set<GameCharacter> myChars = new HashSet<GameCharacter>();
 	
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -63,8 +63,8 @@ public class MainActivity extends FragmentActivity
 		proBar.setVisibility(View.VISIBLE);
 
 		//(re)load existing characters
-		CharacterStorageService.loadCharacters(CharacterStorageService.getSavedCharacterNames(), Character.class, new CharacterStorageService.LoadingDelegate<Character>(){
-				@Override public void charactersLoaded(Set<Character> characters)
+		CharacterStorageService.loadCharacters(CharacterStorageService.getSavedCharacterNames(), GameCharacter.class, new CharacterStorageService.LoadingDelegate<GameCharacter>(){
+				@Override public void charactersLoaded(Set<GameCharacter> characters)
 				{
 					ProgressBar proBar = (ProgressBar)findViewById(R.id.loadingCharacterSpinner);
 					proBar.setVisibility(View.GONE);
@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity
 					{	
 						ListView characterList = (ListView)findViewById(R.id.characterList);
 						characterList.setVisibility(View.VISIBLE);
-						myListAdapter = new ArrayAdapter<Character>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new Character[0]));
+						myListAdapter = new ArrayAdapter<GameCharacter>(MainActivity.this, android.R.layout.simple_list_item_1, myChars.toArray(new GameCharacter[0]));
 						characterList.setAdapter(myListAdapter);
 						characterList.setOnItemClickListener(characterClicked);
 					}
@@ -92,7 +92,7 @@ public class MainActivity extends FragmentActivity
 		@Override
 		public void onItemClick(AdapterView<?> adapter, View v, int position, long huh)
 		{
-			Character whichChar = myListAdapter.getItem(position);
+			GameCharacter whichChar = myListAdapter.getItem(position);
 			Intent i = new Intent(MainActivity.this, CharacterHomeActivity.class);
 			i.putExtra(BundleConstants.CHARACTER,whichChar);
 			startActivity(i);
@@ -131,7 +131,7 @@ public class MainActivity extends FragmentActivity
 		{
 			if(resultCode == RESULT_OK)
 			{
-				final Character myChar = i.getExtras().getParcelable(BundleConstants.CHARACTER);
+				final GameCharacter myChar = GameCharacter.fromJson(i.getExtras().getString(BundleConstants.CHARACTER));
 				if(myChar != null)
 				{
 					Log.i("IKRPG","Character created!");

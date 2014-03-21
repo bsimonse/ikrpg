@@ -8,14 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.random.captain.ikrpg.character.Character;
+import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.character.CharacterAdvancementServiceActivity;
 import com.random.captain.ikrpg.character.SkillEnum;
 import com.random.captain.ikrpg.util.BundleConstants;
 
 public class CharacterAdvancementPointGain extends Activity
 {
-	private Character mainChar;
+	private GameCharacter mainChar;
 	private int baseEXP;
 	private int currentEXP;
 	private TextView expTotalView;
@@ -28,7 +28,7 @@ public class CharacterAdvancementPointGain extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_character_advance_point_gain);
 		
-		mainChar = (Character)getIntent().getExtras().get(BundleConstants.CHARACTER);
+		mainChar = (GameCharacter)getIntent().getExtras().get(BundleConstants.CHARACTER);
 		baseEXP = mainChar.exp();
 		
 		//setup EXP
@@ -92,7 +92,7 @@ public class CharacterAdvancementPointGain extends Activity
 		if(requestCode == 5 && resultCode == RESULT_OK)
 		{
 			Log.i("IKRPG","Good, it thinks things went okay.");
-			Character c = Character.fromJson(data.getExtras().getString(BundleConstants.CHARACTER));
+			GameCharacter c = GameCharacter.fromJson(data.getExtras().getString(BundleConstants.CHARACTER));
 			Log.i("IKRPG", "Hand weapon after: "+c.getSkillBaseLevel(SkillEnum.HAND_WEAPON));
 		}
 	}

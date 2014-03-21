@@ -9,247 +9,86 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.util.Pair;
 
-import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.gear.Loot;
 import com.random.captain.ikrpg.gear.LootPack;
 import com.random.captain.ikrpg.util.BundleConstants;
+import com.random.captain.ikrpg.util.FlowFragment;
+import com.random.captain.ikrpg.util.FlowNavigator;
 import com.random.captain.ikrpg.util.Utilities;
 
-public class CharacterCreationServiceActivity extends FragmentActivity
+public class CharacterCreationServiceActivity extends FlowNavigator
 {
-
-	private int nameIndex=0;
-	private int postHookIndex=0;
-	private boolean firstTime = true;
-	
-	private ArrayList<zzCreateCharacterHook> postCreateHooks = new ArrayList<zzCreateCharacterHook>(15);
 	private zzBaseCharacter buildingChar;
 	
 	@Override
 	public void onSaveInstanceState(Bundle b)
 	{
 		super.onSaveInstanceState(b);
-		b.putParcelable(BundleConstants.CHARACTER, buildingChar);
-		b.putBoolean("l", firstTime);
-		b.putInt("n", nameIndex);
-		b.putInt("P", postHookIndex);
+		b.putString(BundleConstants.CHARACTER,buildingChar.toJson());
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_flow_navigator);
-		
 		if(savedInstanceState != null)
 		{
-			buildingChar = savedInstanceState.getParcelable(BundleConstants.CHARACTER);
-			firstTime = savedInstanceState.getBoolean("l", true);
-			nameIndex = savedInstanceState.getInt("n", 0);
-			postHookIndex = savedInstanceState.getInt("p", -1);
+			buildingChar = zzBaseCharacter.fromJson(savedInstanceState.getString(BundleConstants.CHARACTER));
+		}
+		else
+		{
+			buildingChar = new zzBaseCharacter();
 		}
 	}
 	
 	@Override
-	public void onResume()
+	protected void hookComplete(Bundle b)
 	{
-		super.onResume();
-		if(firstTime)
-		{
-			firstTime = false;
-			buildingChar = new zzBaseCharacter();
-			nextFrag(zzCreateCharacterHook.CreateHook.START);
-		}
-		else
-		{
-			//get top frag
-			FragmentManager manager = getSupportFragmentManager();
-			int fragCount = manager.getBackStackEntryCount();
-			if(fragCount > 0)
-			{	
-				FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(fragCount-1);
-				final zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(entry.getName());
-				
-				topFrag.restartHook(new zzCreateCharacterHookDelegate(){
-					@Override public void hookComplete(zzBaseCharacter theChar)
-					{CharacterCreationServiceActivity.this.hookComplete(theChar, topFrag.getHook());}
-				});
-			}
-			
-			try
-			{postCreateHooks = generateHooks(buildingChar);}
-			catch(Exception e)
-			{
-				//huh.
-			}
-		}
+		buildingChar = zzBaseCharacter.fromJson(b.getString(BundleConstants.CHARACTER));
 	}
 	
-	public void nextFrag(zzCreateCharacterHook.CreateHook completedHook)
-	{	
-		final zzCreateCharacterHook nextHook;
-		final zzCreateCharacterHook.CreateHook hookType;
-		final Bundle args = new Bundle();
-		
-		switch(completedHook)
-		{
-			case START:
-				nextHook = new zzStaticCreateCharacterHooks.ChooseRaceFragment();
-				hookType = zzCreateCharacterHook.CreateHook.RACE;
-				break;
-				
-			case RACE:
-				nextHook = new zzStaticCreateCharacterHooks.ChooseArchetypeHook();
-				hookType = zzCreateCharacterHook.CreateHook.ARCHETYPE;
-				break;
-				
-			case ARCHETYPE:
-				nextHook = new zzStaticCreateCharacterHooks.ChooseCareerFragment();
-				hookType = zzCreateCharacterHook.CreateHook.CAREER1;
-				break;
-			
-			case CAREER1:
-				nextHook = new zzStaticCreateCharacterHooks.ChooseCareerFragment();
-				args.putBoolean(zzStaticCreateCharacterHooks.ChooseCareerFragment.SECOND_CAREER, true);
-				hookType = zzCreateCharacterHook.CreateHook.CAREER2;
-			break;
-			
-			case CAREER2:
-				try
-				{postCreateHooks = generateHooks(buildingChar);}
-				catch(Exception e)
-				{
-					nextHook = null; hookType = null;
-					setResult(RESULT_FIRST_USER);
-					finish();
-					return;
-				}
-
-				//Do postcreatehooks
-				if(postCreateHooks.size() > 0)
-				{
-					nextFrag(zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK);
-					return;
-				}
-				else
-				{
-					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
-					hookType = zzCreateCharacterHook.CreateHook.FLUFF;
-					break;
-				}
-			
-			case POSTCREATE_HOOK:
-				//Which one, and what is left?
-
-				if(postHookIndex >= postCreateHooks.size())
-				{
-					nextHook = new zzStaticCreateCharacterHooks.ChooseFluffFragment();
-					hookType = zzCreateCharacterHook.CreateHook.FLUFF;
-					break;
-				}
-
-				nextHook = postCreateHooks.get(postHookIndex);
-				hookType = zzCreateCharacterHook.CreateHook.POSTCREATE_HOOK;
-				postHookIndex++;
-			break;
-			
-			case FLUFF: nextHook = null; hookType = null; characterComplete(); break;
-			
-			default:
-			nextHook = null;
-			hookType = null;
-			break;
-		}
-		
-		if(nextHook != null)
-		{
-			nextHook.setArguments(args);
-			nextHook.startHook(buildingChar,
-				new zzCreateCharacterHookDelegate(){
-					@Override public void hookComplete(zzBaseCharacter theChar)
-					{CharacterCreationServiceActivity.this.hookComplete(theChar, nextHook.getHook());}
-				}, hookType);
-			
-			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-			trans.replace(R.id.mainFragmentContainer, nextHook, ""+nameIndex);
-			trans.addToBackStack(""+nameIndex);
-			trans.commit();
-			
-			nameIndex++;
-			if(!nextHook.hasUI()){nextFrag(hookType);}
-		}
+	@Override
+	protected Bundle prepBundle()
+	{
+		Bundle b = new Bundle();
+		b.putString(BundleConstants.CHARACTER, buildingChar.toJson());
+		return b;
 	}
 	
-	public void hookComplete(zzBaseCharacter pChar, zzCreateCharacterHook.CreateHook finishedHook)
-	{buildingChar=pChar;nextFrag(finishedHook);}
-	
-	@Override public void onBackPressed()
+	@Override
+	protected ArrayList<? extends FlowFragment> generateFrags()
 	{
-		Log.i("IKRPG","Back");
-		FragmentManager manager = getSupportFragmentManager();
+		ArrayList<zzCreateCharacterHook> flowFrags = new ArrayList<zzCreateCharacterHook>(15);
+		Collection<zzCreateCharacterHook> tempFrags;
 		
-		if(manager.getBackStackEntryCount() <= 1)
-		{
-			firstTime = true;
-			Intent i = new Intent();
-			i.putExtra(BundleConstants.CHARACTER, (zzBaseCharacter)null);
-			setResult(RESULT_OK, i);
-			finish();
-			return;
-		}
+		//all the static ones
+		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseRaceFragment());
+		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseArchetypeHook());
+		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseCareerFragment());
+		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseCareerFragment());
+		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
+		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseFluffFragment());
 		
-		//undo previous thing
-		final zzCreateCharacterHook topFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-1).getName());
-		final zzCreateCharacterHook prevFrag = (zzCreateCharacterHook)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
-		
-		//If we were on a dynamic hook, decrement
-		if(topFrag.getPriority() >= 0)
-		{
-			postHookIndex--;
-		}
-		
-		//Undo previous frag that we're chosing again
-		//I have no idea what the best way to do this is.
-		prevFrag.restartHook(new zzCreateCharacterHookDelegate(){
-				@Override public void hookComplete(zzBaseCharacter theChar)
-				{CharacterCreationServiceActivity.this.hookComplete(theChar, prevFrag.getHook());}
-			});
-		prevFrag.undoHook();
-		
-		manager.popBackStackImmediate();
-		if(!prevFrag.hasUI())
-		{onBackPressed();}
-	}
-	
-	protected ArrayList<zzCreateCharacterHook> generateHooks(zzBaseCharacter myChar)
-	{
-		Collection<zzCreateCharacterHook> hookStore;
-		ArrayList<zzCreateCharacterHook> finalHooks = new ArrayList<zzCreateCharacterHook>(15);
-		
+		//all the possible dynamic ones
 		if(buildingChar.race != null)
 		{
 			for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
 			{buildingChar.baseStats.put(startStat.first, startStat.second);}
 			for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
 			{buildingChar.maxStats.put(maxStat.first, maxStat.second);}
-			buildingChar.deriveStats();	//whoops.
-			hookStore = buildingChar.race.postCreateHooks();
-			if(hookStore != null){finalHooks.addAll(hookStore);}
+			buildingChar.deriveStats();	//whoops?
+			tempFrags = buildingChar.race.postCreateHooks();
+			if(tempFrags != null){flowFrags.addAll(tempFrags);}
 		}
 		
 		if(buildingChar.archetype != null)
 		{
-			hookStore = buildingChar.archetype.postCreateHooks();
-			if(hookStore!=null){finalHooks.addAll(hookStore);}
+			tempFrags = buildingChar.archetype.postCreateHooks();
+			if(tempFrags!=null){flowFrags.addAll(tempFrags);}
 		}
 		
 		if(buildingChar.careers != null)
@@ -266,47 +105,36 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 				buildingChar.abilities.addAll(career.startingAbilities());
 				buildingChar.spells.addAll(career.startingSpells());
 				buildingChar.connections.addAll(career.startingConnections());
-				hookStore = career.postCreateHooks();
-				if(hookStore!=null){finalHooks.addAll(hookStore);}
+				tempFrags = career.postCreateHooks();
+				if(tempFrags!=null){flowFrags.addAll(tempFrags);}
 				startGold += career.startGold();
 				startLoot.addAll(career.startLoot());
 			}
 			buildingChar.lootPack = new LootPack(startGold, startLoot);
 		}
-
-		//advancement point hook
-		finalHooks.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
 		
-		//sort hooks
-		Collections.sort(finalHooks, new Comparator<zzCreateCharacterHook>(){
+		//sort hooks into proper order
+		Collections.sort(flowFrags, new Comparator<zzCreateCharacterHook>(){
 				@Override public int compare(zzCreateCharacterHook one, zzCreateCharacterHook two)
 				{return one.getPriority() - two.getPriority();}
 			});
 			
-		return finalHooks;
+		return flowFrags;
 	}
 	
-	@SuppressLint("UseValueOf")	//what is this I don't even
-	public void characterComplete()
+	@Override
+	protected void setResult()
 	{
 		//Stamp an index on it;
-		buildingChar.index = makeIndex(buildingChar);
+		buildingChar.index = Utilities.hashToInt(buildingChar.fluff.name + Utilities.getAppID());
 		
 		Intent i = new Intent();
-		i.putExtra(BundleConstants.CHARACTER, new Character(buildingChar));
+		i.putExtra(BundleConstants.CHARACTER, buildingChar.toJson());
 		setResult(RESULT_OK, i);
-		finish();
-	}
-	
-	static int makeIndex(zzBaseCharacter guy)
-	{
-		//simple hash based on character name and app random ID
-		String toHash = guy.fluff.name + Utilities.getAppID();
-		return Utilities.hashToInt(toHash);
 	}
 	
 	//Cheating!
-	public static Character getPascal()
+	public static GameCharacter getPascal()
 	{
 		//At 24 EXP
 		zzBaseCharacter pascal = new zzBaseCharacter();
@@ -387,8 +215,8 @@ public class CharacterCreationServiceActivity extends FragmentActivity
 		pascal.abilities = abilities;
 
 		//id
-		pascal.index = makeIndex(pascal);
+		pascal.index = 123456;
 
-		return new Character(pascal);
+		return new GameCharacter(pascal);
 	}
 }

@@ -13,13 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 public abstract class zzChooseOneHook<T> extends zzCreateCharacterHook
 {
 	protected abstract String getTitle();
 	protected abstract List<T> getOptions();
 	protected abstract void itemSelected(int which);
-	protected abstract void doDefaultCase();
 	
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
 	{
@@ -30,7 +30,9 @@ public abstract class zzChooseOneHook<T> extends zzCreateCharacterHook
 				@Override public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 				{
 					itemSelected(which);
-					delegate.hookComplete(myChar);
+					Bundle b = new Bundle();
+					b.putString(BundleConstants.CHARACTER, myChar.toJson());
+					delegate.hookComplete(b);
 				}
 			});
 

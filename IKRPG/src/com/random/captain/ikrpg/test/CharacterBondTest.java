@@ -2,7 +2,7 @@ package com.random.captain.ikrpg.test;
 
 import android.util.Log;
 
-import com.random.captain.ikrpg.character.Character;
+import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.character.CharacterBond;
 import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
 import com.random.captain.ikrpg.util.Utilities;
@@ -11,7 +11,7 @@ public class CharacterBondTest
 {
 	public static boolean runTests()
 	{
-		Character testChar = CharacterCreationServiceActivity.getPascal();
+		GameCharacter testChar = CharacterCreationServiceActivity.getPascal();
 		
 		try
 		{	

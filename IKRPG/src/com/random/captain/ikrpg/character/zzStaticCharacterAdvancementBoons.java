@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class zzStaticCharacterAdvancementBoons
 {
-	public static class ChooseOccupationalSkillsFragment extends zzCharacterAdvancementBoon
+	public static class ChooseOccupationalSkillsFragment extends zzCharacterAdvancementFragment
 	{
 		ArrayList<SkillEnum> potentialSkills;
 		

@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Set;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Pair;
 
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.gear.Loot;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 public enum Career implements zzPrereqCheck
 {
@@ -869,20 +871,20 @@ public enum Career implements zzPrereqCheck
 	
 	public static class ArcanistHook extends zzCreateCharacterHook
 	{
-		@Override public void doDefaultCase()
+		@Override
+		public void startFlowFragment(FlowFragmentDelegate pDelegate)
 		{
+			super.startFlowFragment(pDelegate);
+			
 			myChar.abilities.add(AbilityEnum.GREAT_POWER.make());
 			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
+			
+			Bundle b = new Bundle();
+			b.putString(BundleConstants.CHARACTER, myChar.toJson());
+			pDelegate.hookComplete(b);
 		}
 		
-		@Override public boolean hasUI(){return false;}
 		@Override public int getPriority(){return 0;}
-		@Override public void undoHook()
-		{
-			//TODO: latent error needs to be fixed
-			myChar.abilities.remove(AbilityEnum.GREAT_POWER);
-			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
-		}
 	}
 	
 	public static class AristocratWeaponHook extends zzChooseOneMilitarySkillHook
@@ -908,23 +910,12 @@ public enum Career implements zzPrereqCheck
 			chosenLanguage = getOptions().get(which);
 			myChar.languages.add(chosenLanguage);
 		}
-
-		@Override public boolean hasUI(){return true;}
-
-		@Override protected void doDefaultCase() {//can't get called, since always hasUI.
-		}
-
-		@Override public void undoHook()
-		{myChar.languages.remove(chosenLanguage);}
 	}
 	
 	//TODO: Finish
 	public static class BountyHunterHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class CutthroatHook extends zzChooseOneMilitarySkillHook
@@ -970,9 +961,6 @@ public enum Career implements zzPrereqCheck
 	public static class FieldMechanikJackHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class GunMageMilitarySkillHook extends zzChooseOneMilitarySkillHook
@@ -988,9 +976,6 @@ public enum Career implements zzPrereqCheck
 	public static class GunMageMagelockWeaponHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class HighwaymanHook extends zzChooseOneMilitarySkillHook
@@ -1014,24 +999,23 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	public static class InvestigatorHyperPerceptionHook extends zzCreateCharacterHook
-	{
-		private static final String THE_KEY = "WhatAWonderKeyThisCouldBe";
-		
-		@Override public int getPriority(){return 0;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void doDefaultCase()
+	{	
+		@Override
+		public void startFlowFragment(FlowFragmentDelegate pDelegate)
 		{
-			boolean additionNeeded = myChar.abilities.contains(AbilityEnum.HYPER_PERCEPTION.make());
-			getArguments().putBoolean(THE_KEY, additionNeeded);
+			super.startFlowFragment(pDelegate);
+			
+			boolean additionNeeded = !(myChar.abilities.contains(AbilityEnum.HYPER_PERCEPTION.make()));
 			if(additionNeeded)
 			{myChar.abilities.add(AbilityEnum.HYPER_PERCEPTION.make());}
+			
+			Bundle b = new Bundle();
+			b.putString(BundleConstants.CHARACTER, myChar.toJson());
+			pDelegate.hookComplete(b);
 		}
 		
-		@Override public void undoHook()
-		{
-			boolean additionWasNeeded = getArguments().getBoolean(THE_KEY);
-			if(additionWasNeeded){myChar.abilities.remove(AbilityEnum.HYPER_PERCEPTION.make());}
-		}
+		@Override
+		public int getPriority(){return 0;}
 	}
 	
 	public static class MageHunterHook extends zzChooseOneMilitarySkillHook
@@ -1078,9 +1062,6 @@ public enum Career implements zzPrereqCheck
 	public static class PistoleerHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class PriestWeaponHook extends zzChooseOneMilitarySkillHook
@@ -1108,9 +1089,6 @@ public enum Career implements zzPrereqCheck
 	public static class SoldierWeaponHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class SorcererWeaponHook extends zzChooseOneMilitarySkillHook
@@ -1127,18 +1105,12 @@ public enum Career implements zzPrereqCheck
 	public static class StoneSorcererHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	//TODO: Finish
 	public static class StormSorcererHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class SpyWeaponHook extends zzChooseOneMilitarySkillHook
@@ -1165,8 +1137,5 @@ public enum Career implements zzPrereqCheck
 	public static class WarcasterEquipmentHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 }

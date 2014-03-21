@@ -46,21 +46,21 @@ public class CharacterSheetService
 	static int skillX = 1051;
 	static int totalX = 1105;
 	
-	public static void drawCharacterSheet(Character bob, Delegate dan)
+	public static void drawCharacterSheet(GameCharacter bob, Delegate dan)
 	{
 		new CharacterSheetServiceTask(bob,dan).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
 	private static class CharacterSheetServiceTask extends AsyncTask<Void, Void, Boolean>
 	{	
-		private Character pc;
+		private GameCharacter pc;
 		private CharacterSheetService.Delegate delegate;
 		private int notificationId = 1000;
 		private NotificationCompat.Builder notiBuilder;
 		private NotificationManager man;
 		private Canvas canvas;
 		
-		CharacterSheetServiceTask(Character pPC, CharacterSheetService.Delegate pDelegate)
+		CharacterSheetServiceTask(GameCharacter pPC, CharacterSheetService.Delegate pDelegate)
 		{
 			pc=pPC;
 			delegate=pDelegate;
@@ -152,7 +152,7 @@ public class CharacterSheetService
 			return b;
 		}
 		
-		protected void fillInCharacter(Character c)
+		protected void fillInCharacter(GameCharacter c)
 		{
 			setupPaints();
 			writeFluff(c);
@@ -202,7 +202,7 @@ public class CharacterSheetService
 			abilityPaint.setTextSize(16);
 		}
 	
-		protected void writeFluff(Character c)
+		protected void writeFluff(GameCharacter c)
 		{
 			canvas.drawText(c.fluff.name,64,130,blackFluffLeft);
 			canvas.drawText(c.fluff.sex.toUpperCase(),493,130,blackFluffCenter);
@@ -233,7 +233,7 @@ public class CharacterSheetService
 			canvas.drawText(c.tier.toString().toUpperCase(), 1279,130,blackFluffCenter);
 		}
 		
-		protected void writeStats(Character c)
+		protected void writeStats(GameCharacter c)
 		{
 			canvas.drawText(""+c.getBaseStat(Stat.PHYSIQUE), 108, 654, blackStatsLarge);
 			canvas.drawText(""+c.getBaseStat(Stat.AGILITY), 108, 836, blackStatsLarge);
@@ -295,7 +295,7 @@ public class CharacterSheetService
 			if(intStat<4){canvas.drawCircle(957,1080,9,intPaint);}
 		}
 		
-		protected void writeSkills(Character c)
+		protected void writeSkills(GameCharacter c)
 		{
 			//start with hard-written skills
 			Collection<Pair<Skill,Integer>> trainedSkills = handleHardWrittenSkills(c);
@@ -355,7 +355,7 @@ public class CharacterSheetService
 			}
 		}
 		
-		protected Collection<Pair<Skill,Integer>> handleHardWrittenSkills(Character c)
+		protected Collection<Pair<Skill,Integer>> handleHardWrittenSkills(GameCharacter c)
 		{
 			Collection<Pair<Skill,Integer>> trainedSkillsCopy = new ArrayList<Pair<Skill,Integer>>(c.getTrainedSkills());
 			
@@ -401,7 +401,7 @@ public class CharacterSheetService
 			return trainedSkillsCopy;
 		}
 		
-		protected void writeAbilities(Character c)
+		protected void writeAbilities(GameCharacter c)
 		{
 			int baseYValue = 307;
 			int yIncrement = 34;
@@ -434,7 +434,7 @@ public class CharacterSheetService
 			}
 		}
 		
-		protected void writeModifiers(Character c)
+		protected void writeModifiers(GameCharacter c)
 		{
 			
 		}

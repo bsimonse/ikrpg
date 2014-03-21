@@ -242,56 +242,35 @@ public enum Race
 	public static class humanHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class dwarfHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class gobberHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class iosanHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class nyssHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class ogrunHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 	
 	public static class trollkinHook extends zzCreateCharacterHook
 	{
 		@Override public int getPriority(){return 49;}
-		@Override public boolean hasUI(){return false;}
-		@Override public void undoHook(){}
-		@Override public void doDefaultCase(){}
 	}
 }

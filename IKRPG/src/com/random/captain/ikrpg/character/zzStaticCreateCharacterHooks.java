@@ -1,16 +1,28 @@
 package com.random.captain.ikrpg.character;
 
-import android.widget.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.Archetype;
-import com.random.captain.ikrpg.character.Stat;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 //This isn't really a class... I just wanted to put a bunch of stuff in one file.
 //It's got to be public for Android to recreate the fragments... so no encapsulation for you.
@@ -35,7 +47,12 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 				{
-					raceSelected(Race.values()[which]);
+					Race chosen = Race.values()[which];
+					Log.i("IKRPG","Race chosen! "+chosen.toString());
+					myChar.race = chosen;
+					Bundle b = new Bundle();
+					b.putString(BundleConstants.CHARACTER, myChar.toJson());
+					delegate.hookComplete(b);
 				}
 			});
 
@@ -43,16 +60,6 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 		tv.setText("Choose your Race");
 	}
 	
-	private void raceSelected(Race race)
-	{
-		Log.i("IKRPG","Race chosen! "+race.toString());
-		myChar.race = race;
-		delegate.hookComplete(myChar);
-	}
-
-	@Override public boolean hasUI(){return true;}
-	@Override public void doDefaultCase(){}	//nothing since always has UI
-	@Override public void undoHook(){myChar.race = null;}
 	@Override public int getPriority(){return -1;}
 }
 	
@@ -87,7 +94,13 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 				{
-					archetypeSelected(validArchetypes.get(which));
+					//TODO: ask additional question!
+					Archetype archetype = validArchetypes.get(which);
+					Log.i("IKRPG","Archetype chosen! "+archetype.toString());
+					myChar.archetype = archetype;
+					Bundle b = new Bundle();
+					b.putString(BundleConstants.CHARACTER, myChar.toJson());
+					delegate.hookComplete(b);
 				}
 			});
 
@@ -95,28 +108,11 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 		tv.setText("Choose an Archetype");
 	}
 	
-	private void archetypeSelected(Archetype archetype)
-	{
-		//TODO: ask additional question!
-		Log.i("IKRPG","Archetype chosen! "+archetype.toString());
-		myChar.archetype = archetype;
-		delegate.hookComplete(myChar);
-	}
-
-	@Override public boolean hasUI(){return true;}
-	@Override public void doDefaultCase(){}	//nothing since always has UI
-	@Override public void undoHook(){myChar.archetype = null;}
 	@Override public int getPriority(){return -1;}
 }
 	
 public static class ChooseCareerFragment extends zzCreateCharacterHook
 {
-	static final String SECOND_CAREER = "thisIsMySecondCareer";
-	static final String CHOSEN_CAREER = "IhaveChosenThisCareer";
-
-	private ListView careerList;
-	private boolean isSecondCareer = false;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
 	{
@@ -127,11 +123,8 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 	public void onViewCreated(View rootView, Bundle b)
 	{
 		super.onViewCreated(rootView, b);
-		Bundle arguments = getArguments();
-		if(arguments != null)
-		{
-			isSecondCareer = getArguments().getBoolean(SECOND_CAREER, false);
-		}
+		
+		boolean isSecondCareer = myChar.careers.size() > 0;
 
 		final List<Career> validCareers = new ArrayList<Career>(30);
 		for(Career career : Career.values())
@@ -153,13 +146,18 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 			{validCareers.add(career);}
 		}
 
-		careerList = (ListView)rootView.findViewById(R.id.listChoiceList);
+		ListView careerList = (ListView)rootView.findViewById(R.id.listChoiceList);
 		careerList.setAdapter(new ArrayAdapter<Career>(getActivity(), android.R.layout.simple_list_item_1, validCareers.toArray(new Career[validCareers.size()])));
 		careerList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 				{
-					careerSelected(validCareers.get(which));
+					Career career = validCareers.get(which);
+					Log.i("IKRPG","Chosen career: "+career.toString());
+					myChar.careers.add(career);
+					Bundle b = new Bundle();
+					b.putString(BundleConstants.CHARACTER, myChar.toJson());
+					delegate.hookComplete(b);
 				}
 			});
 
@@ -167,30 +165,11 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 		tv.setText(isSecondCareer ? "Choose your second career" : "Choose your first career");
 	}
 
-	private void careerSelected(Career career)
-	{
-		Log.i("IKRPG","Chosen career: "+career.toString());
-		getArguments().putSerializable(CHOSEN_CAREER, career);
-		myChar.careers.add(career);
-		delegate.hookComplete(myChar);
-	}
-
-	@Override public boolean hasUI(){return true;}
-	@Override public void doDefaultCase(){}	//nothing because always has UI
-	@Override public void undoHook()
-	{
-		Career chosenCareer = (Career)getArguments().getSerializable(CHOSEN_CAREER);
-		myChar.careers.remove(chosenCareer);
-	}
-
 	@Override public int getPriority(){return -1;}
 }
 	
 public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 {
-	private static final String OLD_STATS = "blahblahblahblah";
-	private HashMap<Stat, Integer> oldBaseStats;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
 	{
@@ -210,37 +189,11 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 				{
 					ChooseAdvancementPointsAdapter adapter = (ChooseAdvancementPointsAdapter)list.getAdapter();
 					adapter.lockInStats();
-					delegate.hookComplete(myChar);
+					Bundle b = new Bundle();
+					b.putString(BundleConstants.CHARACTER, myChar.toJson());
+					delegate.hookComplete(b);
 				}
 			});
-	}
-
-	@Override boolean hasUI(){return true;}
-	@Override void doDefaultCase(){}	//nothing since always has UI
-	@Override public void startHook(zzBaseCharacter pChar, zzCreateCharacterHookDelegate pDelegate, CreateHook hook)
-	{
-		super.startHook(pChar, pDelegate, hook);
-		oldBaseStats = new HashMap<Stat, Integer>();
-		oldBaseStats.putAll(myChar.baseStats);
-		
-		getArguments().putSerializable(OLD_STATS,oldBaseStats);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override void restartHook(zzCreateCharacterHookDelegate pDelegate)
-	{
-		super.restartHook(pDelegate);
-		if(oldBaseStats == null)
-		{oldBaseStats = (HashMap<Stat, Integer>)getArguments().getSerializable(OLD_STATS);}
-	}
-	
-	@Override public void undoHook()
-	{
-		for(Stat stat : Stat.values())
-		{
-			int oldValue = oldBaseStats.get(stat);
-			if(oldValue >= 0){myChar.setBaseStat(stat, oldValue);}
-		}
 	}
 
 	@Override public int getPriority(){return 100;}
@@ -357,36 +310,31 @@ public static class ChooseFluffFragment extends zzCreateCharacterHook
 	@Override
 	public void onViewCreated(View rootView, Bundle b)
 	{
+		super.onViewCreated(rootView, b);
 		Button doneButton = (Button)rootView.findViewById(R.id.fluffDoneButton);
 		doneButton.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View v){
-					fluffComplete();
+					Fluff fluff = new Fluff();
+					fluff.name = ((EditText)(getView().findViewById(R.id.nameInput))).getText().toString();
+					fluff.characteristics = ((EditText)(getView().findViewById(R.id.characteristicsInput))).getText().toString();
+					fluff.height = ((EditText)(getView().findViewById(R.id.heightInput))).getText().toString();
+					fluff.weight = ((EditText)(getView().findViewById(R.id.weightInput))).getText().toString();
+					fluff.faith = ((EditText)(getView().findViewById(R.id.faithInput))).getText().toString();
+					fluff.owningPlayer = ((EditText)(getView().findViewById(R.id.owningPlayerInput))).getText().toString();
+
+					int selectedSex = ((RadioGroup)(getView().findViewById(R.id.sexChoiceGroup))).getCheckedRadioButtonId();
+					if(selectedSex == R.id.sexChoiceFemale){fluff.sex = "Female";}
+					else{fluff.sex = "Male";}
+
+					myChar.fluff = fluff;
+					Bundle b = new Bundle();
+					b.putString(BundleConstants.CHARACTER, myChar.toJson());
+					delegate.hookComplete(b);
 				}
 			});
 	}
 
-	private void fluffComplete()
-	{
-		Fluff fluff = new Fluff();
-		fluff.name = ((EditText)(getView().findViewById(R.id.nameInput))).getText().toString();
-		fluff.characteristics = ((EditText)(getView().findViewById(R.id.characteristicsInput))).getText().toString();
-		fluff.height = ((EditText)(getView().findViewById(R.id.heightInput))).getText().toString();
-		fluff.weight = ((EditText)(getView().findViewById(R.id.weightInput))).getText().toString();
-		fluff.faith = ((EditText)(getView().findViewById(R.id.faithInput))).getText().toString();
-		fluff.owningPlayer = ((EditText)(getView().findViewById(R.id.owningPlayerInput))).getText().toString();
-
-		int selectedSex = ((RadioGroup)(getView().findViewById(R.id.sexChoiceGroup))).getCheckedRadioButtonId();
-		if(selectedSex == R.id.sexChoiceFemale){fluff.sex = "Female";}
-		else{fluff.sex = "Male";}
-
-		myChar.fluff = fluff;
-		delegate.hookComplete(myChar);
-	}
-
-	@Override public boolean hasUI(){return true;}
-	@Override public void doDefaultCase(){}	//nothing since always has UI
-	@Override public void undoHook(){myChar.fluff = null;}
 	@Override public int getPriority(){return -1;}
 }
 	
