@@ -71,10 +71,8 @@ public enum Archetype implements zzPrereqCheck
 	public static class GiftedArcaneHook extends zzCreateCharacterHook {
 		
 		@Override
-		public void startFlowFragment(FlowFragmentDelegate pDelegate)
+		public Bundle doDefaultCase()
 		{
-			super.startFlowFragment(pDelegate);
-			
 			if(myChar.careers.contains(Career.WARCASTER)){myChar.tradition = GiftedTradition.FOCUSER;}
 			else{myChar.tradition = GiftedTradition.WILL_WEAVER;}
 
@@ -83,7 +81,7 @@ public enum Archetype implements zzPrereqCheck
 			
 			Bundle b = new Bundle();
 			b.putString(BundleConstants.CHARACTER, myChar.toJson());
-			pDelegate.hookComplete(b);
+			return b;
 		}
 		
 		@Override public int getPriority(){return 0;} //no choice necessary
@@ -92,16 +90,14 @@ public enum Archetype implements zzPrereqCheck
 	public static class NonGiftedArcaneHook extends zzCreateCharacterHook
 	{
 		@Override
-		public void startFlowFragment(FlowFragmentDelegate pDelegate)
+		public Bundle doDefaultCase()
 		{
-			super.startFlowFragment(pDelegate);
-			
 			myChar.setBaseStat(Stat.ARCANE,0);
 			myChar.setMaxStat(Stat.ARCANE,0);
 			
 			Bundle b = new Bundle();
 			b.putString(BundleConstants.CHARACTER, myChar.toJson());
-			pDelegate.hookComplete(b);
+			return b;
 		}
 		
 		@Override public int getPriority(){return 0;} //no choice necessary

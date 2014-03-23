@@ -17,9 +17,27 @@ public abstract class FlowFragment extends Fragment {
 		setArguments(b);
 	}
 
-	public void startFlowFragment(FlowFragmentDelegate pDelegate)
+	//The boolean determines whether or not you have a UI.
+	//This could probably be done better.
+	public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
 	{
 		delegate = pDelegate;
+		if(!hasUI())
+		{
+			pDelegate.hookComplete(doDefaultCase());
+			return false;
+		}
+		else
+		{return true;}
+	}
+	
+	//Do nothing by default
+	protected Bundle doDefaultCase(){return new Bundle();}
+	
+	protected boolean hasUI()
+	{
+		//assume false
+		return false;
 	}
 }
 

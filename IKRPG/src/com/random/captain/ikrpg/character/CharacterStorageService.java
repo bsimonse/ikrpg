@@ -6,10 +6,12 @@ import java.util.*;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+
 import com.google.gag.annotation.disclaimer.ProbablyIllegalIn;
 import com.google.gag.annotation.remark.Hack;
 import com.google.gag.enumeration.RegionType;
 import com.random.captain.ikrpg.IKRPGApp;
+
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -114,7 +116,6 @@ public class CharacterStorageService
 					String line;
 					while((line = reader.readLine()) != null){sb.append(line);}
 		
-					stream.close();
 					Method m = charClass.getMethod("fromJson", String.class);
 					T character = charClass.cast(m.invoke(null, sb.toString()));
 					characters.add(character);
@@ -122,7 +123,16 @@ public class CharacterStorageService
 				catch(Exception e)
 				{
 					//oops.
-					Log.e("IKRPG","That didn't work. "+e.getMessage());
+					Log.e("IKRPG","Reading characters from stream didn't work. "+e.getMessage());
+				}
+				finally
+				{
+					//lol whut
+					if(stream != null){try {
+						stream.close();
+					} catch (IOException e) {
+						Log.i("IKRPG","Well, now we're just hosed; character input stream failed to close");
+					}}
 				}
 			}	
 	

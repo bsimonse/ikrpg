@@ -872,7 +872,7 @@ public enum Career implements zzPrereqCheck
 	public static class ArcanistHook extends zzCreateCharacterHook
 	{
 		@Override
-		public void startFlowFragment(FlowFragmentDelegate pDelegate)
+		public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
 		{
 			super.startFlowFragment(pDelegate);
 			
@@ -882,6 +882,8 @@ public enum Career implements zzPrereqCheck
 			Bundle b = new Bundle();
 			b.putString(BundleConstants.CHARACTER, myChar.toJson());
 			pDelegate.hookComplete(b);
+			
+			return hasUI();
 		}
 		
 		@Override public int getPriority(){return 0;}
@@ -1001,7 +1003,7 @@ public enum Career implements zzPrereqCheck
 	public static class InvestigatorHyperPerceptionHook extends zzCreateCharacterHook
 	{	
 		@Override
-		public void startFlowFragment(FlowFragmentDelegate pDelegate)
+		public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
 		{
 			super.startFlowFragment(pDelegate);
 			
@@ -1012,6 +1014,8 @@ public enum Career implements zzPrereqCheck
 			Bundle b = new Bundle();
 			b.putString(BundleConstants.CHARACTER, myChar.toJson());
 			pDelegate.hookComplete(b);
+			
+			return hasUI();
 		}
 		
 		@Override

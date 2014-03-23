@@ -45,7 +45,7 @@ public abstract class FlowNavigator extends FragmentActivity {
 		
 		if(frags == null)
 		{
-			frags = generateFrags();
+			//frags = generateFrags();
 			advanceFlow();
 		}
 		else
@@ -89,34 +89,42 @@ public abstract class FlowNavigator extends FragmentActivity {
 	
 	private void advanceFlow()
 	{	
+		Log.i("IKRPG","Advancing flow for index "+flowIndex+"!");
+		//hmmm.
+		frags = generateFrags();
+		Log.i("IKRPG","Got "+frags.size()+" frags!");
+		
 		if(flowIndex >= frags.size())
 		{
+			Log.i("IKRPG","All done with flow!");
 			flowComplete();
 			return;
 		}
-
+		
 		final FlowFragment nextFrag = frags.get(flowIndex);
 
 		if(nextFrag != null)
 		{
-			
+			flowIndex++;
 			nextFrag.prepFlowFragment(prepBundle());
 			
-			startFrag(nextFrag);
+			//I don't like that I have to call attention to this pattern.
+			boolean hasUI = startFrag(nextFrag);
 
-			String fragName = "flag_"+flowIndex;
-			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-			trans.replace(R.id.mainFragmentContainer, nextFrag, fragName);
-			trans.addToBackStack(fragName);
-			trans.commit();
-
-			flowIndex++;
+			if(hasUI)
+			{
+				String fragName = "flag_"+flowIndex;
+				FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+				trans.replace(R.id.mainFragmentContainer, nextFrag, fragName);
+				trans.addToBackStack(fragName);
+				trans.commit();
+			}
 		}
 	}
 
-	private void startFrag(FlowFragment frag)
+	private boolean startFrag(FlowFragment frag)
 	{
-		frag.startFlowFragment(new FlowFragment.FlowFragmentDelegate() {
+		return frag.startFlowFragment(new FlowFragment.FlowFragmentDelegate() {
 			
 			@Override
 			public void hookComplete(Bundle b) {

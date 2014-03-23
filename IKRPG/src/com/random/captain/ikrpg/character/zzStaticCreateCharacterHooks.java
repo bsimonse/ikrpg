@@ -60,6 +60,7 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 		tv.setText("Choose your Race");
 	}
 	
+	@Override protected boolean hasUI(){return true;}
 	@Override public int getPriority(){return -1;}
 }
 	
@@ -108,6 +109,7 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 		tv.setText("Choose an Archetype");
 	}
 	
+	@Override protected boolean hasUI(){return true;}
 	@Override public int getPriority(){return -1;}
 }
 	
@@ -165,6 +167,7 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 		tv.setText(isSecondCareer ? "Choose your second career" : "Choose your first career");
 	}
 
+	@Override protected boolean hasUI(){return true;}
 	@Override public int getPriority(){return -1;}
 }
 	
@@ -196,6 +199,7 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 			});
 	}
 
+	@Override protected boolean hasUI(){return true;}
 	@Override public int getPriority(){return 100;}
 }
 
@@ -324,6 +328,7 @@ public static class ChooseFluffFragment extends zzCreateCharacterHook
 					fluff.owningPlayer = ((EditText)(getView().findViewById(R.id.owningPlayerInput))).getText().toString();
 
 					int selectedSex = ((RadioGroup)(getView().findViewById(R.id.sexChoiceGroup))).getCheckedRadioButtonId();
+					//Yep, I'm a cis asshole!  This will be fixed.
 					if(selectedSex == R.id.sexChoiceFemale){fluff.sex = "Female";}
 					else{fluff.sex = "Male";}
 
@@ -335,7 +340,8 @@ public static class ChooseFluffFragment extends zzCreateCharacterHook
 			});
 	}
 
-	@Override public int getPriority(){return -1;}
+	@Override protected boolean hasUI(){return true;}
+	@Override public int getPriority(){return 101;}
 }
 	
 }

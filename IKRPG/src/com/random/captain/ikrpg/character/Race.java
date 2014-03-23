@@ -241,6 +241,7 @@ public enum Race
 	
 	public static class humanHook extends zzCreateCharacterHook
 	{
+		//stuff happens here!
 		@Override public int getPriority(){return 49;}
 	}
 	

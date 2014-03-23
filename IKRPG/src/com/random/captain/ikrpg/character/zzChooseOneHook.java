@@ -42,5 +42,6 @@ public abstract class zzChooseOneHook<T> extends zzCreateCharacterHook
 		return root;
 	}
 
+	@Override protected boolean hasUI(){return true;}
 	@Override public int getPriority(){return 50;}
 }

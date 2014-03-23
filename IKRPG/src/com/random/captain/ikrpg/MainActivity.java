@@ -35,8 +35,8 @@ public class MainActivity extends FragmentActivity
 		
 		//LootJSONMaker.getSomeJSON();
 		
-		Log.i("IKRPG","Running tests!");
-		TestSuite.runSuite();
+		//Log.i("IKRPG","Running tests!");
+		//TestSuite.runSuite();
 		
 		//Cheating!
 		/*Character Pascal = CharacterSheetService.getPascal();

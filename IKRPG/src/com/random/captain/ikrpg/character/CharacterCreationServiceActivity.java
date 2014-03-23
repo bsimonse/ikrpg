@@ -48,7 +48,9 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 	@Override
 	protected void hookComplete(Bundle b)
 	{
-		buildingChar = zzBaseCharacter.fromJson(b.getString(BundleConstants.CHARACTER));
+		String characterJson = b.getString(BundleConstants.CHARACTER);
+		if(characterJson != null)
+		{buildingChar = zzBaseCharacter.fromJson(characterJson);}
 	}
 	
 	@Override

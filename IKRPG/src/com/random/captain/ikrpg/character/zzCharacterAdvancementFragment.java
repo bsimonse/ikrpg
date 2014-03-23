@@ -17,9 +17,9 @@ public abstract class zzCharacterAdvancementFragment extends FlowFragment
 	}
 
 	@Override
-	public void startFlowFragment(FlowFragmentDelegate pDelegate)
+	public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
 	{
-		super.startFlowFragment(pDelegate);
 		myChar = zzBaseCharacter.fromJson(getArguments().getString(BundleConstants.CHARACTER));
+		return super.startFlowFragment(pDelegate);
 	}
 }
