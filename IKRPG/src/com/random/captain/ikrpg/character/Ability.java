@@ -1,10 +1,7 @@
 package com.random.captain.ikrpg.character;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-public class Ability implements Parcelable, zzPrereqCheck
+public class Ability implements zzPrereqCheck
 {
 	private AbilityEnum ability;
 	private String qualifier;
@@ -59,34 +56,4 @@ public class Ability implements Parcelable, zzPrereqCheck
 	public String pageNumber(){return ability.pageNumbrer();}
 
 	@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar) {return ability.meetsPrereq(myChar);}
-	
-	/* Parcelling */
-	public void writeToParcel(Parcel toParcel, int flags)
-	{
-		toParcel.writeSerializable(ability);
-		toParcel.writeString(qualifier);
-	}
-
-	public static final Parcelable.Creator<Ability> CREATOR = new Parcelable.Creator<Ability>()
-	{
-		@Override
-		public Ability createFromParcel(Parcel in)
-		{
-			try
-			{
-				AbilityEnum pAbility = (AbilityEnum)in.readSerializable();
-				String pQualifier = in.readString();
-				return new Ability(pAbility, pQualifier);
-			}
-			catch(Exception e)
-			{
-				Log.e("IKRPG","Bad news, dude, Ability didn't Parcel correctly!");
-				return new Ability(null,null);
-			}
-		}
-
-		@Override public Ability[] newArray(int size){return new Ability[size];}
-	};
-
-	@Override public int describeContents(){return 0;}
 }

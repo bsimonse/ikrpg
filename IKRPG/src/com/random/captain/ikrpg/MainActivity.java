@@ -1,24 +1,28 @@
 package com.random.captain.ikrpg;
 
-import android.view.*;
-import android.widget.*;
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gag.annotation.remark.ShoutOutTo;
-import com.random.captain.ikrpg.MainActivity;
-import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.character.CharacterCreationServiceActivity;
 import com.random.captain.ikrpg.character.CharacterStorageService;
-import com.random.captain.ikrpg.test.TestSuite;
+import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.util.BundleConstants;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class MainActivity extends FragmentActivity
@@ -94,7 +98,7 @@ public class MainActivity extends FragmentActivity
 		{
 			GameCharacter whichChar = myListAdapter.getItem(position);
 			Intent i = new Intent(MainActivity.this, CharacterHomeActivity.class);
-			i.putExtra(BundleConstants.CHARACTER,whichChar);
+			i.putExtra(BundleConstants.CHARACTER,whichChar.toJson());
 			startActivity(i);
 		}
 	};

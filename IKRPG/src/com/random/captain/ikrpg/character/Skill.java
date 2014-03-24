@@ -1,10 +1,7 @@
 package com.random.captain.ikrpg.character;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-public class Skill implements Parcelable
+public class Skill
 {
 	private SkillEnum skill;
 	private String qualifier;
@@ -60,34 +57,4 @@ public class Skill implements Parcelable
 	public boolean isGeneral(){return skill.isGeneral();}
 	public boolean isQualifiable(){return skill.isQualifiable();}
 	public boolean canUseUntrained(){return skill.canUseUntrained();}
-	
-	/* Parcelling */
-	public void writeToParcel(Parcel toParcel, int flags)
-	{
-		toParcel.writeSerializable(skill);
-		toParcel.writeString(qualifier);
-	}
-
-	public static final Parcelable.Creator<Skill> CREATOR = new Parcelable.Creator<Skill>()
-	{
-		@Override
-		public Skill createFromParcel(Parcel in)
-		{
-			try
-			{
-				SkillEnum pSkill = (SkillEnum)in.readSerializable();
-				String pQualifier = in.readString();
-				return new Skill(pSkill, pQualifier);
-			}
-			catch(Exception e)
-			{
-				Log.e("IKRPG","Bad news, dude, Skill didn't Parcel correctly!");
-				return new Skill(null);
-			}
-		}
-
-		@Override public Skill[] newArray(int size){return new Skill[size];}
-	};
-
-	@Override public int describeContents(){return 0;}
 }

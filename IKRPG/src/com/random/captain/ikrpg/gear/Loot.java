@@ -1,14 +1,16 @@
 package com.random.captain.ikrpg.gear;
 
-import com.random.captain.ikrpg.character.*;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-import com.random.captain.ikrpg.combat.SpecialRule;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loot implements Parcelable
+import com.random.captain.ikrpg.character.Ability;
+import com.random.captain.ikrpg.character.CharacterBond;
+import com.random.captain.ikrpg.character.Modifier;
+import com.random.captain.ikrpg.character.Skill;
+import com.random.captain.ikrpg.character.Stat;
+import com.random.captain.ikrpg.combat.SpecialRule;
+
+public class Loot
 {
 	public enum EquipmentSlots
 	{
@@ -48,25 +50,4 @@ public class Loot implements Parcelable
 		slots = pSlots != null ? pSlots : new ArrayList<EquipmentSlots>();
 		bond = pBond;
 	}
-	
-	//Parcelling
-	
-	@Override public void writeToParcel(Parcel out, int flags)
-	{
-		//TODO
-	}
-
-	public static final Parcelable.Creator<Loot> CREATOR = new Parcelable.Creator<Loot>()
-	{
-		@Override
-		public Loot createFromParcel(Parcel in)
-		{
-			//TODO
-			return new Loot();
-		}
-
-		@Override public Loot[] newArray(int size) {return new Loot[size];}
-	};
-
-	@Override public int describeContents(){return 0;}
 }

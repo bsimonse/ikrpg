@@ -35,7 +35,7 @@ public class CharacterHomeActivity extends Activity
         super.onCreate(b);
         setContentView(R.layout.act_character_home);
 		
-		mainChar = (GameCharacter)getIntent().getExtras().get(BundleConstants.CHARACTER);
+		mainChar = GameCharacter.fromJson(getIntent().getExtras().getString(BundleConstants.CHARACTER));
 		if(mainChar == null){setResult(RESULT_FIRST_USER); finish(); return;}
 		
 		myList = (ListView)findViewById(R.id.char_home_actions);
@@ -55,7 +55,7 @@ public class CharacterHomeActivity extends Activity
 			{
 				case GAIN_EXP:
 					Intent i = new Intent(CharacterHomeActivity.this, CharacterAdvancementPointGain.class);
-					i.putExtra(BundleConstants.CHARACTER, mainChar);
+					i.putExtra(BundleConstants.CHARACTER, mainChar.toJson());
 					startActivity(i);
 					return;
 				case GEAR:

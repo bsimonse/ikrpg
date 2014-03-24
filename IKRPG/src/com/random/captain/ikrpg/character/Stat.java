@@ -1,10 +1,7 @@
 package com.random.captain.ikrpg.character;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-public enum Stat implements Parcelable
+public enum Stat
 {
 	//"Normal stats"
 	PHYSIQUE("Physique", "PHY"),
@@ -42,32 +39,4 @@ public enum Stat implements Parcelable
 	
 	//@Override
 	//public String toString(){return longName+" ("+shortName+")";}
-	
-	/* Parcelling */
-	public void writeToParcel(Parcel toParcel, int flags)
-	{
-		toParcel.writeInt(this.ordinal());
-	}
-
-	public static final Parcelable.Creator<Stat> CREATOR = new Parcelable.Creator<Stat>()
-	{
-		@Override
-		public Stat createFromParcel(Parcel in)
-		{
-			try
-			{
-				int value = in.readInt();
-				return Stat.values()[value];
-			}
-			catch(Exception e)
-			{
-				Log.e("IKRPG","Bad news, dude, Stat didn't Parcel correctly!");
-				return null;
-			}
-		}
-
-		@Override public Stat[] newArray(int size) {return new Stat[size];}
-	};
-
-	public int describeContents(){return 0;}
 }

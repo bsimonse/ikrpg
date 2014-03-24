@@ -11,6 +11,7 @@ import java.util.Set;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 
 import com.random.captain.ikrpg.gear.Loot;
@@ -29,6 +30,7 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 	{
 		super.onSaveInstanceState(b);
 		b.putString(BundleConstants.CHARACTER,buildingChar.toJson());
+		Log.i("IKRPG","Saving character!");
 	}
 	
 	@Override
@@ -38,6 +40,7 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 		if(savedInstanceState != null)
 		{
 			buildingChar = zzBaseCharacter.fromJson(savedInstanceState.getString(BundleConstants.CHARACTER));
+			Log.i("IKRPG","Got character!\n"+buildingChar.toString());
 		}
 		else
 		{

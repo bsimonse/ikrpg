@@ -1,19 +1,22 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Pair;
+
 import com.google.gag.annotation.disclaimer.HandsOff;
 import com.google.gag.enumeration.Consequence;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.random.captain.ikrpg.character.Modifier;
 import com.random.captain.ikrpg.gear.LootPack;
 
-class zzBaseCharacter implements Parcelable
+class zzBaseCharacter
 {
 	int index;
 	
@@ -310,210 +313,6 @@ class zzBaseCharacter implements Parcelable
 			activeStats.put(stat, value);
 		}
 	}
-	
-	/* Parcelling */
-	@Override
-	public void writeToParcel(Parcel toParcel, int flags)
-	{
-		//Index
-		toParcel.writeInt(index);
-		
-		//Fluff, race, archetype
-		toParcel.writeParcelable(fluff, 0);
-		toParcel.writeSerializable(race);
-		toParcel.writeSerializable(archetype);
-		
-		//Careers
-		int[] careerOrdinals = new int[careers.size()];int index=0;
-		for(Career c: careers){careerOrdinals[index++]=c.ordinal();}
-		toParcel.writeInt(careers.size());
-		toParcel.writeIntArray(careerOrdinals);
-		
-		//Abilities
-		toParcel.writeParcelableArray(abilities.toArray(new Ability[0]), 0);
-		
-		//Spells
-		int[] spellOrdinals = new int[spells.size()];index=0;
-		for(Spell s: spells){spellOrdinals[index++]=s.ordinal();}
-		toParcel.writeInt(spells.size());
-		toParcel.writeIntArray(spellOrdinals);
-		
-		//Connections
-		toParcel.writeParcelableArray(connections.toArray(new Connection[0]),0);
-		
-		//Languages
-		int[] languageOrdinals = new int[languages.size()];index=0;
-		for(Language s: languages){languageOrdinals[index++]=s.ordinal();}
-		toParcel.writeInt(languages.size());
-		toParcel.writeIntArray(languageOrdinals);
-		
-		//Base Skills
-		toParcel.writeInt(baseSkills.keySet().size());
-		for(Skill skill : baseSkills.keySet())
-		{
-			toParcel.writeParcelable(skill,0);
-			toParcel.writeInt(baseSkills.get(skill));
-		}
-		
-		//Skill modifiers
-		toParcel.writeInt(skillModifiers.keySet().size());
-		for(String skillName : skillModifiers.keySet())
-		{
-			toParcel.writeString(skillName);
-			toParcel.writeParcelable(skillModifiers.get(skillName),0);
-		}
-
-		//Base stats
-		toParcel.writeInt(baseStats.keySet().size());
-		for(Stat stat : baseStats.keySet())
-		{
-			toParcel.writeParcelable(stat,0);
-			toParcel.writeInt(baseStats.get(stat));
-		}
-		
-		//Max stats
-		toParcel.writeInt(maxStats.keySet().size());
-		for(Stat stat : maxStats.keySet())
-		{
-			toParcel.writeParcelable(stat,0);
-			toParcel.writeInt(maxStats.get(stat));
-		}
-		
-		//Stat modifiers
-		toParcel.writeInt(statModifiers.keySet().size());
-		for(String statName : statModifiers.keySet())
-		{
-			toParcel.writeString(statName);
-			toParcel.writeParcelable(statModifiers.get(statName),0);
-		}
-		
-		//Exp
-		toParcel.writeInt(exp);
-		
-		//Gear
-		toParcel.writeParcelable(lootPack,0);
-	}
-	
-	public static final Parcelable.Creator<zzBaseCharacter> CREATOR = new Parcelable.Creator<zzBaseCharacter>()
-	{
-		@SuppressWarnings("unchecked")
-		@Override
-		public zzBaseCharacter createFromParcel(Parcel in)
-		{
-			zzBaseCharacter me = new zzBaseCharacter();
-			
-			//index;
-			me.index = in.readInt();
-			
-			//fluff, race, archetype
-			me.fluff = in.readParcelable(Fluff.class.getClassLoader());
-			me.race = (Race)in.readSerializable();
-			me.archetype = (Archetype)in.readSerializable();
-			
-			//careers
-			int careerCount = in.readInt();
-			int[] careerOrdinals = new int[careerCount]; in.readIntArray(careerOrdinals);
-			Set<Career> pCareers = new HashSet<Career>(); Career[] careers = Career.values();
-			for(int c:careerOrdinals)
-			{pCareers.add(careers[c]);}
-			me.careers = pCareers;
-			
-			//Abilities
-			Parcelable[] pAbilitiesArray = in.readParcelableArray(Ability.class.getClassLoader());
-			Set<Ability> pAbilities = new HashSet<Ability>();
-			pAbilities.addAll((Collection<? extends Ability>) Arrays.asList(pAbilitiesArray));
-			me.abilities = pAbilities;
-			
-			//Spells 
-			int spellCount = in.readInt();
-			int[] spellOrdinals = new int[spellCount]; in.readIntArray(spellOrdinals);
-			Set<Spell> pSpells = new HashSet<Spell>(); Spell[] spells = Spell.values();
-			for(int s:spellOrdinals)
-			{pSpells.add(spells[s]);}
-			me.spells = pSpells;
-			
-			//Connections
-			Parcelable[] pConnectionsArray = in.readParcelableArray(Connection.class.getClassLoader());
-			Set<Connection> pConnections = new HashSet<Connection>();
-			pConnections.addAll((Collection<? extends Connection>) Arrays.asList(pConnectionsArray));
-			me.connections = pConnections;
-			
-			//Languages
-			int languageCount = in.readInt();
-			int[] languageOrdinals = new int[languageCount]; in.readIntArray(languageOrdinals);
-			Set<Language> pLanguages = new HashSet<Language>(); Language[] languages = Language.values();
-			for(int s:languageOrdinals)
-			{pLanguages.add(languages[s]);}
-			me.languages = pLanguages;
-			
-			//Base skills
-			Map<Skill,Integer> pSkills = new HashMap<Skill,Integer>();
-			int skillCount = in.readInt();
-			for(int i=0; i<skillCount; i++)
-			{
-				Skill skill = in.readParcelable(Skill.class.getClassLoader());
-				int level = in.readInt();
-				pSkills.put(skill,level);
-			}
-			me.baseSkills=pSkills;
-			
-			//Skill modifiers
-			Map<String, Modifier<Skill>> pSkillModifiers = new HashMap<String, Modifier<Skill>>();
-			int skillModifierCount = in.readInt();
-			for(int i=0; i<skillModifierCount; i++)
-			{
-				String name = in.readString();
-				Modifier<Skill> modifier= in.readParcelable(Modifier.class.getClassLoader());
-				pSkillModifiers.put(name,modifier);
-			}
-			me.skillModifiers = pSkillModifiers;
-			
-			//Base stats
-			Map<Stat,Integer> pBaseStats = new HashMap<Stat,Integer>();
-			int statCount = in.readInt();
-			for(int i=0; i<statCount; i++)
-			{
-				Stat stat = in.readParcelable(Stat.class.getClassLoader());
-				int level = in.readInt();
-				pBaseStats.put(stat,level);
-			}
-			me.baseStats = pBaseStats;
-			
-			//Max stats
-			Map<Stat,Integer> pMaxStats = new HashMap<Stat,Integer>();
-			statCount = in.readInt();
-			for(int i=0; i<statCount; i++)
-			{
-				Stat stat = in.readParcelable(Stat.class.getClassLoader());
-				int level = in.readInt();
-				pMaxStats.put(stat,level);
-			}
-			me.maxStats=pMaxStats;
-			
-			//Stat modifiers
-			Map<String, Modifier<Stat>> pStatModifiers = new HashMap<String, Modifier<Stat>>();
-			int statModifierCount = in.readInt();
-			for(int i=0; i<statModifierCount; i++)
-			{
-				String name = in.readString();
-				Modifier<Stat> modifier= in.readParcelable(Modifier.class.getClassLoader());
-				pStatModifiers.put(name,modifier);
-			}
-			me.statModifiers = pStatModifiers;
-			
-			//EXP
-			me.exp = in.readInt();
-			me.tier = zzTier.getLevelForEXP(me.exp);
-			
-			//Gear
-			me.lootPack = in.readParcelable(LootPack.class.getClassLoader());
-			return me;
-		}
-
-		@Override public zzBaseCharacter[] newArray(int size) {return new zzBaseCharacter[size];}
-	};
-	
-	@Override public int describeContents(){return 0;}
 	
 	@Override
 	public String toString()

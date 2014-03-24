@@ -22,7 +22,6 @@ public abstract class FlowNavigator extends FragmentActivity {
 	{
 		super.onSaveInstanceState(b);
 		b.putInt(BundleConstants.FLOW_INDEX, flowIndex);
-		b.putSerializable(BundleConstants.FLOW_FRAGS, frags);
 	}
 
 	@Override
@@ -34,7 +33,6 @@ public abstract class FlowNavigator extends FragmentActivity {
 		if(savedInstanceState != null)
 		{
 			flowIndex = savedInstanceState.getInt(BundleConstants.FLOW_INDEX, -1);
-			frags = (ArrayList<? extends FlowFragment>)savedInstanceState.getSerializable(BundleConstants.FLOW_FRAGS);
 		}
 	}
 
@@ -45,12 +43,12 @@ public abstract class FlowNavigator extends FragmentActivity {
 		
 		if(frags == null)
 		{
-			//frags = generateFrags();
 			advanceFlow();
 		}
 		else
 		{
 			//get top frag
+			Log.i("IKRPG","Oh, I remember where we were!");
 			FragmentManager manager = getSupportFragmentManager();
 			int fragCount = manager.getBackStackEntryCount();
 			if(fragCount > 0)
@@ -59,9 +57,12 @@ public abstract class FlowNavigator extends FragmentActivity {
 				final FlowFragment topFrag = (FlowFragment)manager.findFragmentByTag(entry.getName());
 				startFrag(topFrag);
 			}
-			
-			//else, huh.
-			finish();
+			else
+			{
+				//else, huh.
+				Log.i("IKRPG","Just kidding, I lied.");
+				finish();
+			}
 		}
 	}
 	

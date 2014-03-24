@@ -1,17 +1,18 @@
 package com.random.captain.ikrpg.character;
 
-import com.google.gson.*;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
-import com.random.captain.ikrpg.character.Skill;
-import com.random.captain.ikrpg.character.Stat;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Modifier<S extends Parcelable> implements Parcelable
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class Modifier<S>
 {
 	int value;
 	S trait;
@@ -32,39 +33,6 @@ public class Modifier<S extends Parcelable> implements Parcelable
 	@Override
 	public String toString()
 	{return trait.toString()+": "+value;}
-	
-	/* Parcelling */
-	public void writeToParcel(Parcel toParcel, int flags)
-	{
-		toParcel.writeSerializable(genericClass);
-		toParcel.writeInt(value);
-		toParcel.writeParcelable(trait, 0);
-	}
-
-	public static final Parcelable.Creator<Modifier<?>> CREATOR = new Parcelable.Creator<Modifier<?>>()
-	{
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		@Override
-		public Modifier<?> createFromParcel(Parcel in)
-		{
-			try
-			{
-				Class<? extends Parcelable> which = (Class<? extends Parcelable>)in.readSerializable();
-				int value = in.readInt();
-				Parcelable trait = in.readParcelable(which.getClassLoader());
-				return new Modifier(trait, value);
-			}
-			catch(Exception e)
-			{
-				Log.e("IKRPG","Bad news, dude, Modifier didn't Parcel correctly!");
-				return null;
-			}
-		}
-
-		@Override public Modifier<?>[] newArray(int size){return new Modifier<?>[size];}
-	};
-
-	@Override public int describeContents() {return 0;}
 	
 	public static class SkillMapSerializer implements JsonSerializer<Map<Skill, Integer>>
 	{

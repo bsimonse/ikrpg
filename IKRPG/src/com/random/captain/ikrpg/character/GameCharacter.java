@@ -1,7 +1,5 @@
 package com.random.captain.ikrpg.character;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class GameCharacter extends zzBaseCharacter
 {
@@ -28,17 +26,6 @@ public class GameCharacter extends zzBaseCharacter
 		deriveStats();
 		deriveSkillCheckLevels();
 	}
-	
-	public static final Parcelable.Creator<GameCharacter> CREATOR = new Parcelable.Creator<GameCharacter>()
-	{
-		@Override
-		public GameCharacter createFromParcel(Parcel in)
-		{
-			return new GameCharacter(zzBaseCharacter.CREATOR.createFromParcel(in));
-		}
-
-		@Override public GameCharacter[] newArray(int size) {return new GameCharacter[size];}
-	};
 	
 	public String toJson()
 	{return super.toJson();}

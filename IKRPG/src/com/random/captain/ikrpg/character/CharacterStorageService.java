@@ -1,7 +1,19 @@
 package com.random.captain.ikrpg.character;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -11,10 +23,6 @@ import com.google.gag.annotation.disclaimer.ProbablyIllegalIn;
 import com.google.gag.annotation.remark.Hack;
 import com.google.gag.enumeration.RegionType;
 import com.random.captain.ikrpg.IKRPGApp;
-
-import java.lang.reflect.Method;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 public class CharacterStorageService
 {
@@ -102,7 +110,7 @@ public class CharacterStorageService
 		{
 			for(String name : names)
 			{
-				FileInputStream stream = null;
+				BufferedReader reader = null;
 				StringBuilder sb = new StringBuilder();
 				
 				try
@@ -110,8 +118,7 @@ public class CharacterStorageService
 					Context c = IKRPGApp.getContext();
 					File dir = c.getDir("characters",Context.MODE_PRIVATE);
 					File inFile = new File(dir, characterNameToFileName(name));
-					stream = new FileInputStream(inFile);
-					BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+					reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFile)));
 					
 					String line;
 					while((line = reader.readLine()) != null){sb.append(line);}
@@ -128,8 +135,8 @@ public class CharacterStorageService
 				finally
 				{
 					//lol whut
-					if(stream != null){try {
-						stream.close();
+					if(reader != null){try {
+						reader.close();
 					} catch (IOException e) {
 						Log.i("IKRPG","Well, now we're just hosed; character input stream failed to close");
 					}}
