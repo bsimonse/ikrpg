@@ -28,7 +28,7 @@ public class CharacterAdvancementPointGain extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_character_advance_point_gain);
 		
-		mainChar = (GameCharacter)getIntent().getExtras().get(BundleConstants.CHARACTER);
+		mainChar = GameCharacter.fromJson(getIntent().getExtras().getString(BundleConstants.CHARACTER));
 		baseEXP = mainChar.exp();
 		
 		//setup EXP
