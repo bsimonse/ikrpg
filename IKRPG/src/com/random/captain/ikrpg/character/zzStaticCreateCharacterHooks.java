@@ -1,27 +1,15 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.widget.*;
+import java.util.*;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.gear.Loot;
+import com.random.captain.ikrpg.gear.LootPack;
 import com.random.captain.ikrpg.util.BundleConstants;
 
 //This isn't really a class... I just wanted to put a bunch of stuff in one file.
@@ -48,7 +36,6 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 				{
 					Race chosen = Race.values()[which];
-					Log.i("IKRPG","Race chosen! "+chosen.toString());
 					myChar.race = chosen;
 					Bundle b = new Bundle();
 					b.putString(BundleConstants.CHARACTER, myChar.toJson());
@@ -97,7 +84,6 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 				{
 					//TODO: ask additional question!
 					Archetype archetype = validArchetypes.get(which);
-					Log.i("IKRPG","Archetype chosen! "+archetype.toString());
 					myChar.archetype = archetype;
 					Bundle b = new Bundle();
 					b.putString(BundleConstants.CHARACTER, myChar.toJson());
@@ -136,7 +122,6 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 			{
 				//gotta make sure original career "approves"
 				Career firstCareer = myChar.careers.toArray(new Career[1])[0];
-				Log.i("IKRPG","First career?"+firstCareer.displayName());
 				if(firstCareer!=null && !firstCareer.agreesWithDuringCreation(career))
 				{continue;}
 			}
@@ -155,7 +140,6 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 				{
 					Career career = validCareers.get(which);
-					Log.i("IKRPG","Chosen career: "+career.toString());
 					myChar.careers.add(career);
 					Bundle b = new Bundle();
 					b.putString(BundleConstants.CHARACTER, myChar.toJson());
@@ -302,7 +286,38 @@ public static class ChooseAdvancementPointsAdapter extends BaseAdapter
 		return convertView;
 	}
 }
-	
+
+public static class CareerFinalizerHook extends zzCreateCharacterHook
+{	
+	@Override
+	public Bundle doDefaultCase()
+	{
+		//skills
+		myChar.setBaseSkills(myChar.careers);
+		myChar.deriveSkillCheckLevels();
+
+		//Careers; Abilities, spells, loot, and post hooks
+		int startGold = 0;
+		Collection<Loot> startLoot = new ArrayList<Loot>();
+		for(Career career : myChar.careers)
+		{
+			myChar.abilities.addAll(career.startingAbilities());
+			myChar.spells.addAll(career.startingSpells());
+			myChar.connections.addAll(career.startingConnections());
+			startGold += career.startGold();
+			startLoot.addAll(career.startLoot());
+		}
+		myChar.lootPack = new LootPack(startGold, startLoot);
+		
+		Bundle b = new Bundle();
+		b.putString(BundleConstants.CHARACTER, myChar.toJson());
+
+		return b;
+	}
+
+	@Override public int getPriority(){return 75;}
+}
+
 public static class ChooseFluffFragment extends zzCreateCharacterHook
 {
 	@Override

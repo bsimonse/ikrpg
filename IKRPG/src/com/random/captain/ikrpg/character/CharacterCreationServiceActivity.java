@@ -30,7 +30,6 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 	{
 		super.onSaveInstanceState(b);
 		b.putString(BundleConstants.CHARACTER,buildingChar.toJson());
-		Log.i("IKRPG","Saving character!");
 	}
 	
 	@Override
@@ -40,7 +39,6 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 		if(savedInstanceState != null)
 		{
 			buildingChar = zzBaseCharacter.fromJson(savedInstanceState.getString(BundleConstants.CHARACTER));
-			Log.i("IKRPG","Got character!\n"+buildingChar.toString());
 		}
 		else
 		{
@@ -77,15 +75,11 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseCareerFragment());
 		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseAdvancementPointsHook());
 		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseFluffFragment());
+		flowFrags.add(new zzStaticCreateCharacterHooks.CareerFinalizerHook());
 		
 		//all the possible dynamic ones
 		if(buildingChar.race != null)
 		{
-			for(Pair<Stat,Integer> startStat : buildingChar.race.startStats())
-			{buildingChar.baseStats.put(startStat.first, startStat.second);}
-			for(Pair<Stat,Integer> maxStat : buildingChar.race.heroStats())
-			{buildingChar.maxStats.put(maxStat.first, maxStat.second);}
-			buildingChar.deriveStats();	//whoops?
 			tempFrags = buildingChar.race.postCreateHooks();
 			if(tempFrags != null){flowFrags.addAll(tempFrags);}
 		}
@@ -98,24 +92,11 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 		
 		if(buildingChar.careers != null)
 		{
-			//skills
-			buildingChar.setBaseSkills(buildingChar.careers);
-			buildingChar.deriveSkillCheckLevels();
-			
-			//Careers; Abilities, spells, loot, and post hooks
-			int startGold = 0;
-			Collection<Loot> startLoot = new ArrayList<Loot>();
 			for(Career career : buildingChar.careers)
 			{
-				buildingChar.abilities.addAll(career.startingAbilities());
-				buildingChar.spells.addAll(career.startingSpells());
-				buildingChar.connections.addAll(career.startingConnections());
 				tempFrags = career.postCreateHooks();
 				if(tempFrags!=null){flowFrags.addAll(tempFrags);}
-				startGold += career.startGold();
-				startLoot.addAll(career.startLoot());
 			}
-			buildingChar.lootPack = new LootPack(startGold, startLoot);
 		}
 		
 		//sort hooks into proper order

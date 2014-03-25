@@ -1,14 +1,12 @@
 package com.random.captain.ikrpg.util;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-
 import com.random.captain.ikrpg.R;
+import java.util.ArrayList;
 
 public abstract class FlowNavigator extends FragmentActivity {
 	
@@ -41,14 +39,13 @@ public abstract class FlowNavigator extends FragmentActivity {
 	{
 		super.onResume();
 		
-		if(frags == null)
+		if(flowIndex < 1)
 		{
 			advanceFlow();
 		}
 		else
 		{
 			//get top frag
-			Log.i("IKRPG","Oh, I remember where we were!");
 			FragmentManager manager = getSupportFragmentManager();
 			int fragCount = manager.getBackStackEntryCount();
 			if(fragCount > 0)
@@ -60,7 +57,6 @@ public abstract class FlowNavigator extends FragmentActivity {
 			else
 			{
 				//else, huh.
-				Log.i("IKRPG","Just kidding, I lied.");
 				finish();
 			}
 		}
@@ -90,14 +86,11 @@ public abstract class FlowNavigator extends FragmentActivity {
 	
 	private void advanceFlow()
 	{	
-		Log.i("IKRPG","Advancing flow for index "+flowIndex+"!");
 		//hmmm.
 		frags = generateFrags();
-		Log.i("IKRPG","Got "+frags.size()+" frags!");
 		
 		if(flowIndex >= frags.size())
 		{
-			Log.i("IKRPG","All done with flow!");
 			flowComplete();
 			return;
 		}

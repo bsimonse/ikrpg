@@ -2,10 +2,11 @@ package com.random.captain.ikrpg.character;
 
 import java.util.*;
 
+import android.os.Bundle;
 import android.util.Pair;
-
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.util.BundleConstants;
 
 public enum Race
 {
@@ -29,7 +30,7 @@ public enum Race
 		  
 		new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		
-		new zzCreateCharacterHook[] {new humanHook()}
+		new zzCreateCharacterHook[] {new raceHook(), new humanHook()}
 		),
 	
 	@SuppressWarnings("unchecked")
@@ -52,7 +53,7 @@ public enum Race
 
 		  new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		  
-		  new zzCreateCharacterHook[] {new dwarfHook()}
+		  new zzCreateCharacterHook[] {new raceHook(), new dwarfHook()}
 		  ),
 	
 	@SuppressWarnings("unchecked")
@@ -75,7 +76,7 @@ public enum Race
 
 		  new Archetype[] {Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		   
-		  new zzCreateCharacterHook[] {new gobberHook()}
+		   new zzCreateCharacterHook[] {new raceHook(), new gobberHook()}
 		  ),
 		  
 	@SuppressWarnings("unchecked")
@@ -98,7 +99,7 @@ public enum Race
 
 		  new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		  
-		  new zzCreateCharacterHook[] {new iosanHook()}
+		  new zzCreateCharacterHook[] {new raceHook(), new iosanHook()}
 		  ),
 	
 	@SuppressWarnings("unchecked")
@@ -121,7 +122,7 @@ public enum Race
 
 		 new Archetype[] {Archetype.GIFTED, Archetype.MIGHTY, Archetype.SKILLED},
 		 
-		  new zzCreateCharacterHook[] {new nyssHook()}
+		 new zzCreateCharacterHook[] {new raceHook(), new nyssHook()}
 		  ),
 	
 	@SuppressWarnings("unchecked")
@@ -144,7 +145,7 @@ public enum Race
 
 		 new Archetype[] {Archetype.MIGHTY, Archetype.SKILLED},
 		  
-		 new zzCreateCharacterHook[] {new ogrunHook()}
+		 new zzCreateCharacterHook[] {new raceHook(), new ogrunHook()}
 		 ),
 		 
 	@SuppressWarnings("unchecked")
@@ -167,7 +168,7 @@ public enum Race
 		
 		new Archetype[] {Archetype.GIFTED, Archetype.MIGHTY, Archetype.SKILLED},
 			 
-		new zzCreateCharacterHook[] {new trollkinHook()}
+		new zzCreateCharacterHook[] {new raceHook(), new trollkinHook()}
 	);
 	
 	private Race(int pNameResourceID, Pair<Stat, Integer>[] pStartStats,
@@ -239,9 +240,26 @@ public enum Race
 	
 	/* Hooks! */
 	
-	public static class humanHook extends zzCreateCharacterHook
+	public static class raceHook extends zzCreateCharacterHook
 	{
 		//stuff happens here!
+		@Override protected Bundle doDefaultCase(){
+			for(Pair<Stat,Integer> startStat : myChar.race.startStats())
+			{myChar.baseStats.put(startStat.first, startStat.second);}
+			for(Pair<Stat,Integer> maxStat : myChar.race.heroStats())
+			{myChar.maxStats.put(maxStat.first, maxStat.second);}
+			myChar.deriveStats();
+			Bundle b = new Bundle();
+			b.putString(BundleConstants.CHARACTER, myChar.toJson());
+			
+			return b;
+		}
+		
+		@Override public int getPriority(){return 0;}
+	}
+	
+	public static class humanHook extends zzCreateCharacterHook
+	{
 		@Override public int getPriority(){return 49;}
 	}
 	
