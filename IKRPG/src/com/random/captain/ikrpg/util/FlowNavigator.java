@@ -73,11 +73,15 @@ public abstract class FlowNavigator extends FragmentActivity {
 			return;
 		}
 
-		//undo previous thing
-		final FlowFragment prevFrag = (FlowFragment)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
 		flowIndex--;
-		startFrag(prevFrag);
 		
+		//what was last index with a UI?
+		while(!frags.get(flowIndex).hasUI())
+		{flowIndex--;}
+		
+		//pop to last UI fragment
+		final FlowFragment prevFrag = (FlowFragment)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
+		startFrag(prevFrag);
 		manager.popBackStackImmediate();
 	}
 	
