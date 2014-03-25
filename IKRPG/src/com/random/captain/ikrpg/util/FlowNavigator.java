@@ -64,6 +64,7 @@ public abstract class FlowNavigator extends FragmentActivity {
 	
 	@Override public void onBackPressed()
 	{
+		frags = generateFrags();
 		FragmentManager manager = getSupportFragmentManager();
 
 		if(manager.getBackStackEntryCount() <= 1)
@@ -76,7 +77,7 @@ public abstract class FlowNavigator extends FragmentActivity {
 		flowIndex--;
 		
 		//what was last index with a UI?
-		while(!frags.get(flowIndex).hasUI())
+		while(!frags.get(flowIndex-1).hasUI())
 		{flowIndex--;}
 		
 		//pop to last UI fragment
