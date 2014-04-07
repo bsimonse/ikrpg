@@ -22,6 +22,8 @@ public class CharacterAdvancementPointGain extends Activity
 	private TextView expDifView;
 	private Button loseExp;
 	
+	private int buildThatChar = 5;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -42,6 +44,11 @@ public class CharacterAdvancementPointGain extends Activity
 					currentEXP--;
 					updateEXPDisplay(currentEXP);
 				}
+				
+				if(currentEXP >= baseEXP)
+				{
+					loseExp.setEnabled(false);
+				}
 			}
 		});
 		
@@ -52,6 +59,7 @@ public class CharacterAdvancementPointGain extends Activity
 			{
 				currentEXP++;
 				updateEXPDisplay(currentEXP);
+				loseExp.setEnabled(true);
 			}
 		});
 			
@@ -69,6 +77,7 @@ public class CharacterAdvancementPointGain extends Activity
 		{expDifView = (TextView)findViewById(R.id.expGainsText);}
 		
 		//can't actually go negative... but why not.
+		//Maybe at some point I should actually allow this.
 		boolean positive = currentEXP >= baseEXP;
 		expDifView.setText("You have "+(positive?"gained":"lost")+" "+Math.abs(currentEXP-mainChar.exp())+" exp");
 		if(positive)
@@ -83,17 +92,14 @@ public class CharacterAdvancementPointGain extends Activity
 		i.putExtra(BundleConstants.CHARACTER, mainChar.toJson());
 		i.putExtra(BundleConstants.START_EXP, baseEXP);
 		i.putExtra(BundleConstants.END_EXP, currentEXP);
-		Log.i("IKRPG", "Hand weapon before: "+mainChar.getSkillBaseLevel(SkillEnum.HAND_WEAPON));
-		startActivityForResult(i,5);
+		startActivityForResult(i,buildThatChar);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if(requestCode == 5 && resultCode == RESULT_OK)
+		if(requestCode == buildThatChar && resultCode == RESULT_OK)
 		{
 			Log.i("IKRPG","Good, it thinks things went okay.");
-			GameCharacter c = GameCharacter.fromJson(data.getExtras().getString(BundleConstants.CHARACTER));
-			Log.i("IKRPG", "Hand weapon after: "+c.getSkillBaseLevel(SkillEnum.HAND_WEAPON));
 		}
 	}
 }
