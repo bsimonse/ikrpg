@@ -7,13 +7,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import com.random.captain.ikrpg.R;
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class FlowNavigator extends FragmentActivity {
+public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActivity {
 	
-	protected abstract ArrayList<? extends FlowFragment> generateFrags();
+	protected abstract List<F> generateFrags();
 	protected abstract void hookComplete(Bundle b);
-	protected abstract Bundle prepBundle();
+	protected abstract Bundle prepBundle(F flowFrag, int fragIndex);
 	protected abstract void setResult();
+	
+	private List<F> frags;
+	private int flowIndex;
 	
 	@Override
 	public void onSaveInstanceState(Bundle b)
@@ -86,9 +90,6 @@ public abstract class FlowNavigator extends FragmentActivity {
 		manager.popBackStackImmediate();
 	}
 	
-	private ArrayList<? extends FlowFragment> frags;
-	private int flowIndex;
-	
 	private void advanceFlow()
 	{	
 		//hmmm.
@@ -100,12 +101,12 @@ public abstract class FlowNavigator extends FragmentActivity {
 			return;
 		}
 		
-		final FlowFragment nextFrag = frags.get(flowIndex);
+		final F nextFrag = frags.get(flowIndex);
 
 		if(nextFrag != null)
 		{
 			flowIndex++;
-			nextFrag.prepFlowFragment(prepBundle());
+			nextFrag.prepFlowFragment(prepBundle(nextFrag, flowIndex));
 			
 			//I don't like that I have to call attention to this pattern.
 			boolean hasUI = startFrag(nextFrag);

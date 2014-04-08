@@ -1,27 +1,14 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Pair;
-
-import com.random.captain.ikrpg.gear.Loot;
-import com.random.captain.ikrpg.gear.LootPack;
 import com.random.captain.ikrpg.util.BundleConstants;
-import com.random.captain.ikrpg.util.FlowFragment;
 import com.random.captain.ikrpg.util.FlowNavigator;
 import com.random.captain.ikrpg.util.Utilities;
 
-public class CharacterCreationServiceActivity extends FlowNavigator
+public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateCharacterHook>
 {
 	private zzBaseCharacter buildingChar;
 	
@@ -55,7 +42,7 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 	}
 	
 	@Override
-	protected Bundle prepBundle()
+	protected Bundle prepBundle(zzCreateCharacterHook hook, int notUsed)
 	{
 		Bundle b = new Bundle();
 		b.putString(BundleConstants.CHARACTER, buildingChar.toJson());
@@ -63,7 +50,7 @@ public class CharacterCreationServiceActivity extends FlowNavigator
 	}
 	
 	@Override
-	protected ArrayList<? extends FlowFragment> generateFrags()
+	protected List<zzCreateCharacterHook> generateFrags()
 	{
 		ArrayList<zzCreateCharacterHook> flowFrags = new ArrayList<zzCreateCharacterHook>(15);
 		Collection<zzCreateCharacterHook> tempFrags;

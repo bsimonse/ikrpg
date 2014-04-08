@@ -78,9 +78,6 @@ class zzBaseCharacter
 	public Set<Language> getLanguages(){return new HashSet<Language>(languages);}
 	public int exp(){return exp;}
 	
-	public void gainEXP(int pExpGain)
-	{setEXP(exp+pExpGain);}
-	
 	/* Skills */
 	public int getSkillBaseLevel(Skill skill){return getSkillBaseLevel(skill.skillEnum(), skill.qualifier());}
 	public int getSkillBaseLevel(SkillEnum skill){return getSkillBaseLevel(skill,"");}
@@ -197,14 +194,6 @@ class zzBaseCharacter
 			activeSkills.put(skill, value);
 		}
 	} 
-	
-	void setEXP(int pExpTotal)
-	{
-		//determine bonuses gained
-		//TODO: add bonuses
-
-		exp = pExpTotal;
-	}
 	
 	void setBaseSkills(Map<Skill, Integer> pBaseSkills)
 	{

@@ -4,24 +4,37 @@ import android.widget.*;
 import java.util.*;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.util.Pair;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.util.BundleConstants;
-import android.util.SparseBooleanArray;
 
 public class zzStaticCharacterAdvancementBoons
 {
-	public static class ChooseOccupationalSkillsFragment extends zzCharacterAdvancementFragment
+	//just a nice little helper
+	public static int skillCapForEXP(int curExp)
+	{
+		if(curExp < 50)
+		{return 2;}
+		else if(curExp < 100)
+		{return 3;}
+		else
+		{return 4;}	
+	}
+	
+	public static class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
 	{
 		List<SkillEnum> potentialSkills;
 		Set<SkillEnum> chosenSkills;
+		
 		int choiceCount;
 		
-		public ChooseOccupationalSkillsFragment(int pChoiceCount)
+		public ChooseOccupationalSkillsFragment(int pCurExp, int pChoiceCount)
 		{
+			super(pCurExp);
 			choiceCount = pChoiceCount;
 		}
 		
@@ -50,8 +63,24 @@ public class zzStaticCharacterAdvancementBoons
 			potentialSkills = new ArrayList<SkillEnum>(10);
 			chosenSkills = new HashSet<SkillEnum>(10);
 			
-			//cheat!
-			//But soon will actually get all eligible.
+			//determine eligible skills
+			//an eligible skill is
+			// - available in one+ of the character's careers
+			// - not already at career cap
+			// - not already at level cap
+
+			for(Career career : myChar.careers)
+			{
+				for(Pair<Skill,Integer> skillCap : career.careerSkills())
+				{
+					int curLevel = myChar.getSkillBaseLevel(skillCap.first);
+					if(curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
+					{
+						potentialSkills.add(skillCap.first.skillEnum());
+					}
+				}
+			}
+			
 			potentialSkills.add(SkillEnum.ALCHEMY);
 			potentialSkills.add(SkillEnum.HAND_WEAPON);
 			potentialSkills.add(SkillEnum.PISTOL);
@@ -78,15 +107,9 @@ public class zzStaticCharacterAdvancementBoons
 						boolean selected = checked.get(which);
 						
 						if(selected)
-						{
-							Log.i("IKRPG","Alright, selected "+chosen);
-							chosenSkills.add(chosen);
-						}
+						{chosenSkills.add(chosen);}
 						else
-						{
-							Log.i("IKRPG","Whoops, I didn't mean THAT "+chosen+".");
-							chosenSkills.remove(chosen);
-						}
+						{chosenSkills.remove(chosen);}
 					}
 				});
 
