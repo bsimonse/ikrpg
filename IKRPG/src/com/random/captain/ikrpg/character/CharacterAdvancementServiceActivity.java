@@ -49,8 +49,9 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvance
 		List<zzAdvanceCharacterHook> frags = new ArrayList<zzAdvanceCharacterHook>(30);
 		for(int i = startExp; i < endExp; i++)
 		{
-			zzAdvanceCharacterHook h = hooks.get(i);
-			if(h != null){frags.add(h);}
+			zzAdvanceCharacterHook h = hooks.valueAt(i);
+			Log.i("IKRPG","How about hook "+i);
+			if(h != null){frags.add(h);Log.i("IKRPG","There we go.");}
 		}
 		Log.i("IKRPG","All of "+frags.size());
 		return frags;

@@ -25,6 +25,13 @@ public class CharacterAdvancementPointGain extends Activity
 	private int buildThatChar = 5;
 	
 	@Override
+	public void onSaveInstanceState(Bundle b)
+	{
+		super.onSaveInstanceState(b);
+		b.putInt(BundleConstants.CUR_EXP, currentEXP);
+	}
+	
+	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
@@ -42,12 +49,7 @@ public class CharacterAdvancementPointGain extends Activity
 				if(currentEXP > baseEXP)
 				{
 					currentEXP--;
-					updateEXPDisplay(currentEXP);
-				}
-				
-				if(currentEXP >= baseEXP)
-				{
-					loseExp.setEnabled(false);
+					updateEXPDisplay();
 				}
 			}
 		});
@@ -58,32 +60,33 @@ public class CharacterAdvancementPointGain extends Activity
 			public void onClick(View v)
 			{
 				currentEXP++;
-				updateEXPDisplay(currentEXP);
-				loseExp.setEnabled(true);
+				updateEXPDisplay();
 			}
 		});
 			
 		currentEXP = mainChar.exp();
-		updateEXPDisplay(currentEXP);
+		if(savedInstanceState != null)
+		{
+			currentEXP = savedInstanceState.getInt(BundleConstants.CUR_EXP, currentEXP);
+		}
+		updateEXPDisplay();
 	}
 	
-	private void updateEXPDisplay(int exp)
+	private void updateEXPDisplay()
 	{
+		//can't actually go negative... but why not.
+		//Maybe at some point I should actually allow this.
+		loseExp.setEnabled(currentEXP > baseEXP);
+	
 		if(expTotalView == null)
 		{expTotalView = (TextView)findViewById(R.id.totalEXPLabel);}
-		expTotalView.setText(""+exp);
+		expTotalView.setText(""+currentEXP);
 		
 		if(expDifView == null)
 		{expDifView = (TextView)findViewById(R.id.expGainsText);}
 		
-		//can't actually go negative... but why not.
-		//Maybe at some point I should actually allow this.
 		boolean positive = currentEXP >= baseEXP;
 		expDifView.setText("You have "+(positive?"gained":"lost")+" "+Math.abs(currentEXP-mainChar.exp())+" exp");
-		if(positive)
-		{loseExp.setEnabled(true);}
-		else
-		{loseExp.setEnabled(false);}
 	}
 	
 	public void getBenefits(View v)

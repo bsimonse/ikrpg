@@ -66,6 +66,7 @@ public class zzStaticCharacterAdvancementBoons
 			//determine eligible skills
 			//an eligible skill is
 			// - available in one+ of the character's careers
+			// - a non-military skill
 			// - not already at career cap
 			// - not already at level cap
 
@@ -74,17 +75,22 @@ public class zzStaticCharacterAdvancementBoons
 				for(Pair<Skill,Integer> skillCap : career.careerSkills())
 				{
 					int curLevel = myChar.getSkillBaseLevel(skillCap.first);
-					if(curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
+					if(!skillCap.first.isMilitary() && curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
 					{
 						potentialSkills.add(skillCap.first.skillEnum());
 					}
 				}
 			}
 			
-			potentialSkills.add(SkillEnum.ALCHEMY);
-			potentialSkills.add(SkillEnum.HAND_WEAPON);
-			potentialSkills.add(SkillEnum.PISTOL);
-			potentialSkills.add(SkillEnum.RESEARCH);
+			//now looking for general skills
+			for(SkillEnum skill : SkillEnum.generalSkills())
+			{
+				int curLevel = myChar.getSkillBaseLevel(skill);
+				if(curLevel < skillCapForEXP(curExp)){potentialSkills.add(skill);}
+			}
+			
+			//might as well
+			Collections.sort(potentialSkills);
 			
 			final ListView skillList = (ListView)rootView.findViewById(R.id.listChoiceList);
 			skillList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

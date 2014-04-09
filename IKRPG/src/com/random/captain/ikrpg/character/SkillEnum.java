@@ -1,6 +1,8 @@
 package com.random.captain.ikrpg.character;
 
 import android.util.Pair;
+import java.util.ArrayList;
+import java.util.List;
 
 public enum SkillEnum
 {
@@ -84,10 +86,24 @@ public enum SkillEnum
 	public boolean isQualifiable(){return isQualifiable;}
 	public boolean canUseUntrained(){return canUseUntrained;}
 	
-	//Are these necessary/helpful?
 	public Skill make(){return new Skill(this);}
 	public Skill make(String qualifier){return new Skill(this, qualifier);}
 	
 	public Pair<Skill, Integer> pair(int skillLevel){return new Pair<Skill,Integer>(new Skill(this),skillLevel);}
 	public Pair<Skill, Integer> pair(String qualifier, int skillLevel){return new Pair<Skill, Integer>(new Skill(this, qualifier),skillLevel);}
+	
+	private static List<SkillEnum> generalSkills;
+	public static List<SkillEnum> generalSkills()
+	{
+		if(generalSkills == null)
+		{
+			generalSkills = new ArrayList<SkillEnum>(40);
+			for(SkillEnum skill : SkillEnum.values())
+			{
+				if(skill.isGeneral()){generalSkills.add(skill);}
+			}
+		}
+		
+		return generalSkills;
+	}
 }
