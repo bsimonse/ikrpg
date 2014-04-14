@@ -111,9 +111,7 @@ public class CharacterAdvancementPointGain extends Activity
 					@Override public void characterSaved(boolean worked)
 					{
 						if(worked)
-						{
-							Toast.makeText(CharacterAdvancementPointGain.this, "EXP gained!", Toast.LENGTH_SHORT).show();
-						}
+						{Toast.makeText(CharacterAdvancementPointGain.this, "EXP gained!", Toast.LENGTH_SHORT).show();}
 						else
 						{Toast.makeText(CharacterAdvancementPointGain.this, "Couldn't update EXP... sorry!", Toast.LENGTH_LONG).show();}
 					}

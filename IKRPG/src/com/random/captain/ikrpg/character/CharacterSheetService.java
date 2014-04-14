@@ -5,7 +5,9 @@ import java.util.*;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
@@ -16,6 +18,8 @@ import com.random.captain.ikrpg.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import android.support.v4.app.TaskStackBuilder;
+import android.app.PendingIntent;
 
 public class CharacterSheetService
 {
@@ -126,6 +130,16 @@ public class CharacterSheetService
 							os.write(bytes, i, step);
 						}
 						
+						notiBuilder.setProgress(0,0,false).setContentText("Sheet for "+pc.fluff().name+" printed!");
+						
+						Intent imageIntent = new Intent();
+						imageIntent.setAction(Intent.ACTION_VIEW);
+						imageIntent.setDataAndType(Uri.parse("file://"+f.getAbsolutePath()), "image/png");
+						TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+						stackBuilder.addNextIntent(imageIntent);
+						notiBuilder.setContentIntent(stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT));
+						man.notify(notificationId, notiBuilder.build());
+						
 						stream.flush();stream.close();
 						os.flush();os.close();
 					}
@@ -141,8 +155,6 @@ public class CharacterSheetService
 		@Override protected void onPostExecute(Boolean success)
 		{
 			if(delegate != null){delegate.characterSheetComplete(success);}
-			//NotificationManager man = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-			//man.cancel(notificationId);
 		}
 	
 		private String fileNameSafeString(String toConvert)

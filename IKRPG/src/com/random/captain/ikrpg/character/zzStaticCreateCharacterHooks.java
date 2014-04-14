@@ -160,7 +160,7 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
 	{
-		return inflater.inflate(R.layout.frag_choose_advancement_points, pRoot, false);
+		return inflater.inflate(R.layout.frag_choice_list, pRoot, false);
 	}
 	
 	@Override
