@@ -3,14 +3,14 @@ package com.random.captain.ikrpg;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.random.captain.ikrpg.character.GameCharacter;
+import android.widget.Toast;
+import com.random.captain.ikrpg.MainActivity;
 import com.random.captain.ikrpg.character.CharacterAdvancementServiceActivity;
-import com.random.captain.ikrpg.character.SkillEnum;
+import com.random.captain.ikrpg.character.CharacterStorageService;
+import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.util.BundleConstants;
 
 public class CharacterAdvancementPointGain extends Activity
@@ -102,7 +102,28 @@ public class CharacterAdvancementPointGain extends Activity
 	{
 		if(requestCode == buildThatChar && resultCode == RESULT_OK)
 		{
-			Log.i("IKRPG","Good, it thinks things went okay.");
+			Intent i = new Intent();
+			String character = data.getExtras().getString(BundleConstants.CHARACTER);
+			i.putExtra(BundleConstants.CHARACTER, character);
+			setResult(Activity.RESULT_OK, i);
+			CharacterStorageService.saveCharacter(GameCharacter.fromJson(character), new CharacterStorageService.SavingDelegate()
+				{
+					@Override public void characterSaved(boolean worked)
+					{
+						if(worked)
+						{
+							Toast.makeText(CharacterAdvancementPointGain.this, "EXP gained!", Toast.LENGTH_SHORT).show();
+						}
+						else
+						{Toast.makeText(CharacterAdvancementPointGain.this, "Couldn't update EXP... sorry!", Toast.LENGTH_LONG).show();}
+					}
+				});
 		}
+		else
+		{
+			setResult(Activity.RESULT_FIRST_USER);
+		}
+		
+		finish();
 	}
 }

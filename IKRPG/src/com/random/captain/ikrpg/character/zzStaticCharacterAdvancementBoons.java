@@ -63,6 +63,8 @@ public class zzStaticCharacterAdvancementBoons
 			potentialSkills = new ArrayList<SkillEnum>(10);
 			chosenSkills = new HashSet<SkillEnum>(10);
 			
+			final Button butt = (Button)rootView.findViewById(R.id.continueButton);
+			
 			//determine eligible skills
 			//an eligible skill is
 			// - available in one+ of the character's careers
@@ -116,11 +118,24 @@ public class zzStaticCharacterAdvancementBoons
 						{chosenSkills.add(chosen);}
 						else
 						{chosenSkills.remove(chosen);}
+						
+						if(skillList.getCheckedItemCount() >= choiceCount)
+						{butt.setVisibility(View.VISIBLE);}
+						else
+						{butt.setVisibility(View.GONE);}
 					}
 				});
 
 			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 			tv.setText("Choose your skills");
+			
+			butt.setOnClickListener(new View.OnClickListener(){
+				@Override
+				public void onClick(View v)
+				{
+					choicesComplete();
+				}
+			});
 		}
 		
 		@Override protected boolean hasUI(){return true;}

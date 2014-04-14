@@ -168,7 +168,7 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	{
 		super.onViewCreated(root, b);
 		final ListView list = (ListView)root.findViewById(R.id.chooseAdvancementPointsList);
-		list.setAdapter(new ChooseAdvancementPointsAdapter(myChar, list));
+		list.setAdapter(new ChooseAdvancementPointsAdapter(myChar));
 
 		Button submitButton = (Button)root.findViewById(R.id.chooseAdvancementPointsSubmit);
 		submitButton.setOnClickListener(new View.OnClickListener(){
@@ -195,7 +195,7 @@ public static class ChooseAdvancementPointsAdapter extends BaseAdapter
 	private List<Stat> eStatsList; //for keeping order straight
 	private int increases = 0;
 
-	public ChooseAdvancementPointsAdapter(zzBaseCharacter pChar, ListView pListView)
+	public ChooseAdvancementPointsAdapter(zzBaseCharacter pChar)
 	{
 		character = pChar;
 

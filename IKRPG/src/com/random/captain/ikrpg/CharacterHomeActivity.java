@@ -1,15 +1,16 @@
 package com.random.captain.ikrpg;
 import android.view.*;
 import android.widget.*;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.AdapterView.OnItemClickListener;
-
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.character.CharacterSheetService;
 import com.random.captain.ikrpg.character.CharacterStorageService;
+import com.random.captain.ikrpg.character.GameCharacter;
 import com.random.captain.ikrpg.util.BundleConstants;
 
 public class CharacterHomeActivity extends Activity
@@ -17,6 +18,7 @@ public class CharacterHomeActivity extends Activity
 	private GameCharacter mainChar;
 	private ListView myList;
 	private ArrayAdapter<Actions> myAdapter;
+	private int getSumEXP = 1234;
 	
 	private enum Actions
 	{
@@ -56,7 +58,7 @@ public class CharacterHomeActivity extends Activity
 				case GAIN_EXP:
 					Intent i = new Intent(CharacterHomeActivity.this, CharacterAdvancementPointGain.class);
 					i.putExtra(BundleConstants.CHARACTER, mainChar.toJson());
-					startActivity(i);
+					startActivityForResult(i, getSumEXP);
 					return;
 				case GEAR:
 				break;
@@ -69,6 +71,15 @@ public class CharacterHomeActivity extends Activity
 			}
 		}
 	};
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if(requestCode == getSumEXP && resultCode == RESULT_OK)
+		{
+			Log.i("IKRPG","Good, it thinks things went okay.");
+			mainChar = GameCharacter.fromJson(data.getExtras().getString(BundleConstants.CHARACTER));
+		}
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu pMenu)

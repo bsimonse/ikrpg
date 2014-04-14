@@ -1,21 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
-    
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
 	<TextView
 		style="@style/textLabel"
 		android:id="@+id/listChoiceTitle"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:padding="15sp"
-		android:text="Make a choice!"
-		/>
-	
+		android:text="Make a choice!"/>
+
 	<ListView
 		android:id="@+id/listChoiceList"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		/>
-	
+		android:layout_height="0sp"
+		android:layout_weight="1"/>
+
+	<Button
+		android:id="@+id/continueButton"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="Confirm"
+		android:visibility="gone"/>
+
 </LinearLayout>
+

@@ -76,7 +76,6 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvance
 	protected void setResult()
 	{
 		buildingChar.exp = endExp;
-		
 		Intent i = new Intent();
 		i.putExtra(BundleConstants.CHARACTER, buildingChar.toJson());
 		setResult(RESULT_OK, i);
