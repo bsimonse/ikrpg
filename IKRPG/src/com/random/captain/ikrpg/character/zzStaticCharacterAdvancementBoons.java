@@ -1,16 +1,20 @@
 package com.random.captain.ikrpg.character;
 
-import android.widget.*;
 import java.util.*;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.character.SkillEnum;
 import com.random.captain.ikrpg.util.BundleConstants;
+import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 
 public class zzStaticCharacterAdvancementBoons
 {
@@ -27,7 +31,7 @@ public class zzStaticCharacterAdvancementBoons
 	
 	public static class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
 	{
-		List<SkillEnum> potentialSkills;
+		final List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> potentialSkills = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>>(20);
 		Set<SkillEnum> chosenSkills;
 		
 		int choiceCount;
@@ -60,9 +64,8 @@ public class zzStaticCharacterAdvancementBoons
 		{
 			super.onViewCreated(rootView,b);
 			
-			potentialSkills = new ArrayList<SkillEnum>(10);
-			chosenSkills = new HashSet<SkillEnum>(10);
-			
+			chosenSkills = new HashSet<SkillEnum>(20);
+			Log.i("IKRPG","This is silly");
 			final Button butt = (Button)rootView.findViewById(R.id.continueButton);
 			
 			//determine eligible skills
@@ -79,7 +82,9 @@ public class zzStaticCharacterAdvancementBoons
 					int curLevel = myChar.getSkillBaseLevel(skillCap.first);
 					if(!skillCap.first.isMilitary() && curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
 					{
-						potentialSkills.add(skillCap.first.skillEnum());
+						ChoosePointsAdapter.ChoosePointsBundle bundle = new ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>(curLevel, curLevel, Math.min(skillCap.second.intValue(), skillCapForEXP(curExp)), skillCap.first.skillEnum());
+						potentialSkills.add(bundle);
+						Log.i("IKRPG","Huzzah!");
 					}
 				}
 			}
@@ -88,43 +93,41 @@ public class zzStaticCharacterAdvancementBoons
 			for(SkillEnum skill : SkillEnum.generalSkills())
 			{
 				int curLevel = myChar.getSkillBaseLevel(skill);
-				if(curLevel < skillCapForEXP(curExp)){potentialSkills.add(skill);}
+				if(curLevel < skillCapForEXP(curExp))
+				{
+					ChoosePointsAdapter.ChoosePointsBundle bundle = new ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>(curLevel, curLevel, Math.min(4, skillCapForEXP(curExp)), skill);
+					potentialSkills.add(bundle);
+					Log.i("IKRPG","Huzzah!");
+				}
 			}
 			
 			//might as well
-			Collections.sort(potentialSkills);
+			//Collections.sort(potentialSkills);
 			
 			final ListView skillList = (ListView)rootView.findViewById(R.id.listChoiceList);
-			skillList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 			
-			skillList.setAdapter(new ArrayAdapter<SkillEnum>(getActivity(), android.R.layout.simple_list_item_multiple_choice, potentialSkills){
+			skillList.setAdapter(new ChoosePointsAdapter<SkillEnum>(myChar)
+			{
 				@Override
-				public boolean isEnabled(int position)
+				protected int getIncreaseCount()
 				{
-					return skillList.getCheckedItemCount() < choiceCount ||
-					skillList.getCheckedItemPositions().get(position);
+					return choiceCount;
+				}
+
+				@Override
+				protected String getLabel(ChoosePointsBundle<SkillEnum> bundle)
+				{
+					return bundle.item.name();
+				}
+					
+				@Override
+				protected List<ChoosePointsBundle<SkillEnum>> getItemList()
+				{
+					Log.i("IKRPG","Right here");
+					Log.i("IKRPG",potentialSkills == null ? "Why is it null?" : "But it's not null...");
+					return potentialSkills;
 				}
 			});
-			
-			skillList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-					{
-						SparseBooleanArray checked = skillList.getCheckedItemPositions();
-						SkillEnum chosen = potentialSkills.get(which);
-						boolean selected = checked.get(which);
-						
-						if(selected)
-						{chosenSkills.add(chosen);}
-						else
-						{chosenSkills.remove(chosen);}
-						
-						if(skillList.getCheckedItemCount() >= choiceCount)
-						{butt.setVisibility(View.VISIBLE);}
-						else
-						{butt.setVisibility(View.GONE);}
-					}
-				});
 
 			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 			tv.setText("Choose your skills");

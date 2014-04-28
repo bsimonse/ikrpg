@@ -167,10 +167,10 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	public void onViewCreated(View root, Bundle b)
 	{
 		super.onViewCreated(root, b);
-		final ListView list = (ListView)root.findViewById(R.id.chooseAdvancementPointsList);
+		final ListView list = (ListView)root.findViewById(R.id.listChoiceList);
 		list.setAdapter(new ChooseAdvancementPointsAdapter(myChar));
 
-		Button submitButton = (Button)root.findViewById(R.id.chooseAdvancementPointsSubmit);
+		Button submitButton = (Button)root.findViewById(R.id.continueButton);
 		submitButton.setOnClickListener(new View.OnClickListener(){
 				@Override public void onClick(View v)
 				{
