@@ -44,12 +44,17 @@ public abstract class ChoosePointsAdapter<E> extends BaseAdapter
 	public ChoosePointsAdapter(zzBaseCharacter pChar)
 	{
 		character = pChar;
-		itemList = getItemList();
 	}
 
-	@Override public int getCount(){return itemList.size();}
+	@Override public int getCount(){
+		if(itemList == null){itemList = getItemList();}
+		return itemList.size();
+	}
 	@Override public long getItemId(int which){return which;}
-	@Override public Object getItem(int which){return itemList.get(which);}
+	@Override public Object getItem(int which){
+		if(itemList == null){itemList = getItemList();}
+		return itemList.get(which);
+	}
 	@Override public View getView(int position, View convertView, ViewGroup parent)
 	{
 		final zzChooseAdvancementListItemViewHolder viewHolder;

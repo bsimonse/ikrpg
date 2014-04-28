@@ -29,7 +29,7 @@ public class zzStaticCharacterAdvancementBoons
 		{return 4;}	
 	}
 	
-	public static class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
+	public class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
 	{
 		final List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> potentialSkills = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>>(20);
 		Set<SkillEnum> chosenSkills;
@@ -65,7 +65,6 @@ public class zzStaticCharacterAdvancementBoons
 			super.onViewCreated(rootView,b);
 			
 			chosenSkills = new HashSet<SkillEnum>(20);
-			Log.i("IKRPG","This is silly");
 			final Button butt = (Button)rootView.findViewById(R.id.continueButton);
 			
 			//determine eligible skills
@@ -82,9 +81,8 @@ public class zzStaticCharacterAdvancementBoons
 					int curLevel = myChar.getSkillBaseLevel(skillCap.first);
 					if(!skillCap.first.isMilitary() && curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
 					{
-						ChoosePointsAdapter.ChoosePointsBundle bundle = new ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>(curLevel, curLevel, Math.min(skillCap.second.intValue(), skillCapForEXP(curExp)), skillCap.first.skillEnum());
+						ChoosePointsAdapter.ChoosePointsBundle<SkillEnum> bundle = new ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>(curLevel, curLevel, Math.min(skillCap.second.intValue(), skillCapForEXP(curExp)), skillCap.first.skillEnum());
 						potentialSkills.add(bundle);
-						Log.i("IKRPG","Huzzah!");
 					}
 				}
 			}
@@ -95,9 +93,8 @@ public class zzStaticCharacterAdvancementBoons
 				int curLevel = myChar.getSkillBaseLevel(skill);
 				if(curLevel < skillCapForEXP(curExp))
 				{
-					ChoosePointsAdapter.ChoosePointsBundle bundle = new ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>(curLevel, curLevel, Math.min(4, skillCapForEXP(curExp)), skill);
+					ChoosePointsAdapter.ChoosePointsBundle<SkillEnum> bundle = new ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>(curLevel, curLevel, Math.min(4, skillCapForEXP(curExp)), skill);
 					potentialSkills.add(bundle);
-					Log.i("IKRPG","Huzzah!");
 				}
 			}
 			
@@ -105,29 +102,8 @@ public class zzStaticCharacterAdvancementBoons
 			//Collections.sort(potentialSkills);
 			
 			final ListView skillList = (ListView)rootView.findViewById(R.id.listChoiceList);
-			
-			skillList.setAdapter(new ChoosePointsAdapter<SkillEnum>(myChar)
-			{
-				@Override
-				protected int getIncreaseCount()
-				{
-					return choiceCount;
-				}
 
-				@Override
-				protected String getLabel(ChoosePointsBundle<SkillEnum> bundle)
-				{
-					return bundle.item.name();
-				}
-					
-				@Override
-				protected List<ChoosePointsBundle<SkillEnum>> getItemList()
-				{
-					Log.i("IKRPG","Right here");
-					Log.i("IKRPG",potentialSkills == null ? "Why is it null?" : "But it's not null...");
-					return potentialSkills;
-				}
-			});
+			skillList.setAdapter(new ChooseSkillPoint(myChar, potentialSkills, choiceCount));
 
 			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 			tv.setText("Choose your skills");
@@ -143,4 +119,43 @@ public class zzStaticCharacterAdvancementBoons
 		
 		@Override protected boolean hasUI(){return true;}
 	}
+	
+	public ChooseOccupationalSkillsFragment please(int pCurExp, int pChoiceCount)
+	{
+		return new ChooseOccupationalSkillsFragment(pCurExp, pChoiceCount);
+	}
+	
+	public static class ChooseSkillPoint extends ChoosePointsAdapter<SkillEnum>
+	{
+		List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> skillList;
+		int choiceCount;
+
+		public ChooseSkillPoint(zzBaseCharacter myChar, List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> skills, int cCount)
+		{
+			super(myChar);
+			skillList = skills;
+			Log.i("IKRPG","NOW it's been set.");
+			choiceCount = cCount;
+		}
+
+		@Override
+		protected int getIncreaseCount()
+		{
+			return choiceCount;
+		}
+
+		@Override
+		protected String getLabel(ChoosePointsBundle<SkillEnum> bundle)
+		{
+			return bundle.item.name();
+		}
+
+		@Override
+		protected List<ChoosePointsBundle<SkillEnum>> getItemList()
+		{
+			Log.i("IKRPG",skillList == null ? "Why is it null?" : "But it's not null...");
+			return skillList;
+		}
+	}
+	
 }

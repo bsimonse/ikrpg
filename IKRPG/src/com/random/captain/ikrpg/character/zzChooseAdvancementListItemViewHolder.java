@@ -5,7 +5,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.random.captain.ikrpg.R;
 
-class zzChooseAdvancementListItemViewHolder
+public class zzChooseAdvancementListItemViewHolder
 {
 	public TextView textLabel;
 	public Button incrementButton;
