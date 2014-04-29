@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.FlowNavigator;
 import com.random.captain.ikrpg.util.Utilities;
+import com.random.captain.ikrpg.util.ModifierTags;
 
 public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateCharacterHook>
 {
@@ -154,8 +155,8 @@ public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateChar
 		pascal.setMaxStat(Stat.PERCEPTION, 5);
 
 		//Armor modifiers!
-		pascal.addStatModifier(new Modifier<Stat>(Stat.ARMOR, 7), "ARMOR_BONUS");
-		pascal.addStatModifier(new Modifier<Stat>(Stat.DEFENSE, -2), "DEF_PENALTY");
+		pascal.addStatModifier(new Modifier<Stat>(Stat.ARMOR, 7), ModifierTags.ARMOR_ARMOR_BONUS);
+		pascal.addStatModifier(new Modifier<Stat>(Stat.DEFENSE, -2), ModifierTags.ARMOR_DEFENSE_PENALTY);
 
 		//Skills
 		Map<Skill, Integer> skills = new HashMap<Skill,Integer>(20);

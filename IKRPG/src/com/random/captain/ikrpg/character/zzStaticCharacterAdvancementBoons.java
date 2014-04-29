@@ -29,7 +29,7 @@ public class zzStaticCharacterAdvancementBoons
 		{return 4;}	
 	}
 	
-	public class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
+	public static class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
 	{
 		final List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> potentialSkills = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>>(20);
 		Set<SkillEnum> chosenSkills;
@@ -51,8 +51,11 @@ public class zzStaticCharacterAdvancementBoons
 		private void choicesComplete()
 		{
 			//For now, completely ignoring skill gains in qualified skills
-			for(SkillEnum skill : chosenSkills)
-			{myChar.setSkillLevel(skill.make(), myChar.getSkillBaseLevel(skill)+1);}
+			for(ChoosePointsAdapter.ChoosePointsBundle<SkillEnum> skill : potentialSkills)
+			{
+				myChar.setSkillLevel(skill.item.make(), skill.curVal);
+				Log.i("IKRPG","Setting "+skill.item.displayName()+" to level "+skill.curVal);
+			}
 			
 			Bundle b = new Bundle();
 			b.putString(BundleConstants.CHARACTER, myChar.toJson());
@@ -103,7 +106,36 @@ public class zzStaticCharacterAdvancementBoons
 			
 			final ListView skillList = (ListView)rootView.findViewById(R.id.listChoiceList);
 
-			skillList.setAdapter(new ChooseSkillPoint(myChar, potentialSkills, choiceCount));
+			skillList.setAdapter(new ChoosePointsAdapter<SkillEnum>(myChar)
+			{
+				@Override public int getCount(){
+					//check for continue button enabled
+					if(getIncreaseCount() <= getIncreases())
+					{butt.setVisibility(View.VISIBLE);}
+					else
+					{butt.setVisibility(View.GONE);}
+					
+					return super.getCount();
+				}
+				
+				@Override
+				protected int getIncreaseCount()
+				{
+					return choiceCount;
+				}
+	
+				@Override
+				protected String getLabel(ChoosePointsBundle<SkillEnum> bundle)
+				{
+					return bundle.item.displayName();
+				}
+
+				@Override
+				protected List<ChoosePointsBundle<SkillEnum>> getItemList()
+				{
+					return potentialSkills;
+				}	
+			});
 
 			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
 			tv.setText("Choose your skills");
@@ -119,43 +151,4 @@ public class zzStaticCharacterAdvancementBoons
 		
 		@Override protected boolean hasUI(){return true;}
 	}
-	
-	public ChooseOccupationalSkillsFragment please(int pCurExp, int pChoiceCount)
-	{
-		return new ChooseOccupationalSkillsFragment(pCurExp, pChoiceCount);
-	}
-	
-	public static class ChooseSkillPoint extends ChoosePointsAdapter<SkillEnum>
-	{
-		List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> skillList;
-		int choiceCount;
-
-		public ChooseSkillPoint(zzBaseCharacter myChar, List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> skills, int cCount)
-		{
-			super(myChar);
-			skillList = skills;
-			Log.i("IKRPG","NOW it's been set.");
-			choiceCount = cCount;
-		}
-
-		@Override
-		protected int getIncreaseCount()
-		{
-			return choiceCount;
-		}
-
-		@Override
-		protected String getLabel(ChoosePointsBundle<SkillEnum> bundle)
-		{
-			return bundle.item.name();
-		}
-
-		@Override
-		protected List<ChoosePointsBundle<SkillEnum>> getItemList()
-		{
-			Log.i("IKRPG",skillList == null ? "Why is it null?" : "But it's not null...");
-			return skillList;
-		}
-	}
-	
 }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.random.captain.ikrpg.MainActivity;
 import com.random.captain.ikrpg.character.CharacterAdvancementServiceActivity;
 import com.random.captain.ikrpg.character.CharacterStorageService;
 import com.random.captain.ikrpg.character.GameCharacter;

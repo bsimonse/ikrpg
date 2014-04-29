@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import com.random.captain.ikrpg.R;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActivity {
@@ -136,7 +134,6 @@ public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActi
 	
 	void flowComplete()
 	{
-		Log.i("IKRPG","YOU DID IT!");
 		setResult();
 		finish();
 	}

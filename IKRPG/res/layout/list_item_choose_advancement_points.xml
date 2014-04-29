@@ -17,19 +17,19 @@
 		android:layout_height="wrap_content"
 		android:minWidth="100dp"
 		android:layout_weight="0">
-					
-		<Button
-			android:id="@+id/chooseAdvancementPointsIncrementButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="+" />
 		
 		<Button
 			android:id="@+id/chooseAdvancementPointsDecrementButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="5dp"
 			android:text="-"/>
+		
+		<Button
+			android:id="@+id/chooseAdvancementPointsIncrementButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="5dp"
+			android:text="+" />
 		
 		<TextView
 			style="@style/textLabel"

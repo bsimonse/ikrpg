@@ -82,10 +82,9 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvance
 	private void generateAllHooks()
 	{
 		hooks = new SparseArrayCompat<zzAdvanceCharacterHook>(200);
-		zzStaticCharacterAdvancementBoons hmmm = new zzStaticCharacterAdvancementBoons();
-		hooks.setValueAt(2,hmmm.please(2,2));
-		hooks.setValueAt(8,hmmm.please(8,2));
-	/*	hooks.setValueAt(18,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(18,2));
+		hooks.setValueAt(2,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(2,2));
+		hooks.setValueAt(8,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(8,2));
+		hooks.setValueAt(18,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(18,2));
 		hooks.setValueAt(27,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(27,2));
 		hooks.setValueAt(39,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(39,2));
 		hooks.setValueAt(55,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(55,2));
@@ -93,6 +92,6 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvance
 		hooks.setValueAt(90,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(90,2));
 		hooks.setValueAt(105,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(105,2));
 		hooks.setValueAt(125,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(125,2));
-		hooks.setValueAt(145,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(145,2));*/
+		hooks.setValueAt(145,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(145,2));
 	}
 }

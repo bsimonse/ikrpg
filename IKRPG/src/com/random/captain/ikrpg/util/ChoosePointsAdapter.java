@@ -39,6 +39,8 @@ public abstract class ChoosePointsAdapter<E> extends BaseAdapter
 	protected zzBaseCharacter character;
 
 	private int increases = 0;
+	protected int getIncreases(){return increases;}
+	
 	private List<ChoosePointsBundle<E>> itemList;
 
 	public ChoosePointsAdapter(zzBaseCharacter pChar)
