@@ -11,4 +11,5 @@ public class BundleConstants {
 	public static final String START_EXP = "readysetgo";
 	public static final String END_EXP = "darnthat'stheend";	
 	public static final String CUR_EXP = "hotChocolate";
+	public static final String CHOICE_COUNT = "georgecat";
 }

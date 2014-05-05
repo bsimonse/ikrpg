@@ -10,13 +10,6 @@ public abstract class zzCharacterAdvancementFragment extends FlowFragment
 {
 	protected zzBaseCharacter myChar;
 
-	@Override
-	public void prepFlowFragment(Bundle b)
-	{
-		super.prepFlowFragment(b);
-		getArguments().putString(BundleConstants.CHARACTER,b.getString(BundleConstants.CHARACTER));
-	}
-
 	//Sooo...
 	//I'm not thrilled with how I have to load the character twice...
 	//but I couldn't find where in the lifecycle to do what I want.

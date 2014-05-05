@@ -15,6 +15,7 @@ import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.SkillEnum;
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.ChoosePointsAdapter;
+import com.random.captain.ikrpg.util.FlowFragment;
 
 public class zzStaticCharacterAdvancementBoons
 {
@@ -40,6 +41,22 @@ public class zzStaticCharacterAdvancementBoons
 		{
 			super(pCurExp);
 			choiceCount = pChoiceCount;
+		}
+		
+		public ChooseOccupationalSkillsFragment(){}
+		
+		@Override
+		public void prepFlowFragment(Bundle b)
+		{
+			super.prepFlowFragment(b);
+			getArguments().putInt(BundleConstants.CHOICE_COUNT,choiceCount);
+		}
+		
+		@Override
+		public boolean startFlowFragment(FlowFragment.FlowFragmentDelegate pDelegate)
+		{
+			choiceCount = getArguments().getInt(BundleConstants.CHOICE_COUNT, 1);
+			return super.startFlowFragment(pDelegate);
 		}
 		
 		@Override
