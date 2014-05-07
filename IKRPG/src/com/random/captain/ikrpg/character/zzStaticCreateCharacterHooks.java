@@ -11,6 +11,7 @@ import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.gear.Loot;
 import com.random.captain.ikrpg.gear.LootPack;
 import com.random.captain.ikrpg.util.BundleConstants;
+import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 
 //This isn't really a class... I just wanted to put a bunch of stuff in one file.
 //It's got to be public for Android to recreate the fragments... so no encapsulation for you.
@@ -24,7 +25,7 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 	{
 		return inflater.inflate(R.layout.frag_choice_list, root, false);
 	}
-
+	
 	@Override
 	public void onViewCreated(View rootView, Bundle b)
 	{
@@ -168,14 +169,68 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	{
 		super.onViewCreated(root, b);
 		final ListView list = (ListView)root.findViewById(R.id.listChoiceList);
-		list.setAdapter(new ChooseAdvancementPointsAdapter(myChar));
+		final Button butt = (Button)root.findViewById(R.id.continueButton);
+		
+		//remember all stats that can be increased
+		final List<ChoosePointsAdapter.ChoosePointsBundle<Stat>> potentialStats = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<Stat>>(10);
+		Map<Stat, Integer> eligibleStats = new HashMap<Stat, Integer>(10);
+		for(Stat stat : Stat.values())
+		{
+			int curLevel = myChar.getBaseStat(stat);
+			int maxLevel = myChar.getMaxStat(stat);
+			if(curLevel < maxLevel)
+			{
+				eligibleStats.put(stat, myChar.getBaseStat(stat));
+				ChoosePointsAdapter.ChoosePointsBundle<Stat> bundle = new ChoosePointsAdapter.ChoosePointsBundle<Stat>(curLevel, curLevel, maxLevel, stat);
+				potentialStats.add(bundle);
+			}
+		}
+
+		Collections.sort(potentialStats, new Comparator<ChoosePointsAdapter.ChoosePointsBundle<Stat>>(){
+				@Override
+				public int compare(ChoosePointsAdapter.ChoosePointsBundle<Stat> first, ChoosePointsAdapter.ChoosePointsBundle<Stat> second)
+				{
+					return first.item.ordinal() - second.item.ordinal();
+				}
+			});
+			
+		list.setAdapter(new ChoosePointsAdapter<Stat>(myChar)
+			{
+				@Override public int getCount(){
+					//check for continue button enabled
+					if(getIncreaseCount() <= getIncreases())
+					{butt.setVisibility(View.VISIBLE);}
+					else
+					{butt.setVisibility(View.GONE);}
+					
+					return super.getCount();
+				}
+				
+				@Override
+				protected int getIncreaseCount()
+				{
+					return 3;
+				}
+	
+				@Override
+				protected String getLabel(ChoosePointsBundle<Stat> bundle)
+				{
+					return bundle.item.longName();
+				}
+
+				@Override
+				protected List<ChoosePointsBundle<Stat>> getItemList()
+				{
+					return potentialStats;
+				}	
+			});
 
 		Button submitButton = (Button)root.findViewById(R.id.continueButton);
 		submitButton.setOnClickListener(new View.OnClickListener(){
 				@Override public void onClick(View v)
 				{
-					ChooseAdvancementPointsAdapter adapter = (ChooseAdvancementPointsAdapter)list.getAdapter();
-					adapter.lockInStats();
+					for(ChoosePointsAdapter.ChoosePointsBundle<Stat> stat : potentialStats)
+					{myChar.setBaseStat(stat.item, stat.curVal);}
 					Bundle b = new Bundle();
 					b.putString(BundleConstants.CHARACTER, myChar.toJson());
 					delegate.hookComplete(b);
@@ -185,106 +240,6 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 
 	@Override protected boolean hasUI(){return true;}
 	@Override public int getPriority(){return 100;}
-}
-
-public static class ChooseAdvancementPointsAdapter extends BaseAdapter
-{
-	private final static int MAX_INCREASES = 3;
-	private zzBaseCharacter character;
-	private Map<Stat, Integer> eligibleStats;
-	private List<Stat> eStatsList; //for keeping order straight
-	private int increases = 0;
-
-	public ChooseAdvancementPointsAdapter(zzBaseCharacter pChar)
-	{
-		character = pChar;
-
-		//remember all stats that can be increased
-		eligibleStats = new HashMap<Stat, Integer>(10);
-		for(Stat stat : Stat.values()){if(pChar.getBaseStat(stat) < pChar.getMaxStat(stat)){eligibleStats.put(stat, pChar.getBaseStat(stat));}}
-
-		eStatsList = new ArrayList<Stat>(10);
-		eStatsList.addAll(eligibleStats.keySet());
-		Collections.sort(eStatsList, new Comparator<Stat>(){
-				@Override public int compare(Stat first, Stat second)
-				{
-					return first.ordinal() - second.ordinal();
-				}
-			});
-	}
-
-	public void lockInStats()
-	{
-		for(Stat stat : eligibleStats.keySet())
-		{character.setBaseStat(stat, eligibleStats.get(stat));}
-	}
-
-	@Override public int getCount(){return eStatsList.size();}
-	@Override public long getItemId(int which){return which;}
-	@Override public Object getItem(int which){return eStatsList.get(which);}
-	@Override public View getView(int position, View convertView, ViewGroup parent)
-	{
-		final zzChooseAdvancementListItemViewHolder viewHolder;
-
-		if(convertView == null)
-		{
-			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-			convertView = inflater.inflate(R.layout.list_item_choose_advancement_points, parent, false);
-			viewHolder = new zzChooseAdvancementListItemViewHolder(convertView);
-			convertView.setTag(viewHolder);
-		}
-		else
-		{
-			viewHolder = (zzChooseAdvancementListItemViewHolder)convertView.getTag();
-		}
-
-		final Stat pStat = (Stat)getItem(position);
-
-		viewHolder.textLabel.setText(pStat.toString());
-		viewHolder.valueLabel.setText(""+eligibleStats.get(pStat)+"/"+character.getMaxStat(pStat));
-
-		viewHolder.incrementButton.setOnClickListener(new View.OnClickListener(){
-				@Override public void onClick(View v){
-					if(increases >= MAX_INCREASES){return;}
-
-					int oldValue = eligibleStats.get(pStat);
-					int newValue = oldValue + 1;
-					if(newValue <= character.getMaxStat(pStat))
-					{
-						increases++;
-						eligibleStats.put(pStat, newValue);
-						notifyDataSetChanged();
-					}
-				}
-			});
-
-		viewHolder.decrementButton.setOnClickListener(new View.OnClickListener(){
-				@Override public void onClick(View v){
-					if(increases == 0){return;}
-
-					int oldValue = eligibleStats.get(pStat);
-					int newValue = oldValue - 1;
-					if(newValue >= character.getBaseStat(pStat))
-					{
-						increases--;
-						eligibleStats.put(pStat, newValue);
-						notifyDataSetChanged();
-					}
-				}
-			});
-
-		//is increment button disabled
-		if(increases >= MAX_INCREASES || eligibleStats.get(pStat) >= character.getMaxStat(pStat))
-		{viewHolder.incrementButton.setEnabled(false);}
-		else{viewHolder.incrementButton.setEnabled(true);}
-
-		//is decrement button disabled
-		if(increases <= 0 || eligibleStats.get(pStat) <= character.getBaseStat(pStat))
-		{viewHolder.decrementButton.setEnabled(false);}
-		else{viewHolder.decrementButton.setEnabled(true);}
-
-		return convertView;
-	}
 }
 
 public static class CareerFinalizerHook extends zzCreateCharacterHook

@@ -43,20 +43,21 @@ public class zzStaticCharacterAdvancementBoons
 			choiceCount = pChoiceCount;
 		}
 		
-		public ChooseOccupationalSkillsFragment(){}
-		
+		public ChooseOccupationalSkillsFragment()
+		{}
+
 		@Override
-		public void prepFlowFragment(Bundle b)
+		public void saveToBundle(Bundle b)
 		{
-			super.prepFlowFragment(b);
-			getArguments().putInt(BundleConstants.CHOICE_COUNT,choiceCount);
+			super.saveToBundle(b);
+			b.putInt(BundleConstants.CHOICE_COUNT,choiceCount);
 		}
-		
+
 		@Override
-		public boolean startFlowFragment(FlowFragment.FlowFragmentDelegate pDelegate)
+		public void restoreFromBundle(Bundle b)
 		{
+			super.restoreFromBundle(b);
 			choiceCount = getArguments().getInt(BundleConstants.CHOICE_COUNT, 1);
-			return super.startFlowFragment(pDelegate);
 		}
 		
 		@Override
@@ -71,7 +72,6 @@ public class zzStaticCharacterAdvancementBoons
 			for(ChoosePointsAdapter.ChoosePointsBundle<SkillEnum> skill : potentialSkills)
 			{
 				myChar.setSkillLevel(skill.item.make(), skill.curVal);
-				Log.i("IKRPG","Setting "+skill.item.displayName()+" to level "+skill.curVal);
 			}
 			
 			Bundle b = new Bundle();

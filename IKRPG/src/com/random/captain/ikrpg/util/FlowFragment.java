@@ -12,16 +12,28 @@ public abstract class FlowFragment extends Fragment {
 	
 	protected FlowFragmentDelegate delegate;
 
-	public void prepFlowFragment(Bundle b)
+	abstract void saveToBundle(Bundle b);
+	abstract void restoreFromBundle(Bundle b);
+	
+	public final void prepFlowFragment(Bundle b)
 	{
 		setArguments(b);
+		saveToBundle(getArguments());
 	}
 
+	@Override
+	public final void onCreate(Bundle b)
+	{
+		super.onCreate(b);
+		restoreFromBundle(getArguments());
+	}
+	
 	//The boolean determines whether or not you have a UI.
 	//This could probably be done better.
-	public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
+	public final boolean startFlowFragment(FlowFragmentDelegate pDelegate)
 	{
 		delegate = pDelegate;
+		restoreFromBundle(getArguments());
 		if(!hasUI())
 		{
 			pDelegate.hookComplete(doDefaultCase());

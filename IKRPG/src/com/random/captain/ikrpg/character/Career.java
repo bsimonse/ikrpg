@@ -872,18 +872,11 @@ public enum Career implements zzPrereqCheck
 	public static class ArcanistHook extends zzCreateCharacterHook
 	{
 		@Override
-		public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
+		public void restoreFromBundle(Bundle b)
 		{
-			super.startFlowFragment(pDelegate);
-			
+			super.restoreFromBundle(b);
 			myChar.abilities.add(AbilityEnum.GREAT_POWER.make());
 			myChar.abilities.add(AbilityEnum.RUNE_READER.make());
-			
-			Bundle b = new Bundle();
-			b.putString(BundleConstants.CHARACTER, myChar.toJson());
-			pDelegate.hookComplete(b);
-			
-			return hasUI();
 		}
 		
 		@Override public int getPriority(){return 0;}
@@ -1003,19 +996,12 @@ public enum Career implements zzPrereqCheck
 	public static class InvestigatorHyperPerceptionHook extends zzCreateCharacterHook
 	{	
 		@Override
-		public boolean startFlowFragment(FlowFragmentDelegate pDelegate)
+		public void restoreFromBundle(Bundle b)
 		{
-			super.startFlowFragment(pDelegate);
-			
+			super.restoreFromBundle(b);
 			boolean additionNeeded = !(myChar.abilities.contains(AbilityEnum.HYPER_PERCEPTION.make()));
 			if(additionNeeded)
 			{myChar.abilities.add(AbilityEnum.HYPER_PERCEPTION.make());}
-			
-			Bundle b = new Bundle();
-			b.putString(BundleConstants.CHARACTER, myChar.toJson());
-			pDelegate.hookComplete(b);
-			
-			return hasUI();
 		}
 		
 		@Override

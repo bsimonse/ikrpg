@@ -10,22 +10,24 @@ public abstract class zzCharacterAdvancementFragment extends FlowFragment
 {
 	protected zzBaseCharacter myChar;
 
-	//Sooo...
-	//I'm not thrilled with how I have to load the character twice...
-	//but I couldn't find where in the lifecycle to do what I want.
-	//So I have to load the character when it starts (for UI-less fragments)
-	//and also when the view is created (for UI-full fragments).
 	@Override
-	public boolean startFlowFragment(FlowFragment.FlowFragmentDelegate pDelegate)
+	public void saveToBundle(Bundle b)
 	{
-		myChar = zzBaseCharacter.fromJson(getArguments().getString(BundleConstants.CHARACTER));
-		return super.startFlowFragment(pDelegate);
+		if(myChar != null)
+		{b.putString(BundleConstants.CHARACTER, myChar.toJson());}
 	}
 	
 	@Override
-	public void onViewCreated(View v, Bundle b)
+	public void restoreFromBundle(Bundle b)
 	{
-		super.onViewCreated(v,b);
 		myChar = zzBaseCharacter.fromJson(getArguments().getString(BundleConstants.CHARACTER));
+	}	
+	
+	@Override
+	protected Bundle doDefaultCase()
+	{
+		Bundle b = new Bundle();
+		b.putString(BundleConstants.CHARACTER, myChar.toJson());
+		return b;
 	}
 }

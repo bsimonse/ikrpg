@@ -106,10 +106,7 @@ public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActi
 			flowIndex++;
 			nextFrag.prepFlowFragment(prepBundle(nextFrag, flowIndex));
 			
-			//I don't like that I have to call attention to this pattern.
-			boolean hasUI = startFrag(nextFrag);
-
-			if(hasUI)
+			if(startFrag(nextFrag))
 			{
 				String fragName = "flag_"+flowIndex;
 				FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
