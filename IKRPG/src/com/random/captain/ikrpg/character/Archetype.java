@@ -13,7 +13,7 @@ import com.random.captain.ikrpg.util.BundleConstants;
 public enum Archetype implements zzPrereqCheck
 {
 	GIFTED(R.string.gifted_name, R.string.gifted_longDesc, R.string.gifted_shortDesc, R.string.gifted_page,
-		new zzCreateCharacterHook[] { 
+		new zzCharacterAdvancementFragment[] { 
 			new GiftedArcaneHook()
 		},
 	
@@ -21,27 +21,27 @@ public enum Archetype implements zzPrereqCheck
 	),
 
 	INTELLECTUAL(R.string.intellectual_name, R.string.intellectual_longDesc, R.string.intellectual_shortDesc, R.string.intellectual_page,
-		new zzCreateCharacterHook[] { 
+		new zzCharacterAdvancementFragment[] { 
 			new NonGiftedArcaneHook()
 		},
 		null
 	),
 	
 	MIGHTY(R.string.mighty_name, R.string.mighty_longDesc, R.string.mighty_shortDesc, R.string.mighty_page,
-		new zzCreateCharacterHook[] { 
+		new zzCharacterAdvancementFragment[] { 
 			new NonGiftedArcaneHook()
 		},
 		null
 	),
 	
 	SKILLED(R.string.skilled_name, R.string.skilled_longDesc, R.string.skilled_shortDesc, R.string.skilled_page,
-		new zzCreateCharacterHook[] { 
+			new zzCharacterAdvancementFragment[] { 
 			new NonGiftedArcaneHook()
 		},
 		null
 	);
 	
-	private Archetype(int pName, int pLongDesc, int pShortDesc, int pPage, zzCreateCharacterHook[] pHooks, zzPrereqCheck pPrereq)
+	private Archetype(int pName, int pLongDesc, int pShortDesc, int pPage, zzCharacterAdvancementFragment[] pHooks, zzPrereqCheck pPrereq)
 	{
 		Context c = IKRPGApp.getContext();
 		name = c.getString(pName);
@@ -58,7 +58,7 @@ public enum Archetype implements zzPrereqCheck
 	private String shortDesc;
 	private String page;
 	
-	private Collection<zzCreateCharacterHook> postCreateHooks;
+	private Collection<zzCharacterAdvancementFragment> postCreateHooks;
 	private zzPrereqCheck prereq;
 	
 	public String displayName(){return name;}
@@ -66,9 +66,9 @@ public enum Archetype implements zzPrereqCheck
 	public String shortDescription(){return shortDesc;}
 	public String page(){return page;}
 	
-	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	Collection<zzCharacterAdvancementFragment> postCreateHooks(){return postCreateHooks;}
 	
-	public static class GiftedArcaneHook extends zzCreateCharacterHook {
+	public static class GiftedArcaneHook extends zzCharacterAdvancementFragment {
 		
 		@Override
 		public Bundle doDefaultCase()
@@ -87,7 +87,7 @@ public enum Archetype implements zzPrereqCheck
 		@Override public int getPriority(){return 0;} //no choice necessary
 	}
 	
-	public static class NonGiftedArcaneHook extends zzCreateCharacterHook
+	public static class NonGiftedArcaneHook extends zzCharacterAdvancementFragment
 	{
 		@Override
 		public Bundle doDefaultCase()

@@ -1,21 +1,16 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.List;
+import android.widget.*;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.util.BundleConstants;
+import java.util.List;
 
-public abstract class zzChooseOneHook<T> extends zzCreateCharacterHook
+public abstract class zzChooseOneHook<T> extends zzCharacterAdvancementFragment
 {
 	protected abstract String getTitle();
 	protected abstract List<T> getOptions();

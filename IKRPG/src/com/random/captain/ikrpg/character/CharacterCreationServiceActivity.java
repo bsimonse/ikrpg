@@ -9,7 +9,7 @@ import com.random.captain.ikrpg.util.FlowNavigator;
 import com.random.captain.ikrpg.util.Utilities;
 import com.random.captain.ikrpg.util.ModifierTags;
 
-public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateCharacterHook>
+public class CharacterCreationServiceActivity extends FlowNavigator<zzCharacterAdvancementFragment>
 {
 	private zzBaseCharacter buildingChar;
 	
@@ -43,7 +43,7 @@ public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateChar
 	}
 	
 	@Override
-	protected Bundle prepBundle(zzCreateCharacterHook hook, int notUsed)
+	protected Bundle prepBundle(zzCharacterAdvancementFragment hook, int notUsed)
 	{
 		Bundle b = new Bundle();
 		b.putString(BundleConstants.CHARACTER, buildingChar.toJson());
@@ -51,10 +51,10 @@ public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateChar
 	}
 	
 	@Override
-	protected List<zzCreateCharacterHook> generateFrags()
+	protected List<zzCharacterAdvancementFragment> generateFrags()
 	{
-		ArrayList<zzCreateCharacterHook> flowFrags = new ArrayList<zzCreateCharacterHook>(15);
-		Collection<zzCreateCharacterHook> tempFrags;
+		ArrayList<zzCharacterAdvancementFragment> flowFrags = new ArrayList<zzCharacterAdvancementFragment>(15);
+		Collection<zzCharacterAdvancementFragment> tempFrags;
 		
 		//all the static ones
 		flowFrags.add(new zzStaticCreateCharacterHooks.ChooseRaceFragment());
@@ -88,8 +88,8 @@ public class CharacterCreationServiceActivity extends FlowNavigator<zzCreateChar
 		}
 		
 		//sort hooks into proper order
-		Collections.sort(flowFrags, new Comparator<zzCreateCharacterHook>(){
-				@Override public int compare(zzCreateCharacterHook one, zzCreateCharacterHook two)
+		Collections.sort(flowFrags, new Comparator<zzCharacterAdvancementFragment>(){
+				@Override public int compare(zzCharacterAdvancementFragment one, zzCharacterAdvancementFragment two)
 				{return one.getPriority() - two.getPriority();}
 			});
 			

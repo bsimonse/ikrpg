@@ -18,7 +18,7 @@ import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 public class zzStaticCreateCharacterHooks
 {
 	
-public static class ChooseRaceFragment extends zzCreateCharacterHook
+public static class ChooseRaceFragment extends zzCharacterAdvancementFragment
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
@@ -52,7 +52,7 @@ public static class ChooseRaceFragment extends zzCreateCharacterHook
 	@Override public int getPriority(){return -1;}
 }
 	
-public static class ChooseArchetypeHook extends zzCreateCharacterHook
+public static class ChooseArchetypeHook extends zzCharacterAdvancementFragment
 {
 	private ListView archetypeList;
 
@@ -100,7 +100,7 @@ public static class ChooseArchetypeHook extends zzCreateCharacterHook
 	@Override public int getPriority(){return -1;}
 }
 	
-public static class ChooseCareerFragment extends zzCreateCharacterHook
+public static class ChooseCareerFragment extends zzCharacterAdvancementFragment
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
@@ -156,7 +156,7 @@ public static class ChooseCareerFragment extends zzCreateCharacterHook
 	@Override public int getPriority(){return -1;}
 }
 	
-public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
+public static class ChooseAdvancementPointsHook extends zzCharacterAdvancementFragment
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
@@ -225,6 +225,9 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 				}	
 			});
 
+		TextView tv = (TextView)root.findViewById(R.id.listChoiceTitle);
+		tv.setText("Choose 3 stats");
+		
 		Button submitButton = (Button)root.findViewById(R.id.continueButton);
 		submitButton.setOnClickListener(new View.OnClickListener(){
 				@Override public void onClick(View v)
@@ -242,7 +245,7 @@ public static class ChooseAdvancementPointsHook extends zzCreateCharacterHook
 	@Override public int getPriority(){return 100;}
 }
 
-public static class CareerFinalizerHook extends zzCreateCharacterHook
+public static class CareerFinalizerHook extends zzCharacterAdvancementFragment
 {	
 	@Override
 	public Bundle doDefaultCase()
@@ -273,7 +276,7 @@ public static class CareerFinalizerHook extends zzCreateCharacterHook
 	@Override public int getPriority(){return 75;}
 }
 
-public static class ChooseFluffFragment extends zzCreateCharacterHook
+public static class ChooseFluffFragment extends zzCharacterAdvancementFragment
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)

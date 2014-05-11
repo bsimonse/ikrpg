@@ -57,7 +57,7 @@ public enum Career implements zzPrereqCheck
 				null, new Connection[] {Connection.make("mechaniks organization")},
 				50, new Loot[]{}, null, null,
 				new zzPrereqCheck[]{giftedPrereq()},
-				new zzCreateCharacterHook[] {new ArcaneMechanikHook()}),
+				new zzCharacterAdvancementFragment[] {new ArcaneMechanikHook()}),
 	
 	
 	@SuppressWarnings("unchecked")
@@ -76,7 +76,7 @@ public enum Career implements zzPrereqCheck
 			 null, new Connection[] {Connection.make("magical order")},
 			 75, null, null, null,
 			 new zzPrereqCheck[]{giftedPrereq()},
-			 new zzCreateCharacterHook[] {new ArcanistHook()}),
+			 new zzCharacterAdvancementFragment[] {new ArcanistHook()}),
 			 
 	@SuppressWarnings("unchecked")
 	ARISTOCRAT(R.string.aristocrat_name, true,
@@ -92,7 +92,7 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("nobility")}, new Connection[] {Connection.make("any...?")},
 			 200, null, null, null,
 			 new zzPrereqCheck[]{humanPrereq()},
-			 new zzCreateCharacterHook[] {new AristocratWeaponHook(), new LanguageHook()}),
+			   new zzCharacterAdvancementFragment[] {new AristocratWeaponHook(), new LanguageHook()}),
 	
 	@SuppressWarnings("unchecked")
 	BOUNTY_HUNTER(R.string.bounty_hunter_name, false,
@@ -107,7 +107,7 @@ public enum Career implements zzPrereqCheck
 			 null, new Connection[]{Connection.make("any...?")},
 			 75, null, null, null,
 			 null,
-			 new zzCreateCharacterHook[] {new BountyHunterHook()}),
+				  new zzCharacterAdvancementFragment[] {new BountyHunterHook()}),
 	
 	@SuppressWarnings("unchecked")
 	CUTTHROAT(R.string.cutthroat_name, false,
@@ -122,7 +122,7 @@ public enum Career implements zzPrereqCheck
 			 null, new Connection[]{Connection.make("criminal")},
 			 75, null, null, null,
 			 null,
-			 new zzCreateCharacterHook[] {new CutthroatHook()}),
+			  new zzCharacterAdvancementFragment[] {new CutthroatHook()}),
 	
 	@SuppressWarnings("unchecked")
 	DUELIST(R.string.duelist_name, false,
@@ -156,7 +156,7 @@ public enum Career implements zzPrereqCheck
 			 new Loot[] {},
 			 new String[] {"A character who chooses Explorer as a starting career gains 25 gc each month from their patron for as long as they continue to explore new regions, report back regularly, and bring his patron occasional gifts from exotic places."},
 			 null, null,
-			 new zzCreateCharacterHook[] {new ExplorerMilitarySkillHook(), new LanguageHook()}),
+			 new zzCharacterAdvancementFragment[] {new ExplorerMilitarySkillHook(), new LanguageHook()}),
 	
 	@SuppressWarnings("unchecked")
 	FELL_CALLER(R.string.fell_caller_name, false,
@@ -172,7 +172,7 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("kriel")},
 			 75, null, null, null,
 			 new zzPrereqCheck[] {trollkinPrereq()},
-			 new zzCreateCharacterHook[] {new FellCallerHook()}),
+			 new zzCharacterAdvancementFragment[] {new FellCallerHook()}),
 	
 	@SuppressWarnings("unchecked")
 	FIELD_MECHANIK(R.string.field_mechanik_name, false,
@@ -190,7 +190,7 @@ public enum Career implements zzPrereqCheck
 			 new Loot[] {},
 			 null,
 			 null, null,
-			 new zzCreateCharacterHook[] {new FieldMechanikMilitarySkillHook(), new FieldMechanikJackHook()}),
+				   new zzCharacterAdvancementFragment[] {new FieldMechanikMilitarySkillHook(), new FieldMechanikJackHook()}),
 	
 	@SuppressWarnings("unchecked")
 	GUN_MAGE(R.string.gun_mage_name, false,
@@ -212,7 +212,7 @@ public enum Career implements zzPrereqCheck
 			 new Loot[] {},
 			 null, null,
 			 new zzPrereqCheck[] {giftedPrereq()},
-			 new zzCreateCharacterHook[] {new GunMageMilitarySkillHook(), new GunMageMagelockWeaponHook()}),
+			 new zzCharacterAdvancementFragment[] {new GunMageMilitarySkillHook(), new GunMageMagelockWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
 	HIGHWAYMAN(R.string.highwayman_name, false,
@@ -232,7 +232,7 @@ public enum Career implements zzPrereqCheck
 			 75,
 			 new Loot[] {},
 			 null, null, null,
-			 new zzCreateCharacterHook[] {new HighwaymanHook()}),
+			 new zzCharacterAdvancementFragment[] {new HighwaymanHook()}),
 	
 	@SuppressWarnings("unchecked")
 	INVESTIGATOR(R.string.investigator_name, false,
@@ -249,7 +249,7 @@ public enum Career implements zzPrereqCheck
 			 null,
 			 new Connection[] {Connection.make("any")},
 			 100,null,null,null, null,
-			 new zzCreateCharacterHook[] {new LanguageHook(), new InvestigatorMilitarySkillHook(), new InvestigatorHyperPerceptionHook()}),
+				 new zzCharacterAdvancementFragment[] {new LanguageHook(), new InvestigatorMilitarySkillHook(), new InvestigatorHyperPerceptionHook()}),
 	
 	@SuppressWarnings("unchecked")
 	IRON_FANG(R.string.iron_fang_name, true,
@@ -308,7 +308,7 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("Retribution of Scyrah")},
 			 75, null, null, null,
 			 new zzPrereqCheck[] {iosanPrereq()},
-			 new zzCreateCharacterHook[] {new MageHunterHook()}),
+				new zzCharacterAdvancementFragment[] {new MageHunterHook()}),
 	
 	@SuppressWarnings("unchecked")
 	MAN_AT_ARMS(R.string.man_at_arms_name, false,
@@ -325,7 +325,7 @@ public enum Career implements zzPrereqCheck
 			 new Connection[] {Connection.make("employer")},
 			 100, null, null,
 			 null, null,
-			 new zzCreateCharacterHook[] {new ManAtArmsHook()}),
+				new zzCharacterAdvancementFragment[] {new ManAtArmsHook()}),
 	
 	@SuppressWarnings("unchecked")
 	MILITARY_OFFICER(R.string.military_officer_name, false,
@@ -345,7 +345,7 @@ public enum Career implements zzPrereqCheck
 	 100,
 	 new Loot[] {},
 	 null,null, null,
-	 new zzCreateCharacterHook[] {new MilitaryOfficerWeaponHook()}),
+					 new zzCharacterAdvancementFragment[] {new MilitaryOfficerWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
 	PIRATE(R.string.pirate_name, false,
@@ -362,7 +362,7 @@ public enum Career implements zzPrereqCheck
 	 new Connection[] {Connection.make("pirate crew")},
 	 75,
 	 null, null, null, null,
-	 new zzCreateCharacterHook[] {new PirateHook()}),
+		   new zzCharacterAdvancementFragment[] {new PirateHook()}),
 	
 	@SuppressWarnings("unchecked")
 	PISTOLEER(R.string.pistoleer_name, false,
@@ -376,7 +376,7 @@ public enum Career implements zzPrereqCheck
 	 50,
 	 new Loot[] {},
 	 null, null, null,
-	 new zzCreateCharacterHook[] {new PistoleerHook()}),
+			  new zzCharacterAdvancementFragment[] {new PistoleerHook()}),
 	
 	 @SuppressWarnings("unchecked")
 	PRIEST_OF_MENOTH(R.string.priest_of_menoth_name, false,
@@ -398,7 +398,7 @@ public enum Career implements zzPrereqCheck
 	 75,
 	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq(), humanPrereq()},
-	 new zzCreateCharacterHook[] {new PriestWeaponHook()}),
+					  new zzCharacterAdvancementFragment[] {new PriestWeaponHook()}),
 	 
 	@SuppressWarnings("unchecked")
 	PRIEST_OF_MORROW(R.string.priest_of_morrow_name, false,
@@ -421,7 +421,7 @@ public enum Career implements zzPrereqCheck
 	75,
 	null, null, null,
 	new zzPrereqCheck[] {giftedPrereq(), humanPrereq()},
-	new zzCreateCharacterHook[] {new PriestWeaponHook()}),
+					 new zzCharacterAdvancementFragment[] {new PriestWeaponHook()}),
 
 	@SuppressWarnings("unchecked")
 	RANGER(R.string.ranger_name, false,
@@ -440,7 +440,7 @@ public enum Career implements zzPrereqCheck
 	 null, null, null, null,
 	 75,
 	 null, null, null, null,
-	 new zzCreateCharacterHook[] {new RangerWeaponHook()}),
+		   new zzCharacterAdvancementFragment[] {new RangerWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
 	RIFLEMAN(R.string.rifleman_name, false,
@@ -472,7 +472,7 @@ public enum Career implements zzPrereqCheck
 	new Connection[] {Connection.make("kingdom military"), Connection.make("mercenary company")},
 	100,
 	null, null, null, null,
-	new zzCreateCharacterHook[] {new SoldierWeaponHook()}),
+			new zzCharacterAdvancementFragment[] {new SoldierWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
 	FIRE_SORCERER(R.string.fire_sorcerer_name, true,
@@ -491,7 +491,7 @@ public enum Career implements zzPrereqCheck
 	75,
 	null, null, null,
 	new zzPrereqCheck[] {giftedPrereq()},
-	new zzCreateCharacterHook[] {new SorcererWeaponHook()}),
+				  new zzCharacterAdvancementFragment[] {new SorcererWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
 	ICE_SORCERER(R.string.ice_sorcerer_name, true,
@@ -510,7 +510,7 @@ public enum Career implements zzPrereqCheck
 	 75,
 	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq()},
-	 new zzCreateCharacterHook[] {new SorcererWeaponHook()}),
+				 new zzCharacterAdvancementFragment[] {new SorcererWeaponHook()}),
 	 
 	@SuppressWarnings("unchecked")
 	STONE_SORCERER(R.string.stone_sorcerer_name, true,
@@ -529,7 +529,7 @@ public enum Career implements zzPrereqCheck
 	 75,
 	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq()},
-	 new zzCreateCharacterHook[] {new SorcererWeaponHook(), new StoneSorcererHook()}),
+				   new zzCharacterAdvancementFragment[] {new SorcererWeaponHook(), new StoneSorcererHook()}),
 	 
 	@SuppressWarnings("unchecked")
 	STORM_SORCERER(R.string.storm_sorcerer_name, true,
@@ -548,7 +548,7 @@ public enum Career implements zzPrereqCheck
 	 75,
 	 null, null, null,
 	 new zzPrereqCheck[] {giftedPrereq()},
-	 new zzCreateCharacterHook[] {new SorcererWeaponHook(), new StormSorcererHook()}),
+	 new zzCharacterAdvancementFragment[] {new SorcererWeaponHook(), new StormSorcererHook()}),
 	 
 	@SuppressWarnings("unchecked")
 	SPY(R.string.spy_name, false,
@@ -569,7 +569,7 @@ public enum Career implements zzPrereqCheck
 	100,
 	new Loot[] {},
 	null, null, null,
-	new zzCreateCharacterHook[] {new SpyWeaponHook(), new LanguageHook()}),
+		new zzCharacterAdvancementFragment[] {new SpyWeaponHook(), new LanguageHook()}),
 	
 	@SuppressWarnings("unchecked")
 	STORMBLADE(R.string.stormblade_name, true,
@@ -610,7 +610,7 @@ public enum Career implements zzPrereqCheck
 	 75,
 	 new Loot[] {},
 	 null, null, null,
-	 new zzCreateCharacterHook[] {new ThiefWeaponHook()}),
+	 new zzCharacterAdvancementFragment[] {new ThiefWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
 	TRENCHER(R.string.trencher_name, true,
@@ -657,7 +657,7 @@ public enum Career implements zzPrereqCheck
 	 new String[] {"A warcaster can boost with mechanikal weapons they have bonded to"},
 	 null,
 	 new zzPrereqCheck[] {giftedPrereq()},
-	 new zzCreateCharacterHook[] {new WarcasterEquipmentHook()});
+			  new zzCharacterAdvancementFragment[] {new WarcasterEquipmentHook()});
 	 
 	/*TEMPLATE(R.string.arcanist_name, false,
 	 new Pair[] {},
@@ -681,7 +681,7 @@ public enum Career implements zzPrereqCheck
 					Spell[] pStartSpells, Spell[] pSpells,
 					Connection[] pStartConnections, Connection[] pConnections,
 					int pGold, Loot[] pLoot, String[] pSpecialRules,HolyCrapWhatIsWrongWithMe pAllowedCareers,
-					zzPrereqCheck[] pPrereqChecks, zzCreateCharacterHook[] pPostCreateHook)
+				   zzPrereqCheck[] pPrereqChecks, zzCharacterAdvancementFragment[] pPostCreateHook)
 	{
 		Context c = IKRPGApp.getContext();
 		name = c.getString(pNameResource);
@@ -700,7 +700,7 @@ public enum Career implements zzPrereqCheck
 		prereqChecks = pPrereqChecks != null ? Arrays.asList(pPrereqChecks) : new ArrayList<zzPrereqCheck>(5);
 		allowedCareerGetter = pAllowedCareers;
 		
-		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCreateCharacterHook>(10);
+		postCreateHooks = pPostCreateHook != null ? Arrays.asList(pPostCreateHook) : new ArrayList<zzCharacterAdvancementFragment>(10);
 	}
 	
 	@Override public String toString(){return displayName();}
@@ -725,7 +725,7 @@ public enum Career implements zzPrereqCheck
 	private List<String> specialRules;
 	private HolyCrapWhatIsWrongWithMe allowedCareerGetter;
 	private Collection<zzPrereqCheck> prereqChecks;
-	private Collection<zzCreateCharacterHook> postCreateHooks;
+	private Collection<zzCharacterAdvancementFragment> postCreateHooks;
 	
 	public String displayName(){return name;}
 	public boolean startOnly(){return startOnly;}
@@ -741,7 +741,7 @@ public enum Career implements zzPrereqCheck
 	public Collection<Loot> startLoot(){return startLoot;}
 	public List<String> specialRules(){return specialRules;}
 	public Collection<Career> allowedStartCareers(){if(allowedCareerGetter!=null){return allowedCareerGetter.getEmLater();}return new ArrayList<Career>(5);}
-	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	Collection<zzCharacterAdvancementFragment> postCreateHooks(){return postCreateHooks;}
 	
 	public boolean agreesWithDuringCreation(Career firstCareer)
 	{
@@ -869,7 +869,7 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class ArcanistHook extends zzCreateCharacterHook
+	public static class ArcanistHook extends zzCharacterAdvancementFragment
 	{
 		@Override
 		public void restoreFromBundle(Bundle b)
@@ -908,7 +908,7 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	//TODO: Finish
-	public static class BountyHunterHook extends zzCreateCharacterHook
+	public static class BountyHunterHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
@@ -953,7 +953,7 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class FieldMechanikJackHook extends zzCreateCharacterHook
+	public static class FieldMechanikJackHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
@@ -968,7 +968,7 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class GunMageMagelockWeaponHook extends zzCreateCharacterHook
+	public static class GunMageMagelockWeaponHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
@@ -993,7 +993,7 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class InvestigatorHyperPerceptionHook extends zzCreateCharacterHook
+	public static class InvestigatorHyperPerceptionHook extends zzCharacterAdvancementFragment
 	{	
 		@Override
 		public void restoreFromBundle(Bundle b)
@@ -1049,7 +1049,7 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	//TODO: Finish
-	public static class PistoleerHook extends zzCreateCharacterHook
+	public static class PistoleerHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
@@ -1076,7 +1076,7 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	//TODO: Finish
-	public static class SoldierWeaponHook extends zzCreateCharacterHook
+	public static class SoldierWeaponHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
@@ -1092,13 +1092,13 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	//TODO: Finish
-	public static class StoneSorcererHook extends zzCreateCharacterHook
+	public static class StoneSorcererHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
 	//TODO: Finish
-	public static class StormSorcererHook extends zzCreateCharacterHook
+	public static class StormSorcererHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
@@ -1124,7 +1124,7 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	//TODO: Finish
-	public static class WarcasterEquipmentHook extends zzCreateCharacterHook
+	public static class WarcasterEquipmentHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}

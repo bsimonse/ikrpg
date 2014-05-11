@@ -30,7 +30,7 @@ public class zzStaticCharacterAdvancementBoons
 		{return 4;}	
 	}
 	
-	public static class ChooseOccupationalSkillsFragment extends zzAdvanceCharacterHook
+	public static class ChooseOccupationalSkillsFragment extends zzCharacterAdvancementFragment
 	{
 		final List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> potentialSkills = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>>(20);
 		Set<SkillEnum> chosenSkills;
@@ -44,7 +44,7 @@ public class zzStaticCharacterAdvancementBoons
 		}
 		
 		public ChooseOccupationalSkillsFragment()
-		{}
+		{this(0,1);}
 
 		@Override
 		public void saveToBundle(Bundle b)
@@ -119,7 +119,13 @@ public class zzStaticCharacterAdvancementBoons
 			}
 			
 			//might as well
-			//Collections.sort(potentialSkills);
+			Collections.sort(potentialSkills, new Comparator<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>>(){
+				@Override
+				public int compare(ChoosePointsAdapter.ChoosePointsBundle<SkillEnum> first, ChoosePointsAdapter.ChoosePointsBundle<SkillEnum> second)
+				{
+					return first.item.compareTo(second.item);
+				}
+			});
 			
 			final ListView skillList = (ListView)rootView.findViewById(R.id.listChoiceList);
 
@@ -155,7 +161,7 @@ public class zzStaticCharacterAdvancementBoons
 			});
 
 			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
-			tv.setText("Choose your skills");
+			tv.setText("Choose "+choiceCount+" skills");
 			
 			butt.setOnClickListener(new View.OnClickListener(){
 				@Override
@@ -167,5 +173,91 @@ public class zzStaticCharacterAdvancementBoons
 		}
 		
 		@Override protected boolean hasUI(){return true;}
+	}
+	
+	public static class ChooseAdvancementPointsBoon extends zzCharacterAdvancementFragment
+	{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+		{
+			return inflater.inflate(R.layout.frag_choice_list, pRoot, false);
+		}
+
+		@Override
+		public void onViewCreated(View root, Bundle b)
+		{
+			super.onViewCreated(root, b);
+			final ListView list = (ListView)root.findViewById(R.id.listChoiceList);
+			final Button butt = (Button)root.findViewById(R.id.continueButton);
+
+			//remember all stats that can be increased
+			final List<ChoosePointsAdapter.ChoosePointsBundle<Stat>> potentialStats = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<Stat>>(10);
+			Map<Stat, Integer> eligibleStats = new HashMap<Stat, Integer>(10);
+			for(Stat stat : Stat.values())
+			{
+				int curLevel = myChar.getBaseStat(stat);
+				int maxLevel = myChar.getMaxStat(stat);
+				if(curLevel < maxLevel)
+				{
+					eligibleStats.put(stat, myChar.getBaseStat(stat));
+					ChoosePointsAdapter.ChoosePointsBundle<Stat> bundle = new ChoosePointsAdapter.ChoosePointsBundle<Stat>(curLevel, curLevel, maxLevel, stat);
+					potentialStats.add(bundle);
+				}
+			}
+
+			Collections.sort(potentialStats, new Comparator<ChoosePointsAdapter.ChoosePointsBundle<Stat>>(){
+					@Override
+					public int compare(ChoosePointsAdapter.ChoosePointsBundle<Stat> first, ChoosePointsAdapter.ChoosePointsBundle<Stat> second)
+					{
+						return first.item.ordinal() - second.item.ordinal();
+					}
+				});
+
+			list.setAdapter(new ChoosePointsAdapter<Stat>(myChar)
+				{
+					@Override public int getCount(){
+						//check for continue button enabled
+						if(getIncreaseCount() <= getIncreases())
+						{butt.setVisibility(View.VISIBLE);}
+						else
+						{butt.setVisibility(View.GONE);}
+
+						return super.getCount();
+					}
+
+					@Override
+					protected int getIncreaseCount()
+					{
+						return 3;
+					}
+
+					@Override
+					protected String getLabel(ChoosePointsBundle<Stat> bundle)
+					{
+						return bundle.item.longName();
+					}
+
+					@Override
+					protected List<ChoosePointsBundle<Stat>> getItemList()
+					{
+						return potentialStats;
+					}	
+				});
+
+			Button submitButton = (Button)root.findViewById(R.id.continueButton);
+			submitButton.setOnClickListener(new View.OnClickListener(){
+					@Override public void onClick(View v)
+					{
+						for(ChoosePointsAdapter.ChoosePointsBundle<Stat> stat : potentialStats)
+						{myChar.setBaseStat(stat.item, stat.curVal);}
+						Bundle b = new Bundle();
+						b.putString(BundleConstants.CHARACTER, myChar.toJson());
+						delegate.hookComplete(b);
+					}
+				});
+		}
+
+		@Override protected boolean hasUI(){return true;}
+		@Override public int getPriority(){return 100;}
 	}
 }

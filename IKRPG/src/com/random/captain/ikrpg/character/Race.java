@@ -30,7 +30,7 @@ public enum Race
 		  
 		new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		
-		new zzCreateCharacterHook[] {new raceHook(), new humanHook()}
+		new zzCharacterAdvancementFragment[] {new raceHook(), new humanHook()}
 		),
 	
 	@SuppressWarnings("unchecked")
@@ -53,7 +53,7 @@ public enum Race
 
 		  new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		  
-		  new zzCreateCharacterHook[] {new raceHook(), new dwarfHook()}
+		  new zzCharacterAdvancementFragment[] {new raceHook(), new dwarfHook()}
 		  ),
 	
 	@SuppressWarnings("unchecked")
@@ -76,7 +76,7 @@ public enum Race
 
 		  new Archetype[] {Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		   
-		   new zzCreateCharacterHook[] {new raceHook(), new gobberHook()}
+		   new zzCharacterAdvancementFragment[] {new raceHook(), new gobberHook()}
 		  ),
 		  
 	@SuppressWarnings("unchecked")
@@ -99,7 +99,7 @@ public enum Race
 
 		  new Archetype[] {Archetype.GIFTED, Archetype.INTELLECTUAL, Archetype.MIGHTY, Archetype.SKILLED},
 		  
-		  new zzCreateCharacterHook[] {new raceHook(), new iosanHook()}
+		  new zzCharacterAdvancementFragment[] {new raceHook(), new iosanHook()}
 		  ),
 	
 	@SuppressWarnings("unchecked")
@@ -122,7 +122,7 @@ public enum Race
 
 		 new Archetype[] {Archetype.GIFTED, Archetype.MIGHTY, Archetype.SKILLED},
 		 
-		 new zzCreateCharacterHook[] {new raceHook(), new nyssHook()}
+		 new zzCharacterAdvancementFragment[] {new raceHook(), new nyssHook()}
 		  ),
 	
 	@SuppressWarnings("unchecked")
@@ -145,7 +145,7 @@ public enum Race
 
 		 new Archetype[] {Archetype.MIGHTY, Archetype.SKILLED},
 		  
-		 new zzCreateCharacterHook[] {new raceHook(), new ogrunHook()}
+		  new zzCharacterAdvancementFragment[] {new raceHook(), new ogrunHook()}
 		 ),
 		 
 	@SuppressWarnings("unchecked")
@@ -168,7 +168,7 @@ public enum Race
 		
 		new Archetype[] {Archetype.GIFTED, Archetype.MIGHTY, Archetype.SKILLED},
 			 
-		new zzCreateCharacterHook[] {new raceHook(), new trollkinHook()}
+		new zzCharacterAdvancementFragment[] {new raceHook(), new trollkinHook()}
 	);
 	
 	private Race(int pNameResourceID, Pair<Stat, Integer>[] pStartStats,
@@ -176,7 +176,7 @@ public enum Race
 							Pair<Stat, Integer>[] pVetStats,
 							Pair<Stat, Integer>[] pEpicStats,
 							Archetype[] pArchetypes,
-							zzCreateCharacterHook[] pPostCreateHooks)
+							zzCharacterAdvancementFragment[] pPostCreateHooks)
 	{
 		name = IKRPGApp.getContext().getString(pNameResourceID);
 		startStats = Arrays.asList(pStartStats);
@@ -184,7 +184,7 @@ public enum Race
 		vetStats = Arrays.asList(pVetStats);
 		epicStats = Arrays.asList(pEpicStats);
 		archetypes = Arrays.asList(pArchetypes);
-		postCreateHooks = pPostCreateHooks != null ? Arrays.asList(pPostCreateHooks) : new ArrayList<zzCreateCharacterHook>(10);
+		postCreateHooks = pPostCreateHooks != null ? Arrays.asList(pPostCreateHooks) : new ArrayList<zzCharacterAdvancementFragment>(10);
 	}
 	
 	private String name;
@@ -193,7 +193,7 @@ public enum Race
 	private Collection<Pair<Stat, Integer>> vetStats;
 	private Collection<Pair<Stat, Integer>> epicStats;
 	private Collection<Archetype> archetypes;
-	private Collection<zzCreateCharacterHook> postCreateHooks;
+	private Collection<zzCharacterAdvancementFragment> postCreateHooks;
 	
 	@Override
 	public String toString(){return displayName();}
@@ -235,12 +235,12 @@ public enum Race
 	Collection<Pair<Stat, Integer>> heroStats(){return Collections.unmodifiableCollection(heroStats);}
 	Collection<Pair<Stat, Integer>> vetStats(){return Collections.unmodifiableCollection(vetStats);}
 	Collection<Pair<Stat, Integer>> epicStats(){return Collections.unmodifiableCollection(epicStats);}
-	Collection<zzCreateCharacterHook> postCreateHooks(){return postCreateHooks;}
+	Collection<zzCharacterAdvancementFragment> postCreateHooks(){return postCreateHooks;}
 	Collection<Archetype> archetypes(){return archetypes;}
 	
 	/* Hooks! */
 	
-	public static class raceHook extends zzCreateCharacterHook
+	public static class raceHook extends zzCharacterAdvancementFragment
 	{
 		//stuff happens here!
 		@Override protected Bundle doDefaultCase(){
@@ -258,37 +258,37 @@ public enum Race
 		@Override public int getPriority(){return 0;}
 	}
 	
-	public static class humanHook extends zzCreateCharacterHook
+	public static class humanHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
-	public static class dwarfHook extends zzCreateCharacterHook
+	public static class dwarfHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
-	public static class gobberHook extends zzCreateCharacterHook
+	public static class gobberHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
-	public static class iosanHook extends zzCreateCharacterHook
+	public static class iosanHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
-	public static class nyssHook extends zzCreateCharacterHook
+	public static class nyssHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
-	public static class ogrunHook extends zzCreateCharacterHook
+	public static class ogrunHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}
 	
-	public static class trollkinHook extends zzCreateCharacterHook
+	public static class trollkinHook extends zzCharacterAdvancementFragment
 	{
 		@Override public int getPriority(){return 49;}
 	}

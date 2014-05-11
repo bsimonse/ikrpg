@@ -8,13 +8,13 @@ import com.random.captain.ikrpg.util.FlowNavigator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvanceCharacterHook>
+public class CharacterAdvancementServiceActivity extends FlowNavigator<zzCharacterAdvancementFragment>
 {
 	//character 'in progress' of being changed during flow
 	private zzBaseCharacter buildingChar;
 	private int startExp;
 	private int endExp;
-	private SparseArrayCompat<zzAdvanceCharacterHook> hooks;
+	private SparseArrayCompat<zzCharacterAdvancementFragment> hooks;
 	
 	@Override
 	public void onSaveInstanceState(Bundle b)
@@ -40,22 +40,22 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvance
 	}
 
 	@Override
-	public List<zzAdvanceCharacterHook> generateFrags()
+	public List<zzCharacterAdvancementFragment> generateFrags()
 	{
 		//hooks... frags... they're all the same.
 		if(hooks == null){generateAllHooks();}
 		
-		List<zzAdvanceCharacterHook> frags = new ArrayList<zzAdvanceCharacterHook>(30);
+		List<zzCharacterAdvancementFragment> frags = new ArrayList<zzCharacterAdvancementFragment>(30);
 		for(int i = startExp; i < endExp; i++)
 		{
-			zzAdvanceCharacterHook h = hooks.valueAt(i);
+			zzCharacterAdvancementFragment h = hooks.valueAt(i);
 			if(h != null){frags.add(h);}
 		}
 		return frags;
 	}
 	
 	@Override
-	protected Bundle prepBundle(zzAdvanceCharacterHook frag, int fragDex)
+	protected Bundle prepBundle(zzCharacterAdvancementFragment frag, int fragDex)
 	{
 		Bundle b = new Bundle();
 		b.putString(BundleConstants.CHARACTER, buildingChar.toJson());
@@ -81,7 +81,7 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzAdvance
 	//all the possible hooks!
 	private void generateAllHooks()
 	{
-		hooks = new SparseArrayCompat<zzAdvanceCharacterHook>(200);
+		hooks = new SparseArrayCompat<zzCharacterAdvancementFragment>(200);
 		hooks.setValueAt(2,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(2,2));
 		hooks.setValueAt(8,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(8,2));
 		hooks.setValueAt(18,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(18,2));

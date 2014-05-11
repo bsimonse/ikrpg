@@ -46,6 +46,9 @@ public abstract class FlowFragment extends Fragment {
 	//Do nothing by default
 	protected Bundle doDefaultCase(){return new Bundle();}
 	
+	//Default priority is 100
+	public int getPriority(){return 100;}
+	
 	protected boolean hasUI()
 	{
 		//assume false
