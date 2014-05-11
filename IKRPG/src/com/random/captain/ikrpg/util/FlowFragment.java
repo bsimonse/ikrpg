@@ -12,13 +12,13 @@ public abstract class FlowFragment extends Fragment {
 	
 	protected FlowFragmentDelegate delegate;
 
-	abstract void saveToBundle(Bundle b);
+	abstract void setupWithBundle(Bundle b);
 	abstract void restoreFromBundle(Bundle b);
 	
 	public final void prepFlowFragment(Bundle b)
 	{
 		setArguments(b);
-		saveToBundle(getArguments());
+		setupWithBundle(getArguments());
 	}
 
 	@Override

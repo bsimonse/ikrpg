@@ -1,18 +1,14 @@
 package com.random.captain.ikrpg.character;
 
-public abstract class zzChooseOneSkillHook extends zzChooseOneHook<Skill>
-{
-	private Skill incrementedSkill;
-	private int incrementedSkillPrevValue;
-	
+public abstract class zzChooseOneSkillHook extends zzStaticCreateCharacterHooks.ChooseAnAdvancementFragment<Skill>
+{	
 	@Override protected String getTitle(){return "Choose a skill to boost";}
 	
-	@Override protected void itemSelected(int which)
+	@Override protected void onChosen(Skill chosen)
 	{
-		incrementedSkill = getOptions().get(which);
-		incrementedSkillPrevValue = myChar.getSkillBaseLevel(incrementedSkill);
+		int incrementedSkillPrevValue = myChar.getSkillBaseLevel(chosen);
 		int currentLevel = incrementedSkillPrevValue + 1;
 		if(currentLevel > 2){currentLevel = 2;}
-		myChar.setSkillLevel(incrementedSkill, currentLevel);
+		myChar.setSkillLevel(chosen, currentLevel);
 	}
 }

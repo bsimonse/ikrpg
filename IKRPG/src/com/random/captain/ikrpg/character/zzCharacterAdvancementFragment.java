@@ -18,9 +18,9 @@ public abstract class zzCharacterAdvancementFragment extends FlowFragment
 	{this(0);}
 	
 	@Override
-	public void saveToBundle(Bundle b)
+	public void setupWithBundle(Bundle b)
 	{
-		if(myChar != null){b.putString(BundleConstants.CHARACTER, myChar.toJson());}
+		myChar = zzBaseCharacter.fromJson(getArguments().getString(BundleConstants.CHARACTER,""));
 		b.putInt(BundleConstants.CUR_EXP,curExp);
 	}
 	

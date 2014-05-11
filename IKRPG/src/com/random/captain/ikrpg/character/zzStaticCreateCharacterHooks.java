@@ -17,56 +17,65 @@ import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 //It's got to be public for Android to recreate the fragments... so no encapsulation for you.
 public class zzStaticCreateCharacterHooks
 {
+
+	public static abstract class ChooseAnAdvancementFragment<E> extends zzCharacterAdvancementFragment
+	{
+		abstract List<E> getItems();
+		abstract void onChosen(E chosen);
+		abstract String getTitle();
+		
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
+		{return inflater.inflate(R.layout.frag_choice_list, root, false);}
+
+		@Override
+		public void onViewCreated(View rootView, Bundle b)
+		{
+			super.onViewCreated(rootView,b);
+			ListView listView = (ListView)rootView.findViewById(R.id.listChoiceList);
+			listView.setAdapter(new ArrayAdapter<E>(getActivity(), android.R.layout.simple_list_item_1, getItems()));
+			listView.setOnItemClickListener( new AdapterView.OnItemClickListener(){
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+					{
+						onChosen(getItems().get(which));
+						Bundle b = new Bundle();
+						b.putString(BundleConstants.CHARACTER, myChar.toJson());
+						delegate.hookComplete(b);
+					}
+				});
+
+			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
+			tv.setText(getTitle());
+		}
+
+		@Override protected boolean hasUI(){return true;}
+		@Override public int getPriority(){return -1;}
+	}
 	
-public static class ChooseRaceFragment extends zzCharacterAdvancementFragment
+public static class ChooseRaceFragment extends ChooseAnAdvancementFragment<Race>
 {
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
-	{
-		return inflater.inflate(R.layout.frag_choice_list, root, false);
+	List<Race> getItems(){
+		return Arrays.asList(Race.values());
 	}
 	
 	@Override
-	public void onViewCreated(View rootView, Bundle b)
-	{
-		super.onViewCreated(rootView,b);
-		ListView raceList = (ListView)rootView.findViewById(R.id.listChoiceList);
-		raceList.setAdapter(new ArrayAdapter<Race>(getActivity(), android.R.layout.simple_list_item_1, Race.values()));
-		raceList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-				{
-					Race chosen = Race.values()[which];
-					myChar.race = chosen;
-					Bundle b = new Bundle();
-					b.putString(BundleConstants.CHARACTER, myChar.toJson());
-					delegate.hookComplete(b);
-				}
-			});
-
-		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
-		tv.setText("Choose your Race");
+	void onChosen(Race chosen){
+		myChar.race = chosen;
 	}
 	
-	@Override protected boolean hasUI(){return true;}
-	@Override public int getPriority(){return -1;}
+	@Override
+	String getTitle(){
+		return "Choose your race";
+	}
 }
 	
-public static class ChooseArchetypeHook extends zzCharacterAdvancementFragment
+public static class ChooseArchetypeHook extends ChooseAnAdvancementFragment<Archetype>
 {
-	private ListView archetypeList;
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
-	{
-		return inflater.inflate(R.layout.frag_choice_list, root, false);
-	}
-
-	@Override
-	public void onViewCreated(View rootView, Bundle b)
-	{
-		super.onViewCreated(rootView, b);
-		final List<Archetype> validArchetypes = new ArrayList<Archetype>(5);
+	List<Archetype> getItems(){
+		List<Archetype> validArchetypes = new ArrayList<Archetype>(5);
 		for(Archetype at : Archetype.values())
 		{
 			zzPrereqCheckResult result = at.meetsPrereq(myChar);
@@ -76,45 +85,24 @@ public static class ChooseArchetypeHook extends zzCharacterAdvancementFragment
 			if(result.additionalQuestion != null || result.isAllowed)
 			{validArchetypes.add(at);}
 		}
-
-		archetypeList = (ListView)rootView.findViewById(R.id.listChoiceList);
-		archetypeList.setAdapter(new ArrayAdapter<Archetype>(getActivity(), android.R.layout.simple_list_item_1, validArchetypes.toArray(new Archetype[validArchetypes.size()])));
-		archetypeList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-				{
-					//TODO: ask additional question!
-					Archetype archetype = validArchetypes.get(which);
-					myChar.archetype = archetype;
-					Bundle b = new Bundle();
-					b.putString(BundleConstants.CHARACTER, myChar.toJson());
-					delegate.hookComplete(b);
-				}
-			});
-
-		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
-		tv.setText("Choose an Archetype");
+		return validArchetypes;
 	}
 	
-	@Override protected boolean hasUI(){return true;}
-	@Override public int getPriority(){return -1;}
+	@Override
+	void onChosen(Archetype chosen){
+		myChar.archetype = chosen;
+	}
+	
+	@Override
+	String getTitle(){
+		return "Choose an archetype";
+	}
 }
 	
-public static class ChooseCareerFragment extends zzCharacterAdvancementFragment
+public static class ChooseCareerFragment extends ChooseAnAdvancementFragment<Career>
 {
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
-	{
-		return inflater.inflate(R.layout.frag_choice_list, root, false);
-	}
-	
-	@Override
-	public void onViewCreated(View rootView, Bundle b)
-	{
-		super.onViewCreated(rootView, b);
-		
+	List<Career> getItems(){
 		boolean isSecondCareer = myChar.careers.size() > 0;
-
 		final List<Career> validCareers = new ArrayList<Career>(30);
 		for(Career career : Career.values())
 		{
@@ -133,27 +121,17 @@ public static class ChooseCareerFragment extends zzCharacterAdvancementFragment
 			if(result.additionalQuestion != null || result.isAllowed)
 			{validCareers.add(career);}
 		}
-
-		ListView careerList = (ListView)rootView.findViewById(R.id.listChoiceList);
-		careerList.setAdapter(new ArrayAdapter<Career>(getActivity(), android.R.layout.simple_list_item_1, validCareers.toArray(new Career[validCareers.size()])));
-		careerList.setOnItemClickListener( new AdapterView.OnItemClickListener(){
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-				{
-					Career career = validCareers.get(which);
-					myChar.careers.add(career);
-					Bundle b = new Bundle();
-					b.putString(BundleConstants.CHARACTER, myChar.toJson());
-					delegate.hookComplete(b);
-				}
-			});
-
-		TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
-		tv.setText(isSecondCareer ? "Choose your second career" : "Choose your first career");
+		return validCareers;
 	}
-
-	@Override protected boolean hasUI(){return true;}
-	@Override public int getPriority(){return -1;}
+	
+	void onChosen(Career chosen){
+		myChar.careers.add(chosen);
+	}
+	
+	String getTitle(){
+		boolean isSecondCareer = myChar.careers.size() > 0;
+		return isSecondCareer ? "Choose your second career" : "Choose your first career";
+	}
 }
 	
 public static class ChooseAdvancementPointsHook extends zzCharacterAdvancementFragment

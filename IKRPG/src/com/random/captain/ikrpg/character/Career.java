@@ -1,20 +1,13 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Pair;
-
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.gear.Loot;
-import com.random.captain.ikrpg.util.BundleConstants;
 
 public enum Career implements zzPrereqCheck
 {
@@ -861,7 +854,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class ArcaneMechanikHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(new Skill(SkillEnum.RIFLE)); l.add(new Skill(SkillEnum.HAND_WEAPON));
@@ -884,7 +877,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class AristocratWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(3);
 			l.add(new Skill(SkillEnum.ARCHERY)); l.add(new Skill(SkillEnum.PISTOL)); l.add(new Skill(SkillEnum.RIFLE));
@@ -892,18 +885,15 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class LanguageHook extends zzChooseOneHook<Language>
+	public static class LanguageHook extends zzStaticCreateCharacterHooks.ChooseAnAdvancementFragment<Language>
 	{
-		private Language chosenLanguage;
-
 		@Override public int getPriority(){return 80;}
 		@Override protected String getTitle(){return "Choose a language to learn:";}
-		@Override protected List<Language> getOptions() {return Arrays.asList(Language.values());}
+		@Override protected List<Language> getItems() {return Arrays.asList(Language.values());}
 		
-		@Override protected void itemSelected(int which)
+		@Override protected void onChosen(Language chosen)
 		{
-			chosenLanguage = getOptions().get(which);
-			myChar.languages.add(chosenLanguage);
+			myChar.languages.add(chosen);
 		}
 	}
 	
@@ -915,7 +905,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class CutthroatHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(3);
 			l.add(new Skill(SkillEnum.CROSSBOW)); l.add(new Skill(SkillEnum.THROWN_WEAPON)); l.add(new Skill(SkillEnum.UNARMED));
@@ -925,7 +915,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class ExplorerMilitarySkillHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(4);
 			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.RIFLE.make());
@@ -935,7 +925,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class FellCallerHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.GREAT_WEAPON.make()); l.add(SkillEnum.HAND_WEAPON.make());
@@ -945,7 +935,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class FieldMechanikMilitarySkillHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
@@ -960,7 +950,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class GunMageMilitarySkillHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.RIFLE.make());
@@ -975,7 +965,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class HighwaymanHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(3);
 			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make()); l.add(SkillEnum.PISTOL.make());
@@ -985,7 +975,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class InvestigatorMilitarySkillHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
@@ -1010,7 +1000,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class MageHunterHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(3);
 			l.add(new Skill(SkillEnum.CROSSBOW)); l.add(new Skill(SkillEnum.ARCHERY));
@@ -1020,7 +1010,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class ManAtArmsHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.HAND_WEAPON.make());
@@ -1030,7 +1020,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class MilitaryOfficerWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.GREAT_WEAPON.make());
@@ -1040,7 +1030,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class PirateHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.THROWN_WEAPON.make());
@@ -1056,7 +1046,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class PriestWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.GREAT_WEAPON.make());
@@ -1066,7 +1056,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class RangerWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make()); l.add(SkillEnum.RIFLE.make());
@@ -1083,7 +1073,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class SorcererWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.ARCHERY.make()); l.add(SkillEnum.CROSSBOW.make());
@@ -1105,7 +1095,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class SpyWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.PISTOL.make()); l.add(SkillEnum.THROWN_WEAPON.make());
@@ -1115,7 +1105,7 @@ public enum Career implements zzPrereqCheck
 	
 	public static class ThiefWeaponHook extends zzChooseOneMilitarySkillHook
 	{
-		@Override protected List<Skill> getOptions()
+		@Override protected List<Skill> getItems()
 		{
 			List<Skill> l = new ArrayList<Skill>(2);
 			l.add(SkillEnum.HAND_WEAPON.make()); l.add(SkillEnum.THROWN_WEAPON.make());

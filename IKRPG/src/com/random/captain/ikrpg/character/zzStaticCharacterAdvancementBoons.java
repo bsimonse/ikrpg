@@ -47,9 +47,9 @@ public class zzStaticCharacterAdvancementBoons
 		{this(0,1);}
 
 		@Override
-		public void saveToBundle(Bundle b)
+		public void setupWithBundle(Bundle b)
 		{
-			super.saveToBundle(b);
+			super.setupWithBundle(b);
 			b.putInt(BundleConstants.CHOICE_COUNT,choiceCount);
 		}
 
