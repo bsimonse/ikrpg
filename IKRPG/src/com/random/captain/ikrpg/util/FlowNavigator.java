@@ -76,11 +76,16 @@ public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActi
 			return;
 		}
 
-		flowIndex--;
+		//if the top frag is a primary frag
+		final FlowFragment currentFrag = (FlowFragment)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-1).getName());
+		if(currentFrag.isPrimaryFrag())
+		{
+			flowIndex--;
 		
-		//what was last index with a UI?
-		while(!frags.get(flowIndex-1).hasUI())
-		{flowIndex--;}
+			//what was last primary index with a UI?
+			while(!frags.get(flowIndex-1).hasUI())
+			{flowIndex--;}
+		}
 		
 		//pop to last UI fragment
 		final FlowFragment prevFrag = (FlowFragment)manager.findFragmentByTag(manager.getBackStackEntryAt(manager.getBackStackEntryCount()-2).getName());
@@ -125,6 +130,19 @@ public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActi
 			public void hookComplete(Bundle b) {
 				FlowNavigator.this.hookComplete(b);
 				advanceFlow();
+			}
+			
+			@Override
+			public void pushExtraFrag(F frag, String fragId)
+			{
+				frag.prepFlowFragment(prepBundle(frag, flowIndex));
+				if(startFrag(frag))
+				{
+					FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+					trans.replace(R.id.mainFragmentContainer, frag, fragId);
+					trans.addToBackStack(fragId);
+					trans.commit();
+				}
 			}
 		});
 	}

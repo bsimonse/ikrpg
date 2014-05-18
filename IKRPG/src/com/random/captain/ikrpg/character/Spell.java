@@ -190,6 +190,8 @@ public enum Spell
 	private boolean upkeepable;
 	private boolean offensive;
 	
+	@Override
+	public String toString() {return displayName();}
 	public String displayName() {return spellName;}
 	public String description(){return description;}
 	public int cost(){return cost;}

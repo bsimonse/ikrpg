@@ -1,24 +1,37 @@
 package com.random.captain.ikrpg.character;
 
+import android.widget.*;
 import java.util.*;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.character.Career;
 import com.random.captain.ikrpg.character.SkillEnum;
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.ChoosePointsAdapter;
-import com.random.captain.ikrpg.util.FlowFragment;
 
 public class zzStaticCharacterAdvancementBoons
 {
+	public static enum BOON_CHOICE
+	{
+		SPELL("Spell"),
+		ABILITY("Ability"),
+		CONNECTION("Connection"),
+		MILITARY_SKILL("Military skill");
+		
+		private String displayName;
+		BOON_CHOICE(String pDisplayName)
+		{displayName = pDisplayName;}
+
+		@Override
+		public String toString()
+		{return displayName;}
+	}
+	
 	//just a nice little helper
 	public static int skillCapForEXP(int curExp)
 	{
@@ -172,7 +185,7 @@ public class zzStaticCharacterAdvancementBoons
 			});
 		}
 		
-		@Override protected boolean hasUI(){return true;}
+		@Override public boolean hasUI(){return true;}
 	}
 	
 	public static class ChooseAdvancementPointsBoon extends zzCharacterAdvancementFragment
@@ -257,7 +270,166 @@ public class zzStaticCharacterAdvancementBoons
 				});
 		}
 
-		@Override protected boolean hasUI(){return true;}
+		@Override public boolean hasUI(){return true;}
 		@Override public int getPriority(){return 100;}
+	}
+	
+	public static class ChooseSkillSpellConnectionMilitaryBoon extends zzCharacterAdvancementFragment
+	{
+		public ChooseSkillSpellConnectionMilitaryBoon(int pExp)
+		{
+			super(pExp);
+		}
+		
+		public ChooseSkillSpellConnectionMilitaryBoon(){super(0);}
+		
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+		{
+			return inflater.inflate(R.layout.frag_choice_list, pRoot, false);
+		}
+
+		@Override
+		public void onViewCreated(View root, Bundle b)
+		{
+			super.onViewCreated(root, b);
+			final ListView list = (ListView)root.findViewById(R.id.listChoiceList);
+			final ArrayList<BOON_CHOICE> choices = new ArrayList<BOON_CHOICE>();
+			
+			//To be nice, let's spend a little effort determining what options are available
+			Set<Spell> knownSpells = myChar.spells;
+			Set<Spell> spellBook = new HashSet<Spell>();
+			for(Career c : myChar.careers)
+			{spellBook.addAll(c.careerSpells());}
+			if(knownSpells.size() < spellBook.size())
+			{
+				//there's always something left to learn!
+				choices.add(BOON_CHOICE.SPELL);
+			}
+			
+			list.setAdapter(new ArrayAdapter<BOON_CHOICE>(getActivity(), android.R.layout.simple_list_item_1, choices));
+			list.setOnItemClickListener( new AdapterView.OnItemClickListener(){
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+					{
+						switch(choices.get(which))
+						{
+							case SPELL:
+								delegate.pushExtraFrag(new ChooseSpellFragment(){
+									@Override
+									public boolean isPrimaryFrag(){return false;}
+								}, "spellFrag");
+								break;
+							case ABILITY:
+								delegate.pushExtraFrag(new ChooseAbilityFragment(){
+										@Override
+										public boolean isPrimaryFrag(){return false;}
+									}, "abilityFrag");
+								break;
+							case MILITARY_SKILL:
+								delegate.pushExtraFrag(new zzChooseOneMilitarySkillHook(){
+										@Override
+										public boolean isPrimaryFrag(){return false;}
+										
+										@Override
+										public List<Skill> getItems()
+										{
+											Set<Skill> miliSkills = new HashSet<Skill>();
+											
+											for(Career career : myChar.careers)
+											{
+												for(Pair<Skill,Integer> skillCap : career.careerSkills())
+												{
+													int curLevel = myChar.getSkillBaseLevel(skillCap.first);
+													if(skillCap.first.isMilitary() && curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
+													{
+														miliSkills.add(skillCap.first);
+													}
+												}
+											}
+											
+											return new ArrayList<Skill>(miliSkills);
+										}
+									}, "militaryFrag");
+								break;
+							default:
+								Bundle b = new Bundle();
+								b.putString(BundleConstants.CHARACTER, myChar.toJson());
+								delegate.hookComplete(b);
+						}
+					}
+				});
+		}
+
+		@Override public boolean hasUI(){return true;}
+		@Override public int getPriority(){return 100;}
+	}
+	
+	public static class ChooseSpellFragment extends zzChooseAnAdvancementFragment<Spell>
+	{
+		List<Spell> getItems(){
+			//Grab all spells that can be learned in careers and aren't already known
+			List<Spell> spells = new ArrayList<Spell>();
+			Set<Spell> knownSpells = myChar.spells;
+			
+			for(Career c : myChar.careers)
+			{
+				for(Spell spell : c.careerSpells())
+				{
+					if(!knownSpells.contains(spell)){spells.add(spell);}
+				}
+			}
+			
+			//bleh.  Apologies for the terrible UI.
+			Collections.sort(spells);
+			
+			return spells;
+		}
+
+		void onChosen(Spell chosen){
+			myChar.spells.add(chosen);
+		}
+
+		String getTitle(){
+			return "Choose a spell to learn";
+		}
+	}
+	
+	public static class ChooseAbilityFragment extends zzChooseAnAdvancementFragment<Ability>
+	{
+		List<Ability> getItems(){
+			//Grab all abilities that can be learned in careers and aren't already known
+			List<Ability> abilities = new ArrayList<Ability>();
+			Set<Ability> knownAbilities = myChar.abilities;
+
+			for(Career c : myChar.careers)
+			{
+				for(Ability ability : c.careerAbilities())
+				{
+					if(!knownAbilities.contains(ability) && ability.meetsPrereq(myChar).isAllowed)
+					{
+						abilities.add(ability);
+					}
+				}
+			}
+
+			//bleh.  Apologies for the terrible UI.
+			Collections.sort(abilities, new Comparator<Ability>(){
+				public int compare(Ability a, Ability b)
+				{
+					return a.abilityEnum().compareTo(b.abilityEnum());
+				}
+			});
+
+			return abilities;
+		}
+
+		void onChosen(Ability chosen){
+			myChar.abilities.add(chosen);
+		}
+
+		String getTitle(){
+			return "Choose an ability to learn";
+		}
 	}
 }

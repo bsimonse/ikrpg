@@ -8,6 +8,7 @@ public abstract class FlowFragment extends Fragment {
 	public interface FlowFragmentDelegate
 	{
 		public void hookComplete(Bundle b);
+		public void pushExtraFrag(FlowFragment f, String fragId);
 	}
 	
 	protected FlowFragmentDelegate delegate;
@@ -49,10 +50,14 @@ public abstract class FlowFragment extends Fragment {
 	//Default priority is 100
 	public int getPriority(){return 100;}
 	
-	protected boolean hasUI()
+	public boolean hasUI()
 	{
-		//assume false
 		return false;
+	}
+	
+	public boolean isPrimaryFrag()
+	{
+		return true;
 	}
 }
 

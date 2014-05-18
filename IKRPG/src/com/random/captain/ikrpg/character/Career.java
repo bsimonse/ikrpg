@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Pair;
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.character.Language;
 import com.random.captain.ikrpg.gear.Loot;
 
 public enum Career implements zzPrereqCheck
@@ -885,7 +886,7 @@ public enum Career implements zzPrereqCheck
 		}
 	}
 	
-	public static class LanguageHook extends zzStaticCreateCharacterHooks.ChooseAnAdvancementFragment<Language>
+	public static class LanguageHook extends zzChooseAnAdvancementFragment<Language>
 	{
 		@Override public int getPriority(){return 80;}
 		@Override protected String getTitle(){return "Choose a language to learn:";}

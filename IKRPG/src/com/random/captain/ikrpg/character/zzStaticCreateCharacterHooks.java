@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.random.captain.ikrpg.R;
+import com.random.captain.ikrpg.character.Career;
 import com.random.captain.ikrpg.gear.Loot;
 import com.random.captain.ikrpg.gear.LootPack;
 import com.random.captain.ikrpg.util.BundleConstants;
@@ -17,43 +18,8 @@ import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 //It's got to be public for Android to recreate the fragments... so no encapsulation for you.
 public class zzStaticCreateCharacterHooks
 {
-
-	public static abstract class ChooseAnAdvancementFragment<E> extends zzCharacterAdvancementFragment
-	{
-		abstract List<E> getItems();
-		abstract void onChosen(E chosen);
-		abstract String getTitle();
-		
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
-		{return inflater.inflate(R.layout.frag_choice_list, root, false);}
-
-		@Override
-		public void onViewCreated(View rootView, Bundle b)
-		{
-			super.onViewCreated(rootView,b);
-			ListView listView = (ListView)rootView.findViewById(R.id.listChoiceList);
-			listView.setAdapter(new ArrayAdapter<E>(getActivity(), android.R.layout.simple_list_item_1, getItems()));
-			listView.setOnItemClickListener( new AdapterView.OnItemClickListener(){
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
-					{
-						onChosen(getItems().get(which));
-						Bundle b = new Bundle();
-						b.putString(BundleConstants.CHARACTER, myChar.toJson());
-						delegate.hookComplete(b);
-					}
-				});
-
-			TextView tv = (TextView)rootView.findViewById(R.id.listChoiceTitle);
-			tv.setText(getTitle());
-		}
-
-		@Override protected boolean hasUI(){return true;}
-		@Override public int getPriority(){return -1;}
-	}
 	
-public static class ChooseRaceFragment extends ChooseAnAdvancementFragment<Race>
+public static class ChooseRaceFragment extends zzChooseAnAdvancementFragment<Race>
 {
 	@Override
 	List<Race> getItems(){
@@ -71,7 +37,7 @@ public static class ChooseRaceFragment extends ChooseAnAdvancementFragment<Race>
 	}
 }
 	
-public static class ChooseArchetypeHook extends ChooseAnAdvancementFragment<Archetype>
+public static class ChooseArchetypeHook extends zzChooseAnAdvancementFragment<Archetype>
 {
 	@Override
 	List<Archetype> getItems(){
@@ -99,7 +65,7 @@ public static class ChooseArchetypeHook extends ChooseAnAdvancementFragment<Arch
 	}
 }
 	
-public static class ChooseCareerFragment extends ChooseAnAdvancementFragment<Career>
+public static class ChooseCareerFragment extends zzChooseAnAdvancementFragment<Career>
 {
 	List<Career> getItems(){
 		boolean isSecondCareer = myChar.careers.size() > 0;
@@ -219,7 +185,7 @@ public static class ChooseAdvancementPointsHook extends zzCharacterAdvancementFr
 			});
 	}
 
-	@Override protected boolean hasUI(){return true;}
+	@Override public boolean hasUI(){return true;}
 	@Override public int getPriority(){return 100;}
 }
 
@@ -291,7 +257,7 @@ public static class ChooseFluffFragment extends zzCharacterAdvancementFragment
 			});
 	}
 
-	@Override protected boolean hasUI(){return true;}
+	@Override public boolean hasUI(){return true;}
 	@Override public int getPriority(){return 101;}
 }
 	
