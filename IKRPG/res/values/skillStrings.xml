@@ -2,156 +2,156 @@
 <resources>
 	<!--Skills-->
 	<!--Military-->
-	<string name="archery_name">Hello World, MainActivity!</string>
-	<string name="archery_desc">Hello World, MainActivity!</string>
+	<string name="archery_name">Archery</string>
+	<string name="archery_desc"></string>
 
-	<string name="crossbow_name">Hello World, MainActivity!</string>
-	<string name="crossbow_desc">Hello World, MainActivity!</string>
+	<string name="crossbow_name">Crossbow</string>
+	<string name="crossbow_desc"></string>
 
-	<string name="great_weapon_name">Hello World, MainActivity!</string>
-	<string name="great_weapon_desc">Hello World, MainActivity!</string>
+	<string name="great_weapon_name">Great Weapon</string>
+	<string name="great_weapon_desc"></string>
 
-	<string name="hand_weapon_name">Hello World, MainActivity!</string>
-	<string name="hand_weapon_desc">Hello World, MainActivity!</string>
+	<string name="hand_weapon_name">Hand Weapon</string>
+	<string name="hand_weapon_desc"></string>
 
-	<string name="lance_name">Hello World, MainActivity!</string>
-	<string name="lance_desc">Hello World, MainActivity!</string>
+	<string name="lance_name">Lance</string>
+	<string name="lance_desc"></string>
 
-	<string name="light_artillery_name">Hello World, MainActivity!</string>
-	<string name="light_artillery_desc">Hello World, MainActivity!</string>
+	<string name="light_artillery_name">Light Artillery</string>
+	<string name="light_artillery_desc"></string>
 
-	<string name="pistol_name">Hello World, MainActivity!</string>
-	<string name="pistol_desc">Hello World, MainActivity!</string>
+	<string name="pistol_name">Pistol</string>
+	<string name="pistol_desc"></string>
 
-	<string name="rifle_name">Hello World, MainActivity!</string>
-	<string name="rifle_desc">Hello World, MainActivity!</string>
+	<string name="rifle_name">Rifle</string>
+	<string name="rifle_desc"></string>
 
-	<string name="shield_name">Hello World, MainActivity!</string>
-	<string name="shield_desc">Hello World, MainActivity!</string>
+	<string name="shield_name">Shield</string>
+	<string name="shield_desc"></string>
 
-	<string name="thrown_weapon_name">Hello World, MainActivity!</string>
-	<string name="thrown_weapon_desc">Hello World, MainActivity!</string>
+	<string name="thrown_weapon_name">Thrown Weapon</string>
+	<string name="thrown_weapon_desc"></string>
 
-	<string name="unarmed_combat_name">Hello World, MainActivity!</string>
-	<string name="unarmed_combat_desc">Hello World, MainActivity!</string>
+	<string name="unarmed_combat_name">Unarmed Combat</string>
+	<string name="unarmed_combat_desc"></string>
 
 	<!--Occupational-->
-	<string name="alchemy_name">Hello World, MainActivity!</string>
-	<string name="alchemy_desc">Hello World, MainActivity!</string>
+	<string name="alchemy_name">Alchemy</string>
+	<string name="alchemy_desc"></string>
 
-	<string name="bribery_name">Hello World, MainActivity!</string>
-	<string name="bribery_desc">Hello World, MainActivity!</string>
+	<string name="bribery_name">Bribery</string>
+	<string name="bribery_desc"></string>
 
-	<string name="command_name">Hello World, MainActivity!</string>
-	<string name="command_desc">Hello World, MainActivity!</string>
+	<string name="command_name">Command</string>
+	<string name="command_desc"></string>
 
-	<string name="craft_name">Hello World, MainActivity!</string>
-	<string name="craft_desc">Hello World, MainActivity!</string>
+	<string name="craft_name">Craft</string>
+	<string name="craft_desc"></string>
 
-	<string name="cryptography_name">Hello World, MainActivity!</string>
-	<string name="cryptography_desc">Hello World, MainActivity!</string>
+	<string name="cryptography_name">Crytpography</string>
+	<string name="cryptography_desc"></string>
 
-	<string name="deception_name">Hello World, MainActivity!</string>
-	<string name="deception_desc">Hello World, MainActivity!</string>
+	<string name="deception_name">Deception</string>
+	<string name="deception_desc"></string>
 
-	<string name="disguise_name">Hello World, MainActivity!</string>
-	<string name="disguise_desc">Hello World, MainActivity!</string>
+	<string name="disguise_name">Disguise</string>
+	<string name="disguise_desc"></string>
 
-	<string name="escape_artist_name">Hello World, MainActivity!</string>
-	<string name="escape_artist_desc">Hello World, MainActivity!</string>
+	<string name="escape_artist_name">Escape Artist</string>
+	<string name="escape_artist_desc"></string>
 
-	<string name="etiquette_name">Hello World, MainActivity!</string>
-	<string name="etiquette_desc">Hello World, MainActivity!</string>
+	<string name="etiquette_name">Etiquette</string>
+	<string name="etiquette_desc"></string>
 
-	<string name="fell_calling_name">Hello World, MainActivity!</string>
-	<string name="fell_calling_desc">Hello World, MainActivity!</string>
+	<string name="fell_calling_name">Fell Calling</string>
+	<string name="fell_calling_desc"></string>
 
-	<string name="forensic_science_name">Hello World, MainActivity!</string>
-	<string name="forensic_science_desc">Hello World, MainActivity!</string>
+	<string name="forensic_science_name">Forensic Science</string>
+	<string name="forensic_science_desc"></string>
 
-	<string name="forgery_name">Hello World, MainActivity!</string>
-	<string name="forgery_desc">Hello World, MainActivity!</string>
+	<string name="forgery_name">Forgery</string>
+	<string name="forgery_desc"></string>
 
-	<string name="interrogation_name">Hello World, MainActivity!</string>
-	<string name="interrogation_desc">Hello World, MainActivity!</string>
+	<string name="interrogation_name">Interrogation</string>
+	<string name="interrogation_desc"></string>
 
-	<string name="law_name">Hello World, MainActivity!</string>
-	<string name="law_desc">Hello World, MainActivity!</string>
+	<string name="law_name">Law</string>
+	<string name="law_desc"></string>
 
-	<string name="lock_picking_name">Hello World, MainActivity!</string>
-	<string name="lock_picking_desc">Hello World, MainActivity!</string>
+	<string name="lock_picking_name">Lock Picking</string>
+	<string name="lock_picking_desc"></string>
 
-	<string name="mechanikal_engineering_name">Hello World, MainActivity!</string>
-	<string name="mechanikal_engineering_desc">Hello World, MainActivity!</string>
+	<string name="mechanikal_engineering_name">Mechanikal Engineering</string>
+	<string name="mechanikal_engineering_desc"></string>
 
-	<string name="medicine_name">Hello World, MainActivity!</string>
-	<string name="medicine_desc">Hello World, MainActivity!</string>
+	<string name="medicine_name">Medicine</string>
+	<string name="medicine_desc"></string>
 
-	<string name="navigation_name">Hello World, MainActivity!</string>
-	<string name="navigation_desc">Hello World, MainActivity!</string>
+	<string name="navigation_name">Navigation</string>
+	<string name="navigation_desc"></string>
 
-	<string name="negotiation_name">Hello World, MainActivity!</string>
-	<string name="negotiation_desc">Hello World, MainActivity!</string>
+	<string name="negotiation_name">Negotiation</string>
+	<string name="negotiation_desc"></string>
 
-	<string name="oratory_name">Hello World, MainActivity!</string>
-	<string name="oratory_desc">Hello World, MainActivity!</string>
+	<string name="oratory_name">Oratory</string>
+	<string name="oratory_desc"></string>
 
-	<string name="pickpocket_name">Hello World, MainActivity!</string>
-	<string name="pickpocket_desc">Hello World, MainActivity!</string>
+	<string name="pickpocket_name">Pickpocket</string>
+	<string name="pickpocket_desc"></string>
 
-	<string name="research_name">Hello World, MainActivity!</string>
-	<string name="research_desc">Hello World, MainActivity!</string>
+	<string name="research_name">Research</string>
+	<string name="research_desc"></string>
 
-	<string name="rope_use_name">Hello World, MainActivity!</string>
-	<string name="rope_use_desc">Hello World, MainActivity!</string>
+	<string name="rope_use_name">Rope Use</string>
+	<string name="rope_use_desc"></string>
 
-	<string name="sailing_name">Hello World, MainActivity!</string>
-	<string name="sailing_desc">Hello World, MainActivity!</string>
+	<string name="sailing_name">Sailing</string>
+	<string name="sailing_desc"></string>
 
-	<string name="seduction_name">Hello World, MainActivity!</string>
-	<string name="seduction_desc">Hello World, MainActivity!</string>
+	<string name="seduction_name">Seduction</string>
+	<string name="seduction_desc"></string>
 
-	<string name="sneak_name">Hello World, MainActivity!</string>
-	<string name="sneak_desc">Hello World, MainActivity!</string>
+	<string name="sneak_name">Sneak</string>
+	<string name="sneak_desc"></string>
 
-	<string name="streetwise_name">Hello World, MainActivity!</string>
-	<string name="streetwise_desc">Hello World, MainActivity!</string>
+	<string name="streetwise_name">Streetwise</string>
+	<string name="streetwise_desc"></string>
 
-	<string name="survival_name">Hello World, MainActivity!</string>
-	<string name="survival_desc">Hello World, MainActivity!</string>
+	<string name="survival_name">Survival</string>
+	<string name="survival_desc"></string>
 
-	<string name="tracking_name">Hello World, MainActivity!</string>
-	<string name="tracking_desc">Hello World, MainActivity!</string>
+	<string name="tracking_name">Tracking</string>
+	<string name="tracking_desc"></string>
 
 	<!--General-->
-	<string name="animal_handling_name">Hello World, MainActivity!</string>
-	<string name="animal_handling_desc">Hello World, MainActivity!</string>
+	<string name="animal_handling_name">Animal Handling</string>
+	<string name="animal_handling_desc"></string>
 
-	<string name="climbing_name">Hello World, MainActivity!</string>
-	<string name="climbing_desc">Hello World, MainActivity!</string>
+	<string name="climbing_name">Climbing</string>
+	<string name="climbing_desc"></string>
 
-	<string name="detection_name">Hello World, MainActivity!</string>
-	<string name="detection_desc">Hello World, MainActivity!</string>
+	<string name="detection_name">Detection</string>
+	<string name="detection_desc"></string>
 
-	<string name="driving_name">Hello World, MainActivity!</string>
-	<string name="driving_desc">Hello World, MainActivity!</string>
+	<string name="driving_name">Driving</string>
+	<string name="driving_desc"></string>
 
-	<string name="gambling_name">Hello World, MainActivity!</string>
-	<string name="gambling_desc">Hello World, MainActivity!</string>
+	<string name="gambling_name">Gambling</string>
+	<string name="gambling_desc"></string>
 
-	<string name="intimidation_name">Hello World, MainActivity!</string>
-	<string name="intimidation_desc">Hello World, MainActivity!</string>
+	<string name="intimidation_name">Intimidation</string>
+	<string name="intimidation_desc"></string>
 
-	<string name="jumping_name">Hello World, MainActivity!</string>
-	<string name="jumping_desc">Hello World, MainActivity!</string>
+	<string name="jumping_name">Jumping</string>
+	<string name="jumping_desc"></string>
 
-	<string name="lore_name">Hello World, MainActivity!</string>
-	<string name="lore_desc">Hello World, MainActivity!</string>
+	<string name="lore_name">Lore</string>
+	<string name="lore_desc"></string>
 
-	<string name="riding_name">Hello World, MainActivity!</string>
-	<string name="riding_desc">Hello World, MainActivity!</string>
+	<string name="riding_name">Riding</string>
+	<string name="riding_desc"></string>
 
-	<string name="swimming_name">Hello World, MainActivity!</string>
-	<string name="swimming_desc">Hello World, MainActivity!</string>
+	<string name="swimming_name">Swimming</string>
+	<string name="swimming_desc"></string>
 	
 </resources>

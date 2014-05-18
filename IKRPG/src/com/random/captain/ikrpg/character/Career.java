@@ -20,7 +20,7 @@ public enum Career implements zzPrereqCheck
 	 * and get around the structure that causes this warning.
 	 */
 	@SuppressWarnings("unchecked")
-	ALCHEMIST(R.string.alchemist_name, false,
+	ALCHEMIST(R.string.alchemist_name, R.string.alchemist_desc, false,
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.THROWN_WEAPON.pair(1), SkillEnum.ALCHEMY.pair(1), SkillEnum.MEDICINE.pair(1)},
 			  	new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.THROWN_WEAPON.pair(4), SkillEnum.UNARMED.pair(2), 
 							SkillEnum.ALCHEMY.pair(4), SkillEnum.CRAFT.pair(4), SkillEnum.FORGERY.pair(2), SkillEnum.MEDICINE.pair(4),
@@ -34,7 +34,7 @@ public enum Career implements zzPrereqCheck
 				null, null),
 								
 	@SuppressWarnings("unchecked")
-	ARCANE_MECHANIK(R.string.arcane_mechanik_name, false,
+	ARCANE_MECHANIK(R.string.arcane_mechanik_name, R.string.arcane_mechanik_desc, false,
 				new Pair[] {SkillEnum.CRAFT.pair("gunsmithing", 1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
 				new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.LIGHT_ARTILLERY.pair(2), SkillEnum.RIFLE.pair(2), 
 							SkillEnum.COMMAND.pair(1), SkillEnum.CRAFT.pair(4), SkillEnum.CRYPTOGRAPHY.pair(3), SkillEnum.MECHANIKAL.pair(4),
@@ -55,7 +55,7 @@ public enum Career implements zzPrereqCheck
 	
 	
 	@SuppressWarnings("unchecked")
-	ARCANIST(R.string.arcanist_name, false,
+	ARCANIST(R.string.arcanist_name, R.string.arcanist_desc, false,
 			 new Pair[] {SkillEnum.LORE.pair("Arcane",1), SkillEnum.RESEARCH.pair(1)},
 			 new Pair[] {SkillEnum.CRAFT.pair(2), SkillEnum.ETIQUETTE.pair(2), SkillEnum.NEGOTIATION.pair(2), SkillEnum.ORATORY.pair(2), SkillEnum.RESEARCH.pair(4)},
 			 new Ability[] {AbilityEnum.GREAT_POWER.make()},
@@ -73,7 +73,7 @@ public enum Career implements zzPrereqCheck
 			 new zzCharacterAdvancementFragment[] {new ArcanistHook()}),
 			 
 	@SuppressWarnings("unchecked")
-	ARISTOCRAT(R.string.aristocrat_name, true,
+	ARISTOCRAT(R.string.aristocrat_name, R.string.aristocrat_desc, true,
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1),SkillEnum.COMMAND.pair(1),SkillEnum.ETIQUETTE.pair(1)},
 			 new Pair[] {SkillEnum.ARCHERY.pair(2),SkillEnum.HAND_WEAPON.pair(3),SkillEnum.LANCE.pair(3),SkillEnum.PISTOL.pair(2),SkillEnum.RIFLE.pair(3),
 			 				SkillEnum.BRIBERY.pair(4),SkillEnum.COMMAND.pair(4),SkillEnum.CRYPTOGRAPHY.pair(2),SkillEnum.DECEPTION.pair(4),SkillEnum.ETIQUETTE.pair(4),
@@ -89,7 +89,7 @@ public enum Career implements zzPrereqCheck
 			   new zzCharacterAdvancementFragment[] {new AristocratWeaponHook(), new LanguageHook()}),
 	
 	@SuppressWarnings("unchecked")
-	BOUNTY_HUNTER(R.string.bounty_hunter_name, false,
+	BOUNTY_HUNTER(R.string.bounty_hunter_name, R.string.bounty_hunter_desc, false,
 			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.ROPE_USE.pair(1), SkillEnum.TRACKING.pair(1)},
 			 new Pair[] {SkillEnum.BRIBERY.pair(2), SkillEnum.DECEPTION.pair(2), SkillEnum.DISGUISE.pair(2), SkillEnum.INTERROGATION.pair(2), SkillEnum.LAW.pair(2),
 			 			SkillEnum.NEGOTIATION.pair(4), SkillEnum.ROPE_USE.pair(4), SkillEnum.SNEAK.pair(3), SkillEnum.STREETWISE.pair(4),
@@ -104,7 +104,7 @@ public enum Career implements zzPrereqCheck
 				  new zzCharacterAdvancementFragment[] {new BountyHunterHook()}),
 	
 	@SuppressWarnings("unchecked")
-	CUTTHROAT(R.string.cutthroat_name, false,
+	CUTTHROAT(R.string.cutthroat_name, R.string.cutthroat_desc, false,
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.SNEAK.pair(1), SkillEnum.STREETWISE.pair(1)},
 			 new Pair[] {SkillEnum.CROSSBOW.pair(2), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3),
 			 			SkillEnum.INTERROGATION.pair(2), SkillEnum.SNEAK.pair(4), SkillEnum.STREETWISE.pair(4)},
@@ -119,7 +119,7 @@ public enum Career implements zzPrereqCheck
 			  new zzCharacterAdvancementFragment[] {new CutthroatHook()}),
 	
 	@SuppressWarnings("unchecked")
-	DUELIST(R.string.duelist_name, false,
+	DUELIST(R.string.duelist_name, R.string.duelist_desc, false,
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.PISTOL.pair(1), SkillEnum.GAMBLING.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.JUMPING.pair(1)},
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(4), SkillEnum.PISTOL.pair(4), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(2), SkillEnum.ETIQUETTE.pair(2),
 			 			SkillEnum.LAW.pair(2), SkillEnum.ORATORY.pair(2), SkillEnum.SEDUCTION.pair(3), SkillEnum.STREETWISE.pair(2)},
@@ -133,7 +133,7 @@ public enum Career implements zzPrereqCheck
 			 null, null),
 	
 	@SuppressWarnings("unchecked")
-	EXPLORER(R.string.explorer_name, false,
+	EXPLORER(R.string.explorer_name, R.string.explorer_desc, false,
 			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.MEDICINE.pair(1), SkillEnum.NAVIGATION.pair(1), SkillEnum.SURVIVAL.pair(1)},
 			 new Pair[] {SkillEnum.ARCHERY.pair(2), SkillEnum.CROSSBOW.pair(2), SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.RIFLE.pair(3),
 			 			SkillEnum.THROWN_WEAPON.pair(2), SkillEnum.UNARMED.pair(2), SkillEnum.COMMAND.pair(4), SkillEnum.CRAFT.pair(2), SkillEnum.CRYPTOGRAPHY.pair(2),
@@ -153,7 +153,7 @@ public enum Career implements zzPrereqCheck
 			 new zzCharacterAdvancementFragment[] {new ExplorerMilitarySkillHook(), new LanguageHook()}),
 	
 	@SuppressWarnings("unchecked")
-	FELL_CALLER(R.string.fell_caller_name, false,
+	FELL_CALLER(R.string.fell_caller_name, R.string.fell_caller_desc, false,
 			 new Pair[] {SkillEnum.COMMAND.pair(1), SkillEnum.FELL_CALLING.pair(2), SkillEnum.LORE.pair("Trollkin", 1), SkillEnum.ORATORY.pair(1)},
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(4),
 			 			SkillEnum.FELL_CALLING.pair(4), SkillEnum.ORATORY.pair(4), SkillEnum.SEDUCTION.pair(2)},
@@ -169,7 +169,7 @@ public enum Career implements zzPrereqCheck
 			 new zzCharacterAdvancementFragment[] {new FellCallerHook()}),
 	
 	@SuppressWarnings("unchecked")
-	FIELD_MECHANIK(R.string.field_mechanik_name, false,
+	FIELD_MECHANIK(R.string.field_mechanik_name, R.string.field_mechanik_desc, false,
 			 new Pair[] {SkillEnum.COMMAND.pair(1), SkillEnum.CRAFT.pair("metalworking", 1), SkillEnum.MECHANIKAL.pair(1)},
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.COMMAND.pair(3), SkillEnum.CRAFT.pair(4),
 			 			SkillEnum.MECHANIKAL.pair(4), SkillEnum.NEGOTIATION.pair(3)},
@@ -187,7 +187,7 @@ public enum Career implements zzPrereqCheck
 				   new zzCharacterAdvancementFragment[] {new FieldMechanikMilitarySkillHook(), new FieldMechanikJackHook()}),
 	
 	@SuppressWarnings("unchecked")
-	GUN_MAGE(R.string.gun_mage_name, false,
+	GUN_MAGE(R.string.gun_mage_name, R.string.gun_mage_desc, false,
 			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1)},
 			 new Pair[] {SkillEnum.PISTOL.pair(4), SkillEnum.RIFLE.pair(4), SkillEnum.SEDUCTION.pair(2)},
 			 new Ability[] {AbilityEnum.CRAFT_RUNE_SHOT.make(), AbilityEnum.FAST_RELOAD.make()},
@@ -209,7 +209,7 @@ public enum Career implements zzPrereqCheck
 			 new zzCharacterAdvancementFragment[] {new GunMageMilitarySkillHook(), new GunMageMagelockWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
-	HIGHWAYMAN(R.string.highwayman_name, false,
+	HIGHWAYMAN(R.string.highwayman_name, R.string.highwayman_desc, false,
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1)},
 			 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3),
 			 			SkillEnum.UNARMED.pair(3), SkillEnum.BRIBERY.pair(2), SkillEnum.DECEPTION.pair(3), SkillEnum.DISGUISE.pair(3),
@@ -229,7 +229,7 @@ public enum Career implements zzPrereqCheck
 			 new zzCharacterAdvancementFragment[] {new HighwaymanHook()}),
 	
 	@SuppressWarnings("unchecked")
-	INVESTIGATOR(R.string.investigator_name, false,
+	INVESTIGATOR(R.string.investigator_name, R.string.investigator_desc, false,
 			 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.FORENSIC_SCIENCE.pair(1), SkillEnum.INTERROGATION.pair(1), SkillEnum.LAW.pair(1),
 			 			SkillEnum.MEDICINE.pair(1), SkillEnum.SNEAK.pair(1)},
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2), SkillEnum.UNARMED.pair(2), SkillEnum.CRYPTOGRAPHY.pair(4),
@@ -246,7 +246,7 @@ public enum Career implements zzPrereqCheck
 				 new zzCharacterAdvancementFragment[] {new LanguageHook(), new InvestigatorMilitarySkillHook(), new InvestigatorHyperPerceptionHook()}),
 	
 	@SuppressWarnings("unchecked")
-	IRON_FANG(R.string.iron_fang_name, true,
+	IRON_FANG(R.string.iron_fang_name, R.string.iron_fang_desc, true,
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.SHIELD.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.SURVIVAL.pair(1)},
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.LANCE.pair(4), SkillEnum.SHIELD.pair(4), SkillEnum.UNARMED.pair(3),
 			 			SkillEnum.COMMAND.pair(4), SkillEnum.SURVIVAL.pair(2)},
@@ -269,7 +269,7 @@ public enum Career implements zzPrereqCheck
 			 null),
 	
 	@SuppressWarnings("unchecked")
-	KNIGHT(R.string.knight_name, false,
+	KNIGHT(R.string.knight_name, R.string.knight_desc, false,
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.HAND_WEAPON.pair(1), SkillEnum.SHIELD.pair(1), SkillEnum.COMMAND.pair(1),
 			 			SkillEnum.ETIQUETTE.pair(1), SkillEnum.LORE.pair("knightly order", 1)},
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.LANCE.pair(4), SkillEnum.SHIELD.pair(4),
@@ -287,7 +287,7 @@ public enum Career implements zzPrereqCheck
 			 null),
 	
 	@SuppressWarnings("unchecked")
-	MAGE_HUNTER(R.string.mage_hunter_name, false,
+	MAGE_HUNTER(R.string.mage_hunter_name, R.string.mage_hunter_desc, false,
 			 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.CLIMBING.pair(1), SkillEnum.JUMPING.pair(1), SkillEnum.SNEAK.pair(1),
 			 			SkillEnum.TRACKING.pair(1)},
 			 new Pair[] {SkillEnum.ARCHERY.pair(4), SkillEnum.CROSSBOW.pair(4), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.THROWN_WEAPON.pair(2),
@@ -305,7 +305,7 @@ public enum Career implements zzPrereqCheck
 				new zzCharacterAdvancementFragment[] {new MageHunterHook()}),
 	
 	@SuppressWarnings("unchecked")
-	MAN_AT_ARMS(R.string.man_at_arms_name, false,
+	MAN_AT_ARMS(R.string.man_at_arms_name, R.string.man_at_arms_desc, false,
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.SHIELD.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.DETECTION.pair(1)},
 			 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.SHIELD.pair(40),
 			 			SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(3), SkillEnum.CRAFT.pair("Metalworking", 2)},
@@ -322,7 +322,7 @@ public enum Career implements zzPrereqCheck
 				new zzCharacterAdvancementFragment[] {new ManAtArmsHook()}),
 	
 	@SuppressWarnings("unchecked")
-	MILITARY_OFFICER(R.string.military_officer_name, false,
+	MILITARY_OFFICER(R.string.military_officer_name, R.string.military_officer_desc, false,
 	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.MEDICINE.pair(1), SkillEnum.NAVIGATION.pair(1)},
 	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.HAND_WEAPON.pair(4), SkillEnum.PISTOL.pair(4), SkillEnum.COMMAND.pair(4),
 	 				SkillEnum.CRYPTOGRAPHY.pair(4), SkillEnum.ETIQUETTE.pair(4), SkillEnum.INTERROGATION.pair(4), SkillEnum.LAW.pair(4),
@@ -342,7 +342,7 @@ public enum Career implements zzPrereqCheck
 					 new zzCharacterAdvancementFragment[] {new MilitaryOfficerWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
-	PIRATE(R.string.pirate_name, false,
+	PIRATE(R.string.pirate_name, R.string.pirate_desc, false,
 	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.CLIMBING.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.SAILING.pair(1),
 	 				SkillEnum.SWIMMING.pair(1)},
 	 new Pair[] {SkillEnum.HAND_WEAPON.pair(3), SkillEnum.LIGHT_ARTILLERY.pair(2), SkillEnum.PISTOL.pair(3), SkillEnum.RIFLE.pair(2),
@@ -359,7 +359,7 @@ public enum Career implements zzPrereqCheck
 		   new zzCharacterAdvancementFragment[] {new PirateHook()}),
 	
 	@SuppressWarnings("unchecked")
-	PISTOLEER(R.string.pistoleer_name, false,
+	PISTOLEER(R.string.pistoleer_name, R.string.pistoleer_desc, false,
 	 new Pair[] {SkillEnum.PISTOL.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.INTIMIDATION.pair(1), SkillEnum.SNEAK.pair(1)},
 	 new Pair[] {SkillEnum.PISTOL.pair(4), SkillEnum.CRAFT.pair("gunsmithing", 4), SkillEnum.SNEAK.pair(3)},
 	 new Ability[] {AbilityEnum.FAST_DRAW.make(), AbilityEnum.GUNFIGHTER.make(), AbilityEnum.RETURN_FIRE.make()},
@@ -373,7 +373,7 @@ public enum Career implements zzPrereqCheck
 			  new zzCharacterAdvancementFragment[] {new PistoleerHook()}),
 	
 	 @SuppressWarnings("unchecked")
-	PRIEST_OF_MENOTH(R.string.priest_of_menoth_name, false,
+	PRIEST_OF_MENOTH(R.string.priest_of_menoth_name, R.string.priest_of_menoth_desc, false,
 	 new Pair[] {SkillEnum.LORE.pair("Menite faith", 1), SkillEnum.ORATORY.pair(1)},
 	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.SHIELD.pair(2), SkillEnum.COMMAND.pair(2),
 	 				SkillEnum.CRYPTOGRAPHY.pair(2), SkillEnum.ETIQUETTE.pair(4), SkillEnum.LAW.pair(4), SkillEnum.MEDICINE.pair(4),
@@ -395,7 +395,7 @@ public enum Career implements zzPrereqCheck
 					  new zzCharacterAdvancementFragment[] {new PriestWeaponHook()}),
 	 
 	@SuppressWarnings("unchecked")
-	PRIEST_OF_MORROW(R.string.priest_of_morrow_name, false,
+	PRIEST_OF_MORROW(R.string.priest_of_morrow_name, R.string.priest_of_morrow_desc, false,
 	new Pair[] {SkillEnum.LORE.pair("Morrowan faith", 1), SkillEnum.MEDICINE.pair(1)},
 	new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.SHIELD.pair(2), SkillEnum.COMMAND.pair(2),
 		SkillEnum.CRYPTOGRAPHY.pair(2), SkillEnum.ETIQUETTE.pair(4), SkillEnum.LAW.pair(4), SkillEnum.MEDICINE.pair(4),
@@ -418,7 +418,7 @@ public enum Career implements zzPrereqCheck
 					 new zzCharacterAdvancementFragment[] {new PriestWeaponHook()}),
 
 	@SuppressWarnings("unchecked")
-	RANGER(R.string.ranger_name, false,
+	RANGER(R.string.ranger_name, R.string.ranger_desc, false,
 	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.SNEAK.pair(1), SkillEnum.SURVIVAL.pair(1),
 	 				SkillEnum.TRACKING.pair(1)},
 	 new Pair[] {SkillEnum.ARCHERY.pair(4), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(2), SkillEnum.PISTOL.pair(2),
@@ -437,7 +437,7 @@ public enum Career implements zzPrereqCheck
 		   new zzCharacterAdvancementFragment[] {new RangerWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
-	RIFLEMAN(R.string.rifleman_name, false,
+	RIFLEMAN(R.string.rifleman_name, R.string.rifleman_desc, false,
 	 new Pair[] {SkillEnum.RIFLE.pair(1), SkillEnum.CLIMBING.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
 	 new Pair[] {SkillEnum.RIFLE.pair(4), SkillEnum.CRAFT.pair("gunsmithing",4), SkillEnum.SURVIVAL.pair(3)},
 	 new Ability[] {AbilityEnum.CRACKSHOT.make(), AbilityEnum.DUAL_SHOT.make(), AbilityEnum.MARKSMAN.make()},
@@ -450,7 +450,7 @@ public enum Career implements zzPrereqCheck
 	 null, null, null),
 	 
 	@SuppressWarnings("unchecked")
-	SOLDIER(R.string.soldier_name, false,
+	SOLDIER(R.string.soldier_name, R.string.soldier_desc, false,
 	new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.DRIVING.pair(1), SkillEnum.MEDICINE.pair(1), SkillEnum.SURVIVAL.pair(1)},
 	new Pair[] {SkillEnum.CROSSBOW.pair(3), SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.LIGHT_ARTILLERY.pair(3),
 		SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.RIFLE.pair(4), SkillEnum.SHIELD.pair(2),
@@ -469,7 +469,7 @@ public enum Career implements zzPrereqCheck
 			new zzCharacterAdvancementFragment[] {new SoldierWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
-	FIRE_SORCERER(R.string.fire_sorcerer_name, true,
+	FIRE_SORCERER(R.string.fire_sorcerer_name, R.string.fire_sorcerer_desc, true,
 	new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
 	new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
 				SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
@@ -488,7 +488,7 @@ public enum Career implements zzPrereqCheck
 				  new zzCharacterAdvancementFragment[] {new SorcererWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
-	ICE_SORCERER(R.string.ice_sorcerer_name, true,
+	ICE_SORCERER(R.string.ice_sorcerer_name, R.string.ice_sorcerer_desc, true,
 	 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
 	 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
 	 SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
@@ -507,7 +507,7 @@ public enum Career implements zzPrereqCheck
 				 new zzCharacterAdvancementFragment[] {new SorcererWeaponHook()}),
 	 
 	@SuppressWarnings("unchecked")
-	STONE_SORCERER(R.string.stone_sorcerer_name, true,
+	STONE_SORCERER(R.string.stone_sorcerer_name, R.string.stone_sorcerer_desc, true,
 	 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
 	 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
 	 SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
@@ -526,7 +526,7 @@ public enum Career implements zzPrereqCheck
 				   new zzCharacterAdvancementFragment[] {new SorcererWeaponHook(), new StoneSorcererHook()}),
 	 
 	@SuppressWarnings("unchecked")
-	STORM_SORCERER(R.string.storm_sorcerer_name, true,
+	STORM_SORCERER(R.string.storm_sorcerer_name, R.string.storm_sorcerer_desc, true,
 	 new Pair[] {SkillEnum.DETECTION.pair(1), SkillEnum.SURVIVAL.pair(1)},
 	 new Pair[] {SkillEnum.ARCHERY.pair(3), SkillEnum.CROSSBOW.pair(3), SkillEnum.HAND_WEAPON.pair(3),SkillEnum.THROWN_WEAPON.pair(2),
 	 SkillEnum.UNARMED.pair(2), SkillEnum.SNEAK.pair(3), SkillEnum.SURVIVAL.pair(3)},
@@ -545,7 +545,7 @@ public enum Career implements zzPrereqCheck
 	 new zzCharacterAdvancementFragment[] {new SorcererWeaponHook(), new StormSorcererHook()}),
 	 
 	@SuppressWarnings("unchecked")
-	SPY(R.string.spy_name, false,
+	SPY(R.string.spy_name, R.string.spy_desc, false,
 	new Pair[] {SkillEnum.COMMAND.pair(1), SkillEnum.DECEPTION.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.DISGUISE.pair(1),
 				SkillEnum.SNEAK.pair(1)},
 	new Pair[] {SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(3),
@@ -566,7 +566,7 @@ public enum Career implements zzPrereqCheck
 		new zzCharacterAdvancementFragment[] {new SpyWeaponHook(), new LanguageHook()}),
 	
 	@SuppressWarnings("unchecked")
-	STORMBLADE(R.string.stormblade_name, true,
+	STORMBLADE(R.string.stormblade_name, R.string.stormblade_desc, true,
 	new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.DETECTION.pair(1), SkillEnum.ETIQUETTE.pair(1)},
 	new Pair[] {SkillEnum.GREAT_WEAPON.pair(4), SkillEnum.COMMAND.pair(4), SkillEnum.ETIQUETTE.pair(2), SkillEnum.MEDICINE.pair(2)},
 	new Ability[] {AbilityEnum.BLASTER.make(), AbilityEnum.SPECIALIZATION.make("Storm Glaive")},
@@ -588,7 +588,7 @@ public enum Career implements zzPrereqCheck
 	null),
 	
 	@SuppressWarnings("unchecked")
-	THIEF(R.string.thief_name, false,
+	THIEF(R.string.thief_name, R.string.thief_desc, false,
 	 new Pair[] {SkillEnum.BRIBERY.pair(1), SkillEnum.DECEPTION.pair(1), SkillEnum.ESCAPE_ARTIST.pair(1), SkillEnum.LOCK_PICKING.pair(2),
 	 				SkillEnum.PICKPOCKET.pair(2), SkillEnum.SNEAK.pair(1), SkillEnum.STREETWISE.pair(1)},
 	 new Pair[] {SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(2), SkillEnum.THROWN_WEAPON.pair(3), SkillEnum.UNARMED.pair(2),
@@ -607,7 +607,7 @@ public enum Career implements zzPrereqCheck
 	 new zzCharacterAdvancementFragment[] {new ThiefWeaponHook()}),
 	
 	@SuppressWarnings("unchecked")
-	TRENCHER(R.string.trencher_name, true,
+	TRENCHER(R.string.trencher_name, R.string.trencher_desc, true,
 	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(1), SkillEnum.RIFLE.pair(1), SkillEnum.THROWN_WEAPON.pair(1)},
 	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.LIGHT_ARTILLERY.pair(4), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3),
 	 				SkillEnum.RIFLE.pair(4), SkillEnum.THROWN_WEAPON.pair(4), SkillEnum.UNARMED.pair(3), SkillEnum.COMMAND.pair(3),
@@ -631,7 +631,7 @@ public enum Career implements zzPrereqCheck
 	 null),
 	
 	@SuppressWarnings("unchecked")
-	WARCASTER(R.string.warcaster_name, true,
+	WARCASTER(R.string.warcaster_name, R.string.warcaster_desc, true,
 	 new Pair[] {SkillEnum.HAND_WEAPON.pair(1), SkillEnum.PISTOL.pair(1), SkillEnum.COMMAND.pair(1), SkillEnum.DETECTION.pair(1)},
 	 new Pair[] {SkillEnum.GREAT_WEAPON.pair(3), SkillEnum.HAND_WEAPON.pair(3), SkillEnum.PISTOL.pair(3), SkillEnum.UNARMED.pair(2),
 	 				SkillEnum.COMMAND.pair(4)},
@@ -669,7 +669,7 @@ public enum Career implements zzPrereqCheck
 	 new zzCreateCharacterHook[] {new ArcanistHook()}),*/		  
 	
 	//Done!
-	private Career(int pNameResource, boolean pStartOnly,
+	private Career(int pNameResource, int pDescResource, boolean pStartOnly,
 					Pair<Skill, Integer>[] pStartSkills, Pair<Skill, Integer>[] pSkills,
 				    Ability[] pStartAbilities, Ability[] pAbilities,
 					Spell[] pStartSpells, Spell[] pSpells,
@@ -679,6 +679,7 @@ public enum Career implements zzPrereqCheck
 	{
 		Context c = IKRPGApp.getContext();
 		name = c.getString(pNameResource);
+		desc = c.getString(pDescResource);
 		startOnly = pStartOnly;
 		startingSkills = pStartSkills != null ? Arrays.asList(pStartSkills) : new ArrayList<Pair<Skill, Integer>>(10);
 		careerSkills = pSkills != null ? Arrays.asList(pSkills) : new ArrayList<Pair<Skill, Integer>>(10);
@@ -705,6 +706,7 @@ public enum Career implements zzPrereqCheck
 	}
 	
 	private String name;
+	private String desc;
 	private boolean startOnly;
 	private Collection<Pair<Skill, Integer>> startingSkills;
 	private Collection<Pair<Skill, Integer>> careerSkills;
@@ -722,6 +724,7 @@ public enum Career implements zzPrereqCheck
 	private Collection<zzCharacterAdvancementFragment> postCreateHooks;
 	
 	public String displayName(){return name;}
+	public String description(){return desc;}
 	public boolean startOnly(){return startOnly;}
 	public Collection<Pair<Skill, Integer>> startingSkills(){return Collections.unmodifiableCollection(startingSkills);}
 	public Collection<Pair<Skill, Integer>> careerSkills(){return Collections.unmodifiableCollection(careerSkills);}

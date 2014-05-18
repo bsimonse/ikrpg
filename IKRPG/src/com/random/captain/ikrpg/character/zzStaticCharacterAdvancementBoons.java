@@ -266,8 +266,7 @@ public class zzStaticCharacterAdvancementBoons
 					}	
 				});
 
-			Button submitButton = (Button)root.findViewById(R.id.continueButton);
-			submitButton.setOnClickListener(new View.OnClickListener(){
+			butt.setOnClickListener(new View.OnClickListener(){
 					@Override public void onClick(View v)
 					{
 						for(ChoosePointsAdapter.ChoosePointsBundle<Stat> stat : potentialStats)
@@ -332,45 +331,26 @@ public class zzStaticCharacterAdvancementBoons
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
 					{
+						ChooseSpellFragment spellFrag;
+						ChooseAbilityFragment abilityFrag;
+						ChooseMilitarySkillFrag militaryFrag;
+						
 						switch(choices.get(which))
 						{
 							case SPELL:
-								delegate.pushExtraFrag(new ChooseSpellFragment(){
-									@Override
-									public boolean isPrimaryFrag(){return false;}
-								}, "spellFrag");
+								spellFrag = new ChooseSpellFragment();
+								spellFrag.setIsPrimaryFrag(false);
+								delegate.pushExtraFrag(spellFrag, "spellFrag");
 								break;
 							case ABILITY:
-								delegate.pushExtraFrag(new ChooseAbilityFragment(){
-										@Override
-										public boolean isPrimaryFrag(){return false;}
-									}, "abilityFrag");
+								abilityFrag = new ChooseAbilityFragment();
+								abilityFrag.setIsPrimaryFrag(false);
+								delegate.pushExtraFrag(abilityFrag, "abilityFrag");
 								break;
 							case MILITARY_SKILL:
-								delegate.pushExtraFrag(new zzChooseOneMilitarySkillHook(){
-										@Override
-										public boolean isPrimaryFrag(){return false;}
-										
-										@Override
-										public List<Skill> getItems()
-										{
-											Set<Skill> miliSkills = new HashSet<Skill>();
-											
-											for(Career career : myChar.careers)
-											{
-												for(Pair<Skill,Integer> skillCap : career.careerSkills())
-												{
-													int curLevel = myChar.getSkillBaseLevel(skillCap.first);
-													if(skillCap.first.isMilitary() && curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
-													{
-														miliSkills.add(skillCap.first);
-													}
-												}
-											}
-											
-											return new ArrayList<Skill>(miliSkills);
-										}
-									}, "militaryFrag");
+								militaryFrag = new ChooseMilitarySkillFrag();
+								militaryFrag.setIsPrimaryFrag(false);
+								delegate.pushExtraFrag(militaryFrag , "militaryFrag");
 								break;
 							default:
 								Bundle b = new Bundle();
@@ -450,6 +430,29 @@ public class zzStaticCharacterAdvancementBoons
 
 		String getTitle(){
 			return "Choose an ability to learn";
+		}
+	}
+	
+	public static class ChooseMilitarySkillFrag extends zzChooseOneMilitarySkillHook
+	{
+		@Override
+		public List<Skill> getItems()
+		{
+			Set<Skill> miliSkills = new HashSet<Skill>();
+			
+			for(Career career : myChar.careers)
+			{
+				for(Pair<Skill,Integer> skillCap : career.careerSkills())
+				{
+					int curLevel = myChar.getSkillBaseLevel(skillCap.first);
+					if(skillCap.first.isMilitary() && curLevel < skillCap.second && curLevel < skillCapForEXP(curExp))
+					{
+						miliSkills.add(skillCap.first);
+					}
+				}
+			}
+			
+			return new ArrayList<Skill>(miliSkills);
 		}
 	}
 }

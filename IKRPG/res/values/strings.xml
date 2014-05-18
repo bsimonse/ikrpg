@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">IKRPG</string>
-    <string name="hello">Press dat button</string>
-
+    <string name="experience_label">exp</string>
+    <string name="decrease_label">-</string>
+    <string name="increase_label">+</string>
+    <string name="commit">Commit</string>
+    <string name="confirm">Confirm</string>
+    <string name="done">Done</string>
+    <string name="name_label">Name:</string>
+    <string name="height_label">Height:</string>
+    <string name="weight_label">Weight:</string>
+    <string name="faith_label">Faith:</string>
+    <string name="sex_label">Sex:</string>
+    <string name="owner_label">Owning player:</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="frag_choice_list_default">Choose an item!</string>
+    <string name="characteristics_label">Defining characteristics:</string>
+    <string name="print_button_title">Print Character Sheet</string>
+    <string name="delete_button_title">Delete this Character</string>
+    <string name="new_character_button_title">Make new Character</string>
 </resources>

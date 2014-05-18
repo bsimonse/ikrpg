@@ -4,7 +4,7 @@
 
 <LinearLayout 
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     
 	<LinearLayout
@@ -12,7 +12,7 @@
 	
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Name:" />
+			android:text="@string/name_label" />
 			
 		<EditText
 			style="@style/inputItem"
@@ -25,7 +25,7 @@
 
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Sex:" />
+			android:text="@string/sex_label" />
 
 		<RadioGroup
 			style="@style/inputItem"
@@ -35,13 +35,13 @@
 				android:id="@+id/sexChoiceMale"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="Male"
+				android:text="@string/male"
 				android:checked="true" />
 			<RadioButton 
 				android:id="@+id/sexChoiceFemale"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="Female" />
+				android:text="@string/female" />
 		</RadioGroup>
 
 	</LinearLayout>
@@ -51,7 +51,7 @@
 
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Defining characteristics:" />
+			android:text="@string/characteristics_label" />
 
 		<EditText
 			style="@style/inputItem"
@@ -64,7 +64,7 @@
 
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Height:" />
+			android:text="@string/height_label" />
 
 		<EditText
 			style="@style/inputItem"
@@ -77,7 +77,7 @@
 
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Weight:" />
+			android:text="@string/weight_label" />
 
 		<EditText
 			style="@style/inputItem"
@@ -90,7 +90,7 @@
 
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Faith:" />
+			android:text="@string/faith_label" />
 
 		<EditText
 			style="@style/inputItem"
@@ -103,7 +103,7 @@
 
 		<TextView
 			style="@style/textLabel.inputLabel"
-			android:text="Owning player:" />
+			android:text="@string/owner_label" />
 
 		<EditText
 			style="@style/inputItem"
@@ -118,7 +118,7 @@
 			android:id="@+id/fluffDoneButton"
 			android:layout_width="150dp"
 			android:layout_height="wrap_content"
-			android:text="Done" />
+			android:text="@string/done" />
 	</LinearLayout>
 	
 </LinearLayout>

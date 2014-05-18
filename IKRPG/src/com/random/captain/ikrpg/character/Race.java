@@ -11,7 +11,7 @@ import com.random.captain.ikrpg.util.BundleConstants;
 public enum Race
 {
 	@SuppressWarnings("unchecked")
-	HUMAN(R.string.human_name,
+	HUMAN(R.string.human_name, R.string.human_desc,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
 			Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
@@ -34,7 +34,7 @@ public enum Race
 		),
 	
 	@SuppressWarnings("unchecked")
-	DWARF(R.string.dwarf_name,
+	DWARF(R.string.dwarf_name, R.string.dwarf_desc,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 4), Pair.create(Stat.STRENGTH, 5),
 			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
 			  Pair.create(Stat.INTELLECT, 4), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
@@ -57,7 +57,7 @@ public enum Race
 		  ),
 	
 	@SuppressWarnings("unchecked")
-	GOBBER(R.string.gobber_name,
+	GOBBER(R.string.gobber_name, R.string.gobber_desc,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 4), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 3),
 			  Pair.create(Stat.AGILITY, 4), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
 			  Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
@@ -80,7 +80,7 @@ public enum Race
 		  ),
 		  
 	@SuppressWarnings("unchecked")
-	IOSAN(R.string.iosan_name,
+	IOSAN(R.string.iosan_name, R.string.iosan_desc,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			  Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
 			  Pair.create(Stat.INTELLECT, 4), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
@@ -103,7 +103,7 @@ public enum Race
 		  ),
 	
 	@SuppressWarnings("unchecked")
-	NYSS(R.string.nyss_name,
+	NYSS(R.string.nyss_name, R.string.nyss_desc,
 		  new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 6), Pair.create(Stat.STRENGTH, 4),
 			  Pair.create(Stat.AGILITY, 4), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 4),
 			  Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3) },
@@ -126,7 +126,7 @@ public enum Race
 		  ),
 	
 	@SuppressWarnings("unchecked")
-	OGRUN(R.string.ogrun_name,
+	OGRUN(R.string.ogrun_name, R.string.ogrun_desc,
 		 new Pair[] { Pair.create(Stat.PHYSIQUE, 6), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 6),
 			 Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 3),
 			 Pair.create(Stat.INTELLECT, 3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 2) },
@@ -149,7 +149,7 @@ public enum Race
 		 ),
 		 
 	@SuppressWarnings("unchecked")
-	TROLLKIN(R.string.trollkin_name,
+	TROLLKIN(R.string.trollkin_name, R.string.trollkin_desc,
 		new Pair[] { Pair.create(Stat.PHYSIQUE, 5), Pair.create(Stat.SPEED, 5), Pair.create(Stat.STRENGTH, 5),
 			Pair.create(Stat.AGILITY, 3), Pair.create(Stat.PROWESS, 4), Pair.create(Stat.POISE, 2),
 			Pair.create(Stat.INTELLECT,3), Pair.create(Stat.ARCANE, 0), Pair.create(Stat.PERCEPTION, 3)},
@@ -171,7 +171,7 @@ public enum Race
 		new zzCharacterAdvancementFragment[] {new raceHook(), new trollkinHook()}
 	);
 	
-	private Race(int pNameResourceID, Pair<Stat, Integer>[] pStartStats,
+	private Race(int pNameResourceID, int pDescResource, Pair<Stat, Integer>[] pStartStats,
 							Pair<Stat, Integer>[] pHeroStats,
 							Pair<Stat, Integer>[] pVetStats,
 							Pair<Stat, Integer>[] pEpicStats,
@@ -179,6 +179,7 @@ public enum Race
 							zzCharacterAdvancementFragment[] pPostCreateHooks)
 	{
 		name = IKRPGApp.getContext().getString(pNameResourceID);
+		desc = IKRPGApp.getContext().getString(pDescResource);
 		startStats = Arrays.asList(pStartStats);
 		heroStats = Arrays.asList(pHeroStats);
 		vetStats = Arrays.asList(pVetStats);
@@ -188,6 +189,7 @@ public enum Race
 	}
 	
 	private String name;
+	private String desc;
 	private Collection<Pair<Stat, Integer>> startStats;
 	private Collection<Pair<Stat, Integer>> heroStats;
 	private Collection<Pair<Stat, Integer>> vetStats;
@@ -198,6 +200,7 @@ public enum Race
 	@Override
 	public String toString(){return displayName();}
 	public String displayName(){return name;}
+	public String description(){return desc;}
 	
 	public int getStartStat(Stat pStat)
 	{

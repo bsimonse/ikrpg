@@ -69,7 +69,7 @@ public enum AbilityEnum implements zzPrereqCheck
 	BACKSTAB(R.string.backstab_name, R.string.backstab_longDesc, R.string.backstab_shortDesc, R.string.backstab_page,
 				false, false, null),
 				
-	BATTLE_COMMANDER(R.string.battle_commander_page, R.string.battle_commander_longDesc, R.string.battle_commander_shortDesc, R.string.battle_commander_page,
+	BATTLE_COMMANDER(R.string.battle_commander_name, R.string.battle_commander_longDesc, R.string.battle_commander_shortDesc, R.string.battle_commander_page,
 				false, false, new zzPrereqCheck(){
 			@Override public zzPrereqCheckResult meetsPrereq(zzBaseCharacter myChar)
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.COMMAND) >= 3, null);}
@@ -162,7 +162,7 @@ public enum AbilityEnum implements zzPrereqCheck
 			{return new zzPrereqCheckResult(myChar.getSkillBaseLevel(SkillEnum.ALCHEMY) >= 2, null);}
 	}),
 	
-	CAMOUFLAGE(R.string.camouflage_name, R.string.camouflage_longDesc, R.string.camouflage_shortDesc, R.string.camouflage_name,
+	CAMOUFLAGE(R.string.camouflage_name, R.string.camouflage_longDesc, R.string.camouflage_shortDesc, R.string.camouflage_page,
 				false, false, null),
 			
 	CARD_SHARP(R.string.card_sharp_name, R.string.card_sharp_longDesc, R.string.card_sharp_shortDesc, R.string.card_sharp_page,

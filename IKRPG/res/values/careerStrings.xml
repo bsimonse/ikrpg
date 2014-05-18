@@ -19,7 +19,7 @@
     <string name="cutthroat_desc">Desc</string>
 
     <string name="duelist_name">Duelist</string>
-    <string name="duelist_desc">Stabbity stab stab</string>
+    <string name="duelist_desc">Stabbity stab</string>
 
     <string name="explorer_name">Explorer</string>
     <string name="explorer_desc">Desc</string>
@@ -75,16 +75,16 @@
     <string name="soldier_name">Soldier</string>
     <string name="soldier_desc">Desc</string>
 
-    <string name="fire_sorcerer_name">Sorceror (Fire)</string>
+    <string name="fire_sorcerer_name">Sorcerer (Fire)</string>
     <string name="fire_sorcerer_desc">Desc</string>	
 
-	<string name="ice_sorcerer_name">Sorceror (Ice)</string>
+	<string name="ice_sorcerer_name">Sorcerer (Ice)</string>
     <string name="ice_sorcerer_desc">Desc</string>
 	
-	<string name="storm_sorcerer_name">Sorceror (Storm)</string>
+	<string name="storm_sorcerer_name">Sorcerer (Storm)</string>
     <string name="storm_sorcerer_desc">Desc</string>
 	
-	<string name="stone_sorcerer_name">Sorceror (Stone)</string>
+	<string name="stone_sorcerer_name">Sorcerer (Stone)</string>
     <string name="stone_sorcerer_desc">Desc</string>
 	
     <string name="spy_name">Spy</string>

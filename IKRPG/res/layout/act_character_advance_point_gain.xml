@@ -14,7 +14,6 @@
 			android:id="@+id/totalEXPLabel"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:text="100"
 			android:layout_centerHorizontal="true"
 			android:textSize="42sp"
 			android:layout_alignParentBottom="true"/>
@@ -22,7 +21,7 @@
 		<TextView
 			android:layout_height="20dp"
 			android:layout_width="wrap_content"
-			android:text="exp"
+			android:text="@string/experience_label"
 			android:layout_toRightOf="@id/totalEXPLabel"
 			android:layout_alignParentBottom="true"/>
 
@@ -40,13 +39,13 @@
 			android:id="@+id/loseEXP"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="-"/>
+			android:text="@string/decrease_label"/>
 
 		<Button
 			android:id="@+id/gainEXP"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="+"
+			android:text="@string/increase_label"
 			android:layout_toRightOf="@id/loseEXP"/>
 
 	</RelativeLayout>
@@ -64,7 +63,7 @@
 	<Button
 		android:id="@+id/commitEXPGainButton"
 		android:layout_height="wrap_content"
-		android:text="Commit"
+		android:text="@string/commit"
 		android:layout_width="wrap_content"
 		android:layout_below="@id/expGainsText"
 		android:layout_centerHorizontal="true"

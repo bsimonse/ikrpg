@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/print_character"
-		android:title="Print Character Sheet"
+		android:title="@string/print_button_title"
 		android:icon="@android:drawable/ic_menu_crop"
 		android:showAsAction="ifRoom|withText" />
 	<item android:id="@+id/delete_character"
-		android:title="Delete this Character"
+		android:title="@string/delete_button_title"
 		android:icon="@android:drawable/ic_delete"
 		android:showAsAction="ifRoom|withText" />
 </menu>

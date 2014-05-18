@@ -96,7 +96,7 @@ public enum Spell
 	OBLITERATION(R.string.obliteration_name,R.string.obliteration_desc,4,10,4,15,false,true),
 	OCCULTATION(R.string.occultation_name,R.string.occultation_desc,2,6,0,0,true,false),
 	OVERMIND(R.string.overmind_name,R.string.overmind_desc,4,SpellRange.SELF,SpellRange.CTRL,0,false,false),
-	POLARITY_SHIELD(R.string.polarity_shield_name,R.string.polarity_shield_name,2,6,0,0,true,false),
+	POLARITY_SHIELD(R.string.polarity_shield_name,R.string.polarity_shield_desc,2,6,0,0,true,false),
 	POSITIVE_CHARGE(R.string.positive_charge_name,R.string.positive_charge_desc,2,6,0,0,false,false),
 	POWER_BOOSTER(R.string.power_booster_name,R.string.power_booster_desc,1,5,0,0,false,false),
 	PRAYER_FOR_GUIDANCE(R.string.prayer_for_guidance_name,R.string.prayer_for_guidance_desc,3,6,0,0,false,false),

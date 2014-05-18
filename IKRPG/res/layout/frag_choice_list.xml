@@ -11,7 +11,7 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:padding="15sp"
-		android:text="Make a choice!"/>
+		android:text="@string/frag_choice_list_default"/>
 
 	<ListView
 		android:id="@+id/listChoiceList"
@@ -23,7 +23,7 @@
 		android:id="@+id/continueButton"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="Confirm"
+		android:text="@string/confirm"
 		android:visibility="gone"/>
 
 </LinearLayout>

@@ -172,8 +172,7 @@ public static class ChooseAdvancementPointsHook extends zzCharacterAdvancementFr
 		TextView tv = (TextView)root.findViewById(R.id.listChoiceTitle);
 		tv.setText("Choose 3 stats");
 		
-		Button submitButton = (Button)root.findViewById(R.id.continueButton);
-		submitButton.setOnClickListener(new View.OnClickListener(){
+		butt.setOnClickListener(new View.OnClickListener(){
 				@Override public void onClick(View v)
 				{
 					for(ChoosePointsAdapter.ChoosePointsBundle<Stat> stat : potentialStats)

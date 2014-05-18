@@ -75,6 +75,7 @@ public abstract class ChoosePointsAdapter<E> extends BaseAdapter
 			viewHolder = (zzChooseAdvancementListItemViewHolder)convertView.getTag();
 		}
 
+		@SuppressWarnings("unchecked")
 		final ChoosePointsBundle<E> bundle = (ChoosePointsBundle<E>)getItem(position);
 
 		viewHolder.textLabel.setText(getLabel(bundle));

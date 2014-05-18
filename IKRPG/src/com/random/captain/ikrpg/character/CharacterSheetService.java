@@ -217,12 +217,12 @@ public class CharacterSheetService
 		protected void writeFluff(GameCharacter c)
 		{
 			canvas.drawText(c.fluff.name,64,130,blackFluffLeft);
-			canvas.drawText(c.fluff.sex.toUpperCase(),493,130,blackFluffCenter);
-			canvas.drawText(c.fluff.characteristics.toUpperCase(),546,130,blackFluffLeft);
-			canvas.drawText(c.fluff.weight.toUpperCase(),1056,130,blackFluffLeft);
+			canvas.drawText(c.fluff.sex.toUpperCase(Locale.US),493,130,blackFluffCenter);
+			canvas.drawText(c.fluff.characteristics.toUpperCase(Locale.US),546,130,blackFluffLeft);
+			canvas.drawText(c.fluff.weight.toUpperCase(Locale.US),1056,130,blackFluffLeft);
 			
-			canvas.drawText(c.archetype.toString().toUpperCase(),64,174,blackFluffLeft);
-			canvas.drawText(c.race.toString().toUpperCase(),226,174,blackFluffLeft);
+			canvas.drawText(c.archetype.toString().toUpperCase(Locale.US),64,174,blackFluffLeft);
+			canvas.drawText(c.race.toString().toUpperCase(Locale.US),226,174,blackFluffLeft);
 			
 			String careerString = "";
 			for(Career career : c.careers)
@@ -231,18 +231,18 @@ public class CharacterSheetService
 				careerString += career.toString();
 			}
 			
-			careerString = careerString.toUpperCase();
+			careerString = careerString.toUpperCase(Locale.US);
 			Paint careerPaint = new Paint(blackFluffLeft);
 			float careerFontSize = careerPaint.getTextSize();
 			while(careerPaint.measureText(careerString) > 210){careerFontSize=careerFontSize-1;careerPaint.setTextSize(careerFontSize);}
 			canvas.drawText(careerString, 378,174,careerPaint);
 			
-			canvas.drawText(c.fluff.faith.toUpperCase(), 594,174,blackFluffLeft);
+			canvas.drawText(c.fluff.faith.toUpperCase(Locale.US), 594,174,blackFluffLeft);
 			canvas.drawText(c.fluff.owningPlayer, 756,174,blackFluffLeft);
-			canvas.drawText(c.fluff.height.toUpperCase(), 1056,174,blackFluffLeft);
+			canvas.drawText(c.fluff.height.toUpperCase(Locale.US), 1056,174,blackFluffLeft);
 			
 			canvas.drawText(""+c.exp, 1279,174,blackFluffCenter);
-			canvas.drawText(c.tier.toString().toUpperCase(), 1279,130,blackFluffCenter);
+			canvas.drawText(c.tier.toString().toUpperCase(Locale.US), 1279,130,blackFluffCenter);
 		}
 		
 		protected void writeStats(GameCharacter c)
@@ -359,7 +359,7 @@ public class CharacterSheetService
 				else{shortStatName = bStat.shortName();}
 				
 				String skillDisplayName = skill.first.toString()+" ("+shortStatName+")";
-				skillDisplayName=skillDisplayName.toUpperCase();
+				skillDisplayName=skillDisplayName.toUpperCase(Locale.US);
 				Paint skillPaint = new Paint(skillName);
 				float skillFontSize = skillPaint.getTextSize();
 				while(skillPaint.measureText(skillDisplayName) > 167){skillFontSize--;skillPaint.setTextSize(skillFontSize);}
@@ -437,11 +437,11 @@ public class CharacterSheetService
 			{
 				int yPosition = baseYValue+yIncrement*abilityIndex;
 				//abilityString = ability.toString()+" ("+ability.shortDescription()+")";
-				String abilityName = ability.toString().toUpperCase();
-				String abilityDesc = ("("+ability.shortDescription()+")").toUpperCase();
+				String abilityName = ability.toString().toUpperCase(Locale.US);
+				String abilityDesc = ("("+ability.shortDescription()+")").toUpperCase(Locale.US);
 				canvas.drawText(abilityName, 1172, yPosition, abilityPaint);
 				canvas.drawText(abilityDesc, Math.round(1172+abilityPaint.measureText(abilityName)+4), yPosition - 1, skillName);
-				canvas.drawText(ability.pageNumber().toUpperCase(), 1619, yPosition, blackFluffRight);
+				canvas.drawText(ability.pageNumber().toUpperCase(Locale.US), 1619, yPosition, blackFluffRight);
 				abilityIndex++;
 			}
 		}

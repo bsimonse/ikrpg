@@ -86,7 +86,7 @@
 	<string name="battle_plan_coordinated_strike_shortDesc">Feat: Attack as one in surprise round</string>
 	<string name="battle_plan_coordinated_strike_page">157</string>
 
-	<string name="battle_plan_desperate_pace_name">Battle Plan: Desparate Pace</string>
+	<string name="battle_plan_desperate_pace_name">Battle Plan: Desperate Pace</string>
 	<string name="battle_plan_desperate_pace_longDesc">The character can spend 1 feat point to use this ability.  Using a battle plan is a quick action.  When a character uses this battle plan, friendly characters gain +2\" movement for the round.</string>
 	<string name="battle_plan_desperate_pace_shortDesc">Feat: Allies get +2\" move</string>
 	<string name="battle_plan_desperate_pace_page">158</string>
@@ -132,7 +132,7 @@
 	<string name="blood_spiller_page">158</string>
 
 	<string name="bodge_name">Bodge</string>
-	<string name="bodge_longDesc">The character can make temporary repairs to a steamjack in combat.  Bodging is a full action.  The mechanik makes an INT+Mechanikal Engineering roll against target number 14.  If the roll suceeds, the steamjack regains 1 damage box in each of its crippled systems.  If the roll fails, the character may try again next round.</string>
+	<string name="bodge_longDesc">The character can make temporary repairs to a steamjack in combat.  Bodging is a full action.  The mechanik makes an INT+Mechanikal Engineering roll against target number 14.  If the roll succeeds, the steamjack regains 1 damage box in each of its crippled systems.  If the roll fails, the character may try again next round.</string>
 	<string name="bodge_shortDesc">Repair crippled \'jack systems (14)</string>
 	<string name="bodge_page">319</string>
 
@@ -298,7 +298,7 @@
 
 	<string name="fast_cook_name">Fast Cook</string>
 	<string name="fast_cook_longDesc">The character can create alchemical items in half the normal time.</string>
-	<string name="fast_cook_shortDesc">Create Alchemy in 1/2 time</string>
+	<string name="fast_cook_shortDesc">Create Alchemy in &#189; time</string>
 	<string name="fast_cook_page">161</string>
 
 	<string name="fast_draw_name">Fast Draw</string>
@@ -533,7 +533,7 @@
 
 	<string name="poison_resistance_name">Poison Resistance</string>
 	<string name="poison_resistance_longDesc">The character gains boosted rolls to resist poisons and toxins</string>
-	<string name="poison_resistance_shortDesc">Boosted rolls against poison,toxins</string>
+	<string name="poison_resistance_shortDesc">Boosted rolls against toxins</string>
 	<string name="poison_resistance_page">165</string>
 
 	<string name="port_of_call_name">Port of Call</string>
@@ -623,7 +623,7 @@
 
 	<string name="scrounge_name">Scrounge</string>
 	<string name="scrounge_longDesc">The character is adept at finding hard-to-acquire or expensive replacement parts to repair steamjacks.  Given a day to find the parts in a town or industrialized settlement, the character can find any part needed (or something close enough he can bodge it together).  The character can purchase steamjack parts, weapons, and gear for half the normal price.</string>
-	<string name="scrounge_shortDesc">Always find \'jack parts, 1/2 price</string>
+	<string name="scrounge_shortDesc">Always find \'jack parts, &#189; price</string>
 	<string name="scrounge_page">167</string>
 
 	<string name="sentry_name">Sentry</string>
@@ -708,7 +708,7 @@
 
 	<string name="traceless_path_name">Traceless Path</string>
 	<string name="traceless_path_longDesc">The character knows how to conceal their trail when moving over land.  Though they can easily move at only half their usual rate of speed while using this ability, either on foot or horseback, anyone attempting to follow their trail has +3 added to the skill roll target number.</string>
-	<string name="traceless_path_shortDesc">No trail at 1/2 speed</string>
+	<string name="traceless_path_shortDesc">No trail at &#189; speed</string>
 	<string name="traceless_path_page">168</string>
 
 	<string name="truth_reader_name">Truth Reader</string>
@@ -872,7 +872,7 @@
 	<string name="feat_revitalize_page">116</string>
 	
 	<string name="feat_shield_breaker_name">Feat: Shield Breaker</string>
-	<string name="feat_shield_breaker_longDesc">When this character hits with a melee attack against a target that has a shield, the character can spend 1 feat point to completely destory the other character\'s shield after the damage has been dealt.</string>
+	<string name="feat_shield_breaker_longDesc">When this character hits with a melee attack against a target that has a shield, the character can spend 1 feat point to completely destroy the other character\'s shield after the damage has been dealt.</string>
 	<string name="feat_shield_breaker_shortDesc">Feat: destroy enemy shield</string>
 	<string name="feat_shield_breaker_page">116</string>
 	

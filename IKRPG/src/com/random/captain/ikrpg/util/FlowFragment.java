@@ -12,7 +12,8 @@ public abstract class FlowFragment extends Fragment {
 	}
 	
 	protected FlowFragmentDelegate delegate;
-
+	protected boolean isPrimary = true;
+	
 	public abstract void setupWithBundle(Bundle b);
 	public abstract void restoreFromBundle(Bundle b);
 	
@@ -20,6 +21,7 @@ public abstract class FlowFragment extends Fragment {
 	{
 		setArguments(b);
 		setupWithBundle(getArguments());
+		getArguments().putBoolean("isPrimary", isPrimary);
 	}
 
 	@Override
@@ -27,6 +29,7 @@ public abstract class FlowFragment extends Fragment {
 	{
 		super.onCreate(b);
 		restoreFromBundle(getArguments());
+		isPrimary = getArguments().getBoolean("isPrimary");
 	}
 	
 	//The boolean determines whether or not you have a UI.
@@ -51,13 +54,12 @@ public abstract class FlowFragment extends Fragment {
 	public int getPriority(){return 100;}
 	
 	public boolean hasUI()
-	{
-		return false;
-	}
+	{return false;}
+	
+	public void setIsPrimaryFrag(boolean isIt)
+	{isPrimary = isIt;}
 	
 	public boolean isPrimaryFrag()
-	{
-		return true;
-	}
+	{return isPrimary;}
 }
 
