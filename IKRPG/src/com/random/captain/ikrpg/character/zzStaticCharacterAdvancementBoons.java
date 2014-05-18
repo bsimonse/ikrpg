@@ -297,15 +297,26 @@ public class zzStaticCharacterAdvancementBoons
 			final ArrayList<BOON_CHOICE> choices = new ArrayList<BOON_CHOICE>();
 			
 			//To be nice, let's spend a little effort determining what options are available
-			Set<Spell> knownSpells = myChar.spells;
 			Set<Spell> spellBook = new HashSet<Spell>();
 			for(Career c : myChar.careers)
 			{spellBook.addAll(c.careerSpells());}
-			if(knownSpells.size() < spellBook.size())
+			if(myChar.spells.size() < spellBook.size())
 			{
 				//there's always something left to learn!
 				choices.add(BOON_CHOICE.SPELL);
 			}
+			
+			Set<Ability> possibleAbilities = new HashSet<Ability>();
+			for(Career c : myChar.careers)
+			{possibleAbilities.addAll(c.careerAbilities());}
+			if(myChar.abilities.size() < possibleAbilities.size())
+			{
+				choices.add(BOON_CHOICE.ABILITY);
+			}
+			
+			choices.add(BOON_CHOICE.CONNECTION);
+			
+			choices.add(BOON_CHOICE.MILITARY_SKILL);
 			
 			list.setAdapter(new ArrayAdapter<BOON_CHOICE>(getActivity(), android.R.layout.simple_list_item_1, choices));
 			list.setOnItemClickListener( new AdapterView.OnItemClickListener(){
