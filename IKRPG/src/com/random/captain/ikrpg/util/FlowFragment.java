@@ -13,8 +13,8 @@ public abstract class FlowFragment extends Fragment {
 	
 	protected FlowFragmentDelegate delegate;
 
-	abstract void setupWithBundle(Bundle b);
-	abstract void restoreFromBundle(Bundle b);
+	public abstract void setupWithBundle(Bundle b);
+	public abstract void restoreFromBundle(Bundle b);
 	
 	public final void prepFlowFragment(Bundle b)
 	{

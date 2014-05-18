@@ -1,21 +1,14 @@
 package com.random.captain.ikrpg.character;
 
 import android.os.Bundle;
-import android.view.View;
+
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.FlowFragment;
-import com.random.captain.ikrpg.util.FlowFragment.FlowFragmentDelegate;
 
 public abstract class zzCharacterAdvancementFragment extends FlowFragment
 {
 	protected zzBaseCharacter myChar;
 	protected int curExp;
-
-	zzCharacterAdvancementFragment(int pExp)
-	{super();curExp = pExp;}
-
-	public zzCharacterAdvancementFragment()
-	{this(0);}
 	
 	@Override
 	public void setupWithBundle(Bundle b)

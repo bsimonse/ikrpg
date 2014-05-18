@@ -1,13 +1,15 @@
 package com.random.captain.ikrpg.util;
 
+import java.util.List;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.character.zzBaseCharacter;
 import com.random.captain.ikrpg.character.zzChooseAdvancementListItemViewHolder;
-import java.util.List;
 
 public abstract class ChoosePointsAdapter<E> extends BaseAdapter
 {

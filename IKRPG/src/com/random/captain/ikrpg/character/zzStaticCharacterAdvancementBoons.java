@@ -1,16 +1,25 @@
 package com.random.captain.ikrpg.character;
 
-import android.widget.*;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import com.random.captain.ikrpg.R;
-import com.random.captain.ikrpg.character.Career;
-import com.random.captain.ikrpg.character.SkillEnum;
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 
@@ -43,6 +52,7 @@ public class zzStaticCharacterAdvancementBoons
 		{return 4;}	
 	}
 	
+	@SuppressLint("ValidFragment")
 	public static class ChooseOccupationalSkillsFragment extends zzCharacterAdvancementFragment
 	{
 		final List<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>> potentialSkills = new ArrayList<ChoosePointsAdapter.ChoosePointsBundle<SkillEnum>>(20);
@@ -50,14 +60,13 @@ public class zzStaticCharacterAdvancementBoons
 		
 		int choiceCount;
 		
-		public ChooseOccupationalSkillsFragment(int pCurExp, int pChoiceCount)
+		public static ChooseOccupationalSkillsFragment make(int pCurExp, int pChoiceCount)
 		{
-			super(pCurExp);
-			choiceCount = pChoiceCount;
+			ChooseOccupationalSkillsFragment frag = new ChooseOccupationalSkillsFragment();
+			frag.choiceCount = pChoiceCount;
+			frag.curExp = pCurExp;
+			return frag;
 		}
-		
-		public ChooseOccupationalSkillsFragment()
-		{this(0,1);}
 
 		@Override
 		public void setupWithBundle(Bundle b)
@@ -276,12 +285,12 @@ public class zzStaticCharacterAdvancementBoons
 	
 	public static class ChooseSkillSpellConnectionMilitaryBoon extends zzCharacterAdvancementFragment
 	{
-		public ChooseSkillSpellConnectionMilitaryBoon(int pExp)
+		public static ChooseSkillSpellConnectionMilitaryBoon make(int pExp)
 		{
-			super(pExp);
+			ChooseSkillSpellConnectionMilitaryBoon frag = new ChooseSkillSpellConnectionMilitaryBoon();
+			frag.curExp = pExp;
+			return frag;
 		}
-		
-		public ChooseSkillSpellConnectionMilitaryBoon(){super(0);}
 		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)

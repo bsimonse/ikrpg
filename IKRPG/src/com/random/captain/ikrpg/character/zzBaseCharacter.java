@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.random.captain.ikrpg.gear.LootPack;
 
-class zzBaseCharacter
+public class zzBaseCharacter
 {
 	int index;
 	

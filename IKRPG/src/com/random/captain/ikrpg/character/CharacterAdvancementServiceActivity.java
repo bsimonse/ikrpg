@@ -1,12 +1,15 @@
 package com.random.captain.ikrpg.character;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.util.SparseArrayCompat;
+
 import com.random.captain.ikrpg.util.BundleConstants;
+import com.random.captain.ikrpg.util.FlowFragment;
 import com.random.captain.ikrpg.util.FlowNavigator;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CharacterAdvancementServiceActivity extends FlowNavigator<zzCharacterAdvancementFragment>
 {
@@ -55,11 +58,10 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzCharact
 	}
 	
 	@Override
-	protected Bundle prepBundle(zzCharacterAdvancementFragment frag, int fragDex)
+	protected Bundle prepBundle(FlowFragment frag, int fragDex)
 	{
 		Bundle b = new Bundle();
 		b.putString(BundleConstants.CHARACTER, buildingChar.toJson());
-		
 		return b;
 	}
 	
@@ -82,27 +84,27 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzCharact
 	private void generateAllHooks()
 	{
 		hooks = new SparseArrayCompat<zzCharacterAdvancementFragment>(200);
-		hooks.setValueAt(2,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(2,2));
-		hooks.setValueAt(4,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(4));
-		hooks.setValueAt(8,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(8,2));
-		hooks.setValueAt(10,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(10));
-		hooks.setValueAt(18,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(18,2));
-		hooks.setValueAt(21,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(21));
-		hooks.setValueAt(27,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(27,2));
-		hooks.setValueAt(33,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(33));
-		hooks.setValueAt(39,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(39,2));
-		hooks.setValueAt(42,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(42));
-		hooks.setValueAt(55,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(55,2));
-		hooks.setValueAt(60,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(60));
-		hooks.setValueAt(70,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(70,2));
-		hooks.setValueAt(75,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(75));
-		hooks.setValueAt(90,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(90,2));
-		hooks.setValueAt(95,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(95));
-		hooks.setValueAt(105,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(105,2));
-		hooks.setValueAt(115,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(115));
-		hooks.setValueAt(125,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(125,2));
-		hooks.setValueAt(130,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(130));
-		hooks.setValueAt(145,new zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment(145,2));
-		hooks.setValueAt(150,new zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon(150));
+		hooks.setValueAt(2,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(2,2));
+		hooks.setValueAt(4,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(4));
+		hooks.setValueAt(8,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(8,2));
+		hooks.setValueAt(10,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(10));
+		hooks.setValueAt(18,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(18,2));
+		hooks.setValueAt(21,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(21));
+		hooks.setValueAt(27,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(27,2));
+		hooks.setValueAt(33,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(33));
+		hooks.setValueAt(39,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(39,2));
+		hooks.setValueAt(42,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(42));
+		hooks.setValueAt(55,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(55,2));
+		hooks.setValueAt(60,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(60));
+		hooks.setValueAt(70,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(70,2));
+		hooks.setValueAt(75,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(75));
+		hooks.setValueAt(90,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(90,2));
+		hooks.setValueAt(95,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(95));
+		hooks.setValueAt(105,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(105,2));
+		hooks.setValueAt(115,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(115));
+		hooks.setValueAt(125,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(125,2));
+		hooks.setValueAt(130,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(130));
+		hooks.setValueAt(145,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(145,2));
+		hooks.setValueAt(150,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(150));
 	}
 }
