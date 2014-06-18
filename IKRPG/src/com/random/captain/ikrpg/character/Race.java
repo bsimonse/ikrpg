@@ -254,7 +254,6 @@ public enum Race
 			myChar.deriveStats();
 			Bundle b = new Bundle();
 			b.putString(BundleConstants.CHARACTER, myChar.toJson());
-			
 			return b;
 		}
 		

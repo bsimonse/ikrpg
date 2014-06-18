@@ -1,23 +1,10 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.random.captain.ikrpg.util.*;
+import java.util.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.random.captain.ikrpg.util.BundleConstants;
-import com.random.captain.ikrpg.util.FlowFragment;
-import com.random.captain.ikrpg.util.FlowNavigator;
-import com.random.captain.ikrpg.util.ModifierTags;
-import com.random.captain.ikrpg.util.Utilities;
 
 public class CharacterCreationServiceActivity extends FlowNavigator<zzCharacterAdvancementFragment>
 {
@@ -45,7 +32,7 @@ public class CharacterCreationServiceActivity extends FlowNavigator<zzCharacterA
 	}
 	
 	@Override
-	protected void hookComplete(Bundle b)
+	protected void flowHookComplete(Bundle b)
 	{
 		String characterJson = b.getString(BundleConstants.CHARACTER);
 		if(characterJson != null)

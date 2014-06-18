@@ -15,7 +15,7 @@ import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.ChoosePointsAdapter;
 
 //This isn't really a class... I just wanted to put a bunch of stuff in one file.
-//It's got to be public for Android to recreate the fragments... so no encapsulation for you.
+//It's got to be public for Android to recreate the fragments.
 public class zzStaticCreateCharacterHooks
 {
 	
@@ -35,6 +35,8 @@ public static class ChooseRaceFragment extends zzChooseAnAdvancementFragment<Rac
 	String getTitle(){
 		return "Choose your race";
 	}
+	
+	@Override public int getPriority(){return -1;}
 }
 	
 public static class ChooseArchetypeHook extends zzChooseAnAdvancementFragment<Archetype>
@@ -63,6 +65,8 @@ public static class ChooseArchetypeHook extends zzChooseAnAdvancementFragment<Ar
 	String getTitle(){
 		return "Choose an archetype";
 	}
+	
+	@Override public int getPriority(){return -1;}
 }
 	
 public static class ChooseCareerFragment extends zzChooseAnAdvancementFragment<Career>
@@ -98,6 +102,8 @@ public static class ChooseCareerFragment extends zzChooseAnAdvancementFragment<C
 		boolean isSecondCareer = myChar.careers.size() > 0;
 		return isSecondCareer ? "Choose your second career" : "Choose your first career";
 	}
+	
+	@Override public int getPriority(){return -1;}
 }
 	
 public static class ChooseAdvancementPointsHook extends zzCharacterAdvancementFragment
@@ -196,7 +202,6 @@ public static class CareerFinalizerHook extends zzCharacterAdvancementFragment
 		//skills
 		myChar.setBaseSkills(myChar.careers);
 		myChar.deriveSkillCheckLevels();
-
 		//Careers; Abilities, spells, loot, and post hooks
 		int startGold = 0;
 		Collection<Loot> startLoot = new ArrayList<Loot>();
@@ -209,14 +214,11 @@ public static class CareerFinalizerHook extends zzCharacterAdvancementFragment
 			startLoot.addAll(career.startLoot());
 		}
 		myChar.lootPack = new LootPack(startGold, startLoot);
-		
 		Bundle b = new Bundle();
 		b.putString(BundleConstants.CHARACTER, myChar.toJson());
-
 		return b;
 	}
-
-	@Override public int getPriority(){return 75;}
+	@Override public int getPriority(){return 0;}
 }
 
 public static class ChooseFluffFragment extends zzCharacterAdvancementFragment

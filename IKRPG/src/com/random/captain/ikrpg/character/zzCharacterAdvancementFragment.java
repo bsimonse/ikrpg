@@ -1,7 +1,6 @@
 package com.random.captain.ikrpg.character;
 
 import android.os.Bundle;
-
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.FlowFragment;
 

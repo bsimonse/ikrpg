@@ -1,18 +1,16 @@
 package com.random.captain.ikrpg.util;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-
 import com.random.captain.ikrpg.R;
+import java.util.List;
 
 public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActivity {
 	
 	protected abstract List<F> generateFrags();
-	protected abstract void hookComplete(Bundle b);
+	protected abstract void flowHookComplete(Bundle b);
 	protected abstract Bundle prepBundle(FlowFragment flowFrag, int fragIndex);
 	protected abstract void setResult();
 	
@@ -130,7 +128,7 @@ public abstract class FlowNavigator<F extends FlowFragment> extends FragmentActi
 			
 			@Override
 			public void hookComplete(Bundle b) {
-				FlowNavigator.this.hookComplete(b);
+				flowHookComplete(b);
 				advanceFlow();
 			}
 			

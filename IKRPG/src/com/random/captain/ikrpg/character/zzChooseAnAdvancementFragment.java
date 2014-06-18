@@ -42,5 +42,5 @@ public abstract class zzChooseAnAdvancementFragment<E> extends zzCharacterAdvanc
 		}
 
 		@Override public boolean hasUI(){return true;}
-		@Override public int getPriority(){return -1;}
+		@Override public int getPriority(){return 1;}
 	}

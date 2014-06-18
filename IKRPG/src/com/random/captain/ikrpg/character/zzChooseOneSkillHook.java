@@ -1,5 +1,7 @@
 package com.random.captain.ikrpg.character;
 
+
+
 public abstract class zzChooseOneSkillHook extends zzChooseAnAdvancementFragment<Skill>
 {	
 	@Override protected String getTitle(){return "Choose a skill to boost";}

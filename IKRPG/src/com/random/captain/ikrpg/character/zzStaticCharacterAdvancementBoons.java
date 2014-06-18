@@ -84,9 +84,7 @@ public class zzStaticCharacterAdvancementBoons
 		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle bund)
-		{
-			return inflater.inflate(R.layout.frag_choice_list, root, false);
-		}
+		{return inflater.inflate(R.layout.frag_choice_list, root, false);}
 
 		private void choicesComplete()
 		{
@@ -116,6 +114,7 @@ public class zzStaticCharacterAdvancementBoons
 			// - not already at career cap
 			// - not already at level cap
 
+			potentialSkills.clear();
 			for(Career career : myChar.careers)
 			{
 				for(Pair<Skill,Integer> skillCap : career.careerSkills())
@@ -197,14 +196,36 @@ public class zzStaticCharacterAdvancementBoons
 		@Override public boolean hasUI(){return true;}
 	}
 	
-	public static class ChooseAdvancementPointsBoon extends zzCharacterAdvancementFragment
+	public static class ChooseStatPointsBoon extends zzCharacterAdvancementFragment
 	{
+		int choiceCount;
+		
+		public static ChooseStatPointsBoon make(int curExp, int pChoiceCount)
+		{
+			ChooseStatPointsBoon frag = new ChooseStatPointsBoon();
+			frag.choiceCount = pChoiceCount;
+			frag.curExp = curExp;
+			return frag;
+		}
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+		{return inflater.inflate(R.layout.frag_choice_list, pRoot, false);}
+
+		@Override
+		public void setupWithBundle(Bundle b)
 		{
-			return inflater.inflate(R.layout.frag_choice_list, pRoot, false);
+			super.setupWithBundle(b);
+			b.putInt(BundleConstants.CHOICE_COUNT,choiceCount);
 		}
 
+		@Override
+		public void restoreFromBundle(Bundle b)
+		{
+			super.restoreFromBundle(b);
+			choiceCount = getArguments().getInt(BundleConstants.CHOICE_COUNT, 1);
+		}
+		
 		@Override
 		public void onViewCreated(View root, Bundle b)
 		{
@@ -249,21 +270,15 @@ public class zzStaticCharacterAdvancementBoons
 
 					@Override
 					protected int getIncreaseCount()
-					{
-						return 3;
-					}
+					{return choiceCount;}
 
 					@Override
 					protected String getLabel(ChoosePointsBundle<Stat> bundle)
-					{
-						return bundle.item.longName();
-					}
+					{return bundle.item.longName();}
 
 					@Override
 					protected List<ChoosePointsBundle<Stat>> getItemList()
-					{
-						return potentialStats;
-					}	
+					{return potentialStats;}	
 				});
 
 			butt.setOnClickListener(new View.OnClickListener(){
