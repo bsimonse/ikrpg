@@ -30,7 +30,9 @@ public class zzStaticCharacterAdvancementBoons
 		SPELL("Spell"),
 		ABILITY("Ability"),
 		CONNECTION("Connection"),
-		MILITARY_SKILL("Military skill");
+		MILITARY_SKILL("Military skill"),
+		ARCHTYPE_BENEFIT("Archetype benefit"),
+		CAREER_AND_SKILLS("New career and two occupational skills");
 		
 		private String displayName;
 		BOON_CHOICE(String pDisplayName)
@@ -339,6 +341,7 @@ public class zzStaticCharacterAdvancementBoons
 			
 			choices.add(BOON_CHOICE.CONNECTION);
 			
+			//C'mon, you're not going to max this, are you?
 			choices.add(BOON_CHOICE.MILITARY_SKILL);
 			
 			list.setAdapter(new ArrayAdapter<BOON_CHOICE>(getActivity(), android.R.layout.simple_list_item_1, choices));
@@ -469,5 +472,114 @@ public class zzStaticCharacterAdvancementBoons
 			
 			return new ArrayList<Skill>(miliSkills);
 		}
+	}
+	
+	public static class ChooseArchetypeBenefitFragment extends zzChooseAnAdvancementFragment<Ability>
+	{
+		public static ChooseArchetypeBenefitFragment make(int pExp)
+		{
+			ChooseArchetypeBenefitFragment frag = new ChooseArchetypeBenefitFragment();
+			frag.curExp = pExp;
+			return frag;
+		}
+		
+		List<Ability> getItems(){
+			//Grab all abilities that can be learned in careers and aren't already known
+			List<Ability> abilities = new ArrayList<Ability>();
+			Set<Ability> knownAbilities = myChar.abilities;
+
+			for(Ability ability : AbilityEnum.forArchetype(myChar.archetype))
+			{
+				if(!knownAbilities.contains(ability) && ability.meetsPrereq(myChar).isAllowed)
+				{
+					abilities.add(ability);
+				}
+			}
+			
+			//bleh.  Apologies for the terrible UI.
+			Collections.sort(abilities, new Comparator<Ability>(){
+					public int compare(Ability a, Ability b)
+					{
+						return a.abilityEnum().compareTo(b.abilityEnum());
+					}
+				});
+
+			return abilities;
+		}
+
+		void onChosen(Ability chosen){
+			myChar.abilities.add(chosen);
+		}
+
+		String getTitle(){
+			return "Choose a "+myChar.archetype+" archetype benefit!";
+		}
+	}
+	
+	public static class ChooseArchetypeOrCareerBoon extends zzCharacterAdvancementFragment
+	{
+		public static ChooseArchetypeOrCareerBoon make(int pExp)
+		{
+			ChooseArchetypeOrCareerBoon frag = new ChooseArchetypeOrCareerBoon();
+			frag.curExp = pExp;
+			return frag;
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup pRoot, Bundle bund)
+		{
+			return inflater.inflate(R.layout.frag_choice_list, pRoot, false);
+		}
+
+		@Override
+		public void onViewCreated(View root, Bundle b)
+		{
+			super.onViewCreated(root, b);
+			final ListView list = (ListView)root.findViewById(R.id.listChoiceList);
+			final ArrayList<BOON_CHOICE> choices = new ArrayList<BOON_CHOICE>();
+
+			choices.add(BOON_CHOICE.ARCHTYPE_BENEFIT);
+			choices.add(BOON_CHOICE.CAREER_AND_SKILLS);
+
+			list.setAdapter(new ArrayAdapter<BOON_CHOICE>(getActivity(), android.R.layout.simple_list_item_1, choices));
+			list.setOnItemClickListener( new AdapterView.OnItemClickListener(){
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+					{
+						ChooseArchetypeBenefitFragment archetypeFrag;
+						zzStaticCreateCharacterHooks.ChooseCareerFragment careerFrag;
+						final ChooseOccupationalSkillsFragment skillsFrag = ChooseOccupationalSkillsFragment.make(curExp,2);
+
+						switch(choices.get(which))
+						{
+							case ARCHTYPE_BENEFIT:
+								archetypeFrag = ChooseArchetypeBenefitFragment.make(curExp);
+								archetypeFrag.setIsPrimaryFrag(false);
+								delegate.pushExtraFrag(archetypeFrag, "archetypeFrag");
+								break;
+							case CAREER_AND_SKILLS:
+								careerFrag = new zzStaticCreateCharacterHooks.ChooseCareerFragment(){
+									@Override
+									void onChosen(Career chosen){
+										super.onChosen(chosen);
+										skillsFrag.setIsPrimaryFrag(false);
+										delegate.pushExtraFrag(skillsFrag, "skillsFrag");
+									}
+								};
+								careerFrag.setIsPrimaryFrag(false);
+								delegate.pushExtraFrag(careerFrag, "careerFrag");
+								
+								break;
+							default:
+								Bundle b = new Bundle();
+								b.putString(BundleConstants.CHARACTER, myChar.toJson());
+								delegate.hookComplete(b);
+						}
+					}
+				});
+		}
+
+		@Override public boolean hasUI(){return true;}
+		@Override public int getPriority(){return 100;}
 	}
 }

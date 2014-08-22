@@ -49,7 +49,7 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzCharact
 		if(hooks == null){generateAllHooks();}
 		
 		List<zzCharacterAdvancementFragment> frags = new ArrayList<zzCharacterAdvancementFragment>(30);
-		for(int i = startExp; i < endExp; i++)
+		for(int i = startExp+1; i <= endExp; i++)
 		{
 			zzCharacterAdvancementFragment h = hooks.valueAt(i);
 			if(h != null){frags.add(h);}
@@ -89,31 +89,37 @@ public class CharacterAdvancementServiceActivity extends FlowNavigator<zzCharact
 		hooks.setValueAt(6,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(6,1));
 		hooks.setValueAt(8,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(8,2));
 		hooks.setValueAt(10,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(10));
+		hooks.setValueAt(12,zzStaticCharacterAdvancementBoons.ChooseArchetypeBenefitFragment.make(12));
 		hooks.setValueAt(15,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(15,1));
 		hooks.setValueAt(18,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(18,2));
 		hooks.setValueAt(21,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(21));
 		hooks.setValueAt(24,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(24,1));
 		hooks.setValueAt(27,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(27,2));
+		hooks.setValueAt(30,zzStaticCharacterAdvancementBoons.ChooseArchetypeOrCareerBoon.make(30));
 		hooks.setValueAt(33,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(33));
 		hooks.setValueAt(36,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(36,1));
 		hooks.setValueAt(39,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(39,2));
 		hooks.setValueAt(42,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(42));
 		hooks.setValueAt(45,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(45,1));
+		hooks.setValueAt(50,zzStaticCharacterAdvancementBoons.ChooseArchetypeBenefitFragment.make(50));
 		hooks.setValueAt(55,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(55,2));
 		hooks.setValueAt(60,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(60));
 		hooks.setValueAt(65,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(65,1));
 		hooks.setValueAt(70,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(70,2));
 		hooks.setValueAt(75,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(75));
+		hooks.setValueAt(80,zzStaticCharacterAdvancementBoons.ChooseArchetypeOrCareerBoon.make(80));
 		hooks.setValueAt(85,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(85,1));
 		hooks.setValueAt(90,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(90,2));
 		hooks.setValueAt(95,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(95));
 		hooks.setValueAt(100,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(100,1));
 		hooks.setValueAt(105,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(105,2));
+		hooks.setValueAt(110,zzStaticCharacterAdvancementBoons.ChooseArchetypeOrCareerBoon.make(110));
 		hooks.setValueAt(115,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(115));
 		hooks.setValueAt(120,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(120,1));
 		hooks.setValueAt(125,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(125,2));
 		hooks.setValueAt(130,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(130));
 		hooks.setValueAt(135,zzStaticCharacterAdvancementBoons.ChooseStatPointsBoon.make(135,1));
+		hooks.setValueAt(140,zzStaticCharacterAdvancementBoons.ChooseArchetypeBenefitFragment.make(140));
 		hooks.setValueAt(145,zzStaticCharacterAdvancementBoons.ChooseOccupationalSkillsFragment.make(145,2));
 		hooks.setValueAt(150,zzStaticCharacterAdvancementBoons.ChooseSkillSpellConnectionMilitaryBoon.make(150));
 	}

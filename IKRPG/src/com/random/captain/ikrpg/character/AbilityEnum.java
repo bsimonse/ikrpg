@@ -1,8 +1,11 @@
 package com.random.captain.ikrpg.character;
 
 import android.content.Context;
+import android.util.Log;
 import com.random.captain.ikrpg.IKRPGApp;
 import com.random.captain.ikrpg.R;
+import java.util.Arrays;
+import java.util.List;
 
 public enum AbilityEnum implements zzPrereqCheck
 {
@@ -729,7 +732,7 @@ public enum AbilityEnum implements zzPrereqCheck
 				  true, false, GIFTED_CHECK()),
 	FEAT_DOMINATOR(R.string.feat_dominator_name, R.string.feat_dominator_longDesc, R.string.feat_dominator_shortDesc, R.string.feat_dominator_page,
 				  true, false, GIFTED_CHECK()),
-	FEAT_POWEFUL_CASTER(R.string.feat_powerful_caster_name, R.string.feat_powerful_caster_longDesc, R.string.feat_powerful_caster_shortDesc, R.string.feat_powerful_caster_page,
+	FEAT_POWERFUL_CASTER(R.string.feat_powerful_caster_name, R.string.feat_powerful_caster_longDesc, R.string.feat_powerful_caster_shortDesc, R.string.feat_powerful_caster_page,
 				  true, false, GIFTED_CHECK()),
 	FEAT_QUICK_CAST(R.string.feat_quick_cast_name, R.string.feat_quick_cast_longDesc, R.string.feat_quick_cast_shortDesc, R.string.feat_quick_cast_page,
 				  true, false, GIFTED_CHECK()),
@@ -810,6 +813,46 @@ public enum AbilityEnum implements zzPrereqCheck
 		true, false, SKILLED_CHECK()),
 	VIRTUOSO(R.string.virtuoso_name, R.string.virtuoso_longDesc, R.string.virtuoso_shortDesc, R.string.virtuoso_page,
 		true, true, SKILLED_CHECK());
+	
+	public static List<Ability> forArchetype(Archetype type)
+	{
+		Ability[] items = {};
+		if(type.equals(Archetype.GIFTED))
+		{
+			items = new Ability[]{
+				ADDITIONAL_STUDY.make(), COMBAT_CASTER.make(), FAST_CASTER.make(), FEAT_DOMINATOR.make(),
+				FEAT_POWERFUL_CASTER.make(), FEAT_QUICK_CAST.make(), FEAT_STRENGTH_OF_WILL.make(), MAGIC_SENSITIVITY.make(),
+				RUNE_READER.make(), WARDING_CIRCLE.make()
+			};
+		}
+		else if(type.equals(Archetype.INTELLECTUAL))
+		{
+			items = new Ability[]{
+				BATTLEFIELD_COORDINATION.make(), FEAT_FLAWLESS_TIMING.make(), FEAT_PRESCIENT.make(), FEAT_PERFECT_PLOT.make(),
+				FEAT_PLAN_OF_ACTION.make(), FEAT_QUICK_THINKING.make(), FEAT_UNCONVENTIONAL_WARFARE.make(), GENIUS.make(),
+				HYPER_PERCEPTION.make(), PHOTOGRAPHIC_MEMORY.make()
+			};
+		}
+		else if(type.equals(Archetype.MIGHTY))
+		{
+			items = new Ability[]{
+				BEAT_BACK.make(), FEAT_BACK_SWING.make(), FEAT_BOUNDING_LEAP.make(), FEAT_COUNTER_CHARGE.make(),
+				FEAT_INVULNERABLE.make(), FEAT_REVITALIZE.make(), FEAT_SHIELD_BREAKER.make(), FEAT_VENDETTA.make(),
+				RIGHTEOUS_ANGER.make(), TOUGH.make()
+			};
+		}
+		else if(type.equals(Archetype.SKILLED))
+		{
+			items = new Ability[]{
+				AMBIDEXTROUS.make(), CAGEY.make(), DEFT.make(), FEAT_DEFENSIVE_STRIKE.make(), FEAT_DISARM.make(),
+				FEAT_SWASHBUCKLER.make(), FEAT_UNTOUCHABLE.make(), PRETERNATURAL_AWARENESS.make(), SIDESTEP.make(),
+				VIRTUOSO.make()
+			};
+		}
+		
+		Log.i("IKRPG","I found "+items.length+" items for "+type);
+		return Arrays.asList(items);
+	}	
 	
 	private AbilityEnum(int pNameResourceID, int pLongDescResourceID, int pShortDescResourceID, int pPageNumberResourceID, boolean pFromArchetype, boolean pIsQualifiable, zzPrereqCheck pPrereqCheck)
 	{

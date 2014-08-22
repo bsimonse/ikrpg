@@ -41,7 +41,7 @@ public class CharacterHomeActivity extends Activity
 		if(mainChar == null){setResult(RESULT_FIRST_USER); finish(); return;}
 		
 		myList = (ListView)findViewById(R.id.char_home_actions);
-		myAdapter = new ArrayAdapter<Actions>(this, android.R.layout.simple_list_item_1, Actions.values());
+		myAdapter = new ArrayAdapter<Actions>(this, R.layout.simple_elan_list_item, Actions.values());
 		myList.setAdapter(myAdapter);
 		myList.setOnItemClickListener(listener);
 		setTitle(mainChar.fluff().name);

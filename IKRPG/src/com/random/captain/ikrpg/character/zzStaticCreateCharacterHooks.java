@@ -99,8 +99,8 @@ public static class ChooseCareerFragment extends zzChooseAnAdvancementFragment<C
 	}
 	
 	String getTitle(){
-		boolean isSecondCareer = myChar.careers.size() > 0;
-		return isSecondCareer ? "Choose your second career" : "Choose your first career";
+		boolean isAnotherCareer = myChar.careers.size() > 0;
+		return isAnotherCareer ? "Choose your additional career" : "Choose your first career";
 	}
 	
 	@Override public int getPriority(){return -1;}
