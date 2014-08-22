@@ -1,24 +1,17 @@
 package com.random.captain.ikrpg.character;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.widget.*;
+import java.util.*;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import com.google.gag.annotation.remark.Hack;
+import com.google.gag.annotation.remark.PleaseDontShowUpOn;
+import com.google.gag.enumeration.Website;
 import com.random.captain.ikrpg.R;
 import com.random.captain.ikrpg.util.BundleConstants;
 import com.random.captain.ikrpg.util.ChoosePointsAdapter;
@@ -560,10 +553,24 @@ public class zzStaticCharacterAdvancementBoons
 							case CAREER_AND_SKILLS:
 								careerFrag = new zzStaticCreateCharacterHooks.ChooseCareerFragment(){
 									@Override
-									void onChosen(Career chosen){
-										super.onChosen(chosen);
-										skillsFrag.setIsPrimaryFrag(false);
-										delegate.pushExtraFrag(skillsFrag, "skillsFrag");
+									@Hack
+									@PleaseDontShowUpOn(Website.STACKOVERFLOW)
+									public void onViewCreated(View rootView, Bundle b)
+									{
+										super.onViewCreated(rootView,b);
+										ListView listView = (ListView)rootView.findViewById(R.id.listChoiceList);
+										listView.setOnItemClickListener( new AdapterView.OnItemClickListener(){
+												@Override
+												public void onItemClick(AdapterView<?> parent, View view, int which, long id)
+												{
+													onChosen(getItems().get(which));
+													Bundle b = new Bundle();
+													b.putString(BundleConstants.CHARACTER, myChar.toJson());
+													ChooseOccupationalSkillsFragment skillsFrag = ChooseOccupationalSkillsFragment.make(curExp,2);
+													skillsFrag.setIsPrimaryFrag(false);
+													delegate.pushExtraFrag(skillsFrag, "skillsFrag");
+												}
+											});
 									}
 								};
 								careerFrag.setIsPrimaryFrag(false);
